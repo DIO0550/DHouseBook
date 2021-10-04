@@ -1,0 +1,66 @@
+{
+  "name": "electron-react-ts",
+  "description": "An Electron boilerplate with hot reloading for React and TypeScript.",
+  "version": "1.0.2",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "run-s clean build serve",
+    "dev": "run-p dev:*",
+    "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"development\" electron .",
+    "dev:tsc": "tsc -w -p tsconfig.main.json",
+    "dev:webpack": "webpack --watch --progress",
+    "predev": "rimraf dist",
+    "clean": "rimraf dist release",
+    "serve": "electron .",
+    "build": "cross-env NODE_ENV=\"development\" webpack --config webpack.config.prod.ts --progress",
+    "build:prod": "cross-env NODE_ENV=\"production\" webpack --config webpack.config.prod.ts --progress",
+    "build:pack": "ts-node ./scripts/build.ts",
+    "package": "run-s clean build:prod build:pack",
+    "lint": "run-s lint:*",
+    "lint:eslint": "eslint . --ext .ts,.tsx --fix",
+    "lint:prettier": "prettier --write ."
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/mini-css-extract-plugin": "^2.3.0",
+    "@types/node": "^16.10.2",
+    "@types/react": "^17.0.26",
+    "@types/react-dom": "^17.0.9",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.3.0",
+    "electron": "^15.1.0",
+    "electron-builder": "^22.11.7",
+    "html-webpack-plugin": "^5.3.2",
+    "ifdef-loader": "^2.3.0",
+    "mini-css-extract-plugin": "^2.3.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3",
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "optionalDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "electron-notarize": "^1.1.1",
+    "electron-reload": "^1.5.0",
+    "electron-search-devtools": "^1.4.8",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.4.1",
+    "wait-on": "^6.0.0"
+  }
+}
