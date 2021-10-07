@@ -9,7 +9,6 @@ const execPath =
     ? '../node_modules/electron/dist/electron.exe'
     : '../node_modules/.bin/electron';
 
-// 開発モードの場合はホットリロードする
 if (isDev) {
   require('electron-reload')(__dirname, {
     electron: path.resolve(__dirname, execPath),
@@ -18,7 +17,6 @@ if (isDev) {
   });
 }
 
-// BrowserWindow インスタンスを作成する関数
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
@@ -27,7 +25,6 @@ const createWindow = () => {
   });
 
   if (isDev) {
-    // 開発モードの場合はデベロッパーツールを開く
     mainWindow.webContents.openDevTools({ mode: 'detach' });
   }
 
@@ -37,7 +34,6 @@ const createWindow = () => {
 
 app.whenReady().then(async () => {
   if (isDev) {
-    // 開発モードの場合は React Devtools をロード
     const devtools = await searchDevtools('REACT');
     if (devtools) {
       await session.defaultSession.loadExtension(devtools, {
@@ -45,10 +41,8 @@ app.whenReady().then(async () => {
       });
     }
   }
-
-  // BrowserWindow インスタンスを作成
   createWindow();
 });
 
-// すべてのウィンドウが閉じられたらアプリを終了する
+
 app.once('window-all-closed', () => app.quit());
