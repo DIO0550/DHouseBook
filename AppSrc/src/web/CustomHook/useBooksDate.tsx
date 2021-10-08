@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { States } from "../store/store";
-import { bookDateSlice, BookDateState } from "../store/bookDateSlice";
+import { BookDateState, bookDateSlice } from "../store/bookDateSlice";
 
 const useBooksDate = () => {
     const dispatch = useDispatch();
@@ -12,9 +12,9 @@ const useBooksDate = () => {
     }));
     const { incrementMonth, decrementMonth } = bookDateSlice.actions;
     return {
-        date: bookDate.date,
-        incrementMonth: () => dispatch(incrementMonth),
-        decrementMonth: () => dispatch(decrementMonth)
+        dateStr: bookDate.dateStr,
+        incrementMonth: () => dispatch(incrementMonth()),
+        decrementMonth: () => dispatch(decrementMonth())
     }
 };
 

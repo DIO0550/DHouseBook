@@ -1,23 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 type BookDateState = {
-    date: Date;
+    dateStr: String;
 }
 
 const now = new Date();
-const initialState: BookDateState = { date: new Date(now.getFullYear(), now.getMonth(), 1) };
+const initialState: BookDateState = { dateStr: (new Date(now.getFullYear(), now.getMonth(), 1)).toString() };
 
 const bookDateSlice = createSlice({
   name: 'bookDate',
   initialState,
   reducers: {
     incrementMonth: (state) => {
-        state.date.setMonth(state.date.getMonth() + 1);
-        return { ...state, date: state.date};
+        const date = new Date(state.dateStr.toString());
+        const incrementMonthDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        return { dateStr: incrementMonthDate.toString() };
     },
     decrementMonth: (state) => {
-        state.date.setMonth(state.date.getMonth() - 1);
-        return { ...state, date: state.date};
+      const date = new Date(state.dateStr.toString());
+      const decrementMonthDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        return { dateStr: decrementMonthDate.toString() };
     }
   }
 })
