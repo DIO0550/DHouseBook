@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 type BookDateState = {
-    dateStr: String;
+    dateStr: string;
 }
 
 const now = new Date();
