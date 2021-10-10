@@ -11,7 +11,7 @@ const config: Configuration = {
     __filename: false,
   },
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.sass', '.scss', '.css'],
   },
   entry: {
     app: './src/web/index.tsx',

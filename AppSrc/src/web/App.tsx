@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.scss';
-import DateComponent  from './Component/Atoms/DateComponent'
-import NextMonthComponent from './Component/Atoms/NextMonthComponent';
-import BackMonthComponent from './Component/Atoms/BackMonthComponent';
+import DateControlComponent from './Component/Molecules/DateControlComponent';
+import PurchasedListFunction from './Function/Atoms/PurchasedListFunction';
 
 function App() {
   return (
     <div className="App">
-      <BackMonthComponent />
-      <DateComponent />
-      <NextMonthComponent />
+      <DateControlComponent />
+      <PurchasedListFunction />
     </div>
   );
 }
