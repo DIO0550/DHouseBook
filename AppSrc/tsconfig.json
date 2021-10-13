@@ -17,5 +17,8 @@
       "target": "ES2015",
       "module": "CommonJS"
     }
-  }
+  },
+  "typeRoots": [
+    "@types/global.d.ts"
+  ],
 }

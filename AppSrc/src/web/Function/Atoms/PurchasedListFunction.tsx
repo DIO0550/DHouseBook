@@ -3,6 +3,10 @@ import { FC } from "react";
 import usePurchasedItemList from "../../CustomHook/usePurchasedItemList";
 import { PurchasedItem } from "../../store/PurchasedItemListSlice";
 
+const saveClick = () => {
+    window.api.saveBook("dir", "dir");
+}
+
 const PurchasedListFunction: FC = () => {
     const {purchasedItemList, purchasedItemAdded, purchasedItemSetAll } = usePurchasedItemList();
 
@@ -44,6 +48,9 @@ const PurchasedListFunction: FC = () => {
                 type: "テスト",
                 purchasedDate: "テスト"
             })}>新規追加</button>
+            <button type="button" onClick={() => saveClick()}>
+                保存
+            </button>
         </div>
     )
 }

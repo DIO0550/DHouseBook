@@ -7,7 +7,7 @@ const BackMonthFunction: FC = () => {
     const { decrementMonth } = useBooksDate();
     return (
         <div className={dateControlStyle['date-button-block']}>
-            <button className={dateControlStyle['date-button']}  onClick={ decrementMonth }>
+            <button className={dateControlStyle['date-button']} onClick={ decrementMonth }>
                 &lt;
             </button>
         </div>

@@ -1,6 +1,9 @@
 import * as path from 'path';
-import { BrowserWindow, app, session } from 'electron';
+import { BrowserWindow, app, session, ipcMain } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
+import { fileURLToPath } from 'url';
+
+const fs = require('fs');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -21,6 +24,8 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.resolve(__dirname, 'preload.js'),
+      nodeIntegration: false,
+      contextIsolation: true, 
     },
   });
 
@@ -46,3 +51,17 @@ app.whenReady().then(async () => {
 
 
 app.once('window-all-closed', () => app.quit());
+
+
+// ===================
+// ipc通信
+// ===================
+
+ipcMain.handle("saveBook", (event, filePath: string, bookData: string) => {
+  console.log("call saveBook");
+  try {
+    fs.writeFileSync('bookdata/test2.txt', 'Hello world!!', 'utf8')
+  } catch (err) {
+    console.log(err)
+  }
+})
