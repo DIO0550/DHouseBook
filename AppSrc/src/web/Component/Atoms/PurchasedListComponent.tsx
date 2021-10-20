@@ -2,13 +2,12 @@ import { v4 as uuidv4 } from "uuid";
 import { FC } from "react";
 import usePurchasedItemList from "../../CustomHook/usePurchasedItemList";
 import { PurchasedItem } from "../../store/PurchasedItemListSlice";
+import useBooksDate from "../../CustomHook/useBooksDate";
 
-const saveClick = () => {
-    window.api.saveBook("dir", "dir");
-}
-
-const PurchasedListFunction: FC = () => {
-    const {purchasedItemList, purchasedItemAdded, purchasedItemSetAll } = usePurchasedItemList();
+const PurchasedListComponent: FC = () => {
+    const {purchasedItemList, purchasedItemAdded, purchasedItemSetAll, saveData } = usePurchasedItemList();
+    const { dateStr } = useBooksDate();
+    const date = new Date(dateStr);
 
     function tableRender() {
         var list = [];
@@ -48,11 +47,11 @@ const PurchasedListFunction: FC = () => {
                 type: "テスト",
                 purchasedDate: "テスト"
             })}>新規追加</button>
-            <button type="button" onClick={() => saveClick()}>
+            <button type="button" onClick={() => saveData(date.getFullYear(), date.getMonth() + 1)}>
                 保存
             </button>
         </div>
     )
 }
 
-export default PurchasedListFunction;
+export default PurchasedListComponent;

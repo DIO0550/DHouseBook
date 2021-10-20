@@ -1,9 +1,16 @@
 import React from "react";
-import BackMonthFunction from "../../Function/Atoms/BackMonthFunction";
+import useBooksDate from "../../CustomHook/useBooksDate";
+
+import dateControlStyle from '../../style/date_control.module.scss';
 
 const BackMonthComponent: React.VFC = () => {
+    const { decrementMonth } = useBooksDate();
     return (
-        <BackMonthFunction />
+        <div className={dateControlStyle['date-button-block']}>
+            <button className={dateControlStyle['date-button']} onClick={ decrementMonth }>
+                &lt;
+            </button>
+        </div>
     );
 }
 

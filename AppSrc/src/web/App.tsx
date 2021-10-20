@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.scss';
 import DateControlComponent from './Component/Molecules/DateControlComponent';
-import PurchasedListFunction from './Function/Atoms/PurchasedListFunction';
+import PurchasedListComponent from './Component/Atoms/PurchasedListComponent';
 
 function App() {
   return (
     <div className="App">
       <DateControlComponent />
-      <PurchasedListFunction />
+      <PurchasedListComponent />
     </div>
   );
 }

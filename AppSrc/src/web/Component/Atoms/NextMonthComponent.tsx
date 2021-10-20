@@ -1,9 +1,16 @@
 import React from "react";
-import NextMonthFunction from "../../Function/Atoms/NextMonthFunction";
+import useBooksDate from "../../CustomHook/useBooksDate";
+
+import dateControlStyle from '../../style/date_control.module.scss';
 
 const NextMonthComponent: React.VFC = () => {
+    const { incrementMonth } = useBooksDate();
     return (
-        <NextMonthFunction />
+        <div className={dateControlStyle['date-button-block']}>
+            <button className={dateControlStyle['date-button']} onClick={ incrementMonth }>
+                &gt;
+            </button>
+        </div>
     );
 }
 

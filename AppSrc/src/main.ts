@@ -60,7 +60,7 @@ app.once('window-all-closed', () => app.quit());
 ipcMain.handle("saveBook", (event, filePath: string, bookData: string) => {
   console.log("call saveBook");
   try {
-    fs.writeFileSync('bookdata/test2.txt', 'Hello world!!', 'utf8')
+    fs.writeFileSync(filePath, bookData, 'utf8')
   } catch (err) {
     console.log(err)
   }
