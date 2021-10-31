@@ -4,13 +4,14 @@ import usePurchasedItem from '../../CustomHook/usePurchasedItem';
 import styles from './PurchasedItemCell.module.scss';
 
 type props = {
-  ids: string;
+  // id
+  id: string;
 };
 
-const PurchasedItemCell: FC<props> = ({ ids }) => {
+const PurchasedItemCell: FC<props> = ({ id }) => {
   const { purchasedItemList, selectById, onInputPurchasedItem } =
     usePurchasedItem();
-  const purchasedItem = selectById(purchasedItemList, ids);
+  const purchasedItem = selectById(purchasedItemList, id);
   console.log(purchasedItem);
   return (
     <div className={styles['purchased-item-cell']}>
@@ -18,7 +19,7 @@ const PurchasedItemCell: FC<props> = ({ ids }) => {
         contentEditable='true'
         className={styles['purchased-item-div']}
         onInput={(e) =>
-          onInputPurchasedItem(ids, 'name', e.currentTarget.innerHTML)
+          onInputPurchasedItem(id, 'name', e.currentTarget.innerHTML)
         }
       >
         {purchasedItem?.name}
@@ -27,7 +28,7 @@ const PurchasedItemCell: FC<props> = ({ ids }) => {
         contentEditable='true'
         className={styles['purchased-item-div']}
         onInput={(e) =>
-          onInputPurchasedItem(ids, 'price', e.currentTarget.innerHTML)
+          onInputPurchasedItem(id, 'price', e.currentTarget.innerHTML)
         }
       >
         {purchasedItem?.price}
@@ -36,7 +37,7 @@ const PurchasedItemCell: FC<props> = ({ ids }) => {
         contentEditable='true'
         className={styles['purchased-item-div']}
         onInput={(e) =>
-          onInputPurchasedItem(ids, 'type', e.currentTarget.innerHTML)
+          onInputPurchasedItem(id, 'type', e.currentTarget.innerHTML)
         }
       >
         {purchasedItem?.type}
@@ -45,7 +46,7 @@ const PurchasedItemCell: FC<props> = ({ ids }) => {
         contentEditable='true'
         className={styles['purchased-item-div']}
         onInput={(e) =>
-          onInputPurchasedItem(ids, 'purchasedDate', e.currentTarget.innerHTML)
+          onInputPurchasedItem(id, 'purchasedDate', e.currentTarget.innerHTML)
         }
       >
         {purchasedItem?.purchasedDate}

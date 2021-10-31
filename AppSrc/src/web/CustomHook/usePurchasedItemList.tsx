@@ -1,11 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { EntityState } from '@reduxjs/toolkit';
 import { States } from '../store/store';
-import {
-  PurchasedItem,
-  purchasedItemListSlice,
-} from '../store/PurchasedItemListSlice';
+import { purchasedItemListSlice } from '../store/purchasedItemListSlice';
 import { formatSaveData, zeroPadding } from '../util/converter';
+import { PurchasedItem } from '../types/purchasedItem';
 import { v4 as uuidv4 } from 'uuid';
 
 const usePurchasedItemList = () => {

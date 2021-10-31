@@ -8,11 +8,10 @@ const PurchasedListComponent: FC = () => {
     usePurchasedItemList();
   const { dateStr } = useBooksDate();
   const date = new Date(dateStr);
-  const ids = purchasedItemList.ids;
   return (
     <div>
       {purchasedItemList.ids.map((item) => (
-        <PurchasedItemCell ids={String(item)} />
+        <PurchasedItemCell id={String(item)} />
       ))}
       <button type='button' onClick={() => insertParchasedItem()}>
         新規追加

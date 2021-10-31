@@ -1,7 +1,6 @@
 import * as path from 'path';
 import { BrowserWindow, app, session, ipcMain } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
-import { fileURLToPath } from 'url';
 
 const fs = require('fs');
 
@@ -25,7 +24,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.resolve(__dirname, 'preload.js'),
       nodeIntegration: false,
-      contextIsolation: true, 
+      contextIsolation: true,
     },
   });
 
@@ -49,19 +48,36 @@ app.whenReady().then(async () => {
   createWindow();
 });
 
-
 app.once('window-all-closed', () => app.quit());
-
 
 // ===================
 // ipc通信
 // ===================
 
-ipcMain.handle("saveBook", (event, filePath: string, bookData: string) => {
-  console.log("call saveBook");
+/**
+ * ファイルの保存
+ * @param filePath 保存するファイルのパス
+ * @param bookDate 保存するデータ
+ */
+ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
   try {
-    fs.writeFileSync(filePath, bookData, 'utf8')
+    fs.writeFileSync(filePath, bookData, 'utf8');
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-})
+});
+
+/**
+ * ファイルロードする
+ * @param filePath 読み込むファイルのパス
+ * @returns ファイルあり:JsonObject / ファイルなし:null
+ */
+ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
+  let jsonObject: unknown;
+  try {
+    jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (err) {
+    return null;
+  }
+  return jsonObject;
+});
