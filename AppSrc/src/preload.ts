@@ -5,5 +5,7 @@ contextBridge.exposeInMainWorld('api', {
   saveBook: (filePath: string, jsonStr: string) => {
     ipcRenderer.invoke('saveBook', filePath, jsonStr);
   },
-  loadBook: (filePath: string) => {},
+  loadBook: (filePath: string): unknown | null => {
+    return ipcRenderer.invoke('loadBook', filePath);
+  },
 });

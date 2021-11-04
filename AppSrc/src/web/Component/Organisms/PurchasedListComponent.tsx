@@ -2,12 +2,14 @@ import { FC } from 'react';
 import usePurchasedItemList from '../../CustomHook/usePurchasedItemList';
 import useBooksDate from '../../CustomHook/useBooksDate';
 import PurchasedItemCell from '../Molecules/PuchasedItemCell';
+import useBookFile from '../../CustomHook/useBookFile';
 
 const PurchasedListComponent: FC = () => {
   const { purchasedItemList, insertParchasedItem, saveData } =
     usePurchasedItemList();
   const { dateStr } = useBooksDate();
   const date = new Date(dateStr);
+  const _ = useBookFile();
   return (
     <div>
       {purchasedItemList.ids.map((item) => (
