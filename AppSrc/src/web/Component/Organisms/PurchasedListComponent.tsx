@@ -1,17 +1,13 @@
 import { FC } from 'react';
 import usePurchasedItemList from '../../CustomHook/usePurchasedItemList';
-import useBooksDate from '../../CustomHook/useBooksDate';
 import PurchasedItemCell from '../Molecules/PurchasedItemCell';
-import useBookFile from '../../CustomHook/useBookFile';
 
 const PurchasedListComponent: FC = () => {
-  const { purchasedItemList, insertParchasedItem, saveData } =
+  const { purchasedItemList, insertParchasedItem, saveFile, isLoading } =
     usePurchasedItemList();
-  const { dateStr } = useBooksDate();
-  const date = new Date(dateStr);
-  const _ = useBookFile();
   return (
     <div>
+      <div>{isLoading}</div>
       {purchasedItemList.ids.map((ids) => {
         const item = purchasedItemList.entities[ids];
         return (
@@ -25,13 +21,10 @@ const PurchasedListComponent: FC = () => {
           />
         );
       })}
-      <button type='button' onClick={() => insertParchasedItem()}>
+      <button type='button' onClick={insertParchasedItem}>
         新規追加
       </button>
-      <button
-        type='button'
-        onClick={() => saveData(date.getFullYear(), date.getMonth() + 1)}
-      >
+      <button type='button' onClick={saveFile}>
         保存
       </button>
     </div>

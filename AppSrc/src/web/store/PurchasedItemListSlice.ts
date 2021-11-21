@@ -53,6 +53,8 @@ const purchasedItemListSlice = createSlice({
         },
       });
     },
+
+    purchasedItemRemoveAll: purchasedItemAdapter.removeAll,
   },
 });
 

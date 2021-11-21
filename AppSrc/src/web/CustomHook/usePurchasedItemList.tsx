@@ -5,27 +5,28 @@ import { purchasedItemListSlice } from '../store/purchasedItemListSlice';
 import { formatSaveData, zeroPadding } from '../util/converter';
 import { PurchasedItem } from '../types/purchasedItem';
 import { v4 as uuidv4 } from 'uuid';
+import { BookDateState } from '../store/bookDateSlice';
+import useBookFile from './useBookFile';
+import { useEffect } from 'react';
 
 const usePurchasedItemList = () => {
   const dispatch = useDispatch();
-  const { purchasedItemList } = useSelector<
+  const { bookDate, purchasedItemList } = useSelector<
     States,
-    { purchasedItemList: EntityState<PurchasedItem> }
+    { bookDate: BookDateState; purchasedItemList: EntityState<PurchasedItem> }
   >((state) => ({
+    bookDate: state.bookDate,
     purchasedItemList: state.purchasedItemList,
   }));
 
-  const { purchasedItemAdded, purchasedItemSetAll } =
-    purchasedItemListSlice.actions;
-  const fetchData = (year: number, month: number) => {};
-  const saveData = (year: number, month: number) => {
-    const formatData = formatSaveData(purchasedItemList.entities);
-    const dataJsonString: string = JSON.stringify(formatData);
-    const fileName = `${year}${zeroPadding(month, 2)}.json`;
-    const filePath = `bookdata/${fileName}`;
-    window.api.saveBook(filePath, dataJsonString);
-  };
+  const useBookFileValue = useBookFile();
 
+  const { purchasedItemAdded, purchasedItemSetAll, purchasedItemRemoveAll } =
+    purchasedItemListSlice.actions;
+
+  /**
+   * 購入アイテム挿入
+   */
   const insertParchasedItem = () => {
     const newItem = {
       id: `id-${uuidv4()}`,
@@ -37,16 +38,39 @@ const usePurchasedItemList = () => {
     dispatch(purchasedItemAdded(newItem));
   };
 
+  /**
+   * 複数の購入アイテムを挿入
+   * @param items 挿入するアイテム
+   */
   const insertAllPurchasedItems = (items: PurchasedItem[]) => {
     dispatch(purchasedItemSetAll(items));
   };
 
+  const removeAllPurchasedItems = () => {
+    dispatch(purchasedItemRemoveAll());
+  };
+
+  useEffect(() => {
+    useBookFileValue.saveFile();
+    useBookFileValue.loadFile();
+  }, [bookDate]);
+
+  useEffect(() => {
+    // データすべて削除
+    removeAllPurchasedItems();
+    if (!useBookFileValue.bookData) {
+      return;
+    }
+
+    console.log(useBookFileValue.bookData);
+  }, [useBookFileValue.bookData]);
+
   return {
+    isLoading: useBookFileValue.isLoading,
     purchasedItemList,
+    saveFile: useBookFileValue.saveFile,
     insertParchasedItem,
     insertAllPurchasedItems,
-    fetchData,
-    saveData,
   };
 };
 

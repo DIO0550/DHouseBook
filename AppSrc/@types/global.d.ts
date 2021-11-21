@@ -6,5 +6,5 @@ declare global {
 
 export interface BookAPI {
   saveBook: (filePath: string, jsonStr: String) => void;
-  loadBook: (filePath: string) => unknown | null;
+  loadBook: (filePath: string) => Promise<unknown | null>;
 }

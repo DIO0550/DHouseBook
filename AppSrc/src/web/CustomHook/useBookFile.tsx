@@ -1,5 +1,5 @@
 import { EntityState } from '@reduxjs/toolkit';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BookDateState } from '../store/bookDateSlice';
 import { States } from '../store/store';
@@ -16,16 +16,25 @@ const useBookFile = () => {
     purchasedItemList: state.purchasedItemList,
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [bookData, setBookData] = useState<unknown | null>(null);
 
+  /**
+   * ファイル読み込み処理
+   */
   const loadFile = () => {
+    setIsLoading(true);
     const date = new Date(prevBookDate.dateStr);
     const year = date.getFullYear();
     const month = date.getMonth();
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
 
-    const jsonObject = window.api.loadBook(filePath);
-    console.log(jsonObject);
+    window.api.loadBook(filePath).then((data) => {
+      setBookData(data);
+      setIsLoading(false);
+      console.log('complete load');
+    });
   };
 
   /**
@@ -48,10 +57,12 @@ const useBookFile = () => {
     window.api.saveBook(filePath, dataJsonString);
   };
 
-  useEffect(() => {
-    saveFile();
-    loadFile();
-  }, [bookDate]);
+  return {
+    isLoading,
+    bookData,
+    saveFile,
+    loadFile,
+  };
 };
 
 export default useBookFile;
