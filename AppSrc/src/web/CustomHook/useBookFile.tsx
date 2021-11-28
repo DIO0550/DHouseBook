@@ -17,25 +17,28 @@ const useBookFile = () => {
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [bookData, setBookData] = useState<unknown | null>(null);
+  const [bookData, setBookData] = useState<PurchasedItem[] | null>(null);
 
   /**
    * ファイル読み込み処理
    */
   const loadFile = () => {
     setIsLoading(true);
-    const date = new Date(prevBookDate.dateStr);
+    const date = new Date(bookDate.dateStr);
     const year = date.getFullYear();
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
-
+    console.log(`loadFile ${fileName}`);
     window.api.loadBook(filePath).then((data) => {
       setBookData(data);
       setIsLoading(false);
-      console.log('complete load');
     });
   };
+
+  useEffect(() => {
+    console.log(bookData);
+  }, [bookData]);
 
   /**
    * ファイル保存処理
@@ -49,7 +52,7 @@ const useBookFile = () => {
     }
     const date = new Date(prevBookDate.dateStr);
     const year = date.getFullYear();
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const formatData = formatSaveData(purchasedItemList.entities);
     const dataJsonString: string = JSON.stringify(formatData);
     const fileName = `${year}${zeroPadding(month, 2)}.json`;

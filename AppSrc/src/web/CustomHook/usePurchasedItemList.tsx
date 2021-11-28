@@ -47,22 +47,32 @@ const usePurchasedItemList = () => {
   };
 
   const removeAllPurchasedItems = () => {
+    console.log('removeAllPurchasedItems');
     dispatch(purchasedItemRemoveAll());
   };
 
   useEffect(() => {
+    console.log(bookDate.dateStr);
     useBookFileValue.saveFile();
     useBookFileValue.loadFile();
   }, [bookDate]);
 
   useEffect(() => {
+    if (useBookFileValue.bookData === null) {
+      return;
+    }
     // データすべて削除
     removeAllPurchasedItems();
-    if (!useBookFileValue.bookData) {
+
+    console.log(purchasedItemList);
+    if (
+      useBookFileValue.bookData === null ||
+      useBookFileValue.bookData.length === 0
+    ) {
       return;
     }
 
-    console.log(useBookFileValue.bookData);
+    insertAllPurchasedItems(useBookFileValue.bookData);
   }, [useBookFileValue.bookData]);
 
   return {

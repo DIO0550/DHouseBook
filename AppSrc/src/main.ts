@@ -73,8 +73,10 @@ ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
  * @returns ファイルあり:JsonObject / ファイルなし:null
  */
 ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
+  console.log(filePath);
   let jsonObject: unknown;
   try {
+    console.log(filePath);
     jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   } catch (err) {
     return null;

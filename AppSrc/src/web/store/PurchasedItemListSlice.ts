@@ -36,8 +36,8 @@ const purchasedItemListSlice = createSlice({
      * @param state state
      * @param action action
      */
-    purchasedItemSetAll(state, action) {
-      purchasedItemAdapter.setAll(state, action.payload.purchasedItemList);
+    purchasedItemSetAll(state, action: PayloadAction<PurchasedItem[]>) {
+      purchasedItemAdapter.setAll(state, action.payload);
     },
     /**
      * 購入アイテム更新
@@ -54,6 +54,9 @@ const purchasedItemListSlice = createSlice({
       });
     },
 
+    /**
+     * アイテムすべて削除
+     */
     purchasedItemRemoveAll: purchasedItemAdapter.removeAll,
   },
 });

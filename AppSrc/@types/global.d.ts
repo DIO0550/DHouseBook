@@ -1,3 +1,5 @@
+import { PurchasedItem } from './../src/web/types/purchasedItem';
+
 declare global {
   interface Window {
     api: BookAPI;
@@ -6,5 +8,5 @@ declare global {
 
 export interface BookAPI {
   saveBook: (filePath: string, jsonStr: String) => void;
-  loadBook: (filePath: string) => Promise<unknown | null>;
+  loadBook: (filePath: string) => Promise<PurchasedItem[] | null>;
 }

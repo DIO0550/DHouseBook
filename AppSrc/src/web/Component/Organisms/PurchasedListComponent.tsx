@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import usePurchasedItemList from '../../CustomHook/usePurchasedItemList';
 import PurchasedItemCell from '../Molecules/PurchasedItemCell';
+import Loading from '../Templates/Loading';
 
 const PurchasedListComponent: FC = () => {
   const { purchasedItemList, insertParchasedItem, saveFile, isLoading } =
     usePurchasedItemList();
   return (
     <div>
-      <div>{isLoading}</div>
+      {isLoading && <Loading />}
       {purchasedItemList.ids.map((ids) => {
+        console.log(purchasedItemList);
         const item = purchasedItemList.entities[ids];
         return (
           <PurchasedItemCell

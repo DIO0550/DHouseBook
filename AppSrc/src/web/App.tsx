@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.scss';
 import DateControlComponent from './Component/Molecules/DateControlComponent';
 import PurchasedListComponent from './Component/Organisms/PurchasedListComponent';
