@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { EntityState, configureStore } from '@reduxjs/toolkit';
 import { BookDateState, bookDateSlice } from './bookDateSlice';
 import { purchasedItemListSlice } from './purchasedItemListSlice';
-import { PurchasedItem } from '../types/purchasedItem';
+import { PurchasedItem } from '../@types/purchasedItem';
 
 // stateの型
 export type States = {

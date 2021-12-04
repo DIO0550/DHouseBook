@@ -15,11 +15,11 @@
   },
   "ts-node": {
     "compilerOptions": {
-      "target": "ES2015",
+      "target": "ESNext",
       "module": "CommonJS"
     }
   },
-  "typeRoots": [
-    "@types/global.d.ts"
-  ],
+  "include": [
+    "src"
+  ]
 }

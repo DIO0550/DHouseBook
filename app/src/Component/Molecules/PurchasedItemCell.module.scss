@@ -1,0 +1,12 @@
+.purchased-item-cell {
+  display: flex;
+  border: darkcyan solid 2px;
+  min-width: 200px;
+
+  .purchased-item-div {
+    width: 25%;
+    min-width: 200px;
+    border: darkcyan solid 2px;
+    margin: 4px;
+  }
+}

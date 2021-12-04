@@ -1,7 +1,7 @@
 import React from 'react';
 import useBooksDate from '../../CustomHook/useBooksDate';
 
-import dateControlStyle from '../../style/date_control.module.scss';
+import dateControlStyle from './date_control.module.scss';
 
 const DateControlComponent: React.VFC = () => {
   const { dateStr, incrementMonth, decrementMonth } = useBooksDate();

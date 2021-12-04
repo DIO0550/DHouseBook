@@ -1,9 +1,9 @@
 import { EntityState } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BookDateState } from '../store/bookDateSlice';
 import { States } from '../store/store';
-import { PurchasedItem } from '../types/purchasedItem';
+import { PurchasedItem } from '../@types/purchasedItem';
 import { formatSaveData, zeroPadding } from '../util/converter';
 import usePrevious from './usePrevious';
 

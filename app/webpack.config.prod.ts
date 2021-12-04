@@ -45,6 +45,7 @@ const base: Configuration = {
             loader: 'sass-loader',
             options: {
               sourceMap: isDev,
+              implementation: require('sass'),
             },
           },
         ],
@@ -81,12 +82,12 @@ const renderer: Configuration = {
   ...base,
   target: 'web',
   entry: {
-    index: './src/web/index.tsx',
+    index: './src/index.tsx',
   },
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/web/index.html',
+      template: './src/index.html',
       minify: !isDev,
       inject: 'body',
       filename: 'index.html',

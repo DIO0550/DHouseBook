@@ -5,7 +5,6 @@ import PurchasedListComponent from './Component/Organisms/PurchasedListComponent
 function App() {
   return (
     <div className='App'>
-      <DateControlComponent />
       <PurchasedListComponent />
     </div>
   );

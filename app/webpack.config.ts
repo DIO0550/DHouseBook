@@ -11,10 +11,19 @@ const config: Configuration = {
     __filename: false,
   },
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.sass', '.scss', '.css'],
+    extensions: [
+      '.js',
+      '.ts',
+      '.jsx',
+      '.tsx',
+      '.json',
+      '.sass',
+      '.scss',
+      '.css',
+    ],
   },
   entry: {
-    app: './src/web/index.tsx',
+    app: './src/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -43,6 +52,7 @@ const config: Configuration = {
           {
             loader: 'sass-loader',
             options: {
+              implementation: require('sass'),
               sourceMap: true,
             },
           },
@@ -57,7 +67,7 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/web/index.html',
+      template: './src/index.html',
       filename: 'index.html',
       scriptLoading: 'blocking',
       inject: 'body',
