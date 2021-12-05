@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import usePurchasedItemList from '../../CustomHook/usePurchasedItemList';
+import usePurchasedItemList from '../../hooks/usePurchasedItemList';
 import PurchasedItemCell from '../Molecules/PurchasedItemCell';
 import Loading from '../Templates/Loading';
 

@@ -1,32 +1,36 @@
 $button-date-space: 20px;
 $control-height: 50px;
 
-.date-control-block {
+.date-control-container {
+  position: fixed;
+
+  .date-control-block {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.date-block {
+  .date-block {
     width: 300px;
     height: $control-height;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 45px;
-}
+  }
 
-.date-button-block {
+  .date-button-block {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.date-button {
-   width: 50px;    
-   height: calc($control-height / 1.5);
-   border-radius: 20px;
-   background-color: #ffa500;
-   border-color: #d2691e;
-   box-shadow: none;
+  .date-button {
+    width: 50px;
+    height: calc($control-height / 1.5);
+    border-radius: 5px;
+    background-color: #ffa500;
+    border-color: #d2691e;
+    box-shadow: none;
+  }
 }

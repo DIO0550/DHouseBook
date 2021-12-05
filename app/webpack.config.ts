@@ -54,6 +54,7 @@ const config: Configuration = {
             options: {
               implementation: require('sass'),
               sourceMap: true,
+              additionalData: "@use './src/styles/_variable.module.scss' as *;",
             },
           },
         ],

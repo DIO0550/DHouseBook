@@ -1,11 +1,10 @@
-import './App.scss';
-import DateControlComponent from './Component/Molecules/DateControlComponent';
-import PurchasedListComponent from './Component/Organisms/PurchasedListComponent';
+import styles from './App.module.scss';
+import HouseholdAccountBook from './components/Templates/HouseholdAccountBook';
 
 function App() {
   return (
-    <div className='App'>
-      <PurchasedListComponent />
+    <div className={styles.App}>
+      <HouseholdAccountBook />
     </div>
   );
 }

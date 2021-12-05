@@ -46,6 +46,7 @@ const base: Configuration = {
             options: {
               sourceMap: isDev,
               implementation: require('sass'),
+              additionalData: "@use './src/styles/_variable.module.scss' as *;",
             },
           },
         ],

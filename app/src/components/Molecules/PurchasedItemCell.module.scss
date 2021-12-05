@@ -1,0 +1,17 @@
+@use '../../styles/variable.module' as *;
+
+$cell-column-count: 4;
+$cell-min-width: 200px;
+
+.purchased-item-cell {
+  display: flex;
+  border: darkcyan solid 2px;
+  min-width: calc(#{$cell-min-width} * #{$cell-column-count});
+
+  .purchased-item-div {
+    width: calc(100% / #{$cell-column-count});
+    min-width: $cell-min-width;
+    border: darkcyan solid 2px;
+    margin: 4px;
+  }
+}

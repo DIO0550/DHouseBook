@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import usePurchasedItemUnitCell from '../../CustomHook/usePurchasedItemUnitCell';
-import usePurchasedItemCell from '../../CustomHook/usePurchasedItemUnitCell';
+import usePurchasedItemUnitCell from '../../hooks/usePurchasedItemUnitCell';
+import usePurchasedItemCell from '../../hooks/usePurchasedItemUnitCell';
 
 import styles from './PurchasedItemCell.module.scss';
 
