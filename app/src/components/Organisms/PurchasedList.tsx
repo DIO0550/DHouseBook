@@ -3,11 +3,13 @@ import usePurchasedItemList from '../../hooks/usePurchasedItemList';
 import PurchasedItemCell from '../Molecules/PurchasedItemCell';
 import Loading from '../Templates/Loading';
 
+import styles from './PurchasedList.module.scss';
+
 const PurchasedListComponent: FC = () => {
   const { purchasedItemList, insertParchasedItem, saveFile, isLoading } =
     usePurchasedItemList();
   return (
-    <div>
+    <div className={styles['purchased-list-container']}>
       {isLoading && <Loading />}
       {purchasedItemList.ids.map((ids) => {
         console.log(purchasedItemList);

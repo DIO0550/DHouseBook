@@ -3,8 +3,15 @@ $control-height: 50px;
 
 .date-control-container {
   position: fixed;
+  background-color: $header-color;
+
+  height: $header-height;
+  width: 100%;
+  left: 0px;
+  top: 0px;
 
   .date-control-block {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +24,7 @@ $control-height: 50px;
     justify-content: center;
     align-items: center;
     font-size: 45px;
+    color: $text-color;
   }
 
   .date-button-block {
@@ -26,11 +34,20 @@ $control-height: 50px;
   }
 
   .date-button {
+    height: calc(#{$header-height} / 2);
     width: 50px;
-    height: calc($control-height / 1.5);
-    border-radius: 5px;
-    background-color: #ffa500;
-    border-color: #d2691e;
+    background-color: $button-color;
     box-shadow: none;
+    color: $text-color;
+
+    &.right {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &.left {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
   }
 }

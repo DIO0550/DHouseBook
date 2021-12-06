@@ -11,7 +11,7 @@ const DateControlComponent: React.VFC = () => {
       <div className={dateControlStyle['date-control-block']}>
         <div className={dateControlStyle['date-button-block']}>
           <button
-            className={dateControlStyle['date-button']}
+            className={`${dateControlStyle['date-button']} ${dateControlStyle['left']}`}
             onClick={decrementMonth}
           >
             &lt;
@@ -22,7 +22,7 @@ const DateControlComponent: React.VFC = () => {
         </div>
         <div className={dateControlStyle['date-button-block']}>
           <button
-            className={dateControlStyle['date-button']}
+            className={`${dateControlStyle['date-button']} ${dateControlStyle['right']}`}
             onClick={incrementMonth}
           >
             &gt;
