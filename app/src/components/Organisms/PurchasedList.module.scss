@@ -1,3 +1,6 @@
 .purchased-list-container {
-  margin-top: $header-height;
+  margin-top: 20px;
+  border: $cell-border-color-outer solid 5px;
+  margin-left: 8px;
+  margin-right: 8px;
 }

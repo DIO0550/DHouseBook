@@ -2,7 +2,7 @@ $button-date-space: 20px;
 $control-height: 50px;
 
 .date-control-container {
-  position: fixed;
+  position: sticky;
   background-color: $header-color;
 
   height: $header-height;

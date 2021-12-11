@@ -3,13 +3,26 @@ $cell-min-width: 200px;
 
 .purchased-item-cell {
   display: flex;
-  border: darkcyan solid 2px;
   min-width: calc(#{$cell-min-width} * #{$cell-column-count});
+  background-color: white;
 
   .purchased-item-div {
     width: calc(100% / #{$cell-column-count});
     min-width: $cell-min-width;
-    border: darkcyan solid 2px;
     margin: 4px;
+  }
+}
+
+.purchased-item-cell-header {
+  display: flex;
+  min-width: calc(#{$cell-min-width} * #{$cell-column-count});
+
+  .purchased-item-div-header {
+    display: flex;
+    width: calc(100% / #{$cell-column-count});
+    min-width: $cell-min-width;
+    background-color: $header-bg-color;
+    color: $cell-border-color-outer;
+    text-align: center;
   }
 }
