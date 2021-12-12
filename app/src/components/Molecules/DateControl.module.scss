@@ -36,8 +36,10 @@ $control-height: 50px;
   .date-button {
     height: calc(#{$header-height} / 2);
     width: 50px;
-    background-color: $button-color;
+    color: $button-color;
+    background-color: $button-bg-color;
     box-shadow: none;
+    border: $button-border-color solid 3px;
     color: $text-color;
 
     &.right {

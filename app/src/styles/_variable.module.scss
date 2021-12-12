@@ -1,8 +1,12 @@
 // color
 $theme-color: #ffff80;
 $header-color: #ffff80;
-$text-color: #ffffff;
-$button-color: #0bd9bc;
+$text-color: #f78540;
+
+$button-bg-color: #ffac79;
+$button-color: #f78540;
+$button-border-color: #f78540;
+
 $cell-border-color: #f78540;
 $cell-border-color-outer: #f78540;
 
@@ -10,8 +14,8 @@ $header-text-color: #f78540;
 $header-bg-color: #ffac79;
 
 // button
-$button-width-min: 100px;
-$button-height-min: 40px;
+$button-width-small: 100px;
+$button-height-small: 40px;
 
 // header
 $header-height: 70px;

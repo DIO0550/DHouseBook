@@ -7,8 +7,7 @@ import styles from './PurchasedList.module.scss';
 import PurchasedListCellHeader from '../Molecules/PurchasedListCellHeader';
 
 const PurchasedList: FC = () => {
-  const { purchasedItemList, insertParchasedItem, saveFile, isLoading } =
-    usePurchasedItemList();
+  const { purchasedItemList, isLoading } = usePurchasedItemList();
   return (
     <>
       <div className={styles['purchased-list-container']}>
@@ -29,13 +28,6 @@ const PurchasedList: FC = () => {
           );
         })}
       </div>
-
-      <button type='button' onClick={insertParchasedItem}>
-        新規追加
-      </button>
-      <button type='button' onClick={saveFile}>
-        保存
-      </button>
     </>
   );
 };

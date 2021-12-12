@@ -18,7 +18,7 @@ const usePurchasedItemList = () => {
     purchasedItemList: state.purchasedItemList,
   }));
 
-  const useBookFileValue = useBookFile();
+  const { isLoading, saveFile, loadFile, bookData } = useBookFile();
 
   const { purchasedItemAdded, purchasedItemSetAll, purchasedItemRemoveAll } =
     purchasedItemListSlice.actions;
@@ -46,38 +46,31 @@ const usePurchasedItemList = () => {
   };
 
   const removeAllPurchasedItems = () => {
-    console.log('removeAllPurchasedItems');
     dispatch(purchasedItemRemoveAll());
   };
 
   useEffect(() => {
-    console.log(bookDate.dateStr);
-    useBookFileValue.saveFile();
-    useBookFileValue.loadFile();
+    saveFile();
+    loadFile();
   }, [bookDate]);
 
   useEffect(() => {
-    if (useBookFileValue.bookData === null) {
+    if (bookData === null) {
       return;
     }
     // データすべて削除
     removeAllPurchasedItems();
 
-    console.log(purchasedItemList);
-    if (
-      useBookFileValue.bookData === null ||
-      useBookFileValue.bookData.length === 0
-    ) {
+    if (bookData === null || bookData.length === 0) {
       return;
     }
 
-    insertAllPurchasedItems(useBookFileValue.bookData);
-  }, [useBookFileValue.bookData]);
+    insertAllPurchasedItems(bookData);
+  }, [bookData]);
 
   return {
-    isLoading: useBookFileValue.isLoading,
+    isLoading: isLoading,
     purchasedItemList,
-    saveFile: useBookFileValue.saveFile,
     insertParchasedItem,
     insertAllPurchasedItems,
   };

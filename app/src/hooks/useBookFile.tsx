@@ -29,16 +29,11 @@ const useBookFile = () => {
     const month = date.getMonth() + 1;
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
-    console.log(`loadFile ${fileName}`);
     window.api.loadBook(filePath).then((data) => {
       setBookData(data);
       setIsLoading(false);
     });
   };
-
-  useEffect(() => {
-    console.log(bookData);
-  }, [bookData]);
 
   /**
    * ファイル保存処理

@@ -1,0 +1,23 @@
+.operate-buttons-container {
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  bottom: 0;
+  left: 0;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .operate-button {
+    color: $button-color;
+    width: $button-width-small;
+    height: $button-height-small;
+
+    background-color: $button-bg-color;
+    border: $button-border-color solid 5px;
+
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
