@@ -6,7 +6,16 @@ import { PurchasedItem } from '../@types/purchasedItem';
 import { v4 as uuidv4 } from 'uuid';
 import { BookDateState } from '../store/bookDateSlice';
 import useBookFile from './useBookFile';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+const SORT_TYPE = {
+  NONE: 'NONE',
+  NAME: 'NAME',
+  PRICE: 'PRICE',
+  TYPE: 'TYPWE',
+  PURCHASE_DATE: 'PRUCHASE_DATE',
+} as const;
+type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
 
 const usePurchasedItemList = () => {
   const dispatch = useDispatch();
@@ -22,6 +31,15 @@ const usePurchasedItemList = () => {
 
   const { purchasedItemAdded, purchasedItemSetAll, purchasedItemRemoveAll } =
     purchasedItemListSlice.actions;
+
+  // ソートの種類
+  const [sortType, setSortType] = useState<SORT_TYPE>(SORT_TYPE.NONE);
+
+  // アイテムの一覧
+  const [sortItemList, setItemList] = useState<[]>([]);
+
+  // 合計
+  const [priceSum, setPriceSum] = useState<Number>(0);
 
   /**
    * 購入アイテム挿入

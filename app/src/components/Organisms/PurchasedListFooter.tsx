@@ -3,13 +3,13 @@ import useBookFile from '../../hooks/useBookFile';
 import usePurchasedItemList from '../../hooks/usePurchasedItemList';
 import styles from './OperateDataButtons.module.scss';
 
-const OperateDataButtons: FC = () => {
+const PurcahsedListFooter: FC = () => {
   const { saveFile } = useBookFile();
   const { insertParchasedItem } = usePurchasedItemList();
 
   return (
     <>
-      <div className={styles['operate-buttons-container']}>
+      <div className={styles['purchased-list-footer-container']}>
         <button
           type='button'
           onClick={insertParchasedItem}
@@ -31,9 +31,10 @@ const OperateDataButtons: FC = () => {
         >
           削除
         </button>
+        <div>合計０</div>
       </div>
     </>
   );
 };
 
-export default OperateDataButtons;
+export default PurcahsedListFooter;
