@@ -1,6 +1,6 @@
 import React from 'react';
 import DateControl from '../Molecules/DateControl';
-import OperateDataButtons from '../Organisms/OperateDataButtons';
+import PurcahsedListFooter from '../Organisms/PurchasedListFooter';
 import PurchasedList from '../Organisms/PurchasedList';
 
 const HouseholdAccountBook: React.VFC = () => {
@@ -8,7 +8,7 @@ const HouseholdAccountBook: React.VFC = () => {
     <>
       <DateControl />
       <PurchasedList />
-      <OperateDataButtons />
+      <PurcahsedListFooter />
     </>
   );
 };
