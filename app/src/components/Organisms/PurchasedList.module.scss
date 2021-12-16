@@ -3,4 +3,6 @@
   border: $cell-border-color-outer solid 5px;
   margin-left: 8px;
   margin-right: 8px;
+
+  min-width: calc(#{$cell-min-width} * #{$cell-column-count});
 }

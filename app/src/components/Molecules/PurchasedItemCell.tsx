@@ -31,34 +31,39 @@ const PurchasedItemCell: FC<Props> = (props: Props) => {
     <div className={styles['purchased-item-cell']}>
       <div
         contentEditable='true'
-        className={styles['purchased-item-div']}
+        className={`${styles['purchased-item-div']} ${styles['start']}`}
         onBlur={() => unitCellName.onBlurHandler()}
         onInput={(e) => unitCellName.onInputHandler(e.currentTarget.innerHTML)}
         dangerouslySetInnerHTML={{ __html: unitCellName.ref.current }}
       />
       <div
         contentEditable='true'
-        className={styles['purchased-item-div']}
+        className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
         onBlur={() => unitCellPrice.onBlurHandler()}
         onInput={(e) => unitCellPrice.onInputHandler(e.currentTarget.innerHTML)}
         dangerouslySetInnerHTML={{ __html: unitCellPrice.ref.current }}
       />
       <div
         contentEditable='true'
-        className={styles['purchased-item-div']}
+        className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
         onBlur={() => unitCellType.onBlurHandler()}
         onInput={(e) => unitCellType.onInputHandler(e.currentTarget.innerHTML)}
         dangerouslySetInnerHTML={{ __html: unitCellType.ref.current }}
       />
       <div
         contentEditable='true'
-        className={styles['purchased-item-div']}
+        className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
         onBlur={() => unitCellPurchasedDate.onBlurHandler()}
         onInput={(e) =>
           unitCellPurchasedDate.onInputHandler(e.currentTarget.innerHTML)
         }
         dangerouslySetInnerHTML={{ __html: unitCellPurchasedDate.ref.current }}
       />
+      <div className={`${styles['purchased-item-div']} ${styles['end']}`}>
+        <button type='button' className={`${styles['delete-button']}`}>
+          削除
+        </button>
+      </div>
     </div>
   );
 };

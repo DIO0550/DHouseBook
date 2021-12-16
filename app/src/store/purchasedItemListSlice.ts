@@ -2,7 +2,6 @@ import {
   createEntityAdapter,
   createSlice,
   PayloadAction,
-  Update,
 } from '@reduxjs/toolkit';
 
 import { PurchasedItem } from '../@types/purchasedItem';
@@ -52,6 +51,15 @@ const purchasedItemListSlice = createSlice({
           [action.payload.key]: action.payload.value,
         },
       });
+    },
+
+    /**
+     * 購入アイテム削除
+     * @param state state
+     * @param action action
+     */
+    purchasedItemRemoveById: (state, action: PayloadAction<string>): void => {
+      purchasedItemAdapter.removeOne(state, action);
     },
 
     /**

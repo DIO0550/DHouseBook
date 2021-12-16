@@ -29,8 +29,12 @@ const usePurchasedItemList = () => {
 
   const { isLoading, saveFile, loadFile, bookData } = useBookFile();
 
-  const { purchasedItemAdded, purchasedItemSetAll, purchasedItemRemoveAll } =
-    purchasedItemListSlice.actions;
+  const {
+    purchasedItemAdded,
+    purchasedItemSetAll,
+    purchasedItemRemoveAll,
+    purchasedItemRemoveById,
+  } = purchasedItemListSlice.actions;
 
   // ソートの種類
   const [sortType, setSortType] = useState<SORT_TYPE>(SORT_TYPE.NONE);
@@ -63,6 +67,17 @@ const usePurchasedItemList = () => {
     dispatch(purchasedItemSetAll(items));
   };
 
+  /**
+   * 購入アイテムを削除
+   * @param id 削除するアイテムのid
+   */
+  const removePurchasedItemById = (id: string) => {
+    purchasedItemRemoveById(id);
+  };
+
+  /**
+   * すべての購入アイテムを削除する
+   */
   const removeAllPurchasedItems = () => {
     dispatch(purchasedItemRemoveAll());
   };

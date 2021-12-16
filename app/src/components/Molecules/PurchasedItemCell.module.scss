@@ -1,6 +1,3 @@
-$cell-column-count: 4;
-$cell-min-width: 200px;
-
 .purchased-item-cell {
   display: flex;
   min-width: calc(#{$cell-min-width} * #{$cell-column-count});
@@ -9,7 +6,13 @@ $cell-min-width: 200px;
   .purchased-item-div {
     width: calc(100% / #{$cell-column-count});
     min-width: $cell-min-width;
-    margin: 4px;
+    padding: 4px;
+    border-top: $cell-border-color-outer solid $cell-boreder-width;
+
+    .delete-button {
+      display: block;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -18,6 +21,7 @@ $cell-min-width: 200px;
   min-width: calc(#{$cell-min-width} * #{$cell-column-count});
 
   .purchased-item-div-header {
+    padding: 4px;
     display: flex;
     width: calc(100% / #{$cell-column-count});
     min-width: $cell-min-width;
@@ -25,4 +29,17 @@ $cell-min-width: 200px;
     color: $cell-border-color-outer;
     text-align: center;
   }
+}
+
+.not-edge {
+  border-left: $cell-border-color-outer solid calc(#{$cell-boreder-width} / 2);
+  border-right: $cell-border-color-outer solid calc(#{$cell-boreder-width} / 2);
+}
+
+.start {
+  border-right: $cell-border-color-outer solid calc(#{$cell-boreder-width} / 2);
+}
+
+.end {
+  border-left: $cell-border-color-outer solid calc(#{$cell-boreder-width} / 2);
 }

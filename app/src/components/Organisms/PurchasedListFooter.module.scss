@@ -15,9 +15,11 @@
     height: $button-height-small;
 
     background-color: $button-bg-color;
-    border: $button-border-color solid 5px;
+    border: $button-border-color solid $cell-boreder-width;
 
     margin-left: 8px;
     margin-right: 8px;
+
+    cursor: pointer;
   }
 }
