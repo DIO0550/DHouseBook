@@ -17,7 +17,15 @@ const SORT_TYPE = {
 } as const;
 type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
 
-const usePurchasedItemList = () => {
+type UsePurchasedItemListValue = {
+  isLoading: boolean;
+  purchasedItemList: EntityState<PurchasedItem>;
+  insertParchasedItem: () => void;
+  insertAllPurchasedItems: (items: PurchasedItem[]) => void;
+  removePurchasedItemById: (id: string) => void;
+};
+
+const usePurchasedItemList = (): UsePurchasedItemListValue => {
   const dispatch = useDispatch();
   const { bookDate, purchasedItemList } = useSelector<
     States,
@@ -72,7 +80,7 @@ const usePurchasedItemList = () => {
    * @param id 削除するアイテムのid
    */
   const removePurchasedItemById = (id: string) => {
-    purchasedItemRemoveById(id);
+    dispatch(purchasedItemRemoveById(id));
   };
 
   /**
@@ -106,6 +114,7 @@ const usePurchasedItemList = () => {
     purchasedItemList,
     insertParchasedItem,
     insertAllPurchasedItems,
+    removePurchasedItemById,
   };
 };
 

@@ -14,7 +14,6 @@ const PurchasedList: FC = () => {
         <PurchasedListCellHeader />
         {isLoading && <Loading />}
         {purchasedItemList.ids.map((ids) => {
-          console.log(purchasedItemList);
           const item = purchasedItemList.entities[ids];
           return (
             <PurchasedItemCell

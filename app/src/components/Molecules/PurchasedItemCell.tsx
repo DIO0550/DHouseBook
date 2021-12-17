@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import usePurchasedItemList from '../../hooks/usePurchasedItemList';
 import usePurchasedItemUnitCell from '../../hooks/usePurchasedItemUnitCell';
 import usePurchasedItemCell from '../../hooks/usePurchasedItemUnitCell';
 
@@ -27,40 +28,46 @@ const PurchasedItemCell: FC<Props> = (props: Props) => {
     'purchasedDate'
   );
 
+  const { removePurchasedItemById } = usePurchasedItemList();
+
   return (
     <div className={styles['purchased-item-cell']}>
       <div
         contentEditable='true'
         className={`${styles['purchased-item-div']} ${styles['start']}`}
-        onBlur={() => unitCellName.onBlurHandler()}
+        onBlur={unitCellName.onBlurHandler}
         onInput={(e) => unitCellName.onInputHandler(e.currentTarget.innerHTML)}
         dangerouslySetInnerHTML={{ __html: unitCellName.ref.current }}
       />
       <div
         contentEditable='true'
         className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
-        onBlur={() => unitCellPrice.onBlurHandler()}
+        onBlur={unitCellPrice.onBlurHandler}
         onInput={(e) => unitCellPrice.onInputHandler(e.currentTarget.innerHTML)}
         dangerouslySetInnerHTML={{ __html: unitCellPrice.ref.current }}
       />
       <div
         contentEditable='true'
         className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
-        onBlur={() => unitCellType.onBlurHandler()}
+        onBlur={unitCellType.onBlurHandler}
         onInput={(e) => unitCellType.onInputHandler(e.currentTarget.innerHTML)}
         dangerouslySetInnerHTML={{ __html: unitCellType.ref.current }}
       />
       <div
         contentEditable='true'
         className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
-        onBlur={() => unitCellPurchasedDate.onBlurHandler()}
+        onBlur={unitCellPurchasedDate.onBlurHandler}
         onInput={(e) =>
           unitCellPurchasedDate.onInputHandler(e.currentTarget.innerHTML)
         }
         dangerouslySetInnerHTML={{ __html: unitCellPurchasedDate.ref.current }}
       />
       <div className={`${styles['purchased-item-div']} ${styles['end']}`}>
-        <button type='button' className={`${styles['delete-button']}`}>
+        <button
+          type='button'
+          className={`${styles['delete-button']}`}
+          onClick={() => removePurchasedItemById(props.id)}
+        >
           削除
         </button>
       </div>
