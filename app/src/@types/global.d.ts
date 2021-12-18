@@ -1,7 +1,7 @@
 import { PurchasedItem } from './purchasedItem';
 
 export interface BookAPI {
-  saveBook: (filePath: string, jsonStr: String) => void;
+  saveBook: (filePath: string, jsonStr: String) => Promise<void>;
   loadBook: (filePath: string) => Promise<PurchasedItem[] | null>;
 }
 

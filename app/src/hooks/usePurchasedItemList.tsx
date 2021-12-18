@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { BookDateState } from '../store/bookDateSlice';
 import useBookFile from './useBookFile';
 import { useEffect, useState } from 'react';
+import usePrevious from './usePrevious';
 
 const SORT_TYPE = {
   NONE: 'NONE',
@@ -34,8 +35,9 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     bookDate: state.bookDate,
     purchasedItemList: state.purchasedItemList,
   }));
+  const prevBookDate: BookDateState = usePrevious(bookDate);
 
-  const { isLoading, saveFile, loadFile, bookData } = useBookFile();
+  const { isLoading, loadFile, bookData, switchFile } = useBookFile();
 
   const {
     purchasedItemAdded,
@@ -90,15 +92,34 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     dispatch(purchasedItemRemoveAll());
   };
 
+  /**
+   * コンポーネント読み込み時
+   */
   useEffect(() => {
-    saveFile();
     loadFile();
-  }, [bookDate]);
+  }, []);
 
+  /**
+   * 日付変更時
+   */
+  useEffect(() => {
+    if (bookDate.dateStr === prevBookDate.dateStr) {
+      return;
+    }
+
+    (async () => {
+      await switchFile();
+    })();
+  }, [bookDate.dateStr]);
+
+  /**
+   * BookDataが変更時
+   */
   useEffect(() => {
     if (bookData === null) {
       return;
     }
+
     // データすべて削除
     removeAllPurchasedItems();
 

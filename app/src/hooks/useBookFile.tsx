@@ -17,6 +17,7 @@ const useBookFile = () => {
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [bookData, setBookData] = useState<PurchasedItem[] | null>(null);
 
   /**
@@ -30,9 +31,19 @@ const useBookFile = () => {
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
     window.api.loadBook(filePath).then((data) => {
+      console.log(data);
       setBookData(data);
       setIsLoading(false);
     });
+  };
+
+  const asyncLoadFile = () => {
+    const date = new Date(bookDate.dateStr);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const fileName = `${year}${zeroPadding(month, 2)}.json`;
+    const filePath = `bookdata/${fileName}`;
+    return window.api.loadBook(filePath);
   };
 
   /**
@@ -55,11 +66,41 @@ const useBookFile = () => {
     window.api.saveBook(filePath, dataJsonString);
   };
 
+  const asyncSaveFile = () => {
+    const date = new Date(prevBookDate.dateStr);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const formatData = formatSaveData(purchasedItemList.entities);
+    const dataJsonString: string = JSON.stringify(formatData);
+    const fileName = `${year}${zeroPadding(month, 2)}.json`;
+    const filePath = `bookdata/${fileName}`;
+    return window.api.saveBook(filePath, dataJsonString);
+  };
+
+  const switchFile = async () => {
+    setIsLoading(true);
+    try {
+      await asyncSaveFile();
+    } catch (e) {
+      return;
+    }
+
+    try {
+      const data = await asyncLoadFile();
+      console.log(data);
+      setBookData(data);
+    } catch (e) {
+      return;
+    }
+    setIsLoading(false);
+  };
+
   return {
     isLoading,
     bookData,
     saveFile,
     loadFile,
+    switchFile,
   };
 };
 
