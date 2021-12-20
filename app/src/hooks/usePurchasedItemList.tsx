@@ -59,13 +59,14 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
    * 購入アイテム挿入
    */
   const insertParchasedItem = () => {
-    const newItem = {
+    const newItem: PurchasedItem = {
       id: `id-${uuidv4()}`,
       name: '',
       price: 0,
       type: '',
       purchasedDate: '',
     };
+    console.log('insertParchasedItem');
     dispatch(purchasedItemAdded(newItem));
   };
 
@@ -119,6 +120,8 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     if (bookData === null) {
       return;
     }
+
+    console.log(bookData);
 
     // データすべて削除
     removeAllPurchasedItems();

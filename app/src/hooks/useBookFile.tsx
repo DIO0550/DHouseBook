@@ -17,7 +17,6 @@ const useBookFile = () => {
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [bookData, setBookData] = useState<PurchasedItem[] | null>(null);
 
   /**
@@ -31,7 +30,6 @@ const useBookFile = () => {
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
     window.api.loadBook(filePath).then((data) => {
-      console.log(data);
       setBookData(data);
       setIsLoading(false);
     });
@@ -87,7 +85,6 @@ const useBookFile = () => {
 
     try {
       const data = await asyncLoadFile();
-      console.log(data);
       setBookData(data);
     } catch (e) {
       return;
