@@ -1,5 +1,5 @@
 import { EntityState } from '@reduxjs/toolkit';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BookDateState } from '../store/bookDateSlice';
 import { States } from '../store/store';
@@ -17,25 +17,12 @@ const useBookFile = () => {
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [bookData, setBookData] = useState<PurchasedItem[] | null>(null);
 
   /**
-   * ファイル読み込み処理
+   * ファイルロード
+   * @returns ファイルロードのPromise
    */
-  const loadFile = () => {
-    setIsLoading(true);
-    const date = new Date(bookDate.dateStr);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const fileName = `${year}${zeroPadding(month, 2)}.json`;
-    const filePath = `bookdata/${fileName}`;
-    window.api.loadBook(filePath).then((data) => {
-      setBookData(data);
-      setIsLoading(false);
-    });
-  };
-
-  const asyncLoadFile = () => {
+  const loadFile = (): Promise<PurchasedItem[] | null> => {
     const date = new Date(bookDate.dateStr);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -45,26 +32,10 @@ const useBookFile = () => {
   };
 
   /**
-   * ファイル保存処理
+   * ファイルセーブ
+   * @returns ファイルセーブのPromise
    */
-  const saveFile = () => {
-    if (
-      purchasedItemList.entities === null ||
-      purchasedItemList.ids.length === 0
-    ) {
-      return;
-    }
-    const date = new Date(prevBookDate.dateStr);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const formatData = formatSaveData(purchasedItemList.entities);
-    const dataJsonString: string = JSON.stringify(formatData);
-    const fileName = `${year}${zeroPadding(month, 2)}.json`;
-    const filePath = `bookdata/${fileName}`;
-    window.api.saveBook(filePath, dataJsonString);
-  };
-
-  const asyncSaveFile = () => {
+  const saveFile = (): Promise<void> => {
     const date = new Date(prevBookDate.dateStr);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -75,26 +46,37 @@ const useBookFile = () => {
     return window.api.saveBook(filePath, dataJsonString);
   };
 
-  const switchFile = async () => {
+  /**
+   * ファイル切り替え
+   * @returns ファイル切り替えのPromise
+   */
+  const switchFile = async (): Promise<PurchasedItem[]> => {
     setIsLoading(true);
+
+    let items: PurchasedItem[] | null = [];
     try {
-      await asyncSaveFile();
+      await saveFile();
     } catch (e) {
-      return;
+      setIsLoading(false);
+      return items;
     }
 
     try {
-      const data = await asyncLoadFile();
-      setBookData(data);
+      const data = await loadFile();
+      if (!data) {
+        return [];
+      }
+      items = data;
     } catch (e) {
-      return;
+      setIsLoading(false);
+      return items;
     }
     setIsLoading(false);
+    return items;
   };
 
   return {
     isLoading,
-    bookData,
     saveFile,
     loadFile,
     switchFile,
