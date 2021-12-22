@@ -1,8 +1,9 @@
 import { MutableRefObject, useCallback, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { purchasedItemListSlice } from '../store/purchasedItemListSlice';
-import usePrevious from './usePrevious';
+import usePurchasedItemQuery from './usePurchaseItemQuery';
 
+/**
+ * 本フックの返り値
+ */
 type UsePurchasedItemCellValue = {
   ref: MutableRefObject<string>;
   onBlurHandler: () => void;
@@ -15,24 +16,20 @@ const usePurchasedItemUnitCell = (
   key: string
 ): UsePurchasedItemCellValue => {
   const ref = useRef(defaultValue);
-  const prevRef = usePrevious(ref);
+  const { updatePurchasedItem } = usePurchasedItemQuery();
 
-  const dispatch = useDispatch();
-  // 購入アイテムの更新
-  const { purchasedItemUpdated } = purchasedItemListSlice.actions;
-
+  /**
+   * 入力時の処理
+   */
   const onInputHandler = useCallback((value: string) => {
     ref.current = value;
   }, []);
 
+  /**
+   * フォーカスが外れた際の処理
+   */
   const onBlurHandler = useCallback(() => {
-    dispatch(
-      purchasedItemUpdated({
-        id,
-        key,
-        value: ref.current ? ref.current : '',
-      })
-    );
+    updatePurchasedItem(id, key, ref.current ? ref.current : '');
   }, [id, key]);
 
   return {

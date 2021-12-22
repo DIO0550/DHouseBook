@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import usePurchasedItemList from '../../hooks/usePurchasedItemList';
 import usePurchasedItemUnitCell from '../../hooks/usePurchasedItemUnitCell';
 import usePurchasedItemCell from '../../hooks/usePurchasedItemUnitCell';
+import usePurchasedItemQuery from '../../hooks/usePurchaseItemQuery';
 
 import styles from './PurchasedItemCell.module.scss';
 
@@ -28,7 +28,7 @@ const PurchasedItemCell: FC<Props> = (props: Props) => {
     'purchasedDate'
   );
 
-  const { removePurchasedItemById } = usePurchasedItemList();
+  const { removePurchasedItemById } = usePurchasedItemQuery();
 
   return (
     <div className={styles['purchased-item-cell']}>

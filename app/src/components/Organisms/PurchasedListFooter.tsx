@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import useBookFile from '../../hooks/useBookFile';
-import usePurchasedItemList from '../../hooks/usePurchasedItemList';
+import usePurchasedItemQuery from '../../hooks/usePurchaseItemQuery';
 import styles from './PurchasedListFooter.module.scss';
 
 const PurcahsedListFooter: FC = () => {
   const { saveFile } = useBookFile();
-  const { insertParchasedItem } = usePurchasedItemList();
+  const { insertParchasedItem } = usePurchasedItemQuery();
 
   return (
     <>
