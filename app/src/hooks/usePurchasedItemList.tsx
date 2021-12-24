@@ -4,7 +4,7 @@ import { States } from '../store/store';
 import { PurchasedItem } from '../@types/purchasedItem';
 import { BookDateState } from '../store/bookDateSlice';
 import useBookFile from './useBookFile';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import usePrevious from './usePrevious';
 import usePurchasedItemQuery from './usePurchaseItemQuery';
 
@@ -20,6 +20,7 @@ type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
 type UsePurchasedItemListValue = {
   isLoading: boolean;
   purchasedItemList: EntityState<PurchasedItem>;
+  priceSum: number;
 };
 
 const usePurchasedItemList = (): UsePurchasedItemListValue => {
@@ -40,12 +41,20 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
   // アイテムの一覧
   const [sortItemList, setItemList] = useState<[]>([]);
 
-  // 合計
-  const [priceSum, setPriceSum] = useState<Number>(0);
-
   // query
   const { insertAllPurchasedItems, removeAllPurchasedItems } =
     usePurchasedItemQuery();
+
+  /**
+   * 合計金額
+   */
+  const priceSum = useMemo(() => {
+    let sum = 0;
+    for (const id in purchasedItemList.ids) {
+      sum += Number(purchasedItemList.entities[id]);
+    }
+    return sum;
+  }, [purchasedItemList]);
 
   /**
    * コンポーネント読み込み時
@@ -83,6 +92,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
   return {
     isLoading,
     purchasedItemList,
+    priceSum,
   };
 };
 
