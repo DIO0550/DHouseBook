@@ -100,7 +100,9 @@ dist
 # TernJS port file
 .tern-port
 
-*.js
+main.js
+preload.js
+index.js
 
 */bookdata/*.txt
 */bookdata/*.json
