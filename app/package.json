@@ -1,7 +1,7 @@
 {
-  "name": "electron-react-ts",
-  "description": "An Electron boilerplate with hot reloading for React and TypeScript.",
-  "version": "1.0.2",
+  "name": "todo",
+  "description": "todo",
+  "version": "0.0.1",
   "license": "MIT",
   "engines": {
     "node": ">=12.13.0"
@@ -51,6 +51,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.2",
@@ -78,6 +79,12 @@
     "electron-reload": "^1.5.0",
     "electron-search-devtools": "^1.4.8",
     "wait-on": "^6.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browser": {
     "crypto": false

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { PurchasedItem } from '../@types/purchasedItem';
 import { purchasedItemListSlice } from '../store/purchasedItemListSlice';
-import { v4 as uuidv4 } from 'uuid';
 
 type UsePurchasedItemQueryValue = {
   insertParchasedItem: () => void;
@@ -71,7 +71,7 @@ const usePurchasedItemQuery = (): UsePurchasedItemQueryValue => {
         id,
         key,
         value,
-      })
+      }),
     );
   };
 

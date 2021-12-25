@@ -7,9 +7,10 @@ const useBooksDate = () => {
   const { bookDate } = useSelector<States, { bookDate: BookDateState }>(
     (state) => ({
       bookDate: state.bookDate,
-    })
+    }),
   );
   const { incrementMonth, decrementMonth } = bookDateSlice.actions;
+
   return {
     dateStr: bookDate.dateStr,
     incrementMonth: () => dispatch(incrementMonth()),

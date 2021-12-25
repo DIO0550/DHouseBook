@@ -9,9 +9,8 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'plugin:import/errors',
-    'plugin:import/warinings',
+    'plugin:import/warnings',
     'plugin:import/typescript',
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
@@ -29,11 +28,17 @@ module.exports = {
       jsx: true,
     },
     project: './tsconfig.eslint.json',
-    ecmaVersion: 12,
     sourceType: 'module',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'jsx-a11y',
+    'react',
+    'react-hooks',
+    'prefer-arrow-functions',
+  ],
   rules: {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
@@ -48,12 +53,12 @@ module.exports = {
       'error',
       { blankLine: 'always', prev: '*', next: 'return' },
     ],
-    'prefer-arrow/prefer-allow-functions': [
+    'prefer-arrow-functions/prefer-arrow-functions': [
       'error',
       {
         disallowPrototype: true,
         singleReturnOnly: false,
-        classProperties: false,
+        classPropertiesAllowed: false,
       },
     ],
     '@typescript-eslint/no-unused-vars': [
@@ -114,6 +119,7 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: ['src'],
+        extensions: ['.js', '.ts', '.d.ts', '.tsx'],
       },
     },
   },

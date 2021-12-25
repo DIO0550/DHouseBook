@@ -1,10 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { EntityState } from '@reduxjs/toolkit';
+import { useEffect, useMemo, useState } from 'react';
 import { States } from '../store/store';
-import { PurchasedItem } from '../@types/purchasedItem';
+import { PurchasedItem } from '../@types/purchasedItem.d.ts';
 import { BookDateState } from '../store/bookDateSlice';
 import useBookFile from './useBookFile';
-import { useEffect, useMemo, useState } from 'react';
 import usePrevious from './usePrevious';
 import usePurchasedItemQuery from './usePurchaseItemQuery';
 
@@ -50,9 +50,10 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
    */
   const priceSum = useMemo(() => {
     let sum = 0;
-    for (const id in purchasedItemList.ids) {
+    for (const id of purchasedItemList.ids) {
       sum += Number(purchasedItemList.entities[id]);
     }
+
     return sum;
   }, [purchasedItemList]);
 
@@ -61,13 +62,15 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
    */
   useEffect(() => {
     // ファイルロード
-    (async () => {
-      const data = await loadFile();
+    void (async () => {
+      const data: PurchasedItem[] | null = await loadFile();
       if (!data) {
         return;
       }
       insertAllPurchasedItems(data);
     })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
@@ -78,7 +81,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
       return;
     }
 
-    (async () => {
+    void (async () => {
       const data = await switchFile();
 
       // データすべて削除
@@ -87,6 +90,8 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
       // データ挿入
       insertAllPurchasedItems(data);
     })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookDate.dateStr]);
 
   return {
