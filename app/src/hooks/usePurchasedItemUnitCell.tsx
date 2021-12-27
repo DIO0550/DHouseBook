@@ -13,7 +13,7 @@ type UsePurchasedItemCellValue = {
 const usePurchasedItemUnitCell = (
   defaultValue: string,
   id: string,
-  key: string
+  key: string,
 ): UsePurchasedItemCellValue => {
   const ref = useRef(defaultValue);
   const { updatePurchasedItem } = usePurchasedItemQuery();
@@ -30,7 +30,7 @@ const usePurchasedItemUnitCell = (
    */
   const onBlurHandler = useCallback(() => {
     updatePurchasedItem(id, key, ref.current ? ref.current : '');
-  }, [id, key]);
+  }, [id, key, updatePurchasedItem]);
 
   return {
     ref,

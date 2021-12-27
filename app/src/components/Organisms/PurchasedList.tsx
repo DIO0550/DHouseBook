@@ -8,6 +8,7 @@ import PurchasedListCellHeader from '../Molecules/PurchasedListCellHeader';
 
 const PurchasedList: FC = () => {
   const { purchasedItemList, isLoading } = usePurchasedItemList();
+
   return (
     <>
       <div className={styles['purchased-list-container']}>
@@ -15,14 +16,15 @@ const PurchasedList: FC = () => {
         {isLoading && <Loading />}
         {purchasedItemList.ids.map((ids) => {
           const item = purchasedItemList.entities[ids];
+
           return (
             <PurchasedItemCell
               key={String(item?.id)}
               id={String(item?.id)}
-              name={item?.name!}
-              price={String(item?.price!)}
-              type={item?.type!}
-              purchasedDate={item?.purchasedDate!}
+              name={item?.name ?? ''}
+              price={String(item?.price ?? 0)}
+              type={item?.type ?? ''}
+              purchasedDate={item?.purchasedDate ?? ''}
             />
           );
         })}

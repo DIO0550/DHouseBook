@@ -11,14 +11,14 @@ const PurcahsedListFooter: FC = () => {
     <>
       <div className={styles['purchased-list-footer-container']}>
         <button
-          type='button'
+          type="button"
           onClick={insertParchasedItem}
           className={styles['operate-button']}
         >
           新規追加
         </button>
         <button
-          type='button'
+          type="button"
           onClick={saveFile}
           className={styles['operate-button']}
         >

@@ -19,13 +19,15 @@ type Props = {
 };
 
 const PurchasedItemCell: FC<Props> = (props: Props) => {
-  const unitCellName = usePurchasedItemUnitCell(props.name, props.id, 'name');
-  const unitCellPrice = usePurchasedItemCell(props.price, props.id, 'price');
-  const unitCellType = usePurchasedItemUnitCell(props.type, props.id, 'type');
+  const { id, name, price, type, purchasedDate } = props;
+
+  const unitCellName = usePurchasedItemUnitCell(name, id, 'name');
+  const unitCellPrice = usePurchasedItemCell(price, id, 'price');
+  const unitCellType = usePurchasedItemUnitCell(type, id, 'type');
   const unitCellPurchasedDate = usePurchasedItemUnitCell(
-    props.purchasedDate,
-    props.id,
-    'purchasedDate'
+    purchasedDate,
+    id,
+    'purchasedDate',
   );
 
   const { removePurchasedItemById } = usePurchasedItemQuery();
@@ -33,38 +35,45 @@ const PurchasedItemCell: FC<Props> = (props: Props) => {
   return (
     <div className={styles['purchased-item-cell']}>
       <div
-        contentEditable='true'
+        contentEditable="true"
         className={`${styles['purchased-item-div']} ${styles['start']}`}
         onBlur={unitCellName.onBlurHandler}
         onInput={(e) => unitCellName.onInputHandler(e.currentTarget.innerHTML)}
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: unitCellName.ref.current }}
       />
       <div
-        contentEditable='true'
+        contentEditable="true"
         className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
         onBlur={unitCellPrice.onBlurHandler}
         onInput={(e) => unitCellPrice.onInputHandler(e.currentTarget.innerHTML)}
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: unitCellPrice.ref.current }}
       />
       <div
-        contentEditable='true'
+        contentEditable="true"
         className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
         onBlur={unitCellType.onBlurHandler}
         onInput={(e) => unitCellType.onInputHandler(e.currentTarget.innerHTML)}
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: unitCellType.ref.current }}
       />
       <div
-        contentEditable='true'
+        contentEditable="true"
         className={`${styles['purchased-item-div']} ${styles['not-edge']}`}
         onBlur={unitCellPurchasedDate.onBlurHandler}
-        onInput={(e) =>
-          unitCellPurchasedDate.onInputHandler(e.currentTarget.innerHTML)
+        onInput={
+          (e) =>
+            // eslint-disable-next-line implicit-arrow-linebreak
+            unitCellPurchasedDate.onInputHandler(e.currentTarget.innerHTML)
+          // eslint-disable-next-line react/jsx-curly-newline
         }
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: unitCellPurchasedDate.ref.current }}
       />
       <div className={`${styles['purchased-item-div']} ${styles['end']}`}>
         <button
-          type='button'
+          type="button"
           className={`${styles['delete-button']}`}
           onClick={() => removePurchasedItemById(props.id)}
         >

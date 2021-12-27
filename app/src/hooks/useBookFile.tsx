@@ -1,7 +1,7 @@
 import { EntityState } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { PurchasedItem } from '../@types/purchasedItem.d.ts';
+import { PurchasedItem } from '../@types/purchasedItem';
 import { BookDateState } from '../store/bookDateSlice';
 import { States } from '../store/store';
 import { formatSaveData, zeroPadding } from '../util/converter';
@@ -28,6 +28,7 @@ const useBookFile = () => {
     const month = date.getMonth() + 1;
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
+
     return window.api.loadBook(filePath);
   };
 
@@ -43,6 +44,7 @@ const useBookFile = () => {
     const dataJsonString: string = JSON.stringify(formatData);
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
     const filePath = `bookdata/${fileName}`;
+
     return window.api.saveBook(filePath, dataJsonString);
   };
 
@@ -53,25 +55,28 @@ const useBookFile = () => {
   const switchFile = async (): Promise<PurchasedItem[]> => {
     setIsLoading(true);
 
-    let items: PurchasedItem[] | null = [];
+    let items: PurchasedItem[] = [];
     try {
       await saveFile();
     } catch (e) {
       setIsLoading(false);
-      return items;
+
+      return [];
     }
 
     try {
       const data = await loadFile();
       if (!data) {
-        return [];
+        return items;
       }
       items = data;
     } catch (e) {
       setIsLoading(false);
+
       return items;
     }
     setIsLoading(false);
+
     return items;
   };
 

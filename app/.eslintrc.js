@@ -5,7 +5,6 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
     'airbnb',
     'airbnb/hooks',
     'plugin:import/errors',
@@ -15,12 +14,12 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
   plugins: [
-    'jsx-a11y',
     'react',
-    '@typescript-eslint',
-    'import',
     'react-hooks',
+    'import',
+    'jsx-a11y',
     'preffer-arrow',
+    '@typescript-eslint',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -106,6 +105,15 @@ module.exports = {
     'no-dupe-keys': ['error'],
     'no-duplicate-case': ['error'],
     'no-empty': ['error'],
+    'operator-linebreak': [
+      'error',
+      'after',
+      {
+        overrides: {
+          ':': 'before',
+        },
+      },
+    ],
   },
   overrides: [
     {
