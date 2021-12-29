@@ -12,14 +12,7 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  ],
-  plugins: [
-    'react',
-    'react-hooks',
-    'import',
-    'jsx-a11y',
-    'preffer-arrow',
-    '@typescript-eslint',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

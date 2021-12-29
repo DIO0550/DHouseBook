@@ -18,8 +18,9 @@ const bookDateSlice = createSlice({
       const incrementMonthDate = new Date(
         date.getFullYear(),
         date.getMonth() + 1,
-        1
+        1,
       );
+
       return { dateStr: incrementMonthDate.toString() };
     },
     decrementMonth: (state) => {
@@ -27,8 +28,9 @@ const bookDateSlice = createSlice({
       const decrementMonthDate = new Date(
         date.getFullYear(),
         date.getMonth() - 1,
-        1
+        1,
       );
+
       return { dateStr: decrementMonthDate.toString() };
     },
   },

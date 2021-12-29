@@ -29,13 +29,14 @@ const purchasedItemListSlice = createSlice({
   initialState: purchasedItemAdapter.getInitialState(),
   reducers: {
     // アイテム１つ追加
-    purchasedItemAdded: purchasedItemAdapter.addOne,
+    purchasedItemAdded: (state, action: PayloadAction<PurchasedItem>) =>
+      purchasedItemAdapter.addOne(state, action.payload),
     /**
      * 複数アイテム追加
      * @param state state
      * @param action action
      */
-    purchasedItemSetAll(state, action: PayloadAction<PurchasedItem[]>) {
+    purchasedItemSetAll: (state, action: PayloadAction<PurchasedItem[]>) => {
       purchasedItemAdapter.setAll(state, action.payload);
     },
     /**
@@ -65,7 +66,7 @@ const purchasedItemListSlice = createSlice({
     /**
      * アイテムすべて削除
      */
-    purchasedItemRemoveAll: purchasedItemAdapter.removeAll,
+    purchasedItemRemoveAll: (state) => purchasedItemAdapter.removeAll(state),
   },
 });
 
