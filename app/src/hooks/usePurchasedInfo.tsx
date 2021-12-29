@@ -25,7 +25,7 @@ const usePurchasedInfo = (): UsePurchasedInfoValue => {
       const id: EntityId = purchasedItemList.ids[i];
       const item = purchasedItemList.entities[id];
       if (item) {
-        sum += item.price;
+        sum += Number(item.price);
       }
     }
 
