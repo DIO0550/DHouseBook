@@ -29,7 +29,7 @@ module.exports = {
     'jsx-a11y',
     'react',
     'react-hooks',
-    'prefer-arrow-functions',
+    'prefer-arrow',
   ],
   rules: {
     'no-use-before-define': 'off',
