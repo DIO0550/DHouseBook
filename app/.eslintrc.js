@@ -30,6 +30,7 @@ module.exports = {
     'react',
     'react-hooks',
     'prefer-arrow',
+    'prefer-arrow-functions',
   ],
   rules: {
     'no-use-before-define': 'off',

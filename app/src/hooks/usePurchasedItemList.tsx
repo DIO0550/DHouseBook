@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { EntityState } from '@reduxjs/toolkit';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { States } from '../store/store';
 import { PurchasedItem } from '../@types/purchasedItem';
 import { BookDateState } from '../store/bookDateSlice';
@@ -61,6 +61,31 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
   };
 
   /**
+   * ソートで使用する値
+   * @param item アイテム
+   * @returns ソート時に使用する値
+   */
+  const sortValue = useCallback(
+    (item: PurchasedItem): string | number => {
+      switch (sortType) {
+        case SORT_TYPE.NONE:
+          return item.id;
+        case SORT_TYPE.NAME:
+          return item.name;
+        case SORT_TYPE.PRICE:
+          return item.price;
+        case SORT_TYPE.TYPE:
+          return item.type;
+        case SORT_TYPE.PURCHASE_DATE:
+          return item.purchasedDate;
+        default:
+          return item.id;
+      }
+    },
+    [sortType],
+  );
+
+  /**
    * コンポーネント読み込み時
    */
   useEffect(() => {
@@ -108,8 +133,31 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
       }
     }
 
+    itemList.sort((a, b) => {
+      const aValue = sortValue(a);
+      const bValue = sortValue(b);
+
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        if (aValue < bValue) {
+          return -1;
+        }
+
+        if (aValue > bValue) {
+          return 1;
+        }
+
+        return 0;
+      }
+
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return aValue - bValue;
+      }
+
+      return 0;
+    });
+
     setItemList(itemList);
-  }, [purchasedItemList.entities, purchasedItemList.ids, sortType]);
+  }, [purchasedItemList.entities, purchasedItemList.ids, sortType, sortValue]);
 
   return {
     sortItemList,
