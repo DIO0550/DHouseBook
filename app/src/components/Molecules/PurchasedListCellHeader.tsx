@@ -1,30 +1,43 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC } from 'react';
+import useHeaderCell from '../../hooks/useHeaderCell';
+import { SORT_TYPE } from '../../store/bookDateSlice';
 import styles from './PurchasedItemCell.module.scss';
 
-const PurcahsedListCellHeader: FC = () => (
-  <div className={styles['purchased-item-cell-header']}>
-    <div className={`${styles['purchased-item-div-header']} ${styles.start}`}>
-      名前
+const PurcahsedListCellHeader: FC = () => {
+  const { onClickHeader } = useHeaderCell();
+
+  return (
+    <div className={styles['purchased-item-cell-header']}>
+      <div
+        className={`${styles['purchased-item-div-header']} ${styles.start}`}
+        onClick={() => {
+          onClickHeader(SORT_TYPE.NAME);
+        }}
+      >
+        名前
+      </div>
+      <div
+        className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
+      >
+        値段
+      </div>
+      <div
+        className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
+      >
+        種類
+      </div>
+      <div
+        className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
+      >
+        購入日
+      </div>
+      <div className={`${styles['purchased-item-div-header']} ${styles.end}`}>
+        削除
+      </div>
     </div>
-    <div
-      className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
-    >
-      値段
-    </div>
-    <div
-      className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
-    >
-      種類
-    </div>
-    <div
-      className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
-    >
-      購入日
-    </div>
-    <div className={`${styles['purchased-item-div-header']} ${styles.end}`}>
-      削除
-    </div>
-  </div>
-);
+  );
+};
 
 export default PurcahsedListCellHeader;

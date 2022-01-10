@@ -3,22 +3,10 @@ import { EntityState } from '@reduxjs/toolkit';
 import { useCallback, useEffect, useState } from 'react';
 import { States } from '../store/store';
 import { PurchasedItem } from '../@types/purchasedItem';
-import { BookDateState } from '../store/bookDateSlice';
+import { BookDateState, SORT_TYPE } from '../store/bookDateSlice';
 import useBookFile from './useBookFile';
 import usePrevious from './usePrevious';
 import usePurchasedItemQuery from './usePurchaseItemQuery';
-
-/**
- * ソートの種類
- */
-const SORT_TYPE = {
-  NONE: 'NONE',
-  NAME: 'NAME',
-  PRICE: 'PRICE',
-  TYPE: 'TYPE',
-  PURCHASE_DATE: 'PRUCHASE_DATE',
-} as const;
-type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
 
 /**
  * カスタムフックの返却値
@@ -43,10 +31,10 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
   const { isLoading, loadFile, switchFile } = useBookFile();
 
   // ソートの種類
-  const [sortType, setSortType] = useState<SORT_TYPE>(SORT_TYPE.NONE);
+  const [sortType, setSortType] = useState<SORT_TYPE>(SORT_TYPE.NAME);
 
   // アイテムの一覧
-  const [sortItemList, setItemList] = useState<PurchasedItem[]>([]);
+  const [sortItemList, setSortItemList] = useState<PurchasedItem[]>([]);
 
   // query
   const { insertAllPurchasedItems, removeAllPurchasedItems } =
@@ -156,7 +144,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
       return 0;
     });
 
-    setItemList(itemList);
+    setSortItemList(itemList);
   }, [purchasedItemList.entities, purchasedItemList.ids, sortType, sortValue]);
 
   return {

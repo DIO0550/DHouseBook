@@ -7,27 +7,23 @@ import styles from './PurchasedList.module.scss';
 import PurchasedListCellHeader from '../Molecules/PurchasedListCellHeader';
 
 const PurchasedList: FC = () => {
-  const { purchasedItemList, isLoading } = usePurchasedItemList();
+  const { sortItemList, isLoading } = usePurchasedItemList();
 
   return (
     <>
       <div className={styles['purchased-list-container']}>
         <PurchasedListCellHeader />
         {isLoading && <Loading />}
-        {purchasedItemList.ids.map((ids) => {
-          const item = purchasedItemList.entities[ids];
-
-          return (
-            <PurchasedItemCell
-              key={String(item?.id)}
-              id={String(item?.id)}
-              name={item?.name ?? ''}
-              price={String(item?.price ?? 0)}
-              type={item?.type ?? ''}
-              purchasedDate={item?.purchasedDate ?? ''}
-            />
-          );
-        })}
+        {sortItemList.map((item) => (
+          <PurchasedItemCell
+            key={String(item.id)}
+            id={String(item.id)}
+            name={item.name}
+            price={String(item.price ?? 0)}
+            type={item.type}
+            purchasedDate={item.purchasedDate}
+          />
+        ))}
       </div>
     </>
   );
