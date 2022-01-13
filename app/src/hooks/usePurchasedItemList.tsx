@@ -15,7 +15,6 @@ type UsePurchasedItemListValue = {
   sortItemList: PurchasedItem[];
   isLoading: boolean;
   purchasedItemList: EntityState<PurchasedItem>;
-  changeSortType: (type: SORT_TYPE) => void;
 };
 
 const usePurchasedItemList = (): UsePurchasedItemListValue => {
@@ -30,9 +29,6 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
 
   const { isLoading, loadFile, switchFile } = useBookFile();
 
-  // ソートの種類
-  const [sortType, setSortType] = useState<SORT_TYPE>(SORT_TYPE.NAME);
-
   // アイテムの一覧
   const [sortItemList, setSortItemList] = useState<PurchasedItem[]>([]);
 
@@ -41,27 +37,19 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     usePurchasedItemQuery();
 
   /**
-   * ソートの種類を変更
-   * @param type 変更するタイプ
-   */
-  const changeSortType = (type: SORT_TYPE) => {
-    setSortType(type);
-  };
-
-  /**
    * ソートで使用する値
    * @param item アイテム
    * @returns ソート時に使用する値
    */
   const sortValue = useCallback(
     (item: PurchasedItem): string | number => {
-      switch (sortType) {
+      switch (bookDate.sortType) {
         case SORT_TYPE.NONE:
           return item.id;
         case SORT_TYPE.NAME:
           return item.name;
         case SORT_TYPE.PRICE:
-          return item.price;
+          return Number(item.price);
         case SORT_TYPE.TYPE:
           return item.type;
         case SORT_TYPE.PURCHASE_DATE:
@@ -70,7 +58,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
           return item.id;
       }
     },
-    [sortType],
+    [bookDate.sortType],
   );
 
   /**
@@ -116,9 +104,15 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     for (let i = 0; i < purchasedItemList.ids.length; i += 1) {
       const id = purchasedItemList.ids[i];
       const item = purchasedItemList.entities[id];
-      if (item && sortType !== SORT_TYPE.NONE) {
+      if (item) {
         itemList.push(item);
       }
+    }
+
+    if (bookDate.sortType === SORT_TYPE.NONE) {
+      setSortItemList(itemList);
+
+      return;
     }
 
     itemList.sort((a, b) => {
@@ -145,13 +139,17 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     });
 
     setSortItemList(itemList);
-  }, [purchasedItemList.entities, purchasedItemList.ids, sortType, sortValue]);
+  }, [
+    purchasedItemList.entities,
+    purchasedItemList.ids,
+    bookDate.sortType,
+    sortValue,
+  ]);
 
   return {
     sortItemList,
     isLoading,
     purchasedItemList,
-    changeSortType,
   };
 };
 

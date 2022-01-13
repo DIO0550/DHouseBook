@@ -20,16 +20,25 @@ const PurcahsedListCellHeader: FC = () => {
       </div>
       <div
         className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
+        onClick={() => {
+          onClickHeader(SORT_TYPE.PRICE);
+        }}
       >
         値段
       </div>
       <div
         className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
+        onClick={() => {
+          onClickHeader(SORT_TYPE.TYPE);
+        }}
       >
         種類
       </div>
       <div
         className={`${styles['purchased-item-div-header']} ${styles['not-edge']}`}
+        onClick={() => {
+          onClickHeader(SORT_TYPE.PURCHASE_DATE);
+        }}
       >
         購入日
       </div>
