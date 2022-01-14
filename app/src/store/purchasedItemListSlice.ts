@@ -16,6 +16,31 @@ type UpdateItem = {
   value: unknown;
 };
 
+/**
+ * ソートの種類
+ */
+const SORT_TYPE = {
+  /// なし
+  NONE: 'NONE',
+  NAME: 'NAME',
+  PRICE: 'PRICE',
+  TYPE: 'TYPE',
+  PURCHASE_DATE: 'PRUCHASE_DATE',
+} as const;
+type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
+
+/**
+ * ソートのオーダー種類
+ * - 昇順
+ * - 降順
+ */
+const SORT_ORDER_TYPE = {
+  /// 昇順
+  ASCENDING: 'ASCENDING',
+  DESCENDING: 'DESCENDING',
+} as const;
+type SORT_ORDER_TYPE = typeof SORT_ORDER_TYPE[keyof typeof SORT_ORDER_TYPE];
+
 // adapter
 const purchasedItemAdapter = createEntityAdapter<PurchasedItem>({
   selectId: (purchasedItem) => purchasedItem.id,
