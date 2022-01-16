@@ -3,10 +3,12 @@ import { EntityState } from '@reduxjs/toolkit';
 import { useCallback, useEffect, useState } from 'react';
 import { States } from '../store/store';
 import { PurchasedItem } from '../@types/purchasedItem';
-import { BookDateState, SORT_TYPE } from '../store/bookDateSlice';
+import { BookDateState } from '../store/bookDateSlice';
+import { SORT_TYPE } from '../store/itemSortSlice';
 import useBookFile from './useBookFile';
 import usePrevious from './usePrevious';
 import usePurchasedItemQuery from './usePurchaseItemQuery';
+import useItemSort from './useItemSort';
 
 /**
  * カスタムフックの返却値
@@ -20,12 +22,16 @@ type UsePurchasedItemListValue = {
 const usePurchasedItemList = (): UsePurchasedItemListValue => {
   const { bookDate, purchasedItemList } = useSelector<
     States,
-    { bookDate: BookDateState; purchasedItemList: EntityState<PurchasedItem> }
+    {
+      bookDate: BookDateState;
+      purchasedItemList: EntityState<PurchasedItem>;
+    }
   >((state) => ({
     bookDate: state.bookDate,
     purchasedItemList: state.purchasedItemList,
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
+  const { sortType, isAscending } = useItemSort();
 
   const { isLoading, loadFile, switchFile } = useBookFile();
 
@@ -43,7 +49,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
    */
   const sortValue = useCallback(
     (item: PurchasedItem): string | number => {
-      switch (bookDate.sortType) {
+      switch (sortType) {
         case SORT_TYPE.NONE:
           return item.id;
         case SORT_TYPE.NAME:
@@ -58,7 +64,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
           return item.id;
       }
     },
-    [bookDate.sortType],
+    [sortType],
   );
 
   /**
@@ -109,7 +115,8 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
       }
     }
 
-    if (bookDate.sortType === SORT_TYPE.NONE) {
+    // ソートなしなら、順番通りに返す
+    if (sortType === SORT_TYPE.NONE) {
       setSortItemList(itemList);
 
       return;
@@ -121,18 +128,18 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
 
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         if (aValue < bValue) {
-          return -1;
+          return isAscending ? -1 : 1;
         }
 
         if (aValue > bValue) {
-          return 1;
+          return isAscending ? 1 : -1;
         }
 
         return 0;
       }
 
       if (typeof aValue === 'number' && typeof bValue === 'number') {
-        return aValue - bValue;
+        return (isAscending ? 1 : -1) * (aValue - bValue);
       }
 
       return 0;
@@ -142,7 +149,8 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
   }, [
     purchasedItemList.entities,
     purchasedItemList.ids,
-    bookDate.sortType,
+    sortType,
+    isAscending,
     sortValue,
   ]);
 

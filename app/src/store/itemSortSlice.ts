@@ -54,11 +54,23 @@ const itemSortSlice = createSlice({
      * @returns 変更後のstate
      */
     changeSortType: (state, action: PayloadAction<SORT_TYPE>) => {
-      if (state.sortType === action.payload) {
-        return state;
+      if (state.sortType !== action.payload) {
+        return {
+          orderType: SORT_ORDER_TYPE.ASCENDING,
+          sortType: action.payload,
+        };
       }
 
-      return { ...state, sortType: action.payload };
+      switch (state.orderType) {
+        case SORT_ORDER_TYPE.ASCENDING:
+          return { ...state, orderType: SORT_ORDER_TYPE.DESCENDING };
+
+        case SORT_ORDER_TYPE.DESCENDING:
+          return { ...state, orderType: SORT_ORDER_TYPE.ASCENDING };
+
+        default:
+          return { ...state, orderType: SORT_ORDER_TYPE.ASCENDING };
+      }
     },
 
     /**
@@ -78,4 +90,4 @@ const itemSortSlice = createSlice({
 });
 
 export { itemSortSlice };
-export type { ItemSortState, SORT_TYPE, SORT_ORDER_TYPE };
+export { ItemSortState, SORT_TYPE, SORT_ORDER_TYPE };
