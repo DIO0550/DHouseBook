@@ -1,5 +1,5 @@
-import { SORT_TYPE } from '../store/bookDateSlice';
-import useBookData from './useBooksDate';
+import { SORT_TYPE } from '../store/itemSortSlice';
+import useItemSort from './useItemSort';
 
 // カスタムフックの返却値
 type UseHeaderCell = {
@@ -10,7 +10,7 @@ type UseHeaderCell = {
 };
 
 const useHeaderCell = (): UseHeaderCell => {
-  const { sortType, changeSortType } = useBookData();
+  const { sortType, changeSortType } = useItemSort();
 
   /**
    * ヘッダクリック時の処理
