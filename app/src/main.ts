@@ -1,3 +1,11 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable import/no-extraneous-dependencies */
 import * as path from 'path';
 import { BrowserWindow, app, session, ipcMain } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
@@ -19,6 +27,7 @@ if (isDev) {
   });
 }
 
+// Window 生成
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
@@ -33,10 +42,11 @@ const createWindow = () => {
   }
 
   // レンダラープロセスをロード
-  mainWindow.loadFile('dist/index.html');
+  void mainWindow.loadFile('dist/index.html');
 };
 
-app.whenReady().then(async () => {
+// アプリ初期化時
+void app.whenReady().then(async () => {
   if (isDev) {
     const devtools = await searchDevtools('REACT');
     if (devtools) {
@@ -48,6 +58,7 @@ app.whenReady().then(async () => {
   createWindow();
 });
 
+// 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
 
 // ===================
@@ -79,5 +90,6 @@ ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
   } catch (err) {
     return null;
   }
+
   return jsonObject;
 });

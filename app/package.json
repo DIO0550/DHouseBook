@@ -1,28 +1,23 @@
 {
-  "name": "todo",
-  "description": "todo",
+  "name": "dhousebook",
+  "description": "housebook",
   "version": "0.0.1",
-  "license": "MIT",
   "engines": {
     "node": ">=12.13.0"
   },
   "main": "dist/main.js",
   "scripts": {
     "start": "run-s clean build serve",
-    "dev": "run-p dev:*",
-    "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"development\" electron .",
-    "dev:tsc": "tsc -w -p tsconfig.main.json",
-    "dev:webpack": "webpack --watch --progress",
-    "predev": "rimraf dist",
-    "clean": "rimraf dist release",
-    "serve": "electron .",
-    "build": "cross-env NODE_ENV=\"development\" webpack --config webpack.config.prod.ts --progress",
-    "build:prod": "cross-env NODE_ENV=\"production\" webpack --config webpack.config.prod.ts --progress",
-    "build:pack": "ts-node ./scripts/build.ts",
-    "package": "run-s clean build:prod build:pack",
-    "lint": "run-s lint:*",
-    "lint:eslint": "eslint . --ext .ts,.tsx --fix",
-    "lint:prettier": "prettier --write ."
+    "dev": "run-p dev:*"
+  },
+  "build": {
+    "productName": "家計簿",
+    "appId": "dio.housebook.com",
+    "directories": {
+      "output": "./dist"
+    },
+    "mac": {},
+    "win": {}
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
