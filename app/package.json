@@ -7,8 +7,13 @@
   },
   "main": "dist/main.js",
   "scripts": {
-    "start": "run-s clean build serve",
-    "dev": "run-p dev:*"
+    "dev": "run-p dev:*",
+    "dev:main": "tsc -w -p tsconfig.main.json",
+    "dev:render": "cross-env NODE_ENV=development webpack",
+    "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"development\" electron .",
+    "prod:main": "tsc -p tsconfig.main.json",
+    "prod:render": "cross-env NODE_ENV=production webpack",
+    "build:win": "npm run prod:main && npm run prod:render && electron-builder --win --x64 --dir"
   },
   "build": {
     "productName": "家計簿",
@@ -16,6 +21,12 @@
     "directories": {
       "output": "./dist"
     },
+    "files": [
+      "dist/**/*",
+      "dist/main.js",
+      "dist/index.html",
+      "./icon/**/*"
+    ],
     "mac": {},
     "win": {}
   },
