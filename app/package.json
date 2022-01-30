@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=12.13.0"
   },
+  "homepage": ".",
   "main": "dist/main.js",
   "scripts": {
     "dev": "run-p dev:*",
@@ -13,36 +14,39 @@
     "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"development\" electron .",
     "prod": "run-p prod:*",
     "prod:main": "tsc -p tsconfig.main.json",
-    "prod:render": "cross-env NODE_ENV=\"production\" webpack",
+    "prod:render": "cross-env NODE_ENV=\"production\" webpack --config webpack.config.prod.ts",
     "prod:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"production\" electron .",
     "build": "electron-builder --win --x64 --dir",
-    "build:win": "npm run prod:main && npm run prod:render && electron-builder --win --x64 --dir && mkdirp dist/win-unpacked/bookdata"
+    "build:win": "npm run prod:main && npm run prod:render && electron-builder && mkdirp dist/win-unpacked/bookdata"
   },
   "build": {
     "productName": "家計簿",
     "appId": "dio.housebook.com",
     "directories": {
+      "buildResources": "resources",
       "output": "./dist"
     },
     "files": [
-      "dist/**/*",
-      "dist/main.js",
+      "dist/**/*.js",
+      "dist/**/*.css",
       "dist/index.html",
       "./icon/**/*"
     ],
-    "mac": {},
     "win": {
       "target": {
-        "target": "default",
+        "target": "dir",
         "arch": [
-          "x64",
-          "arm64"
+          "x64"
         ]
       }
+    },
+    "mac": {
+      "target": "dmg"
     }
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
+    "electron-log": "^4.4.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
@@ -58,6 +62,7 @@
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
+    "asar": "^3.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.3.0",
     "dart-sass": "^1.25.0",

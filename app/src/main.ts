@@ -42,7 +42,7 @@ const createWindow = () => {
   }
 
   // レンダラープロセスをロード
-  void mainWindow.loadFile('dist/index.html');
+  void mainWindow.loadFile(path.join(__dirname, 'index.html'));
 };
 
 // アプリ初期化時
@@ -72,7 +72,7 @@ app.once('window-all-closed', () => app.quit());
  */
 ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
   try {
-    fs.writeFileSync(filePath, bookData, 'utf8');
+    fs.writeFileSync(path.join(__dirname, filePath), bookData, 'utf8');
   } catch (err) {
     console.log(err);
   }
@@ -86,7 +86,9 @@ ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
 ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
   let jsonObject: unknown;
   try {
-    jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    jsonObject = JSON.parse(
+      fs.readFileSync(path.join(__dirname, filePath), 'utf8'),
+    );
   } catch (err) {
     return null;
   }
