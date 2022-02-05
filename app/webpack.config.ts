@@ -52,16 +52,11 @@ const config: Configuration = {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('sass'),
               sourceMap: true,
               additionalData: "@use './src/styles/_variable.module.scss' as *;",
             },
           },
         ],
-      },
-      {
-        test: /\.(ico|gif|jpe?g|png|svg|webp|ttf|otf|eot|woff?2?)$/,
-        type: 'asset/resource',
       },
     ],
   },
@@ -70,7 +65,6 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
-      scriptLoading: 'blocking',
       inject: 'body',
       minify: false,
     }),
