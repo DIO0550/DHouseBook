@@ -23,7 +23,7 @@ const config: Configuration = {
     ],
   },
   entry: {
-    app: './src/index.tsx',
+    index: './src/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,7 +39,7 @@ const config: Configuration = {
         use: 'ts-loader',
       },
       {
-        test: /\.s?css$/,
+        test: /\.(scss|sass|css)$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -69,7 +69,6 @@ const config: Configuration = {
       minify: false,
     }),
   ],
-  stats: 'errors-only',
   performance: { hints: false },
   optimization: { minimize: false },
   devtool: 'inline-source-map',

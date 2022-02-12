@@ -31,7 +31,7 @@ const base: Configuration = {
         ],
       },
       {
-        test: /\.s?css$/,
+        test: /\.(scss|sass|css)$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
