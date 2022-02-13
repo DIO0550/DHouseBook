@@ -27,9 +27,11 @@ const useBookFile = () => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
-    const filePath = `bookdata/${fileName}`;
 
-    return window.api.loadBook(filePath);
+    const dirPath = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
+    console.log(dirPath);
+
+    return window.api.loadBook(fileName);
   };
 
   /**
@@ -43,9 +45,8 @@ const useBookFile = () => {
     const formatData = formatSaveData(purchasedItemList.entities);
     const dataJsonString: string = JSON.stringify(formatData);
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
-    const filePath = `bookdata/${fileName}`;
 
-    return window.api.saveBook(filePath, dataJsonString);
+    return window.api.saveBook(fileName, dataJsonString);
   };
 
   /**

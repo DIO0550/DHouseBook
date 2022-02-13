@@ -12,16 +12,13 @@ import { searchDevtools } from 'electron-search-devtools';
 
 const fs = require('fs');
 
-const isDev = process.env.NODE_ENV === 'development';
+require('dotenv').config({ path: `${__dirname}/../.env.development` });
 
-const execPath =
-  process.platform === 'win32'
-    ? '../node_modules/electron/dist/electron.exe'
-    : '../node_modules/.bin/electron';
+const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
   require('electron-reload')(__dirname, {
-    electron: path.resolve(__dirname, execPath),
+    electron: path.resolve(__dirname, '../node_modules/.bin/electron'),
     forceHardReset: true,
     hardResetMethod: 'exit',
   });
@@ -72,7 +69,17 @@ app.once('window-all-closed', () => app.quit());
  */
 ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
   try {
-    fs.writeFileSync(path.join(__dirname, filePath), bookData, 'utf8');
+    // const dirPath = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
+    // fs.writeFileSync(
+    //   path.join(__dirname, `${dirPath}/${filePath}`),
+    //   bookData,
+    //   'utf8',
+    // );
+    fs.writeFileSync(
+      path.join(__dirname, `bookdata/${filePath}`),
+      bookData,
+      'utf8',
+    );
   } catch (err) {
     console.log(err);
   }
@@ -86,9 +93,14 @@ ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
 ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
   let jsonObject: unknown;
   try {
+    const dirPath = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
+    console.log(dirPath);
     jsonObject = JSON.parse(
-      fs.readFileSync(path.join(__dirname, filePath), 'utf8'),
+      fs.readFileSync(path.join(__dirname, `${dirPath}/${filePath}`), 'utf8'),
     );
+    // jsonObject = JSON.parse(
+    //   fs.readFileSync(path.join(__dirname, `bookdata/${filePath}`), 'utf8'),
+    // );
   } catch (err) {
     return null;
   }
