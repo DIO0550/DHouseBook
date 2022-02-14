@@ -28,9 +28,6 @@ const useBookFile = () => {
     const month = date.getMonth() + 1;
     const fileName = `${year}${zeroPadding(month, 2)}.json`;
 
-    const dirPath = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
-    console.log(dirPath);
-
     return window.api.loadBook(fileName);
   };
 
