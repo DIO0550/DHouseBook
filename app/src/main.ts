@@ -7,7 +7,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 import * as path from 'path';
-import { BrowserWindow, app, session, ipcMain } from 'electron';
+import { BrowserWindow, app, Menu, session, ipcMain } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
 
 const fs = require('fs');
@@ -28,6 +28,27 @@ if (isDev) {
     hardResetMethod: 'exit',
   });
 }
+
+// アプリケーションメニュー
+const appMenu = Menu.buildFromTemplate([
+  {
+    label: 'ファイル',
+    submenu: [{ role: 'close', label: 'ウィンドウを閉じる' }],
+  },
+  {
+    label: '編集',
+    submenu: [
+      { role: 'undo', label: '元に戻す' },
+      { role: 'redo', label: 'やり直す' },
+      { type: 'separator' },
+      { role: 'cut', label: '切り取り' },
+      { role: 'copy', label: 'コピー' },
+      { role: 'paste', label: '貼り付け' },
+    ],
+  },
+]);
+
+Menu.setApplicationMenu(appMenu);
 
 // Window 生成
 const createWindow = () => {
