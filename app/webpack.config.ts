@@ -3,6 +3,10 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const webpack = require('webpack');
+const mode = process.env.NODE_ENV;
+const envconfig = require(path.resolve(__dirname, `.env.${mode}.js`));
+
 const config: Configuration = {
   mode: 'development',
   target: 'web',
@@ -67,6 +71,9 @@ const config: Configuration = {
       filename: 'index.html',
       inject: 'body',
       minify: false,
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(envconfig),
     }),
   ],
   performance: { hints: false },
