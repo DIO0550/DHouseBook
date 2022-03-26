@@ -41,9 +41,10 @@ const useBookFile = () => {
     const month = date.getMonth() + 1;
     const formatData = formatSaveData(purchasedItemList.entities);
     const dataJsonString: string = JSON.stringify(formatData);
-    const fileName = `${year}${zeroPadding(month, 2)}.json`;
+    const dir = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
+    const filepath = `${dir}/${year}${zeroPadding(month, 2)}.json`;
 
-    return window.api.saveBook(fileName, dataJsonString);
+    return window.api.saveBook(filepath, dataJsonString);
   };
 
   /**
