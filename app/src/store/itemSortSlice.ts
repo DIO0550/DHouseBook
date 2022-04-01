@@ -24,10 +24,13 @@ type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
 
 /**
  * ソートのオーダー種類
+ * - なし
  * - 昇順
  * - 降順
  */
 const SORT_ORDER_TYPE = {
+  /// なし
+  NONE: 'NONE',
   /// 昇順
   ASCENDING: 'ASCENDING',
   /// 降順
@@ -40,7 +43,7 @@ type SORT_ORDER_TYPE = typeof SORT_ORDER_TYPE[keyof typeof SORT_ORDER_TYPE];
  */
 const initialState: ItemSortState = {
   sortType: SORT_TYPE.NONE,
-  orderType: SORT_ORDER_TYPE.ASCENDING,
+  orderType: SORT_ORDER_TYPE.NONE,
 };
 
 const itemSortSlice = createSlice({
@@ -62,11 +65,14 @@ const itemSortSlice = createSlice({
       }
 
       switch (state.orderType) {
+        case SORT_ORDER_TYPE.NONE:
+          return { ...state, orderType: SORT_ORDER_TYPE.ASCENDING };
+
         case SORT_ORDER_TYPE.ASCENDING:
           return { ...state, orderType: SORT_ORDER_TYPE.DESCENDING };
 
         case SORT_ORDER_TYPE.DESCENDING:
-          return { ...state, orderType: SORT_ORDER_TYPE.ASCENDING };
+          return { sortType: SORT_TYPE.NONE, orderType: SORT_ORDER_TYPE.NONE };
 
         default:
           return { ...state, orderType: SORT_ORDER_TYPE.ASCENDING };
