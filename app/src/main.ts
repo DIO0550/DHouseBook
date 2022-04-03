@@ -95,12 +95,7 @@ app.once('window-all-closed', () => app.quit());
  */
 ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
   try {
-    const dirPath = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
-    fs.writeFileSync(
-      path.join(__dirname, `${dirPath}/${filePath}`),
-      bookData,
-      'utf8',
-    );
+    fs.writeFileSync(path.join(__dirname, `${filePath}`), bookData, 'utf8');
   } catch (err) {
     console.log(err);
   }
@@ -114,14 +109,21 @@ ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
 ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
   let jsonObject: unknown;
   try {
-    const dirPath = process.env.REACT_APP_BOOK_DATA_PATH ?? 'bookdata';
-
     jsonObject = JSON.parse(
-      fs.readFileSync(path.join(__dirname, `${dirPath}/${filePath}`), 'utf8'),
+      fs.readFileSync(path.join(__dirname, `${filePath}`), 'utf8'),
     );
   } catch (err) {
     return null;
   }
 
   return jsonObject;
+});
+
+/**
+ * パス確認用（TODO：不要になったら削除する）
+ */
+ipcMain.handle('getPath', (): string => {
+  const dirPath = '';
+
+  return path.join(__dirname, `${dirPath}`);
 });

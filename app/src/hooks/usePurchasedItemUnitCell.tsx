@@ -10,6 +10,13 @@ type UsePurchasedItemCellValue = {
   onInputHandler: (value: string) => void;
 };
 
+/**
+ * 単体セルのカスタムフック
+ * @param defaultValue デフォルト値
+ * @param id id
+ * @param key キー
+ * @returns
+ */
 const usePurchasedItemUnitCell = (
   defaultValue: string,
   id: string,

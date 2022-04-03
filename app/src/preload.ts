@@ -11,4 +11,7 @@ contextBridge.exposeInMainWorld('api', {
   },
   loadBook: (filePath: string): unknown | null =>
     ipcRenderer.invoke('loadBook', filePath),
+
+  // TODO: パス確認用のため
+  getPath: () => ipcRenderer.invoke('getPath'),
 });

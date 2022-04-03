@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
  * Stateの型
  */
 type BookDateState = {
+  // 日付の文字列
   dateStr: string;
 };
 
@@ -17,7 +18,7 @@ const bookDateSlice = createSlice({
   initialState,
   reducers: {
     /**
-     * 日付１日増やす
+     * 月を１つ増やす
      * @param state
      * @returns
      */
@@ -31,6 +32,12 @@ const bookDateSlice = createSlice({
 
       return { ...state, dateStr: incrementMonthDate.toString() };
     },
+
+    /**
+     * 月を１つ減らす
+     * @param state
+     * @returns
+     */
     decrementMonth: (state) => {
       const date = new Date(state.dateStr.toString());
       const decrementMonthDate = new Date(

@@ -3,7 +3,10 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const webpack = require('webpack');
 const isDev = process.env.NODE_ENV === 'development';
+const mode = process.env.NODE_ENV;
+const envconfig = require(path.resolve(__dirname, `.env.${mode}.js`));
 
 const base: Configuration = {
   mode: isDev ? 'development' : 'production',
@@ -93,6 +96,9 @@ const renderer: Configuration = {
       inject: 'body',
       filename: 'index.html',
       scriptLoading: 'blocking',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(envconfig),
     }),
   ],
 };
