@@ -11,11 +11,11 @@
     "dev": "run-p dev:*",
     "dev:main": "tsc -w -p tsconfig.main.json",
     "dev:render": "cross-env NODE_ENV=development webpack",
-    "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"development\" electron .",
+    "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=development electron .",
     "prod": "run-p prod:*",
     "prod:main": "tsc -p tsconfig.main.json",
-    "prod:render": "cross-env NODE_ENV=\"production\" webpack --config webpack.config.prod.ts",
-    "prod:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=\"production\" electron .",
+    "prod:render": "cross-env NODE_ENV=production webpack --config webpack.config.prod.ts",
+    "prod:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=production electron .",
     "build": "electron-builder --win --x64 --dir",
     "build:win": "npm run prod:main && npm run prod:render && electron-builder && mkdirp dist/win-unpacked/resources/bookdata"
   },
@@ -46,7 +46,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
-    "dotenv": "^16.0.0",
     "electron-log": "^4.4.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
