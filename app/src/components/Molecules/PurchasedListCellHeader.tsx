@@ -4,13 +4,13 @@
 import { FC } from 'react';
 import useHeaderCell from '../../hooks/useHeaderCell';
 import useItemSort from '../../hooks/useItemSort';
-import { SORT_TYPE } from '../../store/itemSortSlice';
+import { SORT_TYPE, SORT_ORDER_TYPE } from '../../store/itemSortSlice';
 import styles from './PurchasedItemCell.module.scss';
 import { ORDER_MARK } from '../../util/const';
 
 const PurcahsedListCellHeader: FC = () => {
   const { onClickHeader } = useHeaderCell();
-  const { sortType, isAscending } = useItemSort();
+  const { sortType, orderType } = useItemSort();
 
   return (
     <div className={styles['purchased-item-cell-header']}>
@@ -22,7 +22,7 @@ const PurcahsedListCellHeader: FC = () => {
       >
         名前
         {sortType === SORT_TYPE.NAME &&
-          (isAscending
+          (orderType === SORT_ORDER_TYPE.ASCENDING
             ? ORDER_MARK.ASCENDING_MARK
             : ORDER_MARK.DESCENDING_MARK)}
       </div>
@@ -34,7 +34,7 @@ const PurcahsedListCellHeader: FC = () => {
       >
         値段
         {sortType === SORT_TYPE.PRICE &&
-          (isAscending
+          (orderType === SORT_ORDER_TYPE.ASCENDING
             ? ORDER_MARK.ASCENDING_MARK
             : ORDER_MARK.DESCENDING_MARK)}
       </div>
@@ -46,7 +46,7 @@ const PurcahsedListCellHeader: FC = () => {
       >
         種類
         {sortType === SORT_TYPE.TYPE &&
-          (isAscending
+          (orderType === SORT_ORDER_TYPE.ASCENDING
             ? ORDER_MARK.ASCENDING_MARK
             : ORDER_MARK.DESCENDING_MARK)}
       </div>
@@ -58,7 +58,7 @@ const PurcahsedListCellHeader: FC = () => {
       >
         購入日
         {sortType === SORT_TYPE.PURCHASE_DATE &&
-          (isAscending
+          (orderType === SORT_ORDER_TYPE.ASCENDING
             ? ORDER_MARK.ASCENDING_MARK
             : ORDER_MARK.DESCENDING_MARK)}
       </div>

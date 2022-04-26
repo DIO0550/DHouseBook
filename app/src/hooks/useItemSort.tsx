@@ -19,7 +19,6 @@ type UseItemSortValue = {
     payload: SORT_ORDER_TYPE;
     type: string;
   };
-  isAscending: boolean;
 };
 
 const useItemSort = (): UseItemSortValue => {
@@ -41,7 +40,6 @@ const useItemSort = (): UseItemSortValue => {
     changeSortType: (sortType: SORT_TYPE) => dispatch(changeSortType(sortType)),
     changeOrderType: (orderType: SORT_ORDER_TYPE) =>
       dispatch(changeOrderType(orderType)),
-    isAscending,
   };
 };
 

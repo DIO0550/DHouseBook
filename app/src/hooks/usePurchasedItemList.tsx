@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { States } from '../store/store';
 import { PurchasedItem } from '../@types/purchasedItem';
 import { BookDateState } from '../store/bookDateSlice';
-import { SORT_TYPE } from '../store/itemSortSlice';
+import { SORT_TYPE, SORT_ORDER_TYPE } from '../store/itemSortSlice';
 import useBookFile from './useBookFile';
 import usePrevious from './usePrevious';
 import usePurchasedItemQuery from './usePurchaseItemQuery';
@@ -31,7 +31,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     purchasedItemList: state.purchasedItemList,
   }));
   const prevBookDate: BookDateState = usePrevious(bookDate);
-  const { sortType, isAscending } = useItemSort();
+  const { sortType, orderType } = useItemSort();
 
   const { isLoading, loadFile, switchFile } = useBookFile();
 
@@ -128,18 +128,20 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
 
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         if (aValue < bValue) {
-          return isAscending ? -1 : 1;
+          return orderType === SORT_ORDER_TYPE.ASCENDING ? -1 : 1;
         }
 
         if (aValue > bValue) {
-          return isAscending ? 1 : -1;
+          return orderType === SORT_ORDER_TYPE.ASCENDING ? 1 : -1;
         }
 
         return 0;
       }
 
       if (typeof aValue === 'number' && typeof bValue === 'number') {
-        return (isAscending ? 1 : -1) * (aValue - bValue);
+        return (
+          (orderType === SORT_ORDER_TYPE.ASCENDING ? 1 : -1) * (aValue - bValue)
+        );
       }
 
       return 0;
@@ -150,7 +152,7 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     purchasedItemList.entities,
     purchasedItemList.ids,
     sortType,
-    isAscending,
+    orderType,
     sortValue,
   ]);
 
