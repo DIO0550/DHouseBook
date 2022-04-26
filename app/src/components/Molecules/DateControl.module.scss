@@ -36,20 +36,24 @@ $control-height: 50px;
   .date-button {
     height: calc(#{$header-height} / 2);
     width: 50px;
-    color: $button-color;
-    background-color: $button-bg-color;
+    background-color: $clear-color;
     box-shadow: none;
-    border: $button-border-color solid 3px;
-    color: $text-color;
+    border: none;
 
-    &.right {
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
+    .right {
+      height: calc(#{$header-height} / 2);
+      width: 50px;
+      background-image: url('../../resources/right-button.svg');
+      mask-repeat: no-repeat;
+      cursor: pointer;
     }
 
-    &.left {
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+    .left {
+      height: calc(#{$header-height} / 2);
+      width: 50px;
+      background-image: url('../../resources/left-button.svg');
+      mask-repeat: no-repeat;
+      cursor: pointer;
     }
   }
 }

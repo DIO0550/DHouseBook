@@ -7,11 +7,14 @@ $button-bg-color: #ffac79;
 $button-color: #f78540;
 $button-border-color: #f78540;
 
-$cell-border-color: #f78540;
-$cell-border-color-outer: #f78540;
+$cell-border-color: #ffffff;
+$cell-border-color-outer: #ffffff;
+$cell-bg-color: #e0ffff;
 
-$header-text-color: #f78540;
-$header-bg-color: #ffac79;
+$header-text-color: #ffffff;
+$header-bg-color: #87cefa;
+
+$clear-color: rgba(0, 0, 0, 0);
 
 // button
 $button-width-small: 100px;
@@ -23,4 +26,4 @@ $header-height: 70px;
 // List
 $cell-column-count: 5;
 $cell-min-width: 200px;
-$cell-boreder-width: 5px;
+$cell-boreder-width: 3px;

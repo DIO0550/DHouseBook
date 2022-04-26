@@ -1,7 +1,7 @@
 .purchased-item-cell {
   display: flex;
   min-width: calc(#{$cell-min-width} * #{$cell-column-count});
-  background-color: white;
+  background-color: $cell-bg-color;
 
   .purchased-item-div {
     width: calc(100% / #{$cell-column-count});
@@ -26,7 +26,7 @@
     width: calc(100% / #{$cell-column-count});
     min-width: $cell-min-width;
     background-color: $header-bg-color;
-    color: $cell-border-color-outer;
+    color: $header-text-color;
     text-align: center;
     cursor: pointer;
   }
