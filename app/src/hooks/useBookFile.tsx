@@ -15,7 +15,9 @@ const useBookFile = () => {
     bookDate: state.bookDate,
     purchasedItemList: state.purchasedItemList,
   }));
+  // 前のブックデータ
   const prevBookDate: BookDateState = usePrevious(bookDate);
+  // ロード中か
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /**

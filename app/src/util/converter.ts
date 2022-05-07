@@ -23,4 +23,14 @@ const formatSaveData = (target: Record<string, unknown>): Array<unknown> => {
   return formatTarget;
 };
 
-export { zeroPadding, formatSaveData };
+/**
+ * 対象を価格表示に変換する
+ * @param target
+ */
+const formatPrice = (target: string | number): string => {
+  const priceStr = typeof target === 'number' ? String(target) : target;
+
+  return priceStr;
+};
+
+export { zeroPadding, formatSaveData, formatPrice };
