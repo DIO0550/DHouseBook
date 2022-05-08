@@ -30,7 +30,25 @@ const formatSaveData = (target: Record<string, unknown>): Array<unknown> => {
 const formatPrice = (target: string | number): string => {
   const priceStr = typeof target === 'number' ? String(target) : target;
 
-  return priceStr;
+  // 3桁以下なら、そのまま返す
+  const len = priceStr.length;
+  if (len <= 3) {
+    return priceStr;
+  }
+
+  let formatResult = '';
+  let i = 0;
+  while (i <= len) {
+    formatResult += priceStr.slice(i, i + 2);
+    formatResult = `,${formatResult}`;
+    i += 3;
+  }
+
+  if (formatResult.startsWith(',')) {
+    formatResult = formatResult.slice(1);
+  }
+
+  return formatResult;
 };
 
 export { zeroPadding, formatSaveData, formatPrice };

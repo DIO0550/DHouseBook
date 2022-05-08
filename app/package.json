@@ -8,6 +8,7 @@
   "homepage": ".",
   "main": "dist/main.js",
   "scripts": {
+    "test": "jest",
     "dev": "run-p dev:*",
     "dev:main": "tsc -w -p tsconfig.main.json",
     "dev:render": "cross-env NODE_ENV=development webpack",
@@ -54,6 +55,7 @@
   },
   "devDependencies": {
     "@types/electron": "^1.6.10",
+    "@types/jest": "^27.5.0",
     "@types/mini-css-extract-plugin": "^2.3.0",
     "@types/node": "^16.10.2",
     "@types/react": "^17.0.26",
@@ -80,6 +82,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.2",
     "ifdef-loader": "^2.3.0",
+    "jest": "^28.1.0",
     "mini-css-extract-plugin": "^2.3.0",
     "mkdirp": "^1.0.4",
     "npm-run-all": "^4.1.5",
