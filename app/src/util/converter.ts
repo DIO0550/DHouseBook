@@ -37,16 +37,14 @@ const formatPrice = (target: string | number): string => {
   }
 
   let formatResult = '';
-  let i = 0;
-  while (i <= len) {
-    formatResult += priceStr.slice(i, i + 2);
+  let i = 3;
+  while (i < len) {
+    formatResult = `${priceStr.substr(-i, 3)}${formatResult}`;
     formatResult = `,${formatResult}`;
     i += 3;
   }
 
-  if (formatResult.startsWith(',')) {
-    formatResult = formatResult.slice(1);
-  }
+  formatResult = `${priceStr.substr(0, len - (i - 3))}${formatResult}`;
 
   return formatResult;
 };
