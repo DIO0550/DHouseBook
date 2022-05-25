@@ -100,7 +100,7 @@ dist
 # TernJS port file
 .tern-port
 
-main.js
+dist/**/main.js
 preload.js
 index.js
 
