@@ -57,6 +57,7 @@ const itemSortSlice = createSlice({
      * @returns 変更後のstate
      */
     changeSortType: (state, action: PayloadAction<SORT_TYPE>) => {
+      // 違う場合
       if (state.sortType !== action.payload) {
         return {
           orderType: SORT_ORDER_TYPE.ASCENDING,

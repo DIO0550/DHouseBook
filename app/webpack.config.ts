@@ -62,6 +62,10 @@ const config: Configuration = {
           },
         ],
       },
+      {
+        test: /\.(ico|png|jpe?g|svg|eot|woff?2?)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [

@@ -1,0 +1,15 @@
+@use './../../styles/_colors.module.scss' as color;
+@use './../../styles/_variable.module.scss' as *;
+.operate-button {
+  color: color.$color-button;
+  width: $button-width-small;
+  height: $button-height-small;
+
+  background-color: color.$color-button-bg;
+  border: color.$color-button-border solid $cell-boreder-width;
+
+  margin-left: 8px;
+  margin-right: 8px;
+
+  cursor: pointer;
+}

@@ -1,0 +1,5 @@
+@use './_palettes.module.scss' as palette;
+
+$color-button-bg: palette.$palette-downy;
+$color-button: palette.$palette-ocean-green;
+$color-button-border: palette.$palette-ocean-green;

@@ -1,3 +1,4 @@
+@use './../../styles/_variable.module.scss' as *;
 .purchased-list-footer-container {
   position: fixed;
   width: 100%;
@@ -8,18 +9,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .operate-button {
-    color: $button-color;
-    width: $button-width-small;
-    height: $button-height-small;
-
-    background-color: $button-bg-color;
-    border: $button-border-color solid $cell-boreder-width;
-
-    margin-left: 8px;
-    margin-right: 8px;
-
-    cursor: pointer;
-  }
 }

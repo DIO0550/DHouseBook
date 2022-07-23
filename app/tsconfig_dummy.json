@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES2017",
-    "noImplicitAny": false, //
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "lib": ["DOM", "ESNext"],
@@ -11,11 +10,12 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "ts-node": {
-    "transpileOnly": true,
     "compilerOptions": {
+      "target": "ESNext",
       "module": "CommonJS"
     }
   },

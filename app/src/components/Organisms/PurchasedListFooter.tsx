@@ -2,6 +2,7 @@ import { FC } from 'react';
 import useBookFile from '../../hooks/useBookFile';
 import usePurchasedItemQuery from '../../hooks/usePurchaseItemQuery';
 import styles from './PurchasedListFooter.module.scss';
+import OperateButton from '../Atoms/OperateButton';
 
 const PurcahsedListFooter: FC = () => {
   const { saveFile } = useBookFile();
@@ -10,20 +11,8 @@ const PurcahsedListFooter: FC = () => {
   return (
     <>
       <div className={styles['purchased-list-footer-container']}>
-        <button
-          type="button"
-          onClick={insertParchasedItem}
-          className={styles['operate-button']}
-        >
-          新規追加
-        </button>
-        <button
-          type="button"
-          onClick={saveFile}
-          className={styles['operate-button']}
-        >
-          保存
-        </button>
+        <OperateButton title="新規追加" onClick={insertParchasedItem} />
+        <OperateButton title="保存" onClick={saveFile} />
       </div>
     </>
   );
