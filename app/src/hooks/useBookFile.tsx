@@ -7,6 +7,7 @@ import { States } from '../store/store';
 import { formatSaveData, zeroPadding } from '../util/converter';
 import usePrevious from './usePrevious';
 
+// jsonデータの読み込み/保存を行うフック
 const useBookFile = () => {
   const { bookDate, purchasedItemList } = useSelector<
     States,

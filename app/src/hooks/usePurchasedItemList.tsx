@@ -14,12 +14,18 @@ import useItemSort from './useItemSort';
  * カスタムフックの返却値
  */
 type UsePurchasedItemListValue = {
+  // ソートしたアイテムのリスト
   sortItemList: PurchasedItem[];
+  // ロード中かどうか
   isLoading: boolean;
+  // アイテムのリスト
   purchasedItemList: EntityState<PurchasedItem>;
 };
 
 const usePurchasedItemList = (): UsePurchasedItemListValue => {
+  // Reduxで管理している以下のstate取得
+  // - 表示中の日時
+  // - 購入したアイテムのリスト
   const { bookDate, purchasedItemList } = useSelector<
     States,
     {
@@ -30,9 +36,11 @@ const usePurchasedItemList = (): UsePurchasedItemListValue => {
     bookDate: state.bookDate,
     purchasedItemList: state.purchasedItemList,
   }));
+  // 1つ前の日時
   const prevBookDate: BookDateState = usePrevious(bookDate);
+  // ソートの種類
   const { sortType, orderType } = useItemSort();
-
+  // ロード中か
   const { isLoading, loadFile, switchFile } = useBookFile();
 
   // アイテムの一覧

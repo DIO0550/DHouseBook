@@ -20,9 +20,13 @@ type Props = {
 const PurchasedItemCell: FC<Props> = (props: Props) => {
   const { id, name, price, type, purchasedDate } = props;
 
+  // 商品名
   const unitCellName = usePurchasedItemUnitCell(name, id, 'name');
+  // 値段
   const unitCellPrice = usePurchasedItemUnitCell(price, id, 'price');
+  // 種類
   const unitCellType = usePurchasedItemUnitCell(type, id, 'type');
+  // 購入日時
   const unitCellPurchasedDate = usePurchasedItemUnitCell(
     purchasedDate,
     id,

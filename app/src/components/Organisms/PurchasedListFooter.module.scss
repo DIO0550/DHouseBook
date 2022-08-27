@@ -1,6 +1,6 @@
 @use './../../styles/_variable.module.scss' as *;
 .purchased-list-footer-container {
-  position: fixed;
+  position: sticky;
   width: 100%;
   margin: 0;
   bottom: 0;
@@ -9,4 +9,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }

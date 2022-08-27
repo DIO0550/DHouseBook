@@ -11,6 +11,9 @@ type UsePurchasedItemQueryValue = {
   updatePurchasedItem: (id: string, key: string, value: string) => void;
 };
 
+/**
+ * 購入したアイテムの追加や削除などを行うフック
+ */
 const usePurchasedItemQuery = (): UsePurchasedItemQueryValue => {
   const {
     purchasedItemAdded,
