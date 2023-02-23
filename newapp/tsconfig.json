@@ -23,6 +23,6 @@
     "src",
     "./webpack.config.ts",
     "./webpack.config.prod.ts",
-    "../newapp/.storybook"
+    ".storybook"
   ]
 }
