@@ -1,21 +1,45 @@
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import custom from '../webpack.config';
-export const config = {
-  webpackFinal: async (config, {
-    configType
-  }) => {
-    return { ...config,
-      module: { ...config.module,
-        rules: custom.module!.rules
-      }
-    };
+const path = require('path');
+const mainConfig = {
+  webpackFinal: async (config) => {
+    config.resolve.plugins = [
+      ...(config.resolve.plugins || []),
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
+        extensions: config.resolve.extensions,
+      }),
+    ];
+    // MiniCssExtractPlugin追加
+    config.plugins.push(new MiniCssExtractPlugin());
+
+    // css関連のルール追加
+    if (custom[2].module?.rules) {
+      config.module.rules.push(custom[2].module?.rules[1]);
+    }
+
+    return config;
   },
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-actions'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/addon-postcss',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
+  ],
   framework: '@storybook/react',
   core: {
-    builder: 'webpack5'
-  }
+    builder: '@storybook/builder-webpack5',
+  },
 };
-export const core = {
-  builder: 'webpack5'
-};
+
+export default mainConfig;

@@ -1,10 +1,5 @@
 import styles from './App.module.scss';
-import HouseholdAccountBook from './components/Templates/HouseholdAccountBook';
 
-const App = () => (
-  <div className={styles.App}>
-    <HouseholdAccountBook />
-  </div>
-);
+const App = () => <div className="aaaaa">hoge</div>;
 
 export default App;

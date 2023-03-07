@@ -56,7 +56,8 @@ const base: Configuration = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              additionalData: `@use './src/styles/_variables.module.scss' as variables; \
+              additionalData: `@use './src/styles/_variable.module.scss' as variables; \
+              
                 @use './src/styles/_colors.module.scss' as colors;`,
             },
           },
