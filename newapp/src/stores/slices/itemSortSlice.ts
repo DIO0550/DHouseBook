@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type ItemSortState = {
-  sortType: SORT_TYPE;
-  orderType: SORT_ORDER_TYPE;
+  sortType: ItemSortType;
+  orderType: SortOrderType;
 };
 
 /**
@@ -20,7 +20,7 @@ const SORT_TYPE = {
   /// 購入日
   PURCHASE_DATE: 'PRUCHASE_DATE',
 } as const;
-type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
+type ItemSortType = typeof SORT_TYPE[keyof typeof SORT_TYPE];
 
 /**
  * ソートのオーダー種類
@@ -36,7 +36,7 @@ const SORT_ORDER_TYPE = {
   /// 降順
   DESCENDING: 'DESCENDING',
 } as const;
-type SORT_ORDER_TYPE = typeof SORT_ORDER_TYPE[keyof typeof SORT_ORDER_TYPE];
+type SortOrderType = typeof SORT_ORDER_TYPE[keyof typeof SORT_ORDER_TYPE];
 
 /**
  * 初期state
@@ -56,7 +56,7 @@ const itemSortSlice = createSlice({
      * @param action 変更内容
      * @returns 変更後のstate
      */
-    changeSortType: (state, action: PayloadAction<SORT_TYPE>) => {
+    changeSortType: (state, action: PayloadAction<ItemSortType>) => {
       // 違う場合
       if (state.sortType !== action.payload) {
         return {
@@ -86,7 +86,7 @@ const itemSortSlice = createSlice({
      * @param action 変更内容
      * @returns 変更後のstate
      */
-    changeOrderType: (state, action: PayloadAction<SORT_ORDER_TYPE>) => {
+    changeOrderType: (state, action: PayloadAction<SortOrderType>) => {
       if (state.orderType === action.payload) {
         return state;
       }
@@ -97,4 +97,8 @@ const itemSortSlice = createSlice({
 });
 
 export { itemSortSlice };
-export { ItemSortState, SORT_TYPE, SORT_ORDER_TYPE };
+export {
+  ItemSortState,
+  ItemSortType as SORT_TYPE,
+  SortOrderType as SORT_ORDER_TYPE,
+};

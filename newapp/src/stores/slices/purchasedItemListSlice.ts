@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 
-import { PurchasedItem } from '../@types/purchasedItem';
+import type { PurchasedItem } from '../../types/purchasedItem';
 
 // 更新時のアイテム
 type UpdateItem = {

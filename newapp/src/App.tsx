@@ -1,5 +1,3 @@
-import styles from './App.module.scss';
-
-const App = () => <div className="aaaaa">hoge</div>;
+const App = () => <div>hoge</div>;
 
 export default App;
