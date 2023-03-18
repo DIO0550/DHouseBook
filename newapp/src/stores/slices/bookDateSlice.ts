@@ -4,13 +4,15 @@ import { createSlice } from '@reduxjs/toolkit';
  * Stateの型
  */
 type BookDateState = {
-  // 日付の文字列
-  dateStr: string;
+  // 年
+  year: number;
+  // 月
+  month: number;
 };
 
-const now = new Date();
 const initialState: BookDateState = {
-  dateStr: new Date(now.getFullYear(), now.getMonth(), 1).toString(),
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1,
 };
 
 const bookDateSlice = createSlice({
@@ -23,14 +25,10 @@ const bookDateSlice = createSlice({
      * @returns
      */
     incrementMonth: (state) => {
-      const date = new Date(state.dateStr.toString());
-      const incrementMonthDate = new Date(
-        date.getFullYear(),
-        date.getMonth() + 1,
-        1,
-      );
+      const newDate = new Date(state.year, state.month + 1);
 
-      return { ...state, dateStr: incrementMonthDate.toString() };
+      state.year = newDate.getFullYear();
+      state.month = newDate.getMonth();
     },
 
     /**
@@ -39,14 +37,10 @@ const bookDateSlice = createSlice({
      * @returns
      */
     decrementMonth: (state) => {
-      const date = new Date(state.dateStr.toString());
-      const decrementMonthDate = new Date(
-        date.getFullYear(),
-        date.getMonth() - 1,
-        1,
-      );
+      const newDate = new Date(state.year, state.month - 1);
 
-      return { ...state, dateStr: decrementMonthDate.toString() };
+      state.year = newDate.getFullYear();
+      state.month = newDate.getMonth();
     },
   },
 });

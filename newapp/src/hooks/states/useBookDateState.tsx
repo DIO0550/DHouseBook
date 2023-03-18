@@ -1,15 +1,20 @@
 import { RootState, useAppDispatch } from 'stores/store';
 import { useSelector } from 'react-redux';
 import { bookDateSlice, BookDateState } from 'stores/slices/bookDateSlice';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 const useBookDateState = () => {
   const dispatch = useAppDispatch();
-  const { dateStr } = useSelector<RootState, BookDateState>(
+  const { year, month } = useSelector<RootState, BookDateState>(
     (state) => state.bookDate,
   );
 
   const { incrementMonth, decrementMonth } = bookDateSlice.actions;
+
+  /**
+   * 0スタートなので補正する
+   */
+  const fixMonth = useMemo(() => month + 1, [month]);
 
   /**
    * ブックの日付の月を１つ増やす
@@ -26,10 +31,11 @@ const useBookDateState = () => {
   }, [decrementMonth, dispatch]);
 
   return {
-    dateStr,
+    year,
+    month: fixMonth,
     incrementDateMonth,
     decrementDateMonth,
   };
 };
 
-export default useBookDateState;
+export { useBookDateState };

@@ -113,6 +113,7 @@ module.exports = {
         allowPattern: '^[a-z]+(_[a-z]+)+$',
       },
     ],
+    'import/prefer-default-export': 'off',
     'no-cond-assign': ['error'],
     'no-constant-condition': ['error'],
     'no-dupe-args': ['error'],

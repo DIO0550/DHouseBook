@@ -15,6 +15,7 @@ module.exports = {
       useESM: true,
     },
   },
+  moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },

@@ -3,13 +3,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { bookDateSlice } from 'stores/slices/bookDateSlice';
 
 import { Provider } from 'react-redux';
-import useBookDateState from './useBookDateState';
 import { ReactNode } from 'react';
+import { useBookDateState } from './useBookDateState';
 
 // Dateをmockにする
 const mockDate = new Date(2021, 0, 1, 1, 1, 1);
 jest.useFakeTimers();
 jest.setSystemTime(mockDate);
+
 describe('useBookDateState', () => {
   describe('bookDate', () => {
     it('デフォルト', () => {
@@ -17,6 +18,12 @@ describe('useBookDateState', () => {
         reducer: combineReducers({
           [bookDateSlice.name]: bookDateSlice.reducer,
         }),
+        preloadedState: {
+          bookDate: {
+            year: new Date().getFullYear(),
+            month: new Date().getMonth(),
+          },
+        },
       });
 
       const wrapper = ({ children }: { children: ReactNode }) => (
@@ -24,6 +31,9 @@ describe('useBookDateState', () => {
       );
 
       const { result } = renderHook(() => useBookDateState(), { wrapper });
+
+      expect(result.current.year).toBe(2021);
+      expect(result.current.month).toBe(1);
     });
   });
 });
