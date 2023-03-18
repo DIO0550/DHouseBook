@@ -1,17 +1,11 @@
-import { ContentState, EditorState } from 'draft-js';
-import { useState } from 'react';
+import { useMemo } from 'react';
+import { createEditor } from 'slate';
+import { withReact } from 'slate-react';
 
 const useEditor = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createWithContent({
-        ContentState.
-    }),
-  );
+  const editor = useMemo(() => withReact(createEditor()), []);
 
-  return {
-    editorState,
-    setEditorState,
-  };
+  return { editor };
 };
 
 export { useEditor };

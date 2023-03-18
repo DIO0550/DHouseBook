@@ -1,13 +1,15 @@
-import { Editor } from 'draft-js';
 import { useEditor } from 'hooks/useEditor';
 import React from 'react';
+import { Slate, Editable } from 'slate-react';
 
 const PurchaseItemEditor = React.memo(() => {
-  const { editorState, setEditorState } = useEditor();
+  const { editor } = useEditor();
 
   return (
     <div>
-      <Editor editorState={editorState} onChange={setEditorState} />
+      <Slate value={[]} editor={editor}>
+        <Editable />
+      </Slate>
     </div>
   );
 });
