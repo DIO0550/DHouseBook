@@ -8,5 +8,5 @@ export type PurchasedItem = {
   // 種類
   type: string;
   // 購入日
-  purchasedDate: string;
+  date: string;
 };
