@@ -1,8 +1,8 @@
 import { useEditor } from 'hooks/useEditor';
-import React from 'react';
+import { memo } from 'react';
 import { Slate, Editable } from 'slate-react';
 
-const PurchaseItemEditor = React.memo(() => {
+const PurchaseItemEditor = memo(() => {
   const { editor } = useEditor();
 
   return (

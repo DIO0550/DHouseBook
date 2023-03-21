@@ -1,4 +1,6 @@
-const convertDataToElement = () => {};
+import { HouseBook } from 'types/housebook';
+
+const convertDataToElement = (data: HouseBook): PurchasedItemElement[] => {};
 
 const PurchaseItemEditorConst = {
   convertCustomState,
