@@ -1,8 +1,8 @@
-import { useEditor } from 'hooks/useEditor';
+import { useEditor } from 'features/editors/hooks/useEditor';
 import { memo } from 'react';
 import { Slate, Editable } from 'slate-react';
 
-const PurchaseItemEditor = memo(() => {
+const PurchasedItemEditor = memo(() => {
   const { editor } = useEditor();
 
   return (
@@ -14,4 +14,4 @@ const PurchaseItemEditor = memo(() => {
   );
 });
 
-export { PurchaseItemEditor };
+export { PurchasedItemEditor };

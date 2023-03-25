@@ -12,7 +12,7 @@ type BookDateState = {
 
 const initialState: BookDateState = {
   year: new Date().getFullYear(),
-  month: new Date().getMonth() + 1,
+  month: new Date().getMonth(),
 };
 
 const bookDateSlice = createSlice({
@@ -26,7 +26,7 @@ const bookDateSlice = createSlice({
      */
     incrementMonth: (state) => {
       const newDate = new Date(state.year, state.month + 1);
-
+      console.log(newDate);
       state.year = newDate.getFullYear();
       state.month = newDate.getMonth();
     },
@@ -38,7 +38,7 @@ const bookDateSlice = createSlice({
      */
     decrementMonth: (state) => {
       const newDate = new Date(state.year, state.month - 1);
-
+      console.log(newDate);
       state.year = newDate.getFullYear();
       state.month = newDate.getMonth();
     },

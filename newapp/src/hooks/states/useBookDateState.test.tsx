@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { bookDateSlice } from 'stores/slices/bookDateSlice';
 
@@ -34,6 +34,36 @@ describe('useBookDateState', () => {
 
       expect(result.current.year).toBe(2021);
       expect(result.current.month).toBe(1);
+    });
+
+    it('incrementDateMonth', () => {
+      const store = configureStore({
+        reducer: combineReducers({
+          [bookDateSlice.name]: bookDateSlice.reducer,
+        }),
+        preloadedState: {
+          bookDate: {
+            year: new Date().getFullYear(),
+            month: new Date().getMonth(),
+          },
+        },
+      });
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <Provider store={store}>{children}</Provider>
+      );
+
+      const { result } = renderHook(() => useBookDateState(), { wrapper });
+
+      expect(result.current.year).toBe(2021);
+      expect(result.current.month).toBe(1);
+
+      act(() => {
+        result.current.incrementDateMonth();
+      });
+
+      expect(result.current.year).toBe(2021);
+      expect(result.current.month).toBe(2);
     });
   });
 });

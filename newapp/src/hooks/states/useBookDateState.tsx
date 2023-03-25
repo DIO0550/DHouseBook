@@ -20,14 +20,14 @@ const useBookDateState = () => {
    * ブックの日付の月を１つ増やす
    */
   const incrementDateMonth = useCallback(() => {
-    dispatch(incrementMonth);
+    dispatch(incrementMonth());
   }, [dispatch, incrementMonth]);
 
   /**
    * ブックの日付の月を１つ減らす
    */
   const decrementDateMonth = useCallback(() => {
-    dispatch(decrementMonth);
+    dispatch(decrementMonth());
   }, [decrementMonth, dispatch]);
 
   return {
