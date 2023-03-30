@@ -8,10 +8,17 @@ type PurchasedItemProps = RenderElementProps & {
   selected?: boolean;
 };
 
-const PurchasedItemElement = memo<RenderElementProps>((props) => (
-  <div className={styles['item-render-container']} {...props.attributes}>
-    {props.children}
-  </div>
-));
+const PurchasedItemElement = memo<PurchasedItemProps>(
+  ({ children, attributes, selected = false }) => (
+    <div
+      className={`${styles['item-container']} ${
+        selected ? styles.selected : ''
+      }`}
+      {...attributes}
+    >
+      {children}
+    </div>
+  ),
+);
 
 export { PurchasedItemElement };
