@@ -1,0 +1,46 @@
+@use '@/styles/colors.module.scss' as colors;
+
+$primary-color-map: (
+  red: colors.$color-theme-red-primary,
+  purple: colors.$color-theme-purple-primary,
+  blue: colors.$color-theme-blue-primary,
+  cyan: colors.$color-theme-cyan-primary,
+  green: colors.$color-theme-green-primary,
+  yellow: colors.$color-theme-yellow-primary,
+  orange: colors.$color-theme-orange-primary,
+  gray: colors.$color-theme-gray-primary,
+);
+
+$primary-sub-color-map: (
+  red: colors.$color-theme-red-primary-sub,
+  purple: colors.$color-theme-purple-primary-sub,
+  blue: colors.$color-theme-blue-primary-sub,
+  cyan: colors.$color-theme-cyan-primary-sub,
+  green: colors.$color-theme-green-primary-sub,
+  yellow: colors.$color-theme-yellow-primary-sub,
+  orange: colors.$color-theme-orange-primary-sub,
+  gray: colors.$color-theme-gray-primary-sub,
+);
+
+$secondary-sub-color-map: (
+  red: colors.$color-theme-red-secondary,
+  purple: colors.$color-theme-purple-secondary,
+  blue: colors.$color-theme-blue-secondary,
+  cyan: colors.$color-theme-cyan-secondary,
+  green: colors.$color-theme-green-secondary,
+  yellow: colors.$color-theme-yellow-secondary,
+  orange: colors.$color-theme-orange-secondary,
+  gray: colors.$color-theme-gray-secondary,
+);
+
+@function primaryColor($theme) {
+  @return #{map-get($primary-color-map, $theme)};
+}
+
+@function primarySubColor($theme) {
+  @return #{map-get($primary-color-map, $theme)};
+}
+
+@function secondaryColor($theme) {
+  @return #{map-get($primary-color-map, $theme)};
+} ;

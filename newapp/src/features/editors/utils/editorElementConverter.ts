@@ -5,7 +5,7 @@ import {
   PriceElement,
   PurchasedItemElement,
   PurchaseItemEditorConst,
-} from '../purchaseItemEditorConst';
+} from '../../../utils/editors/purchaseItemEditorConst';
 
 /**
  * 名前要素生成

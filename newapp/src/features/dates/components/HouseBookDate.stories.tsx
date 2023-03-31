@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { bookDateSlice } from 'stores/slices/bookDateSlice';
+import { bookDateSlice } from '@/stores/slices/bookDateSlice';
 
 import { HouseBookDate } from './HouseBookDate';
 

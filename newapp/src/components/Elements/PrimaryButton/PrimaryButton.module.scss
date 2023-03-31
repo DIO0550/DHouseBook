@@ -1,0 +1,6 @@
+.primary {
+  &.blue {
+    @include mixins.button-color-style(blue);
+    //background-color: colors.$color-theme-red-primary;
+  }
+}

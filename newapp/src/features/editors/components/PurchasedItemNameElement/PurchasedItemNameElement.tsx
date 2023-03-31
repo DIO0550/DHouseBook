@@ -8,10 +8,10 @@ type Props = {
   renderElementProps: RenderElementProps;
 };
 
-const PurchasedItemNameRender = memo<Props>(({ renderElementProps }) => (
+const PurchasedItemNameElement = memo<Props>(({ renderElementProps }) => (
   <div {...renderElementProps.attributes} className={styles['name-container']}>
     {renderElementProps.children}
   </div>
 ));
 
-export { PurchasedItemNameRender };
+export { PurchasedItemNameElement };

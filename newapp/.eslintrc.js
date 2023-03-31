@@ -155,6 +155,7 @@ module.exports = {
         paths: ['src'],
         extensions: ['.js', '.ts', '.d.ts', '.tsx'],
       },
+      typescript: { project: './' },
     },
   },
 };

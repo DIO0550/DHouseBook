@@ -1,7 +1,7 @@
-import { RootState, useAppDispatch } from 'stores/store';
-import { useSelector } from 'react-redux';
-import { bookDateSlice, BookDateState } from 'stores/slices/bookDateSlice';
 import { useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '@/stores/store';
+import { bookDateSlice, BookDateState } from '@/stores/slices/bookDateSlice';
 
 const useBookDateState = () => {
   const dispatch = useAppDispatch();

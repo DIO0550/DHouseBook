@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { bookDateSlice } from 'stores/slices/bookDateSlice';
+import { bookDateSlice } from '@/stores/slices/bookDateSlice';
 
 import { Provider } from 'react-redux';
 import { ReactNode } from 'react';

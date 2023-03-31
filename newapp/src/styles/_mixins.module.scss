@@ -1,0 +1,6 @@
+@use '@/styles/functions.module.scss' as functions;
+
+@mixin button-color-style($theme) {
+  color: white;
+  background-color: functions.primaryColor($theme);
+}

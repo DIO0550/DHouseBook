@@ -18,6 +18,10 @@ const mainConfig = {
     if (custom[2].module?.rules) {
       config.module.rules.push(custom[2].module?.rules[1]);
     }
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
+    };
 
     return config;
   },

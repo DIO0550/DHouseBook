@@ -24,6 +24,9 @@ const base: Configuration = {
       '.scss',
       '.css',
     ],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   entry: {
     index: './src/index.tsx',
@@ -56,9 +59,10 @@ const base: Configuration = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              additionalData: `@use './src/styles/_variable.module.scss' as variables; \
-              
-                @use './src/styles/_colors.module.scss' as colors;`,
+              additionalData: `@use '@/styles/_variable.module.scss' as variables; \
+              @use '@/styles/_colors.module.scss' as colors; \
+              @use '@/styles/_functions.module.scss' as functions; \
+              @use '@/styles/_mixins.module.scss' as mixins;`,
             },
           },
         ],

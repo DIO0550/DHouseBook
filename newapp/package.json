@@ -19,7 +19,7 @@
     "prod:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=production electron .",
     "build": "electron-builder --win --x64 --dir",
     "build:win": "npm run prod:main && npm run prod:render && electron-builder && mkdirp dist/win-unpacked/resources/bookdata",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "ts-storybook": "cross-env TS_NODE_PROJECT=.storybook/tsconfig.json start-storybook",
     "build-storybook": "build-storybook"
   },
