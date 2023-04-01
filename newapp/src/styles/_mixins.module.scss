@@ -1,6 +1,32 @@
 @use '@/styles/functions.module.scss' as functions;
+@use '@/styles/variable.module.scss' as variable;
 
-@mixin button-color-style($theme) {
+@mixin base-primary-button-style($theme) {
   color: white;
   background-color: functions.primaryColor($theme);
+  padding-top: variable.$base-button-padding-v;
+  padding-bottom: variable.$base-button-padding-v;
+  padding-left: variable.$base-button-padding-h;
+  padding-right: variable.$base-button-padding-h;
+  border-radius: 8px;
+}
+
+@mixin base-primary-sub-button-style($theme) {
+  color: white;
+  background-color: functions.primarySubColor($theme);
+  padding-top: variable.$base-button-padding-v;
+  padding-bottom: variable.$base-button-padding-v;
+  padding-left: variable.$base-button-padding-h;
+  padding-right: variable.$base-button-padding-h;
+  border-radius: 8px;
+}
+
+@mixin base-secondary-button-style($theme) {
+  color: white;
+  background-color: functions.secondaryColor($theme);
+  padding-top: variable.$base-button-padding-v;
+  padding-bottom: variable.$base-button-padding-v;
+  padding-left: variable.$base-button-padding-h;
+  padding-right: variable.$base-button-padding-h;
+  border-radius: 8px;
 }

@@ -1,0 +1,28 @@
+@use '@/styles/mixins.module.scss' as mixins;
+
+.secondary {
+  &.red {
+    @include mixins.base-secondary-button-style(red);
+  }
+  &.purple {
+    @include mixins.base-secondary-button-style(purple);
+  }
+  &.blue {
+    @include mixins.base-secondary-button-style(blue);
+  }
+  &.cyan {
+    @include mixins.base-secondary-button-style(cyan);
+  }
+  &.green {
+    @include mixins.base-secondary-button-style(green);
+  }
+  &.yellow {
+    @include mixins.base-secondary-button-style(yellow);
+  }
+  &.orange {
+    @include mixins.base-secondary-button-style(orange);
+  }
+  &.gray {
+    @include mixins.base-secondary-button-style(gray);
+  }
+}

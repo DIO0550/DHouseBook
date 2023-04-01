@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "ES2017",
-    "noImplicitAny": false, //
+    "noImplicitAny": false,
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "lib": ["DOM", "ESNext"],
@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     }

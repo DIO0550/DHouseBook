@@ -1,5 +1,5 @@
 import { memo, MouseEvent } from 'react';
-import styles from './PrimaryButton.module.scss';
+import styles from './PrimarySubButton.module.scss';
 import { useThemeContext } from '@/components/Providers';
 
 type Props = {
@@ -7,18 +7,18 @@ type Props = {
   handleClick: (e?: MouseEvent) => void;
 };
 
-const PrimaryButton = memo<Props>(({ title, handleClick }) => {
+const PrimarySubButton = memo<Props>(({ title, handleClick }) => {
   const theme = useThemeContext();
 
   return (
     <button
       type="button"
       onClick={handleClick}
-      className={`${styles.primary} ${styles[theme]}`}
+      className={`${styles['primary-sub']} ${styles[theme]}`}
     >
       <div>{title}</div>
     </button>
   );
 });
 
-export { PrimaryButton };
+export { PrimarySubButton };

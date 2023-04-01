@@ -1,6 +1,28 @@
+@use '@/styles/mixins.module.scss' as mixins;
+
 .primary {
+  &.red {
+    @include mixins.base-primary-button-style(red);
+  }
+  &.purple {
+    @include mixins.base-primary-button-style(purple);
+  }
   &.blue {
-    @include mixins.button-color-style(blue);
-    //background-color: colors.$color-theme-red-primary;
+    @include mixins.base-primary-button-style(blue);
+  }
+  &.cyan {
+    @include mixins.base-primary-button-style(cyan);
+  }
+  &.green {
+    @include mixins.base-primary-button-style(green);
+  }
+  &.yellow {
+    @include mixins.base-primary-button-style(yellow);
+  }
+  &.orange {
+    @include mixins.base-primary-button-style(orange);
+  }
+  &.gray {
+    @include mixins.base-primary-button-style(gray);
   }
 }

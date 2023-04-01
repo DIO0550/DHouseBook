@@ -59,10 +59,7 @@ const base: Configuration = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              additionalData: `@use '@/styles/_variable.module.scss' as variables; \
-              @use '@/styles/_colors.module.scss' as colors; \
-              @use '@/styles/_functions.module.scss' as functions; \
-              @use '@/styles/_mixins.module.scss' as mixins;`,
+              additionalData: `@use '@/styles/reset.scss';`,
             },
           },
         ],

@@ -20,7 +20,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: './tsconfig.eslint.json',
+    project: './tsconfig.json',
     sourceType: 'module',
     tsconfigRootDir: __dirname,
   },
@@ -152,10 +152,9 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: ['src'],
         extensions: ['.js', '.ts', '.d.ts', '.tsx'],
       },
-      typescript: { project: './' },
+      typescript: {},
     },
   },
 };

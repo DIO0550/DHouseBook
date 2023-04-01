@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { SecondaryButton } from './SecondaryButton';
+import { PrimarySubButton } from './PrimarySubButton';
 import { ThemeProvider } from '@/components/Providers';
 
 export default {
-  title: 'components/Elements/SecondaryButton',
-  component: SecondaryButton,
-} as ComponentMeta<typeof SecondaryButton>;
+  title: 'components/Elements/PrimarySubButton',
+  component: PrimarySubButton,
+} as ComponentMeta<typeof PrimarySubButton>;
 
-const Template: ComponentStory<typeof SecondaryButton> = (args) => (
-  <SecondaryButton {...args} />
+const Template: ComponentStory<typeof PrimarySubButton> = (args) => (
+  <PrimarySubButton {...args} />
 );
 
 export const Default = Template.bind({});
