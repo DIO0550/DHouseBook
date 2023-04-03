@@ -1,6 +1,6 @@
 import { createContext, memo, ReactNode, useContext } from 'react';
 
-const BookThemeColor = {
+export const BookThemeColor = {
   red: 'red',
   purple: 'purple',
   blue: 'blue',
@@ -11,18 +11,21 @@ const BookThemeColor = {
   gray: 'gray',
 } as const;
 
-type BookThemeColor = typeof BookThemeColor[keyof typeof BookThemeColor];
+export type BookThemeColor = typeof BookThemeColor[keyof typeof BookThemeColor];
 
 const ThemeContext = createContext<BookThemeColor>(BookThemeColor.red);
 export const useThemeContext = () => useContext(ThemeContext);
 
 type ThemeProviderProps = {
+  initialValue?: BookThemeColor;
   children: ReactNode;
 };
 
 // Provider
-export const ThemeProvider = memo<ThemeProviderProps>(({ children }) => (
-  <ThemeContext.Provider value={BookThemeColor.red}>
-    {children}
-  </ThemeContext.Provider>
-));
+export const ThemeProvider = memo<ThemeProviderProps>(
+  ({ initialValue = BookThemeColor.red, children }) => (
+    <ThemeContext.Provider value={initialValue}>
+      {children}
+    </ThemeContext.Provider>
+  ),
+);

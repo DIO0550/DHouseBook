@@ -2,12 +2,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { memo } from 'react';
 import { RenderElementProps } from 'slate-react';
-import styles from './PurchasedItemNameElement.module.scss';
+import styles from './PurchasedItemPriceElement.module.scss';
 
 type Props = RenderElementProps;
 
 const PurchasedItemNameElement = memo<Props>(({ attributes, children }) => (
-  <div {...attributes} className={styles['name-container']}>
+  <div {...attributes} className={styles['price-container']}>
     {children}
   </div>
 ));

@@ -1,12 +1,13 @@
 import React from 'react';
 import { useBookDateState } from '@/hooks/states/useBookDateState';
+import styles from './HouseBookDate.module.scss';
 
 const HouseBookDate = React.memo(() => {
   const { year, month, incrementDateMonth, decrementDateMonth } =
     useBookDateState();
 
   return (
-    <div>
+    <div className={styles.container}>
       <button
         type="button"
         onClick={() => {
