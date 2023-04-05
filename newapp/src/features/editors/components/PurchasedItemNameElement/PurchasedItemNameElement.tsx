@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { RenderElementProps } from 'slate-react';
 import styles from './PurchasedItemNameElement.module.scss';
 
-type Props = RenderElementProps;
+type Props = Partial<RenderElementProps>;
 
 const PurchasedItemNameElement = memo<Props>(({ attributes, children }) => (
   <div {...attributes} className={styles['name-container']}>

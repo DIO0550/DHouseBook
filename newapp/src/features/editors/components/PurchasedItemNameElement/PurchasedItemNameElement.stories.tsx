@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { PurchasedItemNameElement } from './PurchasedItemNameElement';
 
 export default {
-  title: 'renders/PurchasedItemNameElement',
+  title: 'features/components/editors/PurchasedItemNameElement',
   component: PurchasedItemNameElement,
 } as ComponentMeta<typeof PurchasedItemNameElement>;
 
