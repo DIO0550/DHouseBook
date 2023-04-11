@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof PurchasedItemPriceElement>;
 
 const Template: ComponentStory<typeof PurchasedItemPriceElement> = (args) => (
-  <PurchasedItemPriceElement {...args}>名前</PurchasedItemPriceElement>
+  <PurchasedItemPriceElement {...args}>1,1000</PurchasedItemPriceElement>
 );
 
 export const Default = Template.bind({});
