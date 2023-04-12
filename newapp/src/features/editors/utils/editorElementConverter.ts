@@ -1,4 +1,4 @@
-import { HouseBook } from 'types/housebook';
+import { HouseBook } from '@/types/housebook';
 import {
   CustomText,
   NameElement,

@@ -8,7 +8,7 @@ const PurchaseItemEditor = memo(() => {
   return (
     <div>
       <Slate value={[]} editor={editor}>
-        <Editable />
+        <Editable renderElement={} />
       </Slate>
     </div>
   );
