@@ -4,7 +4,7 @@ import type { HistoryEditor } from 'slate-history';
 import type {
   PurchasedItemElement,
   CustomText,
-} from 'utils/editors/purchaseItemEditorConst';
+} from '@/utils/editors/purchaseItemEditorConst';
 
 declare module 'slate' {
   interface CustomTypes {

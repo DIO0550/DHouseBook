@@ -1,22 +1,15 @@
-/* eslint-disable operator-linebreak */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable global-require */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable import/no-extraneous-dependencies */
 import * as path from 'path';
-// import { BrowserWindow, app, Menu, session, ipcMain } from 'electron';
 import { BrowserWindow, app, Menu, session, ipcMain } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
+import electronReload from 'electron-reload';
 
 // const fs = require('fs');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
-  require('electron-reload')(__dirname, {
+  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-var-requires
+  electronReload(__dirname, {
     electron: path.join(
       __dirname,
       '..',
@@ -94,13 +87,13 @@ app.once('window-all-closed', () => app.quit());
 //  * @param filePath 保存するファイルのパス
 //  * @param bookDate 保存するデータ
 //  */
-// ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
-//   try {
-//     fs.writeFileSync(path.join(__dirname, `${filePath}`), bookData, 'utf8');
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
+  try {
+    fs.writeFileSync(path.join(__dirname, `${filePath}`), bookData, 'utf8');
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // /**
 //  * ファイルロードする
