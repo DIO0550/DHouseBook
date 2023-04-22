@@ -1,0 +1,3 @@
+const useBookFile = () => {};
+
+export { useBookFile };

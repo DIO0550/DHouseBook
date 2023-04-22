@@ -1,19 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { PurchasedItemPrchaseDateElement } from './PurchasedItemPrchaseDateElement';
 
-export default {
-  title: 'features/components/editors/PurchasedItemPrchaseDateElement',
+const meta: Meta<typeof PurchasedItemPrchaseDateElement> = {
+  title: 'PurchasedItemPrchaseDateElement',
   component: PurchasedItemPrchaseDateElement,
-} as ComponentMeta<typeof PurchasedItemPrchaseDateElement>;
+  render: (args) => (
+    <PurchasedItemPrchaseDateElement {...args}>
+      2022/12/13
+    </PurchasedItemPrchaseDateElement>
+  ),
+};
+export default meta;
 
-const Template: ComponentStory<typeof PurchasedItemPrchaseDateElement> = (
-  args,
-) => (
-  <PurchasedItemPrchaseDateElement {...args}>
-    2022/12/13
-  </PurchasedItemPrchaseDateElement>
-);
+type Story = StoryObj<typeof PurchasedItemPrchaseDateElement>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

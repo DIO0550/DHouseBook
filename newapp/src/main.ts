@@ -1,15 +1,13 @@
 import * as path from 'path';
 import { BrowserWindow, app, Menu, session, ipcMain } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
-import electronReload from 'electron-reload';
-
-// const fs = require('fs');
+import * as fs from 'fs';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-var-requires
-  electronReload(__dirname, {
+  require('electron-reload')(__dirname, {
     electron: path.join(
       __dirname,
       '..',
@@ -78,46 +76,46 @@ void app.whenReady().then(async () => {
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
 
-// // ===================
-// // ipc通信
-// // ===================
-
-// /**
-//  * ファイルの保存
-//  * @param filePath 保存するファイルのパス
-//  * @param bookDate 保存するデータ
-//  */
-ipcMain.handle('saveBook', (event, filePath: string, bookData: string) => {
+/**
+ * ファイルの保存
+ * @param filePath 保存するファイルのパス
+ * @param bookDate 保存するデータ
+ */
+ipcMain.handle('saveBook', (_, filePath: string, bookData: string): boolean => {
   try {
     fs.writeFileSync(path.join(__dirname, `${filePath}`), bookData, 'utf8');
+
+    return true;
   } catch (err) {
     console.log(err);
+
+    return false;
   }
 });
 
-// /**
-//  * ファイルロードする
-//  * @param filePath 読み込むファイルのパス
-//  * @returns ファイルあり:JsonObject / ファイルなし:null
-//  */
-// ipcMain.handle('loadBook', (event, filePath: string): unknown | null => {
-//   let jsonObject: unknown;
-//   try {
-//     jsonObject = JSON.parse(
-//       fs.readFileSync(path.join(__dirname, `${filePath}`), 'utf8'),
-//     );
-//   } catch (err) {
-//     return null;
-//   }
+/**
+ * ファイルロードする
+ * @param filePath 読み込むファイルのパス
+ * @returns ファイルあり:JsonObject / ファイルなし:null
+ */
+ipcMain.handle('loadBook', (_, filePath: string): string | undefined => {
+  try {
+    const content = fs.readFileSync(
+      path.join(__dirname, `${filePath}`),
+      'utf8',
+    );
 
-//   return jsonObject;
-// });
+    return content;
+  } catch (err) {
+    return undefined;
+  }
+});
 
-// /**
-//  * パス確認用（TODO：不要になったら削除する）
-//  */
-// ipcMain.handle('getPath', (): string => {
-//   const dirPath = '';
+/**
+ * パス確認用（TODO：不要になったら削除する）
+ */
+ipcMain.handle('getPath', (): string => {
+  const dirPath = '';
 
-//   return path.join(__dirname, `${dirPath}`);
-// });
+  return path.join(__dirname, `${dirPath}`);
+});

@@ -1,99 +1,116 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { PrimarySubButton } from './PrimarySubButton';
 import { BookThemeColor, ThemeProvider } from '@/components/Providers';
 
-export default {
-  title: 'components/Elements/PrimarySubButton',
+const meta: Meta<typeof PrimarySubButton> = {
+  title: 'PrimarySubButton',
   component: PrimarySubButton,
-} as ComponentMeta<typeof PrimarySubButton>;
-
-const Template: ComponentStory<typeof PrimarySubButton> = (args) => (
-  <PrimarySubButton {...args} />
-);
-
-export const Red = Template.bind({});
-Red.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.red}>{Story()}</ThemeProvider>
-  ),
-];
-Red.args = {
-  title: 'ボタン',
+  render: (args) => <PrimarySubButton {...args} />,
 };
 
-export const Purple = Template.bind({});
-Purple.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.purple}>
-      {Story()}
-    </ThemeProvider>
-  ),
-];
-Purple.args = {
-  title: 'ボタン',
+export default meta;
+
+type Story = StoryObj<typeof PrimarySubButton>;
+
+export const Red: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };
 
-export const Blue = Template.bind({});
-Blue.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.blue}>{Story()}</ThemeProvider>
-  ),
-];
-Blue.args = {
-  title: 'ボタン',
+export const Purple: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.purple}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };
 
-export const Cyan = Template.bind({});
-Cyan.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.cyan}>{Story()}</ThemeProvider>
-  ),
-];
-Cyan.args = {
-  title: 'ボタン',
+export const Blue: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.blue}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };
 
-export const Green = Template.bind({});
-Green.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.green}>{Story()}</ThemeProvider>
-  ),
-];
-Green.args = {
-  title: 'ボタン',
+export const Cyan: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.cyan}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };
 
-export const Yellow = Template.bind({});
-Yellow.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.yellow}>
-      {Story()}
-    </ThemeProvider>
-  ),
-];
-Yellow.args = {
-  title: 'ボタン',
+export const Green: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.green}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };
 
-export const Orange = Template.bind({});
-Orange.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.orange}>
-      {Story()}
-    </ThemeProvider>
-  ),
-];
-Orange.args = {
-  title: 'ボタン',
+export const Yellow: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.yellow}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };
 
-export const Gray = Template.bind({});
-Gray.decorators = [
-  (Story) => (
-    <ThemeProvider initialValue={BookThemeColor.gray}>{Story()}</ThemeProvider>
-  ),
-];
-Gray.args = {
-  title: 'ボタン',
+export const Orange: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.orange}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
+};
+
+export const Gray: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.gray}>
+        {story()}
+      </ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+  },
 };

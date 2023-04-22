@@ -1,19 +1,22 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
 import { configureStore } from '@reduxjs/toolkit';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { bookDateSlice } from '@/stores/slices/bookDateSlice';
 
 import { HouseBookDate } from './HouseBookDate';
 
-export default {
+const meta: Meta<typeof HouseBookDate> = {
   title: 'renders/HouseBookDate',
   component: HouseBookDate,
-} as ComponentMeta<typeof HouseBookDate>;
+  render: () => <HouseBookDate />,
+};
 
-const Template: ComponentStory<typeof HouseBookDate> = () => <HouseBookDate />;
+export default meta;
+
+type Story = StoryObj<typeof HouseBookDate>;
 
 type MockStoreProps = {
   year?: number;
@@ -41,5 +44,6 @@ const MockStore = ({
   return <Provider store={store}>{children}</Provider>;
 };
 
-export const Default = Template.bind({});
-Default.decorators = [(story) => <MockStore>{story()}</MockStore>];
+export const Default: Story = {
+  decorators: [(story) => <MockStore>{story()}</MockStore>],
+};

@@ -1,19 +1,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { LocalSpinner } from './LocalSpinner';
 
-export default {
+const meta: Meta<typeof LocalSpinner> = {
   title: 'components/Elements/LocalSpinner',
   component: LocalSpinner,
-} as ComponentMeta<typeof LocalSpinner>;
+  render: (args) => (
+    <div style={{ width: '100%', height: '500px' }}>
+      <LocalSpinner {...args} />
+    </div>
+  ),
+};
+export default meta;
+type Story = StoryObj<typeof LocalSpinner>;
 
-const Template: ComponentStory<typeof LocalSpinner> = (args) => (
-  <div style={{ width: '100%', height: '500px' }}>
-    <LocalSpinner {...args} />
-  </div>
-);
-
-export const Open = Template.bind({});
-Open.args = {
-  isOpen: true,
+export const Open: Story = {
+  args: {
+    isOpen: true,
+  },
 };
