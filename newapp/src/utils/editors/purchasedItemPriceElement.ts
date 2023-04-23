@@ -14,9 +14,9 @@ export type PurchasedItemPriceElement = {
 export const PurchasedItemPriceElement = {
   type: 'price',
 
-  fromPrice: (price: string) => {
+  fromPrice: (price: number) => {
     const customText = {
-      text: price,
+      text: price.toString(),
     };
 
     const priceElement: PurchasedItemPriceElement = {
