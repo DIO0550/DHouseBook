@@ -11,12 +11,13 @@ import {
 import { PurchaseItemEditorConst } from '@/utils/editors/purchaseItemEditorConst';
 import { PurchasedItemLeaf } from '@/features/editors/components/PurchasedItemLeaf';
 import { PurchasedItem } from '@/utils/editors/purchasedItem';
+import { PurchasedItemElement } from '@/utils/editors/purchasedItemElement';
 
 type Props = {
   bookItems: PurchasedItem[] | undefined;
 };
 
-const useEditor = (bookItems: Props) => {
+const useEditor = ({ bookItems }: Props) => {
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderElement = useCallback(
@@ -91,11 +92,12 @@ const useEditor = (bookItems: Props) => {
   );
 
   const decendanceValue = useMemo(() => {
-    if (!bookItems) {
-    }
-  }, [bookItems]);
+    const purchasedItem = PurchasedItem.init();
 
-  return { editor, renderElement, renderLeaf };
+    return [PurchasedItemElement.fromPurchasedItem(purchasedItem)];
+  }, []);
+
+  return { editor, renderElement, renderLeaf, decendanceValue };
 };
 
 export { useEditor };

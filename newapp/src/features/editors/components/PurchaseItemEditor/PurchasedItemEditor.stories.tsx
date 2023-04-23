@@ -1,15 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { PurchasedItemEditor } from './PurchasedItemEditor';
 
-export default {
-  title: 'features/components/editors/PurchasedItemEditor',
+const meta: Meta<typeof PurchasedItemEditor> = {
+  title: 'PurchasedItemEditor',
   component: PurchasedItemEditor,
-} as ComponentMeta<typeof PurchasedItemEditor>;
+  render: (args) => <PurchasedItemEditor {...args} />,
+};
 
-const Template: ComponentStory<typeof PurchasedItemEditor> = () => (
-  <PurchasedItemEditor />
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof PurchasedItemEditor>;
+
+export const Default: Story = {
+  args: {
+    houseBookData: undefined,
+  },
+};

@@ -16,7 +16,8 @@ export type PurchasedItem = {
 export const PurchasedItem = {
   init: () => {
     const id = uuidv4();
+    const item: PurchasedItem = { id, name: '', price: 0, type: '', date: '' };
 
-    return { id, name: '', print: 0, type: '', date: '' };
+    return item;
   },
 };
