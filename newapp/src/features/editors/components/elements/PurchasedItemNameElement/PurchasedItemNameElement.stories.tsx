@@ -4,7 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { PurchasedItemNameElement } from './PurchasedItemNameElement';
 
 const meta: Meta<typeof PurchasedItemNameElement> = {
-  title: 'features/components/editors/PurchasedItemNameElement',
+  title: 'PurchasedItemNameElement',
   component: PurchasedItemNameElement,
   render: (args) => (
     <PurchasedItemNameElement {...args}>名前</PurchasedItemNameElement>

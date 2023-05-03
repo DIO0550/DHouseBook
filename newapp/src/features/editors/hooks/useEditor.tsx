@@ -8,10 +8,13 @@ import {
   RenderPurchasedItemPriceElement,
   RenderPurchasedItemTypeElement,
 } from '../utils/editorElementRender';
-import { PurchaseItemEditorConst } from '@/utils/editors/purchaseItemEditorConst';
 import { PurchasedItemLeaf } from '@/features/editors/components/PurchasedItemLeaf';
 import { PurchasedItem } from '@/utils/editors/purchasedItem';
 import { PurchasedItemElement } from '@/utils/editors/purchasedItemElement';
+import { PurchasedItemNameElement } from '@/utils/editors/purchasedItemNameElement';
+import { PurchasedItemPriceElement } from '@/utils/editors/purchasedItemPriceElement';
+import { PurchasedItemTypeElement } from '@/utils/editors/purchasedItemTypeElement';
+import { PurchasedItemDateElement } from '@/utils/editors/purchasedItemDateElement';
 
 type Props = {
   bookItems: PurchasedItem[] | undefined;
@@ -24,7 +27,7 @@ const useEditor = ({ bookItems }: Props) => {
     ({ attributes, children, element }: RenderElementProps) => {
       const { type } = element;
       switch (type) {
-        case PurchaseItemEditorConst.CustomElement.PucheseItem:
+        case PurchasedItemElement.type:
           return (
             <RenderPurchasedItemElement
               attributes={attributes}
@@ -34,7 +37,7 @@ const useEditor = ({ bookItems }: Props) => {
             </RenderPurchasedItemElement>
           );
 
-        case PurchaseItemEditorConst.CustomElement.Name:
+        case PurchasedItemNameElement.type:
           return (
             <RenderPurchasedItemNameElement
               attributes={attributes}
@@ -44,7 +47,7 @@ const useEditor = ({ bookItems }: Props) => {
             </RenderPurchasedItemNameElement>
           );
 
-        case PurchaseItemEditorConst.CustomElement.Price:
+        case PurchasedItemPriceElement.type:
           return (
             <RenderPurchasedItemPriceElement
               attributes={attributes}
@@ -54,7 +57,7 @@ const useEditor = ({ bookItems }: Props) => {
             </RenderPurchasedItemPriceElement>
           );
 
-        case PurchaseItemEditorConst.CustomElement.Type:
+        case PurchasedItemTypeElement.type:
           return (
             <RenderPurchasedItemTypeElement
               attributes={attributes}
@@ -64,7 +67,7 @@ const useEditor = ({ bookItems }: Props) => {
             </RenderPurchasedItemTypeElement>
           );
 
-        case PurchaseItemEditorConst.CustomElement.Date:
+        case PurchasedItemDateElement.type:
           return (
             <RenderPurchasedItemPrchaseDateElement
               attributes={attributes}
@@ -92,10 +95,13 @@ const useEditor = ({ bookItems }: Props) => {
   );
 
   const decendanceValue = useMemo(() => {
+    if (bookItems?.length) {
+      return PurchasedItemElement.listFromPurchasedItems(bookItems);
+    }
     const purchasedItem = PurchasedItem.init();
 
     return [PurchasedItemElement.fromPurchasedItem(purchasedItem)];
-  }, []);
+  }, [bookItems]);
 
   return { editor, renderElement, renderLeaf, decendanceValue };
 };

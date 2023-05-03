@@ -34,4 +34,19 @@ export const PurchasedItemElement = {
 
     return purchasedItemElement;
   },
+  listFromPurchasedItems: (
+    prchasedItems: PurchasedItem[],
+  ): PurchasedItemElement[] => {
+    const purchasedElements: PurchasedItemElement[] =
+      [] as PurchasedItemElement[];
+    for (let i = 0; i < prchasedItems.length; i += 1) {
+      const purchasedItem = prchasedItems[i];
+      const purchasedElement =
+        PurchasedItemElement.fromPurchasedItem(purchasedItem);
+
+      purchasedElements.push(purchasedElement);
+    }
+
+    return purchasedElements;
+  },
 };

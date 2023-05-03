@@ -9,7 +9,7 @@ import { bookDateSlice } from '@/stores/slices/bookDateSlice';
 import { HouseBookDate } from './HouseBookDate';
 
 const meta: Meta<typeof HouseBookDate> = {
-  title: 'renders/HouseBookDate',
+  title: 'HouseBookDate',
   component: HouseBookDate,
   render: () => <HouseBookDate />,
 };
