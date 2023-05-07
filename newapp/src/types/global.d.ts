@@ -1,9 +1,9 @@
-import { PurchasedItem } from '../utils/editors/purchasedItem';
+import { PurchasedItem } from '@/utils/editors/purchasedItem';
+import { HouseBook } from '@/types/housebook';
 
 export type BookApi = {
+  openBook: () => HouseBook;
   saveBook: (filePath: string, jsonStr: string) => Promise<void>;
-  loadBook: (filePath: string) => Promise<PurchasedItem[] | null>;
-  getPath: () => Promise<string>;
 };
 
 declare global {

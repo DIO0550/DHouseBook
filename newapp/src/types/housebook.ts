@@ -1,4 +1,4 @@
-import { PurchasedItem } from '../utils/editors/purchasedItem';
+import { PurchasedItem } from '@/utils/editors/purchasedItem';
 
 // 家計簿のデータ
 export type HouseBook = {
