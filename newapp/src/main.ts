@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { BrowserWindow, app, Menu, session, ipcMain } from 'electron';
+import { BrowserWindow, app, Menu, session, ipcMain, dialog } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
-import * as fs from 'fs';
+import { DialogIpc } from '@/utils/dialogs/dialog';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -41,10 +41,10 @@ const appMenu = Menu.buildFromTemplate([
 ]);
 
 Menu.setApplicationMenu(appMenu);
-
+let mainWindow: BrowserWindow;
 // Window 生成
 const createWindow = () => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.resolve(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -77,45 +77,21 @@ void app.whenReady().then(async () => {
 app.once('window-all-closed', () => app.quit());
 
 /**
- * ファイルの保存
- * @param filePath 保存するファイルのパス
- * @param bookDate 保存するデータ
- */
-ipcMain.handle('saveBook', (_, filePath: string, bookData: string): boolean => {
-  try {
-    fs.writeFileSync(path.join(__dirname, `${filePath}`), bookData, 'utf8');
-
-    return true;
-  } catch (err) {
-    console.log(err);
-
-    return false;
-  }
-});
-
-/**
- * ファイルロードする
- * @param filePath 読み込むファイルのパス
- * @returns ファイルあり:JsonObject / ファイルなし:null
- */
-ipcMain.handle('loadBook', (_, filePath: string): string | undefined => {
-  try {
-    const content = fs.readFileSync(
-      path.join(__dirname, `${filePath}`),
-      'utf8',
-    );
-
-    return content;
-  } catch (err) {
-    return undefined;
-  }
-});
-
-/**
  * パス確認用（TODO：不要になったら削除する）
  */
 ipcMain.handle('getPath', (): string => {
   const dirPath = '';
 
   return path.join(__dirname, `${dirPath}`);
+});
+
+ipcMain.handle(DialogIpc.open, () => {
+  dialog.showOpenDialogSync(mainWindow, {
+    buttonLabel: '開く', // 確認ボタンのラベル
+    filters: [{ name: 'Text', extensions: ['txt', 'text'] }],
+    properties: [
+      'openFile', // ファイルの選択を許可
+      'createDirectory', // ディレクトリの作成を許可 (macOS)
+    ],
+  });
 });

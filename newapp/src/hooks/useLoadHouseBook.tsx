@@ -1,9 +1,8 @@
-import { useCallback } from 'react';
+// import { useCallback } from 'react';
 
 const useHouseBookFile = () => {
-  const openFile = useCallback(() => {}, []);
-
-  const saveFile = useCallback(() => {}, []);
+  // const openFile = useCallback(() => {}, []);
+  // const saveFile = useCallback(() => {}, []);
 };
 
 export { useHouseBookFile };
