@@ -1,6 +1,6 @@
-import * as path from 'path';
 import { BrowserWindow, app, Menu, session, ipcMain, dialog } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
+import * as path from 'path';
 import { DialogIpc } from '@/utils/dialogs/dialog';
 
 const isDev = process.env.NODE_ENV === 'development';

@@ -1,8 +1,21 @@
 {
-  "extends": ".",
   "compilerOptions": {
-    "module": "CommonJS",
-    "outDir": "dist"
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "lib": ["DOM", "ESNext"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "baseUrl": "./",
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src/*.ts", "src/*.tsx", "src/types/*"]
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

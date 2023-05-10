@@ -10,9 +10,9 @@
   "scripts": {
     "test": "npx jest",
     "dev:webpack": "set NODE_OPTIONS=--openssl-legacy-provider && cross-env NODE_ENV=\"development\" webpack --progress",
-    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && run-p dev:*",
+    "dev": "run-p dev:*",
     "dev:main": "tsc -w -p tsconfig.main.json",
-    "dev:render": "set NODE_OPTIONS=--openssl-legacy-provider && cross-env NODE_ENV=development webpack",
+    "dev:render": "cross-env NODE_ENV=development webpack",
     "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=development electron .",
     "prod": "run-p prod:*",
     "prod:main": "tsc -p tsconfig.main.json",
