@@ -9,11 +9,9 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "npx jest",
-    "dev:webpack": "set NODE_OPTIONS=--openssl-legacy-provider && cross-env NODE_ENV=\"development\" webpack --progress",
     "dev": "run-p dev:*",
-    "dev:main": "tsc -w -p tsconfig.main.json",
-    "dev:render": "cross-env NODE_ENV=development webpack",
-    "dev:electron": "wait-on ./dist/index.html && cross-env NODE_ENV=development electron .",
+    "dev:webpack": "cross-env NODE_ENV=\"development\" webpack --progress",
+    "dev:electron": "wait-on ./dist/index.html ./dist/main.js && electronmon .",
     "prod": "run-p prod:*",
     "prod:main": "tsc -p tsconfig.main.json",
     "prod:render": "cross-env NODE_ENV=production webpack --config webpack.config.prod.ts",
@@ -99,6 +97,7 @@
     "css-loader": "^6.3.0",
     "dart-sass": "^1.25.0",
     "electron-builder": "^22.11.7",
+    "electronmon": "^2.0.2",
     "esbuild": "^0.14.46",
     "esbuild-register": "^3.3.3",
     "eslint": "^7.32.0",
@@ -146,6 +145,11 @@
     "electron-reload": "^1.5.0",
     "electron-search-devtools": "^1.4.8",
     "wait-on": "^6.0.0"
+  },
+  "electronmon": {
+    "patterns": [
+      "dist/**/*"
+    ]
   },
   "eslintConfig": {
     "extends": [

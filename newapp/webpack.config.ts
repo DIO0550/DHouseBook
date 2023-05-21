@@ -13,6 +13,7 @@ const base: Configuration = {
     __dirname: false,
     __filename: false,
   },
+  externals: ['fsevents'],
   resolve: {
     extensions: [
       '.js',

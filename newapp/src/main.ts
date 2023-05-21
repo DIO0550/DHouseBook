@@ -1,25 +1,9 @@
 import { BrowserWindow, app, Menu, session, ipcMain, dialog } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
-import * as path from 'path';
+import path from 'node:path';
 import { DialogIpc } from '@/utils/dialogs/dialog';
 
 const isDev = process.env.NODE_ENV === 'development';
-
-if (isDev) {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-var-requires
-  require('electron-reload')(__dirname, {
-    electron: path.join(
-      __dirname,
-      '..',
-      '..',
-      'node_modules',
-      '.bin',
-      'electron',
-    ),
-    forceHardReset: true,
-    hardResetMethod: 'exit',
-  });
-}
 
 // アプリケーションメニュー
 const appMenu = Menu.buildFromTemplate([
