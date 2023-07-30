@@ -1,5 +1,9 @@
 import { PurchasedItem } from '@/utils/editors/purchasedItem';
-import { useReducer } from 'react';
+import {
+  EntityDictionary,
+  PurchasedItemsEntity,
+} from '@/utils/editors/purchasedItemsEntity';
+import { useCallback, useReducer } from 'react';
 
 type Props = {
   initialPurchasedItems: PurchasedItem[];
@@ -53,6 +57,7 @@ type UpdateItem = ActionBase & {
 };
 
 type AddItem = ActionBase & {
+  payload: PurchasedItem;
   type: typeof ActionType.Add;
 };
 
@@ -61,13 +66,6 @@ type RemoveItem = ActionBase & {
 };
 
 type Action = AddItem | RemoveItem | UpdateItem;
-
-type PurchasedItemEntity = { [key in string]: PurchasedItem };
-
-type PurchasedItems = {
-  ids: string[];
-  entities: PurchasedItemEntity;
-};
 
 export {
   AddItem,
@@ -86,20 +84,32 @@ export {
  */
 const normalizedPurchasedItem = (purchasedItems: PurchasedItem[]) => {
   const ids = [] as string[];
-  const entities: PurchasedItemEntity = {};
+  const itemsEntity: EntityDictionary = {};
 
   purchasedItems.forEach((item) => {
     ids.push(item.id);
-    entities[item.id] = item;
+    itemsEntity[item.id] = item;
   });
 
-  const normalizedPurchasedItems: PurchasedItems = { ids, entities };
+  const normalizedPurchasedItems: PurchasedItemsEntity = {
+    ids,
+    entities: itemsEntity,
+  };
 
   return normalizedPurchasedItems;
 };
 
-const reducer = (state: PurchasedItems, action: Action) => {
+const reducer = (state: PurchasedItemsEntity, action: Action) => {
   switch (action.type) {
+    case ActionType.Add:
+      return state;
+
+    case ActionType.Remove:
+      return state;
+
+    case ActionType.Update:
+      return state;
+
     default:
       return state;
   }
@@ -110,6 +120,16 @@ const useEditor = ({ initialPurchasedItems }: Props) => {
     reducer,
     normalizedPurchasedItem(initialPurchasedItems),
   );
+
+  /**
+   * 購入したアイテムの追加
+   */
+  const addPurhcasedItem = useCallback((item: PurchasedItem) => {
+    dispatch({
+      payload: item,
+      type: ActionType.Add,
+    });
+  }, []);
 
   const handleChange = (value: PurchasedItems) => {};
 
