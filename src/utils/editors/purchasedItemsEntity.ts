@@ -7,6 +7,13 @@ type PurchasedItemsEntity = {
   entities: EntityDictionary;
 };
 
+export type UpdateEntity = {
+  // ID
+  id: string;
+  // 更新対象
+  change: Partial<PurchasedItem>;
+};
+
 /**
  * アイテムを１つ追加
  * @param itemsEntity エンティティ
@@ -28,15 +35,15 @@ const addOne = (itemsEntity: PurchasedItemsEntity, item: PurchasedItem) => {
 /**
  * アイテムを１つ削除
  * @param itemsEntity エンティティ
- * @param item 削除するアイテム
+ * @param itemId 削除するアイテムのID
  * @returns 削除後のエンティティ
  */
-const removeOne = (itemsEntity: PurchasedItemsEntity, item: PurchasedItem) => {
+const removeOne = (itemsEntity: PurchasedItemsEntity, itemId: string) => {
   const copyItemsEntity = { ...itemsEntity.entities };
-  delete copyItemsEntity[item.id];
+  delete copyItemsEntity[itemId];
 
   const newEntities: PurchasedItemsEntity = {
-    ids: [...itemsEntity.ids.filter((id) => id !== item.id)],
+    ids: [...itemsEntity.ids.filter((id) => id !== itemId)],
     entities: copyItemsEntity,
   };
 
@@ -49,12 +56,17 @@ const removeOne = (itemsEntity: PurchasedItemsEntity, item: PurchasedItem) => {
  * @param item 更新対象のアイテム
  * @returns アイテムを更新した後のエンティティ
  */
-const updateOne = (itemsEntity: PurchasedItemsEntity, item: PurchasedItem) => {
+const updateOne = (itemsEntity: PurchasedItemsEntity, update: UpdateEntity) => {
+  const updateTarget = itemsEntity.entities[update.id];
+  const isAdd = updateTarget === undefined;
+
+  const newItem = { ...updateTarget, ...update.change };
+
   const copyItemsEntity = { ...itemsEntity.entities };
-  copyItemsEntity[item.id] = item;
+  copyItemsEntity[update.id] = newItem;
 
   const newItemsEntity: PurchasedItemsEntity = {
-    ids: itemsEntity.ids,
+    ids: isAdd ? [...itemsEntity.ids, update.id] : itemsEntity.ids,
     entities: copyItemsEntity,
   };
 

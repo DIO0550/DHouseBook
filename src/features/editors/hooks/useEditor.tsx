@@ -2,6 +2,7 @@ import { PurchasedItem } from '@/utils/editors/purchasedItem';
 import {
   EntityDictionary,
   PurchasedItemsEntity,
+  UpdateEntity,
 } from '@/utils/editors/purchasedItemsEntity';
 import { useCallback, useReducer } from 'react';
 
@@ -16,66 +17,37 @@ const ActionType = {
 } as const;
 type ActionType = (typeof ActionType)[keyof typeof ActionType];
 
-const UpdateTarget = {
-  Name: 'name',
-  Price: 'price',
-  Date: 'date',
-  Type: 'type',
-} as const;
-
-type UpdateItemName = {
-  id: string;
-  name: string;
-  target: typeof UpdateTarget.Date;
-};
-
-type UpdateItemPrice = {
-  id: string;
-  price: string;
-  target: typeof UpdateTarget.Price;
-};
-
-type UpdateItemDate = {
-  id: string;
-  date: string;
-  target: typeof UpdateTarget.Date;
-};
-
-type UpdateItemType = {
-  id: string;
-  type: string;
-  target: typeof UpdateTarget.Type;
-};
-
 type ActionBase = {
   type: ActionType;
 };
 
+/**
+ * アイテム更新
+ */
 type UpdateItem = ActionBase & {
-  payload: UpdateItemName | UpdateItemPrice | UpdateItemDate | UpdateItemType;
+  payload: UpdateEntity;
   type: typeof ActionType.Update;
 };
 
+/**
+ * アイテム追加
+ */
 type AddItem = ActionBase & {
   payload: PurchasedItem;
   type: typeof ActionType.Add;
 };
 
+/**
+ * アイテム削除
+ */
 type RemoveItem = ActionBase & {
+  payload: string;
   type: typeof ActionType.Remove;
 };
 
 type Action = AddItem | RemoveItem | UpdateItem;
 
-export {
-  AddItem,
-  RemoveItem,
-  UpdateItem,
-  UpdateItemName,
-  UpdateItemPrice,
-  UpdateItemDate,
-  UpdateItemType,
-};
+export { AddItem, RemoveItem, UpdateItem };
 
 /**
  * 購入済みアイテムの正規化
@@ -101,14 +73,17 @@ const normalizedPurchasedItem = (purchasedItems: PurchasedItem[]) => {
 
 const reducer = (state: PurchasedItemsEntity, action: Action) => {
   switch (action.type) {
+    // アイテム追加
     case ActionType.Add:
-      return state;
+      return PurchasedItemsEntity.addOne(state, action.payload);
 
+    // アイテム削除
     case ActionType.Remove:
-      return state;
+      return PurchasedItemsEntity.removeOne(state, action.payload);
 
+    // アイテム更新
     case ActionType.Update:
-      return state;
+      return PurchasedItemsEntity.updateOne(state, action.payload);
 
     default:
       return state;
@@ -123,6 +98,7 @@ const useEditor = ({ initialPurchasedItems }: Props) => {
 
   /**
    * 購入したアイテムの追加
+   * @param item 追加するアイテム
    */
   const addPurhcasedItem = useCallback((item: PurchasedItem) => {
     dispatch({
@@ -131,10 +107,33 @@ const useEditor = ({ initialPurchasedItems }: Props) => {
     });
   }, []);
 
-  const handleChange = (value: PurchasedItems) => {};
+  /**
+   * 購入したアイテムの削除
+   * @param id 削除するアイテムのid
+   */
+  const removePurchasedItem = useCallback((id: string) => {
+    dispatch({
+      payload: id,
+      type: ActionType.Remove,
+    });
+  }, []);
+
+  /**
+   * 購入したアイテムの更新
+   * @param update 更新内容
+   */
+  const updatePurchaedItem = useCallback((update: UpdateEntity) => {
+    dispatch({
+      payload: update,
+      type: ActionType.Update,
+    });
+  }, []);
 
   return {
     purchasedItems,
+    addPurhcasedItem,
+    removePurchasedItem,
+    updatePurchaedItem,
   };
 };
 
