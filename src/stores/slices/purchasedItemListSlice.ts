@@ -27,7 +27,7 @@ const SORT_TYPE = {
   TYPE: 'TYPE',
   PURCHASE_DATE: 'PRUCHASE_DATE',
 } as const;
-type SORT_TYPE = typeof SORT_TYPE[keyof typeof SORT_TYPE];
+type SORT_TYPE = (typeof SORT_TYPE)[keyof typeof SORT_TYPE];
 
 /**
  * ソートのオーダー種類
@@ -39,7 +39,7 @@ const SORT_ORDER_TYPE = {
   ASCENDING: 'ASCENDING',
   DESCENDING: 'DESCENDING',
 } as const;
-type SORT_ORDER_TYPE = typeof SORT_ORDER_TYPE[keyof typeof SORT_ORDER_TYPE];
+type SORT_ORDER_TYPE = (typeof SORT_ORDER_TYPE)[keyof typeof SORT_ORDER_TYPE];
 
 // adapter
 const purchasedItemAdapter = createEntityAdapter<PurchasedItem>({

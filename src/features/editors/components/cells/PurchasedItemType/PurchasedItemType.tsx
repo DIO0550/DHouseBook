@@ -1,3 +1,4 @@
+import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
 import { memo } from 'react';
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
 
 const PurchasedItemType = memo<Props>(({ defaultValue }) => (
   <div>
-    <input defaultValue={defaultValue} />
+    <PrimaryColorInput defaultValue={defaultValue} />
   </div>
 ));
 

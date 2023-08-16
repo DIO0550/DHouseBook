@@ -1,6 +1,6 @@
 import { memo, MouseEvent } from 'react';
-import styles from './PrimaryButton.module.scss';
 import { useThemeContext } from '@/components/Providers';
+import styles from './PrimaryButton.module.scss';
 
 type Props = {
   title: string;

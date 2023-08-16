@@ -1,0 +1,31 @@
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/variables.module.scss' as variable;
+@use '@/styles/colors.module.scss' as colors;
+
+@mixin outline($color) {
+  outline: solid 1px $color;
+}
+
+@mixin base-primary-input-style($theme) {
+  @include outline(colors.$color-input-outline);
+  padding-left: 5px;
+  box-sizing: border-box;
+  color: colors.$color-input-text;
+  &:focus {
+    @include outline(functions.primaryColor($theme));
+  }
+}
+
+@mixin base-primary-sub-input-style($theme) {
+  color: colors.$color-input-text;
+  &:focus {
+    @include outline(functions.primarySubColor($theme));
+  }
+}
+
+@mixin base-secondary-input-style($theme) {
+  color: colors.$color-input-text;
+  &:focus {
+    @include outline(functions.secondaryColor($theme));
+  }
+}

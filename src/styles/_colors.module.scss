@@ -1,45 +1,49 @@
-@use './_palettes.module.scss' as palette;
+@use './_palettes.module.scss' as palettes;
 
-$color-button-bg: palette.$palette-downy;
-$color-button: palette.$palette-ocean-green;
-$color-button-border: palette.$palette-ocean-green;
+$color-button-bg: palettes.$palette-downy;
+$color-button: palettes.$palette-ocean-green;
+$color-button-border: palettes.$palette-ocean-green;
 
 // 赤
-$color-theme-red-primary: palette.$palette-red-500;
-$color-theme-red-primary-sub: palette.$palette-red-300;
-$color-theme-red-secondary: palette.$palette-blue-500;
+$color-theme-red-primary: palettes.$palette-red-500;
+$color-theme-red-primary-sub: palettes.$palette-red-300;
+$color-theme-red-secondary: palettes.$palette-blue-500;
 
 // 紫
-$color-theme-purple-primary: palette.$palette-purple-500;
-$color-theme-purple-primary-sub: palette.$palette-purple-300;
-$color-theme-purple-secondary: palette.$palette-cyan-500;
+$color-theme-purple-primary: palettes.$palette-purple-500;
+$color-theme-purple-primary-sub: palettes.$palette-purple-300;
+$color-theme-purple-secondary: palettes.$palette-cyan-500;
 
 // 青
-$color-theme-blue-primary: palette.$palette-blue-500;
-$color-theme-blue-primary-sub: palette.$palette-blue-300;
-$color-theme-blue-secondary: palette.$palette-green-500;
+$color-theme-blue-primary: palettes.$palette-blue-500;
+$color-theme-blue-primary-sub: palettes.$palette-blue-300;
+$color-theme-blue-secondary: palettes.$palette-green-500;
 
 // シアン
-$color-theme-cyan-primary: palette.$palette-cyan-500;
-$color-theme-cyan-primary-sub: palette.$palette-cyan-300;
-$color-theme-cyan-secondary: palette.$palette-yellow-500;
+$color-theme-cyan-primary: palettes.$palette-cyan-500;
+$color-theme-cyan-primary-sub: palettes.$palette-cyan-300;
+$color-theme-cyan-secondary: palettes.$palette-yellow-500;
 
 // 緑
-$color-theme-green-primary: palette.$palette-green-500;
-$color-theme-green-primary-sub: palette.$palette-green-300;
-$color-theme-green-secondary: palette.$palette-orange-500;
+$color-theme-green-primary: palettes.$palette-green-500;
+$color-theme-green-primary-sub: palettes.$palette-green-300;
+$color-theme-green-secondary: palettes.$palette-orange-500;
 
 // 黄
-$color-theme-yellow-primary: palette.$palette-yellow-500;
-$color-theme-yellow-primary-sub: palette.$palette-yellow-500;
-$color-theme-yellow-secondary: palette.$palette-green-500;
+$color-theme-yellow-primary: palettes.$palette-yellow-500;
+$color-theme-yellow-primary-sub: palettes.$palette-yellow-500;
+$color-theme-yellow-secondary: palettes.$palette-green-500;
 
 // オレンジ
-$color-theme-orange-primary: palette.$palette-orange-500;
-$color-theme-orange-primary-sub: palette.$palette-orange-300;
-$color-theme-orange-secondary: palette.$palette-red-500;
+$color-theme-orange-primary: palettes.$palette-orange-500;
+$color-theme-orange-primary-sub: palettes.$palette-orange-300;
+$color-theme-orange-secondary: palettes.$palette-red-500;
 
 // グレー
-$color-theme-gray-primary: palette.$palette-gray-500;
-$color-theme-gray-primary-sub: palette.$palette-gray-300;
-$color-theme-gray-secondary: palette.$palette-gray-800;
+$color-theme-gray-primary: palettes.$palette-gray-500;
+$color-theme-gray-primary-sub: palettes.$palette-gray-300;
+$color-theme-gray-secondary: palettes.$palette-gray-800;
+
+// input
+$color-input-text: palettes.$palette-black;
+$color-input-outline: palettes.$palette-blue-gray-800;

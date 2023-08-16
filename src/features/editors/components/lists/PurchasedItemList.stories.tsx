@@ -3,26 +3,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
 
+import { TestPurchasedItemData } from '@/tests/testPurchasedItem';
 import { ThemeProvider, BookThemeColor } from '@/components/Providers';
-import { PurchasedItemName } from './PurchasedItemName';
+import { PurchasedItemList } from './PurchasedItemList';
 
-const meta: Meta<typeof PurchasedItemName> = {
-  title: 'features/editors/components/cells/PurchasedItemName',
-  component: PurchasedItemName,
+const meta: Meta<typeof PurchasedItemList> = {
+  title: 'features/editors/components/lists/PurchasedItemList',
+  component: PurchasedItemList,
+  render: (args) => <PurchasedItemList {...args} />,
   decorators: [
     (story) => (
       <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
     ),
   ],
-  render: (args) => <PurchasedItemName {...args} />,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PurchasedItemName>;
+type Story = StoryObj<typeof PurchasedItemList>;
 
 export const Default: Story = {
   args: {
-    defaultValue: 'トッポ',
+    purchasedItems: TestPurchasedItemData,
   },
 };

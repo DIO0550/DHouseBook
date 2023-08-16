@@ -3,11 +3,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
 
+import { ThemeProvider, BookThemeColor } from '@/components/Providers';
 import { PurchasedItemType } from './PurchasedItemType';
 
 const meta: Meta<typeof PurchasedItemType> = {
-  title: 'PurchasedItemType',
+  title: 'features/editors/components/cells/PurchasedItemType',
   component: PurchasedItemType,
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
   render: (args) => <PurchasedItemType {...args} />,
 };
 

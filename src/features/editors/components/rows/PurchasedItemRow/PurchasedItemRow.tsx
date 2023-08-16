@@ -3,6 +3,7 @@ import { PurchasedItemName } from '@/features/editors/components/cells/Purchased
 import { PurchasedItemPrice } from '@/features/editors/components/cells/PurchasedItemPrice';
 import { PurchasedItemType } from '@/features/editors/components/cells/PurchasedItemType';
 import { PurchasedItemDate } from '@/features/editors/components/cells/PurchasedItemDate';
+import styles from './PurchasedItemRow.module.scss';
 
 type Props = {
   name: string;
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const PurchasedItemRow = memo<Props>(({ name, price, type, date }) => (
-  <div>
+  <div className={styles.container}>
     <PurchasedItemName defaultValue={name} />
     <PurchasedItemPrice defaultValue={price} />
     <PurchasedItemType defaultValue={type} />

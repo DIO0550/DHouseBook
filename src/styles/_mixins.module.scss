@@ -1,5 +1,5 @@
 @use '@/styles/functions.module.scss' as functions;
-@use '@/styles/variable.module.scss' as variable;
+@use '@/styles/variables.module.scss' as variable;
 
 @mixin base-primary-button-style($theme) {
   color: white;

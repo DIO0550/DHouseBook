@@ -3,11 +3,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
 
+import { ThemeProvider, BookThemeColor } from '@/components/Providers';
 import { PurchasedItemPrice } from './PurchasedItemPrice';
 
 const meta: Meta<typeof PurchasedItemPrice> = {
-  title: 'PurchasedItemPrice',
+  title: 'features/editors/components/cells/PurchasedItemPrice',
   component: PurchasedItemPrice,
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
   render: (args) => <PurchasedItemPrice {...args} />,
 };
 

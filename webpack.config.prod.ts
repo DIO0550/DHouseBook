@@ -7,7 +7,6 @@ const mode = process.env.NODE_ENV as string;
 const envconfig = require(path.resolve(__dirname, `.env.${mode}.js`));
 const isDev = process.env.NODE_ENV === 'development';
 
-
 const base: Configuration = {
   mode: isDev ? 'development' : 'production',
   node: {
@@ -50,7 +49,8 @@ const base: Configuration = {
               sourceMap: isDev,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, global-require
               implementation: require('sass'),
-              additionalData: "@use './src/styles/_variable.module.scss' as *;",
+              additionalData:
+                "@use './src/styles/_variables.module.scss' as *;",
             },
           },
         ],
