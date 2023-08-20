@@ -7,7 +7,7 @@ import { ThemeProvider, BookThemeColor } from '@/components/Providers';
 import { PurchasedItemDate } from './PurchasedItemDate';
 
 const meta: Meta<typeof PurchasedItemDate> = {
-  title: 'PurchasedItemDate',
+  title: 'features/editors/components/cells/PurchasedItemDate',
   component: PurchasedItemDate,
   decorators: [
     (story) => (

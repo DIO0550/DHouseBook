@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import type { Meta, StoryObj } from '@storybook/react';
-import { PrimaryButton } from './PrimaryButton';
 import { BookThemeColor, ThemeProvider } from '@/components/Providers';
+import { PrimaryButton } from './PrimaryButton';
 
 const meta: Meta<typeof PrimaryButton> = {
   title: 'PrimaryButton',
