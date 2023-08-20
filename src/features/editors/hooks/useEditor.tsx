@@ -4,10 +4,10 @@ import {
   PurchasedItemsEntity,
   UpdateEntity,
 } from '@/utils/editors/purchasedItemsEntity';
-import { useCallback, useReducer } from 'react';
+import { useCallback, useMemo, useReducer } from 'react';
 
 type Props = {
-  initialPurchasedItems: PurchasedItem[];
+  initialPurchasedItems?: PurchasedItem[];
 };
 
 const ActionType = {
@@ -90,8 +90,8 @@ const reducer = (state: PurchasedItemsEntity, action: Action) => {
   }
 };
 
-const useEditor = ({ initialPurchasedItems }: Props) => {
-  const [purchasedItems, dispatch] = useReducer(
+const useEditor = ({ initialPurchasedItems = [] }: Props) => {
+  const [purchasedItemsEntity, dispatch] = useReducer(
     reducer,
     normalizedPurchasedItem(initialPurchasedItems),
   );
@@ -128,6 +128,14 @@ const useEditor = ({ initialPurchasedItems }: Props) => {
       type: ActionType.Update,
     });
   }, []);
+
+  /**
+   * アイテム一覧
+   */
+  const purchasedItems = useMemo(
+    () => PurchasedItemsEntity.selectAll(purchasedItemsEntity),
+    [purchasedItemsEntity],
+  );
 
   return {
     purchasedItems,

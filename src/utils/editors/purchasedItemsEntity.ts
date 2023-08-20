@@ -73,10 +73,28 @@ const updateOne = (itemsEntity: PurchasedItemsEntity, update: UpdateEntity) => {
   return newItemsEntity;
 };
 
+/**
+ * 全てのアイテムを配列で取得する
+ * @param itemsEntity
+ * @returns 全てのアイテムの配列
+ */
+const selectAll = (itemsEntity: PurchasedItemsEntity) => {
+  const items: PurchasedItem[] = [] as PurchasedItem[];
+  itemsEntity.ids.forEach((id) => {
+    const item = itemsEntity.entities[id];
+    if (items) {
+      items.push(item);
+    }
+  });
+
+  return items;
+};
+
 const PurchasedItemsEntity = {
   addOne,
   updateOne,
   removeOne,
+  selectAll,
 };
 
 export { EntityDictionary };

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { PurchasedItem } from '@/utils/editors/purchasedItem';
 import { UpdateEntity } from '@/utils/editors/purchasedItemsEntity';
-import { PurchasedItemRow } from '../rows/PurchasedItemRow';
+import { PurchasedItemRow } from '@/features/editors/components/rows/PurchasedItemRow';
 
 type Props = {
   purchasedItems: PurchasedItem[];
