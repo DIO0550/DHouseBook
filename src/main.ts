@@ -30,9 +30,9 @@ let mainWindow: BrowserWindow;
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     webPreferences: {
-      preload: path.resolve(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      preload: path.resolve(__dirname, 'preload.js'),
     },
   });
 
@@ -59,15 +59,6 @@ void app.whenReady().then(async () => {
 
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
-
-/**
- * パス確認用（TODO：不要になったら削除する）
- */
-ipcMain.handle('getPath', (): string => {
-  const dirPath = '';
-
-  return path.join(__dirname, `${dirPath}`);
-});
 
 ipcMain.handle(DialogIpc.open, () => {
   dialog.showOpenDialogSync(mainWindow, {

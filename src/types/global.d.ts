@@ -1,6 +1,6 @@
-export type BookApi = {
-  openBook: () => void;
-};
+export interface BookApi {
+  openFile: () => void;
+}
 
 declare global {
   interface Window {

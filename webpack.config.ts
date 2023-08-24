@@ -99,7 +99,7 @@ const preload: Configuration = {
   ...base,
   target: 'electron-preload',
   entry: {
-    main: './src/preload.ts',
+    preload: './src/preload.ts',
   },
 };
 
