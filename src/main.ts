@@ -2,6 +2,8 @@ import { BrowserWindow, app, Menu, session, ipcMain, dialog } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
 import path from 'node:path';
 import { DialogIpc } from '@/utils/dialogs/dialog';
+import fs from 'fs';
+import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -60,13 +62,38 @@ void app.whenReady().then(async () => {
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
 
-ipcMain.handle(DialogIpc.open, () => {
-  dialog.showOpenDialogSync(mainWindow, {
+ipcMain.handle(DialogIpc.open, (): FileOpenResult => {
+  const filePaths = dialog.showOpenDialogSync(mainWindow, {
     buttonLabel: '開く', // 確認ボタンのラベル
-    filters: [{ name: 'Text', extensions: ['txt', 'text'] }],
+    filters: [
+      { name: 'csv', extensions: ['csv'] },
+      { name: 'json', extensions: ['json'] },
+    ],
     properties: [
       'openFile', // ファイルの選択を許可
       'createDirectory', // ディレクトリの作成を許可 (macOS)
     ],
   });
+
+  if (filePaths === undefined) {
+    return {
+      status: FileOpenStatus.Cancel,
+    };
+  }
+
+  try {
+    const filePath = filePaths[0];
+    const data = fs.readFileSync(filePath);
+
+    return {
+      status: FileOpenStatus.OK,
+      text: data.toString(),
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { status: FileOpenStatus.Error, message: error.message };
+    }
+
+    return { status: FileOpenStatus.Error, message: 'Error Read File' };
+  }
 });

@@ -1,5 +1,8 @@
+import { FileOpenResult } from './fileOpen';
+
 export interface BookApi {
-  openFile: () => void;
+  openFile: () => Promise<FileOpenResult>;
+  saveFile: () => void;
 }
 
 declare global {
