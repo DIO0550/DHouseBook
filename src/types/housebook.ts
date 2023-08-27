@@ -6,3 +6,15 @@ export type HouseBook = {
   month: number;
   items: PurchasedItem[];
 };
+
+export const HouseBook = {
+  fromJsonString: (json: string) => {
+    try {
+      const houseBook = JSON.parse(json) as HouseBook;
+
+      return houseBook;
+    } catch (e) {
+      return undefined;
+    }
+  },
+} as const;

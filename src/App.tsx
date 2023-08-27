@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { FileOpenStatus } from './types/fileOpen';
+import { PurchasedItemEditor } from './features/editors/components/editors/PurchasedItemEditor';
+import { HouseBook } from './types/housebook';
 
 const App = () => {
-  const [file, setFile] = useState<string>('');
+  const [houseBook, setHouseBook] = useState<HouseBook | undefined>(undefined);
 
   return (
     <div>
@@ -10,19 +12,19 @@ const App = () => {
         type="button"
         onClick={() => {
           void window.api.openFile().then((result) => {
-            console.log(result);
             if (result.status === FileOpenStatus.OK) {
-              setFile(result.text || '');
+              const book = HouseBook.fromJsonString(result.text || '');
+              setHouseBook(book);
             }
           });
         }}
       >
         開く
       </button>
-      <div>
-        File:
-        <div>{file}</div>
-      </div>
+      {/* 一旦読み込みするまでは何も表示しない */}
+      {houseBook && (
+        <PurchasedItemEditor initialPurchasedItems={houseBook?.items} />
+      )}
     </div>
   );
 };

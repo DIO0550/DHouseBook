@@ -1,12 +1,13 @@
 {
-    "year": 2021,
-    "month": 9,
-    "items": [
-        {
-            "name":"sample",
-            "price": 12314,
-            "type": "日常品",
-            "purchaseDate": "12月9日"
-        }
-    ]
+  "year": 2021,
+  "month": 9,
+  "items": [
+    {
+      "id": "12345",
+      "name": "sample",
+      "price": 12314,
+      "type": "日常品",
+      "purchaseDate": "12月9日"
+    }
+  ]
 }

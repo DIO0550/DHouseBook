@@ -66,8 +66,8 @@ ipcMain.handle(DialogIpc.open, (): FileOpenResult => {
   const filePaths = dialog.showOpenDialogSync(mainWindow, {
     buttonLabel: '開く', // 確認ボタンのラベル
     filters: [
-      { name: 'csv', extensions: ['csv'] },
       { name: 'json', extensions: ['json'] },
+      { name: 'csv', extensions: ['csv'] },
     ],
     properties: [
       'openFile', // ファイルの選択を許可
