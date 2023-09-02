@@ -1,9 +1,10 @@
 import { BrowserWindow, app, Menu, session, ipcMain, dialog } from 'electron';
 import { searchDevtools } from 'electron-search-devtools';
 import path from 'node:path';
-import { DialogIpc } from '@/utils/dialogs/dialog';
+import { DialogIpc, FileFilters } from '@/utils/dialogs/dialog';
 import fs from 'fs';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
+import { FileSaveResult, FileSaveStatus } from './types/fileSave';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -62,13 +63,11 @@ void app.whenReady().then(async () => {
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
 
-ipcMain.handle(DialogIpc.open, (): FileOpenResult => {
+// ファイルオープン
+ipcMain.handle(DialogIpc.Open, (): FileOpenResult => {
   const filePaths = dialog.showOpenDialogSync(mainWindow, {
     buttonLabel: '開く', // 確認ボタンのラベル
-    filters: [
-      { name: 'json', extensions: ['json'] },
-      { name: 'csv', extensions: ['csv'] },
-    ],
+    filters: FileFilters,
     properties: [
       'openFile', // ファイルの選択を許可
       'createDirectory', // ディレクトリの作成を許可 (macOS)
@@ -89,11 +88,38 @@ ipcMain.handle(DialogIpc.open, (): FileOpenResult => {
       status: FileOpenStatus.OK,
       text: data.toString(),
     };
-  } catch (error) {
-    if (error instanceof Error) {
-      return { status: FileOpenStatus.Error, message: error.message };
+  } catch (e) {
+    if (e instanceof Error) {
+      return { status: FileOpenStatus.Error, message: e.message };
     }
 
-    return { status: FileOpenStatus.Error, message: 'Error Read File' };
+    return { status: FileOpenStatus.Error, message: 'Error Open File' };
+  }
+});
+
+// ファイルセーブ
+ipcMain.handle(DialogIpc.Save, (_, data: string): FileSaveResult => {
+  const filePath = dialog.showSaveDialogSync(mainWindow, {
+    buttonLabel: '保存',
+    filters: FileFilters,
+    properties: ['createDirectory'],
+  });
+
+  if (filePath === undefined) {
+    return { status: FileSaveStatus.Cancel };
+  }
+
+  try {
+    fs.writeFileSync(filePath, data);
+
+    return {
+      status: FileSaveStatus.OK,
+    };
+  } catch (e) {
+    if (e instanceof Error) {
+      return { status: FileSaveStatus.Error, message: e.message };
+    }
+
+    return { status: FileSaveStatus.Error, message: 'Error Save File' };
   }
 });
