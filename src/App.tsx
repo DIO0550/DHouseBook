@@ -21,6 +21,14 @@ const App = () => {
       >
         開く
       </button>
+      <button
+        type="button"
+        onClick={() => {
+          void window.api.saveFile(HouseBook.toJson(houseBook!));
+        }}
+      >
+        保存
+      </button>
       {/* 一旦読み込みするまでは何も表示しない */}
       {houseBook && (
         <PurchasedItemEditor initialPurchasedItems={houseBook?.items} />
