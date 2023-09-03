@@ -6,6 +6,7 @@ export const FileSaveStatus = {
 
 type FileSaveResultOK = {
   status: typeof FileSaveStatus.OK;
+  filePath: string;
 };
 
 type FileSaveResultCancel = {

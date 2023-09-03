@@ -86,6 +86,7 @@ ipcMain.handle(DialogIpc.Open, (): FileOpenResult => {
 
     return {
       status: FileOpenStatus.OK,
+      filePath,
       text: data.toString(),
     };
   } catch (e) {
@@ -114,6 +115,7 @@ ipcMain.handle(DialogIpc.Save, (_, data: string): FileSaveResult => {
 
     return {
       status: FileSaveStatus.OK,
+      filePath,
     };
   } catch (e) {
     if (e instanceof Error) {

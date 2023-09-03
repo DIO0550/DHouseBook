@@ -1,3 +1,0 @@
-const useBookFile = () => {};
-
-export { useBookFile };

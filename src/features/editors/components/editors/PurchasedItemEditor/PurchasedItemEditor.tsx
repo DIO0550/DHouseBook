@@ -1,7 +1,7 @@
 import { useEditor } from '@/features/editors/hooks/useEditor';
 import { memo } from 'react';
 import { PurchasedItem } from '@/utils/editors/purchasedItem';
-import { HouseBook } from '@/types/housebook';
+import { HouseBook } from '@/features/files/utils/houseBook';
 import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
 import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
 

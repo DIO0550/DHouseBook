@@ -6,6 +6,7 @@ export const FileOpenStatus = {
 
 type FileOpenResultOK = {
   status: typeof FileOpenStatus.OK;
+  filePath: string;
   text?: string;
 };
 
