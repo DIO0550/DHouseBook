@@ -7,15 +7,11 @@ type Props = {
 };
 
 const HouseBookList = React.memo<Props>(({ houseBookFiles = [] }) => (
-  <div>
+  <ul>
     {houseBookFiles.map((file) => (
-      <HouseBookListCell
-        key={file.id}
-        fileName="ファイル名"
-        filePath={file.filePath}
-      />
+      <HouseBookListCell key={file.id} filePath={file.filePath} />
     ))}
-  </div>
+  </ul>
 ));
 
 export { HouseBookList };

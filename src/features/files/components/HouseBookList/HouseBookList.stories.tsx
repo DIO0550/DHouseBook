@@ -26,7 +26,7 @@ const TestData: HouseBookFile[] = [
   {
     id: 'データ１',
     filePath: '~/Data/File/File1.json',
-    book: {
+    houseBook: {
       year: 2021,
       month: 9,
       items: [
@@ -44,7 +44,7 @@ const TestData: HouseBookFile[] = [
   {
     id: 'データ２',
     filePath: '~/Data/File/File2.json',
-    book: {
+    houseBook: {
       year: 2022,
       month: 9,
       items: [

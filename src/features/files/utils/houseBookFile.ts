@@ -3,7 +3,7 @@ import { HouseBook } from './houseBook';
 export type HouseBookFile = {
   id: string;
   filePath: string;
-  book: HouseBook;
+  houseBook: HouseBook;
   isDirty: boolean;
 };
 

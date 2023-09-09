@@ -1,15 +1,22 @@
 import { memo } from 'react';
+import { FilePath } from '@/features/files/utils/filePath';
+import styles from './HouseBookListCell.module.scss';
 
 type Props = {
-  fileName: string;
   filePath: string;
 };
 
-const HouseBookListCell = memo<Props>(({ fileName, filePath }) => (
-  <div>
-    <div>{fileName}</div>
-    <div>{filePath}</div>
-  </div>
-));
+const HouseBookListCell = memo<Props>(({ filePath }) => {
+  const fileName = FilePath.getFileName(filePath);
+
+  return (
+    <li>
+      <div>
+        <div className={styles['file-name']}>{fileName}</div>
+        <div className={styles['file-path']}>{filePath}</div>
+      </div>
+    </li>
+  );
+});
 
 export { HouseBookListCell };

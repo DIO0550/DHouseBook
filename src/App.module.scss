@@ -5,10 +5,6 @@ body {
   width: 100%;
 }
 
-div {
-  background-color: colors.$color-button-bg;
-}
-
-.app {
-  background-color: colors.$color-button-bg;
+.contents-container {
+  display: flex;
 }

@@ -3,17 +3,18 @@ import { HouseBook } from '@/features/files/utils/houseBook';
 import { FileOpenStatus } from '@/types/fileOpen';
 import { PurchasedItemEditor } from '@/features/editors/components/editors/PurchasedItemEditor';
 import { v4 as uuidv4 } from 'uuid';
-import { HouseBookList } from './features/files/components/HouseBookList';
+import { Sidebar } from '@/features/files/components/Sidebars/Sidebar';
 import { useHouseBookFiles } from './features/files/hooks/useHouseBookFiles';
 import { HouseBookFile } from './features/files/utils/houseBookFile';
+import styles from './App.module.scss';
 
 const App = memo(() => {
   const [houseBook, setHouseBook] = useState<HouseBook | undefined>(undefined);
   const { files, addFile } = useHouseBookFiles();
 
   return (
-    <div>
-      <HouseBookList houseBookFiles={files} />
+    <div className={styles['contents-container']}>
+      <Sidebar />
       <button
         type="button"
         onClick={() => {
@@ -26,7 +27,7 @@ const App = memo(() => {
                 const bookFile: HouseBookFile = {
                   id: uuidv4(),
                   filePath: result.filePath,
-                  book,
+                  houseBook: book,
                   isDirty: false,
                 };
 

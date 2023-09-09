@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { HouseBookSection } from './HouseBookSection';
+import { HouseBookSection } from './houseBookYearSection';
 
 type Props = {
   section: HouseBookSection;
