@@ -1,7 +1,64 @@
+import { HouseBook } from '@/features/files/utils/houseBook';
 import { HouseBookFile } from '@/features/files/utils/houseBookFile';
-import { atom } from 'recoil';
+import { DefaultValue, atom, atomFamily, selector } from 'recoil';
 
-export const houseBookFileState = atom<HouseBookFile[]>({
-  key: 'houseBookFileState',
+export const houseBookFileIds = atom<string[]>({
+  key: 'houseBookIds',
   default: [],
+});
+
+export const houseBookFileState = atomFamily<HouseBookFile, { id: string }>({
+  key: 'houseBookFileState',
+  default: undefined,
+});
+
+export const houseBookState = atomFamily<HouseBook, { id: string }>({
+  key: 'houseBookState',
+  default: undefined,
+});
+
+export const houseBookFilesSelector = selector<HouseBookFile[]>({
+  key: 'houseBookFileSelector',
+  get: ({ get }) => {
+    const ids = get(houseBookFileIds);
+
+    return ids.map((id) => {
+      const files = get(houseBookFileState({ id }));
+
+      return files;
+    });
+  },
+});
+
+export const houseBookStatesSelector = selector<HouseBook[]>({
+  key: 'houseBookStateSelector',
+  get: ({ get }) => {
+    const ids = get(houseBookFileIds);
+
+    return ids.map((id) => {
+      const states = get(houseBookState({ id }));
+
+      return states;
+    });
+  },
+});
+
+export const houseBookSelector = selector<{
+  houseBookFile: HouseBookFile;
+  houseBook: HouseBook;
+}>({
+  key: 'houseBookSelector',
+  set: ({ _, set }, newValue) => {
+    if (!(newValue instanceof DefaultValue)) {
+      set(houseBookFileIds, (prev) => [...prev, newValue.houseBookFile.id]);
+      set(
+        houseBookFileState({ id: newValue.houseBookFile.id }),
+        newValue.houseBookFile,
+      );
+      set(
+        houseBookState({ id: newValue.houseBookFile.id }),
+        newValue.houseBook,
+      );
+    }
+  },
 });

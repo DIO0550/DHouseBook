@@ -1,9 +1,7 @@
-import { HouseBook } from './houseBook';
-
 export type HouseBookFile = {
   id: string;
+  date: string;
   filePath: string;
-  houseBook: HouseBook;
   isDirty: boolean;
 };
 
