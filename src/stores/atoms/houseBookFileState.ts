@@ -1,6 +1,6 @@
 import { HouseBook } from '@/features/files/utils/houseBook';
 import { HouseBookFile } from '@/features/files/utils/houseBookFile';
-import { DefaultValue, atom, atomFamily, selector } from 'recoil';
+import { atom, atomFamily, selector } from 'recoil';
 
 export const houseBookFileIds = atom<string[]>({
   key: 'houseBookIds',
@@ -40,25 +40,5 @@ export const houseBookStatesSelector = selector<HouseBook[]>({
 
       return states;
     });
-  },
-});
-
-export const houseBookSelector = selector<{
-  houseBookFile: HouseBookFile;
-  houseBook: HouseBook;
-}>({
-  key: 'houseBookSelector',
-  set: ({ _, set }, newValue) => {
-    if (!(newValue instanceof DefaultValue)) {
-      set(houseBookFileIds, (prev) => [...prev, newValue.houseBookFile.id]);
-      set(
-        houseBookFileState({ id: newValue.houseBookFile.id }),
-        newValue.houseBookFile,
-      );
-      set(
-        houseBookState({ id: newValue.houseBookFile.id }),
-        newValue.houseBook,
-      );
-    }
   },
 });
