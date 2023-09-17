@@ -12,6 +12,10 @@ export type HouseBookFile = {
 
 export const HouseBookFile = {
   newFilePath: 'newfile',
+  /**
+   * 初期化
+   * @returns 作成したHouseBookFile
+   */
   init: (): HouseBookFile => {
     const id = uuidv4();
     const date = new Date();
@@ -23,6 +27,29 @@ export const HouseBookFile = {
       date: dateStr,
       filePath: HouseBookFile.newFilePath,
       isDirty: true,
+    };
+  },
+
+  /**
+   * オープンファイルによるHouseBookFileの初期化
+   * @param filePath ファイルパス
+   * @param dateStr 日付の文字列
+   * @returns 作成したHouseBookFile
+   */
+  initByOpenFile: ({
+    filePath,
+    dateStr,
+  }: {
+    filePath: string;
+    dateStr: string;
+  }) => {
+    const id = uuidv4();
+
+    return {
+      id,
+      date: dateStr,
+      filePath,
+      isDirty: false,
     };
   },
   /**

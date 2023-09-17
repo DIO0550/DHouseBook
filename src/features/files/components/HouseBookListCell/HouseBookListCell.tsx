@@ -1,20 +1,35 @@
 import { memo } from 'react';
 import { FilePath } from '@/features/files/utils/filePath';
+import { useThemeContext } from '@/components/Providers';
+import { useSetActiveFileIdState } from '@/stores/atoms/useSetActiveFileIdState';
 import styles from './HouseBookListCell.module.scss';
 
 type Props = {
+  isActive: boolean;
+  fileId: string;
   filePath: string;
 };
 
-const HouseBookListCell = memo<Props>(({ filePath }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const HouseBookListCell = memo<Props>(({ fileId, isActive, filePath }) => {
   const fileName = FilePath.getFileName(filePath);
+  const themeColor = useThemeContext();
+  const { setActiveFileId } = useSetActiveFileIdState();
 
   return (
     <li>
-      <div>
-        <div className={styles['file-name']}>{fileName}</div>
-        <div className={styles['file-path']}>{filePath}</div>
-      </div>
+      <button
+        className={`${styles['file-container']} ${styles[themeColor]} ${
+          isActive ? styles['is-active'] : ''
+        }`}
+        type="button"
+        onClick={() => {
+          setActiveFileId(fileId);
+        }}
+      >
+        <div className={`${styles.name}`}>{fileName}</div>
+        <div className={`${styles.name}`}>{filePath}</div>
+      </button>
     </li>
   );
 });

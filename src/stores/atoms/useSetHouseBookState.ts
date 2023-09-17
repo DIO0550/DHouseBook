@@ -7,7 +7,7 @@ import {
   houseBookState,
 } from './houseBookFileState';
 
-const useHouseBookSetState = () => {
+const useSetHouseBookState = () => {
   const setNewHouseBookFile = useRecoilCallback(
     ({ set }) =>
       ({
@@ -46,4 +46,4 @@ const useHouseBookSetState = () => {
   };
 };
 
-export { useHouseBookSetState };
+export { useSetHouseBookState };

@@ -2,15 +2,14 @@ import { memo, useState } from 'react';
 import { HouseBook } from '@/features/files/utils/houseBook';
 import { FileOpenStatus } from '@/types/fileOpen';
 import { PurchasedItemEditor } from '@/features/editors/components/editors/PurchasedItemEditor';
-import { v4 as uuidv4 } from 'uuid';
 import { Sidebar } from '@/features/files/components/Sidebars/Sidebar';
-import { useHouseBookFiles } from './features/files/hooks/useHouseBookFiles';
 import { HouseBookFile } from './features/files/utils/houseBookFile';
 import styles from './App.module.scss';
+import { useSetHouseBookState } from './stores/atoms/useSetHouseBookState';
 
 const App = memo(() => {
   const [houseBook, setHouseBook] = useState<HouseBook | undefined>(undefined);
-  const { files, addFile } = useHouseBookFiles();
+  const { openHousBookFile } = useSetHouseBookState();
 
   return (
     <div className={styles['contents-container']}>
@@ -23,15 +22,13 @@ const App = memo(() => {
               const book = HouseBook.fromJsonString(result.text || '');
               setHouseBook(book);
 
-              if (book) {
-                const bookFile: HouseBookFile = {
-                  id: uuidv4(),
-                  filePath: result.filePath,
-                  houseBook: book,
-                  isDirty: false,
-                };
+              const file = HouseBookFile.initByOpenFile({
+                filePath: result.filePath,
+                dateStr: '202202',
+              });
 
-                addFile(bookFile);
+              if (book) {
+                openHousBookFile({ newFile: file, newBook: book });
               }
             }
           });

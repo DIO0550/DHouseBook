@@ -1,7 +1,40 @@
-.file-name {
-  height: 20px;
-}
+@use '@/styles/functions.module.scss' as functions;
 
-.file-path {
-  height: 20px;
+.file-container {
+  &.red {
+    background-color: functions.primaryColor(red);
+  }
+  &.purple {
+    background-color: functions.primaryColor(purple);
+  }
+  &.blue {
+    background-color: functions.primaryColor(blue);
+  }
+  &.cyan {
+    background-color: functions.primaryColor(cyan);
+  }
+  &.green {
+    background-color: functions.primaryColor(green);
+  }
+  &.yellow {
+    background-color: functions.primaryColor(yellow);
+  }
+  &.orange {
+    background-color: functions.primaryColor(orange);
+  }
+  &.gray {
+    background-color: functions.primaryColor(gray);
+  }
+
+  &:not(.is-active) {
+    background-color: transparent;
+  }
+
+  .name {
+    height: 20px;
+  }
+
+  .path {
+    height: 20px;
+  }
 }
