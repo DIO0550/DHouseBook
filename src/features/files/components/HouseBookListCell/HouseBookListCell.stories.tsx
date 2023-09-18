@@ -1,17 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
 import { BookThemeColor, ThemeProvider } from '@/components/Providers';
-import { SecondaryButton } from './SecondaryButton';
+import { HouseBookListCell } from './HouseBookListCell';
 
-const meta: Meta<typeof SecondaryButton> = {
-  title: 'SecondaryButton',
-  component: SecondaryButton,
-  render: (args) => <SecondaryButton {...args} />,
+const meta: Meta<typeof HouseBookListCell> = {
+  title: 'features/files/componsents/HouseBookListCell',
+  component: HouseBookListCell,
+  args: {
+    isActive: false,
+    fileId: '1234',
+    filePath: 'Users/Data/test.json',
+  },
+  render: (args) => <HouseBookListCell {...args} />,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof SecondaryButton>;
+type Story = StoryObj<typeof HouseBookListCell>;
 
 export const Red: Story = {
   decorators: [
@@ -20,7 +25,7 @@ export const Red: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -33,7 +38,7 @@ export const Purple: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -46,7 +51,7 @@ export const Blue: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -59,7 +64,7 @@ export const Cyan: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -72,7 +77,7 @@ export const Green: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -85,7 +90,7 @@ export const Yellow: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -98,7 +103,7 @@ export const Orange: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };
 
@@ -111,6 +116,6 @@ export const Gray: Story = {
     ),
   ],
   args: {
-    title: 'ボタン',
+    isActive: true,
   },
 };

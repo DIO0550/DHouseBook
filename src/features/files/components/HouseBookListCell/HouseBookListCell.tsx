@@ -10,11 +10,13 @@ type Props = {
   filePath: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const HouseBookListCell = memo<Props>(({ fileId, isActive, filePath }) => {
   const fileName = FilePath.getFileName(filePath);
   const themeColor = useThemeContext();
   const { setActiveFileId } = useSetActiveFileIdState();
+  const handleClick = () => {
+    setActiveFileId(fileId);
+  };
 
   return (
     <li>
@@ -23,9 +25,7 @@ const HouseBookListCell = memo<Props>(({ fileId, isActive, filePath }) => {
           isActive ? styles['is-active'] : ''
         }`}
         type="button"
-        onClick={() => {
-          setActiveFileId(fileId);
-        }}
+        onClick={handleClick}
       >
         <div className={`${styles.name}`}>{fileName}</div>
         <div className={`${styles.name}`}>{filePath}</div>

@@ -8,7 +8,7 @@ const Sidebar = memo(() => {
   const files = useRecoilValue(houseBookFilesSelector);
 
   return (
-    <div className={styles.Sidebar}>
+    <div className={styles['sidebar-container']}>
       <HouseBookList houseBookFiles={files} />
     </div>
   );
