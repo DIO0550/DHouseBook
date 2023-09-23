@@ -2,7 +2,7 @@ import { EntityState, configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { BookDateState, bookDateSlice } from './slices/bookDateSlice';
 import { purchasedItemListSlice } from './slices/purchasedItemListSlice';
-import { PurchasedItem } from '../utils/editors/purchasedItem';
+import { HouseBookItem } from '../utils/editors/houseBookItem';
 import { itemSortSlice, ItemSortState } from './slices/itemSortSlice';
 
 // stateの型
@@ -10,7 +10,7 @@ export type States = {
   // データの日付
   bookDate: BookDateState;
   // 購入アイテム一覧
-  purchasedItemList: EntityState<PurchasedItem>;
+  purchasedItemList: EntityState<HouseBookItem>;
   // ソート情報
   itemSort: ItemSortState;
 };

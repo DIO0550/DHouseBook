@@ -1,12 +1,12 @@
 import { useEditor } from '@/features/editors/hooks/useEditor';
 import { memo } from 'react';
-import { PurchasedItem } from '@/utils/editors/purchasedItem';
-import { HouseBook } from '@/features/files/utils/houseBook';
+import { HouseBookItem } from '@/utils/editors/houseBookItem';
+import { HouseBookData } from '@/features/files/utils/houseBookData';
 import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
 import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
 
 type Props = {
-  initialPurchasedItems?: PurchasedItem[];
+  initialPurchasedItems?: HouseBookItem[];
 };
 
 const PurchasedItemEditor = memo<Props>(({ initialPurchasedItems = [] }) => {

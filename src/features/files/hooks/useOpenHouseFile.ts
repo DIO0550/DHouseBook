@@ -1,8 +1,8 @@
 import { useSetHouseBookState } from '@/stores/atoms/useSetHouseBookState';
 import { FileOpenStatus } from '@/types/fileOpen';
 import { useCallback, useState } from 'react';
-import { HouseBook } from '../utils/houseBook';
-import { HouseBookFile } from '../utils/houseBookFile';
+import { HouseBookData } from '../utils/houseBookData';
+import { HouseBookFileProperty } from '../utils/houseBookFileProperty';
 
 export const HouseFileOpenStatus = {
   Idle: 'idle',
@@ -34,7 +34,7 @@ const useOpenHouseFile = () => {
       return;
     }
 
-    const book = HouseBook.fromJsonString(result.text || '');
+    const book = HouseBookData.fromJsonString(result.text || '');
 
     if (!book) {
       setOpenStatus(HouseFileOpenStatus.Error);
@@ -42,9 +42,8 @@ const useOpenHouseFile = () => {
       return;
     }
 
-    const file = HouseBookFile.initByOpenFile({
+    const file = HouseBookFile.initWithFilePath({
       filePath: result.filePath,
-      dateStr: '202202',
     });
 
     openHousBookFile({ newFile: file, newBook: book });

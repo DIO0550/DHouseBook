@@ -1,13 +1,13 @@
-import { PurchasedItem } from '@/utils/editors/purchasedItem';
+import { HouseBookItem } from '@/utils/editors/houseBookItem';
 import {
   EntityDictionary,
-  PurchasedItemsEntity,
+  HouseBookItemsEntity,
   UpdateEntity,
-} from '@/utils/editors/purchasedItemsEntity';
+} from '@/utils/editors/houseBookItemsEntity';
 import { useCallback, useMemo, useReducer } from 'react';
 
 type Props = {
-  initialPurchasedItems?: PurchasedItem[];
+  initialPurchasedItems?: HouseBookItem[];
 };
 
 const ActionType = {
@@ -33,7 +33,7 @@ type UpdateItem = ActionBase & {
  * アイテム追加
  */
 type AddItem = ActionBase & {
-  payload: PurchasedItem;
+  payload: HouseBookItem;
   type: typeof ActionType.Add;
 };
 
@@ -54,7 +54,7 @@ export { AddItem, RemoveItem, UpdateItem };
  * @param purchasedItems 購入済みアイテム
  * @returns 正規化された購入済みアイテム
  */
-const normalizedPurchasedItem = (purchasedItems: PurchasedItem[]) => {
+const normalizedPurchasedItem = (purchasedItems: HouseBookItem[]) => {
   const ids = [] as string[];
   const itemsEntity: EntityDictionary = {};
 
@@ -63,7 +63,7 @@ const normalizedPurchasedItem = (purchasedItems: PurchasedItem[]) => {
     itemsEntity[item.id] = item;
   });
 
-  const normalizedPurchasedItems: PurchasedItemsEntity = {
+  const normalizedPurchasedItems: HouseBookItemsEntity = {
     ids,
     entities: itemsEntity,
   };
@@ -71,19 +71,19 @@ const normalizedPurchasedItem = (purchasedItems: PurchasedItem[]) => {
   return normalizedPurchasedItems;
 };
 
-const reducer = (state: PurchasedItemsEntity, action: Action) => {
+const reducer = (state: HouseBookItemsEntity, action: Action) => {
   switch (action.type) {
     // アイテム追加
     case ActionType.Add:
-      return PurchasedItemsEntity.addOne(state, action.payload);
+      return HouseBookItemsEntity.addOne(state, action.payload);
 
     // アイテム削除
     case ActionType.Remove:
-      return PurchasedItemsEntity.removeOne(state, action.payload);
+      return HouseBookItemsEntity.removeOne(state, action.payload);
 
     // アイテム更新
     case ActionType.Update:
-      return PurchasedItemsEntity.updateOne(state, action.payload);
+      return HouseBookItemsEntity.updateOne(state, action.payload);
 
     default:
       return state;
@@ -100,7 +100,7 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
    * 購入したアイテムの追加
    * @param item 追加するアイテム
    */
-  const addPurhcasedItem = useCallback((item: PurchasedItem) => {
+  const addPurhcasedItem = useCallback((item: HouseBookItem) => {
     dispatch({
       payload: item,
       type: ActionType.Add,
@@ -133,7 +133,7 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
    * アイテム一覧
    */
   const purchasedItems = useMemo(
-    () => PurchasedItemsEntity.selectAll(purchasedItemsEntity),
+    () => HouseBookItemsEntity.selectAll(purchasedItemsEntity),
     [purchasedItemsEntity],
   );
 

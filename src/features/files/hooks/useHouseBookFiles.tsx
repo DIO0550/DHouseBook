@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
-import { HouseBookFile } from '../utils/houseBookFile';
+import { HouseBookFileProperty } from '../utils/houseBookFileProperty';
 
 const useHouseBookFiles = () => {
-  const [files, setFiles] = useState<HouseBookFile[]>([]);
+  const [files, setFiles] = useState<HouseBookFileProperty[]>([]);
 
-  const addFile = useCallback((file: HouseBookFile) => {
+  const addFile = useCallback((file: HouseBookFileProperty) => {
     setFiles((list) => [...list, file]);
   }, []);
 

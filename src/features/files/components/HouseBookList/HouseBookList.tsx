@@ -1,10 +1,10 @@
 import React from 'react';
 import { useActiveFileIdState } from '@/stores/atoms/useActiveFileIdState';
-import { HouseBookFile } from '../../utils/houseBookFile';
+import { HouseBookFileProperty } from '../../utils/houseBookFileProperty';
 import { HouseBookListCell } from '../HouseBookListCell';
 
 type Props = {
-  houseBookFiles: HouseBookFile[] | undefined;
+  houseBookFiles: HouseBookFileProperty[] | undefined;
 };
 
 const HouseBookList = React.memo<Props>(({ houseBookFiles = [] }) => {

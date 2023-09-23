@@ -1,6 +1,6 @@
-import { PurchasedItem } from '@/utils/editors/purchasedItem';
+import { HouseBookItem } from '@/utils/editors/houseBookItem';
 
-export const TestPurchasedItemData: PurchasedItem[] = [
+export const TestPurchasedItemData: HouseBookItem[] = [
   {
     id: '1',
     name: 'ポッキー',

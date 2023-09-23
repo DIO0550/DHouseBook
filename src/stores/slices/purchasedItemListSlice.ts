@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 
-import type { PurchasedItem } from '../../utils/editors/purchasedItem';
+import type { HouseBookItem } from '../../utils/editors/houseBookItem';
 
 // 更新時のアイテム
 type UpdateItem = {
@@ -42,7 +42,7 @@ const SORT_ORDER_TYPE = {
 type SORT_ORDER_TYPE = (typeof SORT_ORDER_TYPE)[keyof typeof SORT_ORDER_TYPE];
 
 // adapter
-const purchasedItemAdapter = createEntityAdapter<PurchasedItem>({
+const purchasedItemAdapter = createEntityAdapter<HouseBookItem>({
   selectId: (purchasedItem) => purchasedItem.id,
 });
 
@@ -54,14 +54,14 @@ const purchasedItemListSlice = createSlice({
   initialState: purchasedItemAdapter.getInitialState(),
   reducers: {
     // アイテム１つ追加
-    purchasedItemAdded: (state, action: PayloadAction<PurchasedItem>) =>
+    purchasedItemAdded: (state, action: PayloadAction<HouseBookItem>) =>
       purchasedItemAdapter.addOne(state, action.payload),
     /**
      * 複数アイテム追加
      * @param state state
      * @param action action
      */
-    purchasedItemSetAll: (state, action: PayloadAction<PurchasedItem[]>) => {
+    purchasedItemSetAll: (state, action: PayloadAction<HouseBookItem[]>) => {
       purchasedItemAdapter.setAll(state, action.payload);
     },
     /**

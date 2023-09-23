@@ -1,6 +1,8 @@
 {
-  "year": 2021,
-  "month": 9,
+  "date": {
+    "year": 2021,
+    "month": 9
+  },
   "items": [
     {
       "id": "12345",

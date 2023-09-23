@@ -1,13 +1,23 @@
-import { PurchasedItem } from '@/utils/editors/purchasedItem';
+import { HouseBookItems } from '@/utils/editors/houseBookItem';
+import { HouseBookDate } from './houseBookDate';
 
 // 家計簿のデータ
-export type HouseBook = {
-  year: number;
-  month: number;
-  items: PurchasedItem[];
+export type HouseBookData = {
+  date: HouseBookDate;
+  items: HouseBookItems;
 };
 
-export const HouseBook = {
+export const HouseBookData = {
+  init: () => {
+    const housebookDate = HouseBookDate.init();
+    const newHouseBook: HouseBookData = {
+      date: housebookDate,
+      items: [],
+    };
+
+    return newHouseBook;
+  },
+
   /**
    * jsonからブック生成する
    * @param json json文字列
@@ -15,7 +25,7 @@ export const HouseBook = {
    */
   fromJsonString: (json: string) => {
     try {
-      const houseBook = JSON.parse(json) as HouseBook;
+      const houseBook = JSON.parse(json) as HouseBookData;
 
       return houseBook;
     } catch (e) {
@@ -27,10 +37,10 @@ export const HouseBook = {
    * @param houseBook ブック
    * @returns csvの文字列
    */
-  toCsv: (houseBook: HouseBook) => {
+  toCsv: (houseBook: HouseBookData) => {
     const LineBreak = '\n';
     const Delimiter = ',';
-    let csv = `${houseBook.year}${houseBook.month}${LineBreak}`;
+    let csv = `${houseBook.date.year}${houseBook.date.month}${LineBreak}`;
     houseBook.items.forEach((item) => {
       Object.values(item).forEach((prop) => {
         csv += `${prop}${Delimiter}`;
@@ -46,7 +56,7 @@ export const HouseBook = {
    * @param houseBook ブック
    * @returns jsonの文字列
    */
-  toJson: (houseBook: HouseBook) => {
+  toJson: (houseBook: HouseBookData) => {
     const json = JSON.stringify(houseBook);
 
     return json;

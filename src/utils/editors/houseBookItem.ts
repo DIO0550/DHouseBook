@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export type PurchasedItem = {
+export type HouseBookItem = {
   // id
   id: string;
   // 名前
@@ -13,11 +13,13 @@ export type PurchasedItem = {
   date: string;
 };
 
-export const PurchasedItem = {
+export const HouseBookItem = {
   init: () => {
     const id = uuidv4();
-    const item: PurchasedItem = { id, name: '', price: 0, type: '', date: '' };
+    const item: HouseBookItem = { id, name: '', price: 0, type: '', date: '' };
 
     return item;
   },
 };
+
+export type HouseBookItems = HouseBookItem[];

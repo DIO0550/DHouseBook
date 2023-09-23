@@ -4,7 +4,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeProvider, BookThemeColor } from '@/components/Providers';
-import { HouseBookFile } from '@/features/files/utils/houseBookFile';
+import { HouseBookFileProperty } from '@/features/files/utils/houseBookFileProperty';
 import { HouseBookList } from './HouseBookList';
 
 const meta: Meta<typeof HouseBookList> = {
@@ -22,17 +22,15 @@ export default meta;
 
 type Story = StoryObj<typeof HouseBookList>;
 
-const TestData: HouseBookFile[] = [
+const TestData: HouseBookFileProperty[] = [
   {
     id: 'データ１',
     filePath: '~/Data/File/File1.json',
-    date: '20221212',
     isDirty: false,
   },
   {
     id: 'データ２',
     filePath: '~/Data/File/File2.json',
-    date: '20221212',
     isDirty: false,
   },
 ];

@@ -127,15 +127,16 @@ module.exports = {
     'no-dupe-keys': ['error'],
     'no-duplicate-case': ['error'],
     'no-empty': ['error'],
-    'operator-linebreak': [
-      'error',
-      'after',
-      {
-        overrides: {
-          ':': 'before',
-        },
-      },
-    ],
+    // 'operator-linebreak': [
+    //   'error',
+    //   'after',
+    //   {
+    //     overrides: {
+    //       ':': 'before',
+    //     },
+    //   },
+    // ],
+    'operator-linebreak': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {

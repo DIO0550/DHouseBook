@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import { PurchasedItem } from '@/utils/editors/purchasedItem';
-import { UpdateEntity } from '@/utils/editors/purchasedItemsEntity';
+import { HouseBookItem } from '@/utils/editors/houseBookItem';
+import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import { PurchasedItemRow } from '@/features/editors/components/rows/PurchasedItemRow';
 
 type Props = {
-  purchasedItems: PurchasedItem[];
+  purchasedItems: HouseBookItem[];
   handleUpdate: (updateEntity: UpdateEntity) => void;
 };
 

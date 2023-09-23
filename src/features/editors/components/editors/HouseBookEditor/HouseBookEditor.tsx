@@ -1,14 +1,14 @@
 import { useEditor } from '@/features/editors/hooks/useEditor';
 
-import { houseBookState } from '@/stores/atoms/houseBookFileState';
-import { PurchasedItem } from '@/utils/editors/purchasedItem';
+import { houseBookItemsState } from '@/stores/atoms/houseBookFileState';
+import { HouseBookItem } from '@/utils/editors/houseBookItem';
 import { memo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
 import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
 
 const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
-  const houseBook = useRecoilValue(houseBookState({ id: fileId }));
+  const houseBook = useRecoilValue(houseBookItemsState({ id: fileId }));
   const editor = useEditor({ initialPurchasedItems: houseBook.items });
 
   return (
