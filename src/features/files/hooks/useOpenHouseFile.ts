@@ -1,5 +1,6 @@
 import { useSetHouseBookState } from '@/stores/atoms/useSetHouseBookState';
 import { FileOpenStatus } from '@/types/fileOpen';
+import { v4 as uuidv4 } from 'uuid';
 import { useCallback, useState } from 'react';
 import { HouseBookData } from '../utils/houseBookData';
 import { HouseBookFileProperty } from '../utils/houseBookFileProperty';
@@ -34,19 +35,20 @@ const useOpenHouseFile = () => {
       return;
     }
 
-    const book = HouseBookData.fromJsonString(result.text || '');
+    const bookData = HouseBookData.fromJsonString(result.text || '');
 
-    if (!book) {
+    if (!bookData) {
       setOpenStatus(HouseFileOpenStatus.Error);
 
       return;
     }
 
-    const file = HouseBookFile.initWithFilePath({
+    const fileProperty = HouseBookFileProperty.initWithFilePath({
       filePath: result.filePath,
     });
 
-    openHousBookFile({ newFile: file, newBook: book });
+    const id = uuidv4();
+    openHousBookFile({ id, fileProperty, bookData });
   }, [openHousBookFile]);
 
   return { openStatus, openFile };

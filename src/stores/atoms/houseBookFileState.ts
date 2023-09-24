@@ -1,4 +1,4 @@
-import { HouseBookData } from '@/features/files/utils/houseBookData';
+import { HouseBookDate } from '@/features/files/utils/houseBookDate';
 import { HouseBookFileProperty } from '@/features/files/utils/houseBookFileProperty';
 import { HouseBookItems } from '@/utils/editors/houseBookItem';
 import { atom, atomFamily, selector } from 'recoil';
@@ -8,11 +8,11 @@ export const houseBookIds = atom<string[]>({
   default: [],
 });
 
-export const houseBookFileState = atomFamily<
+export const houseBookFilePropertyState = atomFamily<
   HouseBookFileProperty,
   { id: string }
 >({
-  key: 'houseBookFileState',
+  key: 'houseBookFilePropertyState',
   default: undefined,
 });
 
@@ -21,7 +21,7 @@ export const houseBookItemsState = atomFamily<HouseBookItems, { id: string }>({
   default: undefined,
 });
 
-export const houseBookDateState = atomFamily<HouseBookData, { id: string }>({
+export const houseBookDateState = atomFamily<HouseBookDate, { id: string }>({
   key: 'houseBookDateState',
   default: undefined,
 });
@@ -32,7 +32,7 @@ export const houseBookFilesSelector = selector<HouseBookFileProperty[]>({
     const ids = get(houseBookIds);
 
     return ids.map((id) => {
-      const files = get(houseBookFileState({ id }));
+      const files = get(houseBookFilePropertyState({ id }));
 
       return files;
     });

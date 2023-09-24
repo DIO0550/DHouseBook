@@ -9,17 +9,17 @@ import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedIt
 
 const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const houseBook = useRecoilValue(houseBookItemsState({ id: fileId }));
-  const editor = useEditor({ initialPurchasedItems: houseBook.items });
+  const editor = useEditor({ initialPurchasedItems: houseBook });
 
   return (
     <div>
       <PurchasedItemList
-        purchasedItems={houseBook.items}
+        purchasedItems={houseBook}
         handleUpdate={editor.updatePurchaedItem}
       />
       <AddPurchasedItemButton
         handleAddButtonClick={() =>
-          editor.addPurhcasedItem(PurchasedItem.init())
+          editor.addPurhcasedItem(HouseBookItem.init())
         }
       />
     </div>

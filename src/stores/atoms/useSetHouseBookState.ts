@@ -3,23 +3,27 @@ import { HouseBookFileProperty } from '@/features/files/utils/houseBookFilePrope
 import { useRecoilCallback } from 'recoil';
 import {
   houseBookIds,
-  houseBookFileState,
+  houseBookFilePropertyState,
   houseBookItemsState,
+  houseBookDateState,
 } from './houseBookFileState';
 
 const useSetHouseBookState = () => {
   const setNewHouseBookFile = useRecoilCallback(
     ({ set }) =>
       ({
-        newFile,
-        newBook,
+        id,
+        fileProperty,
+        bookData,
       }: {
-        newFile: HouseBookFileProperty;
-        newBook: HouseBookData;
+        id: string;
+        fileProperty: HouseBookFileProperty;
+        bookData: HouseBookData;
       }) => {
-        set(houseBookIds, (prev) => [...prev, newFile.id]);
-        set(houseBookFileState({ id: newFile.id }), newFile);
-        set(houseBookItemsState({ id: newFile.id }), newBook);
+        set(houseBookIds, (prev) => [...prev, id]);
+        set(houseBookFilePropertyState({ id }), fileProperty);
+        set(houseBookItemsState({ id }), bookData.items);
+        set(houseBookDateState({ id }), bookData.date);
       },
     [],
   );
@@ -27,15 +31,18 @@ const useSetHouseBookState = () => {
   const openHousBookFile = useRecoilCallback(
     ({ set }) =>
       ({
-        newFile,
-        newBook,
+        id,
+        fileProperty,
+        bookData,
       }: {
-        newFile: HouseBookFileProperty;
-        newBook: HouseBookData;
+        id: string;
+        fileProperty: HouseBookFileProperty;
+        bookData: HouseBookData;
       }) => {
-        set(houseBookIds, (prev) => [...prev, newFile.id]);
-        set(houseBookFileState({ id: newFile.id }), newFile);
-        set(houseBookItemsState({ id: newFile.id }), newBook);
+        set(houseBookIds, (prev) => [...prev, id]);
+        set(houseBookFilePropertyState({ id }), fileProperty);
+        set(houseBookItemsState({ id }), bookData.items);
+        set(houseBookDateState({ id }), bookData.date);
       },
     [],
   );

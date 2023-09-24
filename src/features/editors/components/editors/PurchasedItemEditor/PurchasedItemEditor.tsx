@@ -18,9 +18,11 @@ const PurchasedItemEditor = memo<Props>(({ initialPurchasedItems = [] }) => {
         type="button"
         onClick={() => {
           void window.api.saveFile(
-            HouseBook.toJson({
-              year: 2022,
-              month: 12,
+            HouseBookData.toJson({
+              date: {
+                year: 2022,
+                month: 12,
+              },
               items: editor.purchasedItems,
             }),
           );
@@ -34,7 +36,7 @@ const PurchasedItemEditor = memo<Props>(({ initialPurchasedItems = [] }) => {
       />
       <AddPurchasedItemButton
         handleAddButtonClick={() =>
-          editor.addPurhcasedItem(PurchasedItem.init())
+          editor.addPurhcasedItem(HouseBookItem.init())
         }
       />
     </div>
