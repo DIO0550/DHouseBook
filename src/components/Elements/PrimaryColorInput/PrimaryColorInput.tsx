@@ -7,18 +7,23 @@ type Props = {
   defaultValue: string;
   // type
   type?: string;
+  // 変更イベント
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const PrimaryColorInput = memo<Props>(({ defaultValue, type = 'text' }) => {
-  const theme = useThemeContext();
+const PrimaryColorInput = memo<Props>(
+  ({ defaultValue, type = 'text', onChange }) => {
+    const theme = useThemeContext();
 
-  return (
-    <input
-      className={`${styles.primary} ${styles[theme]}`}
-      defaultValue={defaultValue}
-      type={type}
-    />
-  );
-});
+    return (
+      <input
+        className={`${styles.primary} ${styles[theme]}`}
+        defaultValue={defaultValue}
+        type={type}
+        onChange={onChange}
+      />
+    );
+  },
+);
 
 export { PrimaryColorInput };

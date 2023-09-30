@@ -3,22 +3,43 @@ import { PurchasedItemName } from '@/features/editors/components/cells/Purchased
 import { PurchasedItemPrice } from '@/features/editors/components/cells/PurchasedItemPrice';
 import { PurchasedItemType } from '@/features/editors/components/cells/PurchasedItemType';
 import { PurchasedItemDate } from '@/features/editors/components/cells/PurchasedItemDate';
+import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import styles from './PurchasedItemRow.module.scss';
 
 type Props = {
+  id: string;
   name: string;
   price: string;
   type: string;
   date: string;
+  handleUpdate: (updateEntity: UpdateEntity) => void;
 };
 
-const PurchasedItemRow = memo<Props>(({ name, price, type, date }) => (
-  <div className={styles.container}>
-    <PurchasedItemName defaultValue={name} />
-    <PurchasedItemPrice defaultValue={price} />
-    <PurchasedItemType defaultValue={type} />
-    <PurchasedItemDate defaultValue={date} />
-  </div>
-));
+const PurchasedItemRow = memo<Props>(
+  ({ id, name, price, type, date, handleUpdate }) => (
+    <div className={styles.container}>
+      <PurchasedItemName
+        id={id}
+        defaultValue={name}
+        handleUpdate={handleUpdate}
+      />
+      <PurchasedItemPrice
+        id={id}
+        defaultValue={price}
+        handleUpdate={handleUpdate}
+      />
+      <PurchasedItemType
+        id={id}
+        defaultValue={type}
+        handleUpdate={handleUpdate}
+      />
+      <PurchasedItemDate
+        id={id}
+        defaultValue={date}
+        handleUpdate={handleUpdate}
+      />
+    </div>
+  ),
+);
 
 export { PurchasedItemRow };
