@@ -6,10 +6,10 @@ import {
   houseBookFilePropertyState,
   houseBookItemsState,
   houseBookDateState,
-} from './houseBookFileState';
+} from './houseBookState';
 
 const useSetHouseBookState = () => {
-  const setNewHouseBookFile = useRecoilCallback(
+  const setNewHouseBook = useRecoilCallback(
     ({ set }) =>
       ({
         id,
@@ -28,7 +28,7 @@ const useSetHouseBookState = () => {
     [],
   );
 
-  const openHousBookFile = useRecoilCallback(
+  const openHousBook = useRecoilCallback(
     ({ set }) =>
       ({
         id,
@@ -48,8 +48,8 @@ const useSetHouseBookState = () => {
   );
 
   return {
-    setNewHouseBookFile,
-    openHousBookFile,
+    setNewHouseBook,
+    openHousBook,
   };
 };
 

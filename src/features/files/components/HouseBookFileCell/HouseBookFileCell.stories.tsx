@@ -2,7 +2,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { BookThemeColor, ThemeProvider } from '@/components/Providers';
 import { RecoilRoot, SetRecoilState } from 'recoil';
-import { houseBookFilePropertyState } from '@/stores/atoms/houseBookFileState';
+import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
 import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
 import { HouseBookFileCell } from './HouseBookFileCell';
 

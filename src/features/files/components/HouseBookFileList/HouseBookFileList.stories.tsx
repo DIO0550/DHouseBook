@@ -9,7 +9,7 @@ import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
 import {
   houseBookFilePropertyState,
   houseBookIds,
-} from '@/stores/atoms/houseBookFileState';
+} from '@/stores/atoms/houseBookState';
 import { HouseBookList } from './HouseBookFileList';
 
 const meta: Meta<typeof HouseBookList> = {

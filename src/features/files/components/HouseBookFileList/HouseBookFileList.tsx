@@ -1,5 +1,5 @@
 import React from 'react';
-import { houseBookIds } from '@/stores/atoms/houseBookFileState';
+import { houseBookIds } from '@/stores/atoms/houseBookState';
 import { useRecoilValue } from 'recoil';
 import { HouseBookFileCell } from '../HouseBookFileCell';
 

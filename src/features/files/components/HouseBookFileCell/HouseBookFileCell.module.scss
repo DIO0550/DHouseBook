@@ -2,39 +2,47 @@
 
 .file-container {
   &.red {
-    background-color: functions.primaryColor(red);
+    background-color: rgba($color: functions.primaryColor(red), $alpha: 0.5);
   }
   &.purple {
-    background-color: functions.primaryColor(purple);
+    background-color: rgba($color: functions.primaryColor(purple), $alpha: 0.5);
   }
   &.blue {
-    background-color: functions.primaryColor(blue);
+    background-color: rgba($color: functions.primaryColor(blue), $alpha: 0.5);
   }
   &.cyan {
-    background-color: functions.primaryColor(cyan);
+    background-color: rgba($color: functions.primaryColor(cyan), $alpha: 0.5);
   }
   &.green {
-    background-color: functions.primaryColor(green);
+    background-color: rgba($color: functions.primaryColor(green), $alpha: 0.5);
   }
   &.yellow {
-    background-color: functions.primaryColor(yellow);
+    background-color: rgba($color: functions.primaryColor(yellow), $alpha: 0.5);
   }
   &.orange {
-    background-color: functions.primaryColor(orange);
+    background-color: rgba($color: functions.primaryColor(orange), $alpha: 0.5);
   }
   &.gray {
-    background-color: functions.primaryColor(gray);
+    background-color: rgba($color: functions.primaryColor(gray), $alpha: 0.5);
   }
 
   &:not(.is-active) {
     background-color: transparent;
   }
+}
 
-  .name {
-    height: 20px;
-  }
+.file-info {
+  height: 20px;
 
-  .path {
-    height: 20px;
+  &-appearance {
+    font-size: 12px;
   }
+}
+
+.file-name {
+  height: 20px;
+}
+
+.file-path {
+  height: 20px;
 }

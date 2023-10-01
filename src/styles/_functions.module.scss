@@ -34,13 +34,13 @@ $secondary-color-map: (
 );
 
 @function primaryColor($theme) {
-  @return #{map-get($primary-color-map, $theme)};
+  @return map-get($primary-color-map, $theme);
 }
 
 @function primarySubColor($theme) {
-  @return #{map-get($primary-sub-color-map, $theme)};
+  @return map-get($primary-sub-color-map, $theme);
 }
 
 @function secondaryColor($theme) {
-  @return #{map-get($secondary-color-map, $theme)};
-} ;
+  @return map-get($secondary-color-map, $theme);
+}

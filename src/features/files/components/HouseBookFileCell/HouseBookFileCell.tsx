@@ -3,7 +3,7 @@ import { FilePath } from '@/features/files/utils/filePath';
 import { useThemeContext } from '@/components/Providers';
 import { useSetActiveFileIdState } from '@/stores/atoms/useSetActiveFileIdState';
 import { useRecoilValue } from 'recoil';
-import { houseBookFilePropertyState } from '@/stores/atoms/houseBookFileState';
+import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
 import { useActiveFileIdState } from '@/stores/atoms/useActiveFileIdState';
 import styles from './HouseBookFileCell.module.scss';
 
@@ -32,8 +32,17 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
         type="button"
         onClick={handleClick}
       >
-        <div className={`${styles.name}`}>{fileName}</div>
-        <div className={`${styles.name}`}>{fileProperty.filePath}</div>
+        <div>{fileProperty.isDirty ? '未保存' : '保存済み'}</div>
+        <div
+          className={`${styles['file-info']} ${styles['file-info-appearance']}  ${styles['file-name']}`}
+        >
+          {fileName}
+        </div>
+        <div
+          className={`${styles['file-info']} ${styles['file-info-appearance']} ${styles['file-path']}`}
+        >
+          {fileProperty.filePath}
+        </div>
       </button>
     </li>
   );

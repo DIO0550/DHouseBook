@@ -14,7 +14,7 @@ type FileOpenStatus =
   (typeof HouseFileOpenStatus)[keyof typeof HouseFileOpenStatus];
 
 const useOpenHouseFile = () => {
-  const { openHousBookFile } = useSetHouseBookState();
+  const { openHousBook: openHousBookFile } = useSetHouseBookState();
   const [openStatus, setOpenStatus] = useState<FileOpenStatus>(
     HouseFileOpenStatus.Idle,
   );
