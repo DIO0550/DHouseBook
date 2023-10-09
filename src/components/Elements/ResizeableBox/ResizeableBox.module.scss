@@ -1,0 +1,13 @@
+.box-container {
+  display: flex;
+}
+
+.box-knob {
+  width: 4px;
+  content: '';
+
+  &-skin {
+    cursor: col-resize;
+    background-color: aqua;
+  }
+}
