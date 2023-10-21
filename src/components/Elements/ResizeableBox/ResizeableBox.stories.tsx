@@ -5,7 +5,7 @@ import { ResizeableBox } from './ResizeableBox';
 const meta: Meta<typeof ResizeableBox> = {
   component: ResizeableBox,
   render: (args) => (
-    <div style={{ height: '100%', width: '100px' }}>
+    <div style={{ height: '100%' }}>
       <ResizeableBox {...args} />
     </div>
   ),
