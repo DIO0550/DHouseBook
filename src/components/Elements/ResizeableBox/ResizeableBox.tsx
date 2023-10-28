@@ -7,14 +7,7 @@ type Props = {
 };
 
 const ResizeableBox = memo<Props>(({ children }) => {
-  const {
-    boxRef,
-    contetsRef,
-    knobRef,
-    handleDragStart,
-    handleDrag,
-    handleDragEnd,
-  } = useResizeableBox<HTMLDivElement>();
+  const { boxRef, contetsRef, knobRef } = useResizeableBox<HTMLDivElement>();
 
   return (
     <div ref={boxRef} className={`${styles['box-container']}`}>
@@ -22,11 +15,7 @@ const ResizeableBox = memo<Props>(({ children }) => {
         {children}
       </div>
       <div
-        draggable
         ref={knobRef}
-        onDragStart={handleDragStart}
-        onDrag={handleDrag}
-        onDragEnd={handleDragEnd}
         className={`${styles['box-knob']} ${styles['box-knob-skin']}`}
       />
     </div>

@@ -1,4 +1,4 @@
-import { useCallback, useRef, DragEvent } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 const DragStatus = {
   None: 'none',
@@ -7,9 +7,6 @@ const DragStatus = {
 
 type DragStatus = (typeof DragStatus)[keyof typeof DragStatus];
 
-const isLastEvent = (e: DragEvent) =>
-  e.clientX === 0 && e.screenX === 0 && e.pageX === 0;
-
 const useResizeableBox = <T extends HTMLElement>() => {
   const dragStatusRef = useRef<DragStatus>(DragStatus.None);
   const offset = useRef<number>(0);
@@ -17,50 +14,73 @@ const useResizeableBox = <T extends HTMLElement>() => {
   const contetsRef = useRef<T>(null);
   const knobRef = useRef<T>(null);
 
-  const handleDragStart = useCallback((e: DragEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    dragStatusRef.current = DragStatus.Dragging;
-    console.log(e.clientX);
-    if (!knobRef.current) {
+
+    if (!contetsRef.current || !knobRef.current || !boxRef.current) {
       return;
     }
-    const rects = knobRef.current.getBoundingClientRect();
-    console.log(e.clientX);
-    console.log(knobRef.current.getBoundingClientRect());
-    offset.current = e.clientX - rects.x;
+
+    const contentsRect = contetsRef.current.getBoundingClientRect();
+
+    boxRef.current.style.width = `${
+      e.screenX - contentsRect.x + offset.current
+    }px`;
+    contetsRef.current.style.width = `${
+      e.screenX - contentsRect.x + offset.current
+    }px`;
   }, []);
 
-  const handleDrag = useCallback((e: DragEvent) => {
-    e.stopPropagation();
+  const handleMouseUp = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      dragStatusRef.current = DragStatus.None;
 
-    if (!contetsRef.current || !knobRef.current) {
-      return;
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    },
+    [handleMouseMove],
+  );
+
+  const addEventDocument = useCallback(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  }, [handleMouseMove, handleMouseUp]);
+
+  const handleMouseDown = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (!knobRef.current) {
+        return;
+      }
+      addEventDocument();
+
+      const rect = knobRef.current.getBoundingClientRect();
+      const shiftX = rect.right - e.screenX;
+      offset.current = shiftX;
+      dragStatusRef.current = DragStatus.Dragging;
+    },
+    [addEventDocument],
+  );
+
+  useEffect(() => {
+    const knob = knobRef.current;
+    if (knob !== null) {
+      knob.addEventListener('mousedown', handleMouseDown);
     }
 
-    if (isLastEvent(e)) {
-      return;
-    }
-
-    // const contentsRect = contetsRef.current.getBoundingClientRect();
-    // const knobReact = knobRef.current.getBoundingClientRect();
-    // console.log('e.clientX: ', e.clientX);
-    // console.log('e.screenX: ', e.screenX);
-    // console.log('e.movementX: ', e.movementX);
-    // console.log('e.pageX: ', e.pageX);
-
-    contetsRef.current.style.width = `${e.clientX - offset.current * 10}px`;
-  }, []);
-
-  const handleDragEnd = useCallback((e: DragEvent) => {
-    e.stopPropagation();
-    dragStatusRef.current = DragStatus.None;
-    console.log(knobRef.current?.style.left);
+    return () => {
+      if (knob !== null) {
+        knob.removeEventListener('mousedown', handleMouseDown);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
-    handleDragStart,
-    handleDrag,
-    handleDragEnd,
+    handleMouseDown,
     boxRef,
     contetsRef,
     knobRef,
