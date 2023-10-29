@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const DragStatus = {
   None: 'none',
@@ -8,7 +8,7 @@ const DragStatus = {
 type DragStatus = (typeof DragStatus)[keyof typeof DragStatus];
 
 const useResizeableBox = <T extends HTMLElement>() => {
-  const dragStatusRef = useRef<DragStatus>(DragStatus.None);
+  const [dragStatus, setDragStatus] = useState<DragStatus>(DragStatus.None);
   const offset = useRef<number>(0);
   const boxRef = useRef<T>(null);
   const contetsRef = useRef<T>(null);
@@ -31,39 +31,36 @@ const useResizeableBox = <T extends HTMLElement>() => {
     }px`;
   }, []);
 
-  const handleMouseUp = useCallback(
-    (e: MouseEvent) => {
-      e.stopPropagation();
-      e.preventDefault();
-      dragStatusRef.current = DragStatus.None;
+  const handleMouseUp = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setDragStatus(DragStatus.None);
+  }, []);
 
+  const handleMouseDown = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!knobRef.current) {
+      return;
+    }
+
+    const rect = knobRef.current.getBoundingClientRect();
+    const shiftX = rect.right - e.screenX;
+    offset.current = shiftX;
+    setDragStatus(DragStatus.Dragging);
+  }, []);
+
+  useEffect(() => {
+    if (dragStatus === DragStatus.Dragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-    },
-    [handleMouseMove],
-  );
-
-  const addEventDocument = useCallback(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  }, [handleMouseMove, handleMouseUp]);
-
-  const handleMouseDown = useCallback(
-    (e: MouseEvent) => {
-      e.stopPropagation();
-      e.preventDefault();
-      if (!knobRef.current) {
-        return;
-      }
-      addEventDocument();
-
-      const rect = knobRef.current.getBoundingClientRect();
-      const shiftX = rect.right - e.screenX;
-      offset.current = shiftX;
-      dragStatusRef.current = DragStatus.Dragging;
-    },
-    [addEventDocument],
-  );
+    };
+  }, [dragStatus, handleMouseMove, handleMouseUp]);
 
   useEffect(() => {
     const knob = knobRef.current;
