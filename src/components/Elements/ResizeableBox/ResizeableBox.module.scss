@@ -1,26 +1,62 @@
+@use '@/styles/mixins.module.scss' as mixins;
+
+@mixin theme-color {
+  &.red {
+    @include mixins.theme-primary-background-color-style(red);
+  }
+  &.purple {
+    @include mixins.theme-primary-background-color-style(purple);
+  }
+  &.blue {
+    @include mixins.theme-primary-background-color-style(blue);
+  }
+  &.cyan {
+    @include mixins.theme-primary-background-color-style(cyan);
+  }
+  &.green {
+    @include mixins.theme-primary-background-color-style(green);
+  }
+  &.yellow {
+    @include mixins.theme-primary-background-color-style(yellow);
+  }
+  &.orange {
+    @include mixins.theme-primary-background-color-style(orange);
+  }
+  &.gray {
+    @include mixins.theme-primary-background-color-style(gray);
+  }
+}
+
 .box-container {
-  // align-items: stretch;
-  background-color: blue;
   position: relative;
   box-sizing: border-box;
 }
 
 .contents {
-  background-color: antiquewhite;
   position: relative;
   box-sizing: border-box;
 }
 
 .box-knob {
-  width: 20px;
+  height: 100%;
+  width: 4px;
   content: '';
   position: absolute;
-  height: 50px;
   top: 0;
   right: 0;
   box-sizing: border-box;
+  transition: background-color 100ms linear;
+
+  &-dragging-skin {
+    @include theme-color();
+  }
+
   &-skin {
     cursor: col-resize;
-    background-color: aqua;
+
+    &:hover {
+      transition: background-color 500ms ease-in-out;
+      @include theme-color();
+    }
   }
 }

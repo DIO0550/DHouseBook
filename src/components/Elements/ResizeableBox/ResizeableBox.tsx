@@ -1,5 +1,6 @@
 import { ReactNode, memo } from 'react';
-import { useResizeableBox } from './useResizeableBox';
+import { useThemeContext } from '@/components/Providers';
+import { useResizeableBox, DragStatus } from './useResizeableBox';
 import styles from './ResizeableBox.module.scss';
 
 type Props = {
@@ -7,7 +8,10 @@ type Props = {
 };
 
 const ResizeableBox = memo<Props>(({ children }) => {
-  const { boxRef, contetsRef, knobRef } = useResizeableBox<HTMLDivElement>();
+  const theme = useThemeContext();
+
+  const { boxRef, contetsRef, knobRef, dragStatus } =
+    useResizeableBox<HTMLDivElement>();
 
   return (
     <div ref={boxRef} className={`${styles['box-container']}`}>
@@ -16,7 +20,11 @@ const ResizeableBox = memo<Props>(({ children }) => {
       </div>
       <div
         ref={knobRef}
-        className={`${styles['box-knob']} ${styles['box-knob-skin']}`}
+        className={`${styles['box-knob']} ${styles['box-knob-skin']} ${
+          dragStatus === DragStatus.Dragging
+            ? styles['box-knob-dragging-skin']
+            : ''
+        } ${styles[theme]}`}
       />
     </div>
   );

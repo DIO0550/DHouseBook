@@ -30,3 +30,7 @@
   padding-right: variable.$base-button-padding-h;
   border-radius: 8px;
 }
+
+@mixin theme-primary-background-color-style($theme) {
+  background-color: functions.primaryColor($theme);
+}

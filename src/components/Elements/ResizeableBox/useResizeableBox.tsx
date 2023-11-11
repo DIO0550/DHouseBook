@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const DragStatus = {
+export const DragStatus = {
   None: 'none',
   Dragging: 'dragging',
 };
@@ -81,6 +81,7 @@ const useResizeableBox = <T extends HTMLElement>() => {
     boxRef,
     contetsRef,
     knobRef,
+    dragStatus,
   };
 };
 

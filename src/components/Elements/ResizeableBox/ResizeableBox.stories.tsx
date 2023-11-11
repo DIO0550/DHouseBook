@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import type { Meta, StoryObj } from '@storybook/react';
+import { BookThemeColor, ThemeProvider } from '@/components/Providers';
 import { ResizeableBox } from './ResizeableBox';
 
 const meta: Meta<typeof ResizeableBox> = {
@@ -13,10 +14,17 @@ const meta: Meta<typeof ResizeableBox> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ResizeableBox>;
+type StoryType = StoryObj<typeof ResizeableBox>;
 
-export const Default: Story = {
+export const Default: StoryType = {
   args: {
     children: <div style={{ height: '100%', width: '50px' }}>子要素</div>,
   },
+  decorators: [
+    (Story) => (
+      <ThemeProvider initialValue={BookThemeColor.red}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };

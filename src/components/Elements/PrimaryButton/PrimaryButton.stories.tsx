@@ -4,7 +4,6 @@ import { BookThemeColor, ThemeProvider } from '@/components/Providers';
 import { PrimaryButton } from './PrimaryButton';
 
 const meta: Meta<typeof PrimaryButton> = {
-  title: 'PrimaryButton',
   component: PrimaryButton,
   render: (args) => <PrimaryButton {...args} />,
 };
