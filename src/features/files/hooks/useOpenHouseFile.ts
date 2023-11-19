@@ -14,7 +14,7 @@ type FileOpenStatus =
   (typeof HouseFileOpenStatus)[keyof typeof HouseFileOpenStatus];
 
 const useOpenHouseFile = () => {
-  const { openHousBook: openHousBookFile } = useSetHouseBookState();
+  const { openHouseBook: openHouseBookFile } = useSetHouseBookState();
   const [openStatus, setOpenStatus] = useState<FileOpenStatus>(
     HouseFileOpenStatus.Idle,
   );
@@ -48,8 +48,8 @@ const useOpenHouseFile = () => {
     });
 
     const id = uuidv4();
-    openHousBookFile({ id, fileProperty, bookData });
-  }, [openHousBookFile]);
+    openHouseBookFile({ id, fileProperty, bookData });
+  }, [openHouseBookFile]);
 
   return { openStatus, openFile };
 };

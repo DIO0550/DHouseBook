@@ -28,7 +28,7 @@ const useSetHouseBookState = () => {
     [],
   );
 
-  const openHousBook = useRecoilCallback(
+  const openHouseBook = useRecoilCallback(
     ({ set }) =>
       ({
         id,
@@ -49,7 +49,7 @@ const useSetHouseBookState = () => {
 
   return {
     setNewHouseBook,
-    openHousBook,
+    openHouseBook,
   };
 };
 
