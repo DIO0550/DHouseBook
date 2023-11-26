@@ -22,7 +22,7 @@ type Props = {
 };
 
 const useSaveHouseFile = ({ id }: Props) => {
-  const { filePath } = useRecoilValue(houseBookFilePropertyState({ id }));
+  // const { filePath } = useRecoilValue(houseBookFilePropertyState({ id }));
   const items = useRecoilValue(houseBookItemsState({ id }));
   const { year, month } = useRecoilValue(houseBookDateState({ id }));
   const { setIsDirty } = useSetHouseBookFilePropertyState({ id });

@@ -6,6 +6,7 @@ import { memo, useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import useSetHouseBookItemsState from '@/stores/atoms/useSetHouseBookItemsState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
+import { useSaveHouseFile } from '@/features/files/hooks/useSaveHouseFile';
 import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
 import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
 
@@ -15,6 +16,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const { setHouseBookItems } = useSetHouseBookItemsState(fileId);
   const editor = useEditor({ initialPurchasedItems: houseBookItems });
   const isFirstRef = useRef(true);
+  const { overWriteSaveFile } = useSaveHouseFile({ id: fileId });
 
   useEffect(() => {
     if (isFirstRef.current) {
@@ -36,6 +38,14 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
           editor.addPurhcasedItem(HouseBookItem.init())
         }
       />
+      <button
+        type="button"
+        onClick={() => {
+          void overWriteSaveFile();
+        }}
+      >
+        保存
+      </button>
     </div>
   );
 });
