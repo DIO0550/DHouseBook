@@ -53,6 +53,7 @@ const useOpenHouseFile = () => {
 
     const id = uuidv4();
     openHouseBookFile({ id, fileProperty, bookData });
+    setOpenStatus(HouseFileOpenStatus.Idle);
   }, [openHouseBookFile]);
 
   return { openStatus, openFile };
