@@ -5,6 +5,11 @@ import { DialogIpc, FileFilters } from '@/utils/dialogs/dialog';
 import fs from 'fs';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
 import { FileSaveResult, FileSaveStatus } from './types/fileSave';
+import { OverwriteSaveFileInfo } from './types/global';
+import {
+  FileOverwriteSaveResult,
+  FileOverwriteSaveStatus,
+} from './types/fileOverwriteSave';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -63,7 +68,7 @@ void app.whenReady().then(async () => {
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
 
-// ファイルオープン
+// 開く
 ipcMain.handle(DialogIpc.Open, (): FileOpenResult => {
   const filePaths = dialog.showOpenDialogSync(mainWindow, {
     buttonLabel: '開く', // 確認ボタンのラベル
@@ -98,8 +103,8 @@ ipcMain.handle(DialogIpc.Open, (): FileOpenResult => {
   }
 });
 
-// ファイルセーブ
-ipcMain.handle(DialogIpc.Save, (_, data: string): FileSaveResult => {
+// 保存
+ipcMain.handle(DialogIpc.Save, (_, contents: string): FileSaveResult => {
   const filePath = dialog.showSaveDialogSync(mainWindow, {
     buttonLabel: '保存',
     filters: FileFilters,
@@ -111,7 +116,7 @@ ipcMain.handle(DialogIpc.Save, (_, data: string): FileSaveResult => {
   }
 
   try {
-    fs.writeFileSync(filePath, data);
+    fs.writeFileSync(filePath, contents);
 
     return {
       status: FileSaveStatus.OK,
@@ -125,3 +130,30 @@ ipcMain.handle(DialogIpc.Save, (_, data: string): FileSaveResult => {
     return { status: FileSaveStatus.Error, message: 'Error Save File' };
   }
 });
+
+// 上書き保存
+ipcMain.handle(
+  DialogIpc.OverwriteSave,
+  (
+    _,
+    { filePath, contents }: OverwriteSaveFileInfo,
+  ): FileOverwriteSaveResult => {
+    try {
+      fs.writeFileSync(filePath, contents);
+
+      return {
+        status: FileOverwriteSaveStatus.OK,
+        filePath,
+      };
+    } catch (e) {
+      if (e instanceof Error) {
+        return { status: FileOverwriteSaveStatus.Error, message: e.message };
+      }
+
+      return {
+        status: FileOverwriteSaveStatus.Error,
+        message: 'Error Overwrite Save File',
+      };
+    }
+  },
+);

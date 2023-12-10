@@ -29,6 +29,8 @@ const useOpenHouseFile = () => {
       return;
     }
 
+    console.log('hogeee');
+
     if (result.status === FileOpenStatus.Cancel) {
       setOpenStatus(HouseFileOpenStatus.Idle);
 
@@ -36,6 +38,8 @@ const useOpenHouseFile = () => {
     }
 
     const bookData = HouseBookData.fromJsonString(result.text || '');
+
+    console.log(bookData);
 
     if (!bookData) {
       setOpenStatus(HouseFileOpenStatus.Error);

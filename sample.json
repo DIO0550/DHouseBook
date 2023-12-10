@@ -9,7 +9,7 @@
       "name": "sample",
       "price": 12314,
       "type": "日常品",
-      "purchaseDate": "12月9日"
+      "date": "12月9日"
     }
   ]
 }

@@ -5,9 +5,9 @@ import {
 } from '@/stores/atoms/houseBookState';
 import { FileOpenStatus } from '@/types/fileOpen';
 import { useCallback, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { HouseBookData } from '../utils/houseBookData';
+import { useRecoilValue } from 'recoil';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
+import { HouseBookData } from '../utils/houseBookData';
 
 export const HouseFileSaveStatus = {
   Idle: 'idle',
@@ -22,7 +22,7 @@ type Props = {
 };
 
 const useSaveHouseFile = ({ id }: Props) => {
-  // const { filePath } = useRecoilValue(houseBookFilePropertyState({ id }));
+  const { filePath } = useRecoilValue(houseBookFilePropertyState({ id }));
   const items = useRecoilValue(houseBookItemsState({ id }));
   const { year, month } = useRecoilValue(houseBookDateState({ id }));
   const { setIsDirty } = useSetHouseBookFilePropertyState({ id });
@@ -39,7 +39,10 @@ const useSaveHouseFile = ({ id }: Props) => {
       },
       items,
     });
-    const result = await window.api.saveFile(jsonData);
+    const result = await window.api.overwriteSaveFile({
+      contents: jsonData,
+      filePath,
+    });
 
     if (result.status === FileOpenStatus.Error) {
       setSaveStatus(HouseFileSaveStatus.Error);
@@ -54,7 +57,7 @@ const useSaveHouseFile = ({ id }: Props) => {
     }
 
     setIsDirty(false);
-  }, [items, month, setIsDirty, year]);
+  }, [filePath, items, month, setIsDirty, year]);
 
   return {
     saveStatus,
