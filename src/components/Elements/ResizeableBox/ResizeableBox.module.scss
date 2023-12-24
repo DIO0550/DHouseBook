@@ -29,17 +29,24 @@
 
 .box-container {
   position: relative;
+  overflow: hidden;
   box-sizing: border-box;
+  height: 100%;
+  width: 100%;
 }
 
 .contents {
   position: relative;
+  overflow: hidden;
   box-sizing: border-box;
+  height: 100%;
+  width: 100%;
 }
 
 .box-knob {
   height: 100%;
   width: 4px;
+  background-color: black;
   content: '';
   position: absolute;
   top: 0;

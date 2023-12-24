@@ -1,6 +1,7 @@
 import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
 import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import { memo } from 'react';
+import styles from './PurchasedItemPrice.module.scss';
 
 type Props = {
   id: string;
@@ -9,7 +10,7 @@ type Props = {
 };
 
 const PurchasedItemPrice = memo<Props>(({ id, defaultValue, handleUpdate }) => (
-  <div>
+  <div className={styles['price-container']}>
     <PrimaryColorInput
       defaultValue={defaultValue}
       onChange={(e) =>

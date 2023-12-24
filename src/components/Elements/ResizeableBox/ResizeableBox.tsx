@@ -4,10 +4,11 @@ import { useResizeableBox, DragStatus } from './useResizeableBox';
 import styles from './ResizeableBox.module.scss';
 
 type Props = {
+  knobSize?: number;
   children: ReactNode;
 };
 
-const ResizeableBox = memo<Props>(({ children }) => {
+const ResizeableBox = memo<Props>(({ knobSize, children }) => {
   const theme = useThemeContext();
 
   const { boxRef, contetsRef, knobRef, dragStatus } =
@@ -20,6 +21,7 @@ const ResizeableBox = memo<Props>(({ children }) => {
       </div>
       <div
         ref={knobRef}
+        style={{ width: knobSize ? `${knobSize}px` : '10px' }}
         className={`${styles['box-knob']} ${styles['box-knob-skin']} ${
           dragStatus === DragStatus.Dragging
             ? styles['box-knob-dragging-skin']

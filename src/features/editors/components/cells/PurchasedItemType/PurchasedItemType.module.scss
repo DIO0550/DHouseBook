@@ -1,0 +1,7 @@
+@use '@/features/editors/components/styles/list-mixins.module.scss' as
+  list-mixins;
+
+.type-container {
+  width: list-mixins.$width-purchased-item-type;
+  height: list-mixins.$height-purchased-item-cell;
+}

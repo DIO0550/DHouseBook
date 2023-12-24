@@ -6,7 +6,7 @@ import styles from './Siderbar.module.scss';
 const Sidebar = memo(() => (
   <ResizeableBox>
     <div
-      className={`${styles['sidebar-container']} ${styles['sidebar-container-appearance']}`}
+      className={`${styles['sidebar-contents']} ${styles['sidebar-contents-appearance']}`}
     >
       <HouseBookList />
     </div>

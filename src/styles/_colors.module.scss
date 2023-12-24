@@ -1,9 +1,5 @@
 @use './_palettes.module.scss' as palettes;
 
-$color-button-bg: palettes.$palette-downy;
-$color-button: palettes.$palette-ocean-green;
-$color-button-border: palettes.$palette-ocean-green;
-
 // 赤
 $color-theme-red-primary: palettes.$palette-red-500;
 $color-theme-red-primary-sub: palettes.$palette-red-300;
@@ -47,3 +43,6 @@ $color-theme-gray-secondary: palettes.$palette-gray-800;
 // input
 $color-input-text: palettes.$palette-black;
 $color-input-outline: palettes.$palette-blue-gray-800;
+
+// sidebar-color
+$color-sidebar-bg: palettes.$palette-gray-200;
