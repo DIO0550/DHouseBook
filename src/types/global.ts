@@ -7,12 +7,16 @@ export type OverwriteSaveFileInfo = {
 };
 
 export interface BookApi {
-  openFile: () => Promise<FileOpenResult>;
-  saveFile: (contents: string) => Promise<FileSaveResult>;
-  overwriteSaveFile: ({
-    contents,
-    filePath,
-  }: OverwriteSaveFileInfo) => Promise<FileSaveResult>;
+  invoke: {
+    openFile: () => Promise<FileOpenResult>;
+    saveFile: (contents: string) => Promise<FileSaveResult>;
+    overwriteSaveFile: ({
+      contents,
+      filePath,
+    }: OverwriteSaveFileInfo) => Promise<FileSaveResult>;
+  };
+
+  on: { openFile: (listener: (result: FileOpenResult) => void) => () => void };
 }
 
 declare global {

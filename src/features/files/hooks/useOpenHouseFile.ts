@@ -2,6 +2,7 @@ import { useSetHouseBookState } from '@/stores/atoms/useSetHouseBookState';
 import { FileOpenStatus } from '@/types/fileOpen';
 import { v4 as uuidv4 } from 'uuid';
 import { useCallback, useState } from 'react';
+import { useSetActiveFileIdState } from '@/stores/atoms/useSetActiveFileIdState';
 import { HouseBookData } from '../utils/houseBookData';
 import { HouseBookFileProperty } from '../utils/houseBookFileProperty';
 
@@ -15,21 +16,20 @@ type FileOpenStatus =
 
 const useOpenHouseFile = () => {
   const { openHouseBook: openHouseBookFile } = useSetHouseBookState();
+  const { setActiveFileId } = useSetActiveFileIdState();
   const [openStatus, setOpenStatus] = useState<FileOpenStatus>(
     HouseFileOpenStatus.Idle,
   );
 
   const openFile = useCallback(async () => {
     setOpenStatus(HouseFileOpenStatus.Open);
-    const result = await window.api.openFile();
+    const result = await window.api.invoke.openFile();
 
     if (result.status === FileOpenStatus.Error) {
       setOpenStatus(HouseFileOpenStatus.Error);
 
       return;
     }
-
-    console.log('hogeee');
 
     if (result.status === FileOpenStatus.Cancel) {
       setOpenStatus(HouseFileOpenStatus.Idle);
@@ -38,8 +38,6 @@ const useOpenHouseFile = () => {
     }
 
     const bookData = HouseBookData.fromJsonString(result.text || '');
-
-    console.log(bookData);
 
     if (!bookData) {
       setOpenStatus(HouseFileOpenStatus.Error);
@@ -53,8 +51,9 @@ const useOpenHouseFile = () => {
 
     const id = uuidv4();
     openHouseBookFile({ id, fileProperty, bookData });
+    setActiveFileId(id);
     setOpenStatus(HouseFileOpenStatus.Idle);
-  }, [openHouseBookFile]);
+  }, [openHouseBookFile, setActiveFileId]);
 
   return { openStatus, openFile };
 };

@@ -39,7 +39,7 @@ const useSaveHouseFile = ({ id }: Props) => {
       },
       items,
     });
-    const result = await window.api.overwriteSaveFile({
+    const result = await window.api.invoke.overwriteSaveFile({
       contents: jsonData,
       filePath,
     });

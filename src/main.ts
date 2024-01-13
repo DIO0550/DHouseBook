@@ -13,26 +13,6 @@ import {
 
 const isDev = process.env.NODE_ENV === 'development';
 
-// アプリケーションメニュー
-const appMenu = Menu.buildFromTemplate([
-  {
-    label: 'ファイル',
-    submenu: [{ role: 'close', label: 'ウィンドウを閉じる' }],
-  },
-  {
-    label: '編集',
-    submenu: [
-      { role: 'undo', label: '元に戻す' },
-      { role: 'redo', label: 'やり直す' },
-      { type: 'separator' },
-      { role: 'cut', label: '切り取り' },
-      { role: 'copy', label: 'コピー' },
-      { role: 'paste', label: '貼り付け' },
-    ],
-  },
-]);
-
-Menu.setApplicationMenu(appMenu);
 let mainWindow: BrowserWindow;
 // Window 生成
 const createWindow = () => {
@@ -52,6 +32,47 @@ const createWindow = () => {
   void mainWindow.loadFile(path.join(__dirname, 'index.html'));
 };
 
+const fileOpen = () => {
+  const filePaths = dialog.showOpenDialogSync(mainWindow, {
+    buttonLabel: '開く', // 確認ボタンのラベル
+    filters: FileFilters,
+    properties: ['openFile', 'createDirectory'],
+  });
+
+  if (filePaths === undefined) {
+    mainWindow.webContents.send(DialogIpc.Send.Open, {
+      status: FileOpenStatus.Cancel,
+    });
+
+    return;
+  }
+
+  try {
+    const filePath = filePaths[0];
+    const data = fs.readFileSync(filePath);
+
+    mainWindow.webContents.send(DialogIpc.Send.Open, {
+      status: FileOpenStatus.OK,
+      filePath,
+      text: data.toString(),
+    });
+  } catch (e) {
+    if (e instanceof Error) {
+      mainWindow.webContents.send(DialogIpc.Send.Open, {
+        status: FileOpenStatus.Error,
+        message: e.message,
+      });
+
+      return;
+    }
+
+    mainWindow.webContents.send(DialogIpc.Send.Open, {
+      status: FileOpenStatus.Error,
+      message: 'Error Open File',
+    });
+  }
+};
+
 // アプリ初期化時
 void app.whenReady().then(async () => {
   if (isDev) {
@@ -68,8 +89,37 @@ void app.whenReady().then(async () => {
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
 
+// アプリケーションメニュー
+const appMenu = Menu.buildFromTemplate([
+  {
+    label: 'ファイル',
+    submenu: [
+      { role: 'close', label: 'ウィンドウを閉じる' },
+      {
+        label: '開く',
+        click: () => {
+          fileOpen();
+        },
+      },
+    ],
+  },
+  {
+    label: '編集',
+    submenu: [
+      { role: 'undo', label: '元に戻す' },
+      { role: 'redo', label: 'やり直す' },
+      { type: 'separator' },
+      { role: 'cut', label: '切り取り' },
+      { role: 'copy', label: 'コピー' },
+      { role: 'paste', label: '貼り付け' },
+    ],
+  },
+]);
+
+Menu.setApplicationMenu(appMenu);
+
 // 開く
-ipcMain.handle(DialogIpc.Open, (): FileOpenResult => {
+ipcMain.handle(DialogIpc.Invoke.Open, (): FileOpenResult => {
   const filePaths = dialog.showOpenDialogSync(mainWindow, {
     buttonLabel: '開く', // 確認ボタンのラベル
     filters: FileFilters,
@@ -104,7 +154,7 @@ ipcMain.handle(DialogIpc.Open, (): FileOpenResult => {
 });
 
 // 保存
-ipcMain.handle(DialogIpc.Save, (_, contents: string): FileSaveResult => {
+ipcMain.handle(DialogIpc.Invoke.Save, (_, contents: string): FileSaveResult => {
   const filePath = dialog.showSaveDialogSync(mainWindow, {
     buttonLabel: '保存',
     filters: FileFilters,
@@ -133,7 +183,7 @@ ipcMain.handle(DialogIpc.Save, (_, contents: string): FileSaveResult => {
 
 // 上書き保存
 ipcMain.handle(
-  DialogIpc.OverwriteSave,
+  DialogIpc.Invoke.OverwriteSave,
   (
     _,
     { filePath, contents }: OverwriteSaveFileInfo,

@@ -17,7 +17,7 @@ const PurchasedItemEditor = memo<Props>(({ initialPurchasedItems = [] }) => {
       <button
         type="button"
         onClick={() => {
-          void window.api.saveFile(
+          void window.api.invoke.saveFile(
             HouseBookData.toJson({
               date: {
                 year: 2022,

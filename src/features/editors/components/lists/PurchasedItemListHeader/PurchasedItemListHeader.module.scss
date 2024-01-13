@@ -1,3 +1,65 @@
+@use '@/features/editors/components/styles/list-mixins.module.scss' as
+  list-mixins;
+@use '@/styles/functions.module.scss' as functions;
+
+.name-container {
+  width: list-mixins.$width-purchased-item-name;
+  height: list-mixins.$height-purchased-item-cell;
+}
+
 .header-container {
   display: flex;
+
+  &.red {
+    background-color: functions.primarySubColor(red);
+  }
+  &.purple {
+    background-color: functions.primarySubColor(purple);
+  }
+  &.blue {
+    background-color: functions.primarySubColor(blue);
+  }
+  &.cyan {
+    background-color: functions.primarySubColor(cyan);
+  }
+  &.green {
+    background-color: functions.primarySubColor(green);
+  }
+  &.yellow {
+    background-color: functions.primarySubColor(yellow);
+  }
+  &.orange {
+    background-color: functions.primarySubColor(orange);
+  }
+  &.gray {
+    background-color: functions.primarySubColor(gray);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+
+  height: list-mixins.$height-purchased-item-cell;
+
+  &-skin {
+    outline: list-mixins.$border-width-item-cell solid black;
+  }
+
+  &-name {
+    width: list-mixins.$width-purchased-item-name;
+  }
+
+  &-price {
+    width: list-mixins.$width-purchased-item-price;
+  }
+
+  &-type {
+    width: list-mixins.$width-purchased-item-type;
+  }
+
+  &-date {
+    width: list-mixins.$width-purchased-item-date;
+  }
 }

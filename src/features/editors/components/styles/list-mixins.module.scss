@@ -1,6 +1,17 @@
-$width-purchased-item-name: 150px;
-$width-purchased-item-price: 100px;
-$width-purchased-item-type: 150px;
-$width-purchased-item-date: 150px;
+$width-purchased-item-name: 30%;
+$width-purchased-item-price: 20%;
+$width-purchased-item-type: 25%;
+$width-purchased-item-date: 25%;
+
+$min-width-purchased-item-name: 200px;
+$min-width-purchased-item-price: 150px;
+$min-width-purchased-item-type: 200px;
+$min-width-purchased-item-date: 150px;
+
+$min-width-purchased-item-list: $min-width-purchased-item-name +
+  $min-width-purchased-item-price + $min-width-purchased-item-type +
+  $min-width-purchased-item-date;
 
 $height-purchased-item-cell: 60px;
+
+$border-width-item-cell: 1px;

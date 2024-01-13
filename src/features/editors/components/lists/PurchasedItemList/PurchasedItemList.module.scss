@@ -1,0 +1,6 @@
+@use '@/features/editors/components/styles/list-mixins.module.scss' as
+  list-mixins;
+
+.purchased-item-list {
+  min-width: list-mixins.$min-width-purchased-item-list;
+}

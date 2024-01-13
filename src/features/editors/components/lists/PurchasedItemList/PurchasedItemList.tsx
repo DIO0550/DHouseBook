@@ -3,6 +3,7 @@ import { HouseBookItem } from '@/utils/editors/houseBookItem';
 import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import { PurchasedItemRow } from '@/features/editors/components/rows/PurchasedItemRow';
 import { PurchasedItemListHeader } from '../PurchasedItemListHeader/PurchasedItemListHeader';
+import styles from './PurchasedItemList.module.scss';
 
 type Props = {
   purchasedItems: HouseBookItem[];
@@ -10,7 +11,7 @@ type Props = {
 };
 
 const PurchasedItemList = memo<Props>(({ purchasedItems, handleUpdate }) => (
-  <div>
+  <div className={`${styles['purchased-item-list']}`}>
     <PurchasedItemListHeader />
     {purchasedItems.map((item) => (
       <PurchasedItemRow

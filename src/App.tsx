@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { Sidebar } from '@/features/files/components/Sidebars/Sidebar';
 import { useRecoilValue } from 'recoil';
+import { FileProvider } from '@/providers/files/components';
 import styles from './App.module.scss';
 import {
   useOpenHouseFile,
@@ -22,16 +23,20 @@ const App = memo(() => {
   };
 
   return (
-    <div className={styles['contents-container']}>
-      <Sidebar />
-      {openStatus === HouseFileOpenStatus.Open && <div>ファイルオープン中</div>}
-      <button type="button" onClick={handleOpen}>
-        開く
-      </button>
-      {activeFileId !== InactiveFileId && (
-        <HouseBookEditor key={activeFileId} fileId={activeFileId} />
-      )}
-    </div>
+    <FileProvider>
+      <div className={styles['contents-container']}>
+        <Sidebar />
+        {openStatus === HouseFileOpenStatus.Open && (
+          <div>ファイルオープン中</div>
+        )}
+        <button type="button" onClick={handleOpen}>
+          開く
+        </button>
+        {activeFileId !== InactiveFileId && (
+          <HouseBookEditor key={activeFileId} fileId={activeFileId} />
+        )}
+      </div>
+    </FileProvider>
   );
 });
 

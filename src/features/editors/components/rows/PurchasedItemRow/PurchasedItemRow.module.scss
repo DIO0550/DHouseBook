@@ -1,3 +1,41 @@
+@use '@/features/editors/components/styles/list-mixins.module.scss' as
+  list-mixins;
+
+@use '@/styles/functions.module.scss' as functions;
+
 .container {
   display: flex;
+
+  .container-skin {
+    &:nth-child(odd) {
+      &.red {
+        background-color: functions.primarySubSubColor(red);
+      }
+      &.purple {
+        background-color: functions.primarySubSubColor(purple);
+      }
+      &.blue {
+        background-color: functions.primarySubSubColor(blue);
+      }
+      &.cyan {
+        background-color: functions.primarySubSubColor(cyan);
+      }
+      &.green {
+        background-color: functions.primarySubSubColor(green);
+      }
+      &.yellow {
+        background-color: functions.primarySubSubColor(yellow);
+      }
+      &.orange {
+        background-color: functions.primarySubSubColor(orange);
+      }
+      &.gray {
+        background-color: functions.primarySubSubColor(gray);
+      }
+    }
+  }
+
+  input {
+    outline-width: list-mixins.$border-width-item-cell;
+  }
 }

@@ -22,6 +22,17 @@ $primary-sub-color-map: (
   gray: colors.$color-theme-gray-primary-sub,
 );
 
+$primary-sub-sub-color-map: (
+  red: colors.$color-theme-red-primary-sub-sub,
+  purple: colors.$color-theme-purple-primary-sub-sub,
+  blue: colors.$color-theme-blue-primary-sub-sub,
+  cyan: colors.$color-theme-cyan-primary-sub-sub,
+  green: colors.$color-theme-green-primary-sub-sub,
+  yellow: colors.$color-theme-yellow-primary-sub-sub,
+  orange: colors.$color-theme-orange-primary-sub-sub,
+  gray: colors.$color-theme-gray-primary-sub-sub,
+);
+
 $secondary-color-map: (
   red: colors.$color-theme-red-secondary,
   purple: colors.$color-theme-purple-secondary,
@@ -39,6 +50,10 @@ $secondary-color-map: (
 
 @function primarySubColor($theme) {
   @return map-get($primary-sub-color-map, $theme);
+}
+
+@function primarySubSubColor($theme) {
+  @return map-get($primary-sub-sub-color-map, $theme);
 }
 
 @function secondaryColor($theme) {
