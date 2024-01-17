@@ -32,16 +32,24 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
         type="button"
         onClick={handleClick}
       >
-        <div>{fileProperty.isDirty ? '未保存' : '保存済み'}</div>
-        <div
-          className={`${styles['file-info']} ${styles['file-info-appearance']}  ${styles['file-name']}`}
-        >
-          {fileName}
+        <div className={`${styles['file-info-block']}`}>
+          <div
+            className={`${styles['file-info']} ${styles['file-info-skin']} ${styles['file-name']} ${styles['file-name-skin']}`}
+          >
+            {fileName}
+          </div>
+
+          <div
+            className={`${styles['file-info']} ${styles['file-info-skin']} ${styles['file-path']}`}
+          >
+            {fileProperty.filePath}
+          </div>
         </div>
+
         <div
-          className={`${styles['file-info']} ${styles['file-info-appearance']} ${styles['file-path']}`}
+          className={`${styles['file-info']} ${styles['file-info-skin']} ${styles.dirty}`}
         >
-          {fileProperty.filePath}
+          {fileProperty.isDirty ? '●' : ''}
         </div>
       </button>
     </li>

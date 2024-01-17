@@ -38,12 +38,29 @@ const initializeState =
     }
   };
 
-export const Default: StoryType = {
+export const NotDirty: StoryType = {
   decorators: [
     (Story) => (
       <ThemeProvider initialValue={BookThemeColor.red}>
         <RecoilRoot
           initializeState={initializeState({ filePath: 'C//work/sample.json' })}
+        >
+          <Story />
+        </RecoilRoot>
+      </ThemeProvider>
+    ),
+  ],
+};
+
+export const Dirty: StoryType = {
+  decorators: [
+    (Story) => (
+      <ThemeProvider initialValue={BookThemeColor.red}>
+        <RecoilRoot
+          initializeState={initializeState({
+            filePath: 'C//work/sample.json',
+            isDirty: true,
+          })}
         >
           <Story />
         </RecoilRoot>
