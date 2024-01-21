@@ -3,34 +3,23 @@ import { Sidebar } from '@/features/files/components/Sidebars/Sidebar';
 import { useRecoilValue } from 'recoil';
 import { FileProvider } from '@/providers/files/components';
 import styles from './App.module.scss';
-import {
-  useOpenHouseFile,
-  HouseFileOpenStatus,
-} from './features/files/hooks/useOpenHouseFile';
 import { HouseBookEditor } from './features/editors/components/editors/HouseBookEditor/HouseBookEditor';
 import {
   InactiveFileId,
   activeFileIdState,
 } from './stores/atoms/activeFileIdState';
+import { useCreateFile } from './features/files/hooks/useCreateFile';
 
 const App = memo(() => {
-  // const [houseBook, setHouseBook] = useState<HouseBook | undefined>(undefined);
-  // const { openHousBookFile } = useSetHouseBookState();
-  const { openStatus, openFile } = useOpenHouseFile();
   const activeFileId = useRecoilValue(activeFileIdState);
-  const handleOpen = () => {
-    void openFile();
-  };
+  const { createNewFile } = useCreateFile();
 
   return (
     <FileProvider>
       <div className={styles['contents-container']}>
         <Sidebar />
-        {openStatus === HouseFileOpenStatus.Open && (
-          <div>ファイルオープン中</div>
-        )}
-        <button type="button" onClick={handleOpen}>
-          開く
+        <button type="button" onClick={createNewFile}>
+          新規作成
         </button>
         {activeFileId !== InactiveFileId && (
           <HouseBookEditor key={activeFileId} fileId={activeFileId} />
