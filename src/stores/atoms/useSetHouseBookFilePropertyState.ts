@@ -1,5 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 import { useCallback } from 'react';
+import { FileState } from '@/features/files/utils/houseBookFileProperty';
 import { houseBookFilePropertyState } from './houseBookState';
 
 const useSetHouseBookFilePropertyState = ({ id }: { id: string }) => {
@@ -7,18 +8,18 @@ const useSetHouseBookFilePropertyState = ({ id }: { id: string }) => {
     houseBookFilePropertyState({ id }),
   );
 
-  const setIsDirty = useCallback(
-    (isDirty: boolean) => {
+  const setFileState = useCallback(
+    (fileState: FileState) => {
       setHouseBookFilePropertyState((current) => ({
         ...current,
-        isDirty,
+        fileState,
       }));
     },
     [setHouseBookFilePropertyState],
   );
 
   return {
-    setIsDirty,
+    setFileState,
   };
 };
 

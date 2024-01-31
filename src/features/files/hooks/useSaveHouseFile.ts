@@ -8,6 +8,7 @@ import { useCallback, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
 import { HouseBookData } from '../utils/houseBookData';
+import { FileState } from '../utils/houseBookFileProperty';
 
 export const HouseFileSaveStatus = {
   Idle: 'idle',
@@ -25,7 +26,7 @@ const useSaveHouseFile = ({ id }: Props) => {
   const { filePath } = useRecoilValue(houseBookFilePropertyState({ id }));
   const items = useRecoilValue(houseBookItemsState({ id }));
   const { year, month } = useRecoilValue(houseBookDateState({ id }));
-  const { setIsDirty } = useSetHouseBookFilePropertyState({ id });
+  const { setFileState } = useSetHouseBookFilePropertyState({ id });
 
   const [saveStatus, setSaveStatus] = useState<HouseFileSaveStatus>(
     HouseFileSaveStatus.Idle,
@@ -56,8 +57,8 @@ const useSaveHouseFile = ({ id }: Props) => {
       return;
     }
 
-    setIsDirty(false);
-  }, [filePath, items, month, setIsDirty, year]);
+    setFileState(FileState.Saved);
+  }, [filePath, items, month, setFileState, year]);
 
   return {
     saveStatus,

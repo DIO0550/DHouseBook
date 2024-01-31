@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
 import { useActiveFileIdState } from '@/stores/atoms/useActiveFileIdState';
 import styles from './HouseBookFileCell.module.scss';
+import { FileState } from '../../utils/houseBookFileProperty';
 
 type Props = {
   fileId: string;
@@ -49,7 +50,10 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
         <div
           className={`${styles['file-info']} ${styles['file-info-skin']} ${styles.dirty}`}
         >
-          {fileProperty.isDirty ? '●' : ''}
+          {fileProperty.fileState === FileState.Dirty ||
+          fileProperty.fileState === FileState.NewFile
+            ? '●'
+            : ''}
         </div>
       </button>
     </li>

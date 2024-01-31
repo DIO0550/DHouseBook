@@ -8,6 +8,7 @@ import {
 } from '@/stores/atoms/houseBookState';
 import { SetRecoilState, RecoilRoot } from 'recoil';
 import { Sidebar } from './Sidebar';
+import { FileState } from '../../utils/houseBookFileProperty';
 
 const meta: Meta<typeof Sidebar> = {
   component: Sidebar,
@@ -20,18 +21,18 @@ type StoryType = StoryObj<typeof Sidebar>;
 const initializeState =
   ({
     filePath,
-    isDirty = false,
+    fileState = FileState.Dirty,
     isActive = false,
   }: {
     filePath: string;
-    isDirty?: boolean;
+    fileState?: FileState;
     isActive?: boolean;
   }) =>
   ({ set }: { set: SetRecoilState }) => {
     set(houseBookIds, ['1234']);
     set(houseBookFilePropertyState({ id: '1234' }), {
       filePath,
-      isDirty,
+      fileState,
     });
     if (isActive) {
       set(activeFileIdState, '1234');
@@ -59,7 +60,7 @@ export const Dirty: StoryType = {
         <RecoilRoot
           initializeState={initializeState({
             filePath: 'C//work/sample.json',
-            isDirty: true,
+            fileState: FileState.Dirty,
           })}
         >
           <Story />

@@ -11,6 +11,7 @@ import {
   houseBookIds,
 } from '@/stores/atoms/houseBookState';
 import { HouseBookList } from './HouseBookFileList';
+import { FileState } from '../../utils/houseBookFileProperty';
 
 const meta: Meta<typeof HouseBookList> = {
   title: 'features/files/components/HouseBookList',
@@ -30,18 +31,18 @@ type Story = StoryObj<typeof HouseBookList>;
 const initializeState =
   ({
     filePath,
-    isDirty = false,
+    fileState = FileState.Dirty,
     isActive = false,
   }: {
     filePath: string;
-    isDirty?: boolean;
+    fileState?: FileState;
     isActive?: boolean;
   }) =>
   ({ set }: { set: SetRecoilState }) => {
     set(houseBookIds, ['1234']);
     set(houseBookFilePropertyState({ id: '1234' }), {
       filePath,
-      isDirty,
+      fileState,
     });
     if (isActive) {
       set(activeFileIdState, '1234');
