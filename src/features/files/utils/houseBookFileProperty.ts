@@ -15,6 +15,8 @@ export type HouseBookFileProperty = {
 
 export const HouseBookFileProperty = {
   newFilePath: '',
+  newFileName: '新規ファイル',
+
   /**
    * 初期化
    * @returns 作成したHouseBookFileProperty

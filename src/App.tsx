@@ -21,9 +21,11 @@ const App = memo(() => {
         <button type="button" onClick={createNewFile}>
           新規作成
         </button>
-        {activeFileId !== InactiveFileId && (
-          <HouseBookEditor key={activeFileId} fileId={activeFileId} />
-        )}
+        <div className={styles['editor-block']}>
+          {activeFileId !== InactiveFileId && (
+            <HouseBookEditor key={activeFileId} fileId={activeFileId} />
+          )}
+        </div>
       </div>
     </FileProvider>
   );

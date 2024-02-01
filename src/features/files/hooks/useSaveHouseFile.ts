@@ -23,7 +23,9 @@ type Props = {
 };
 
 const useSaveHouseFile = ({ id }: Props) => {
-  const { filePath } = useRecoilValue(houseBookFilePropertyState({ id }));
+  const { filePath, fileState } = useRecoilValue(
+    houseBookFilePropertyState({ id }),
+  );
   const items = useRecoilValue(houseBookItemsState({ id }));
   const { year, month } = useRecoilValue(houseBookDateState({ id }));
   const { setFileState } = useSetHouseBookFilePropertyState({ id });
@@ -31,6 +33,31 @@ const useSaveHouseFile = ({ id }: Props) => {
   const [saveStatus, setSaveStatus] = useState<HouseFileSaveStatus>(
     HouseFileSaveStatus.Idle,
   );
+
+  const saveNewFile = useCallback(async () => {
+    const jsonData = HouseBookData.toJson({
+      date: {
+        year,
+        month,
+      },
+      items,
+    });
+    const result = await window.api.invoke.saveFile(jsonData);
+
+    if (result.status === FileOpenStatus.Error) {
+      setSaveStatus(HouseFileSaveStatus.Error);
+
+      return;
+    }
+
+    if (result.status === FileOpenStatus.Cancel) {
+      setSaveStatus(HouseFileSaveStatus.Idle);
+
+      return;
+    }
+
+    setFileState(FileState.Saved);
+  }, [items, month, setFileState, year]);
 
   const overWriteSaveFile = useCallback(async () => {
     const jsonData = HouseBookData.toJson({
@@ -60,9 +87,19 @@ const useSaveHouseFile = ({ id }: Props) => {
     setFileState(FileState.Saved);
   }, [filePath, items, month, setFileState, year]);
 
+  const saveFile = useCallback(() => {
+    if (fileState === FileState.NewFile) {
+      void saveNewFile();
+
+      return;
+    }
+
+    void overWriteSaveFile();
+  }, [fileState, overWriteSaveFile, saveNewFile]);
+
   return {
     saveStatus,
-    overWriteSaveFile,
+    saveFile,
   };
 };
 

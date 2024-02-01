@@ -19,7 +19,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const { setHouseBookItems } = useSetHouseBookItemsState(fileId);
   const editor = useEditor({ initialPurchasedItems: houseBookItems });
   const isFirstRef = useRef(true);
-  const { overWriteSaveFile } = useSaveHouseFile({ id: fileId });
+  const { saveFile } = useSaveHouseFile({ id: fileId });
 
   useEffect(() => {
     if (isFirstRef.current) {
@@ -41,12 +41,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
           editor.addPurhcasedItem(HouseBookItem.init())
         }
       />
-      <button
-        type="button"
-        onClick={() => {
-          void overWriteSaveFile();
-        }}
-      >
+      <button type="button" onClick={saveFile}>
         保存
       </button>
     </div>

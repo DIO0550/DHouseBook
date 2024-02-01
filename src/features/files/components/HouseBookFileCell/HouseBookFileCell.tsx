@@ -6,10 +6,29 @@ import { useRecoilValue } from 'recoil';
 import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
 import { useActiveFileIdState } from '@/stores/atoms/useActiveFileIdState';
 import styles from './HouseBookFileCell.module.scss';
-import { FileState } from '../../utils/houseBookFileProperty';
+import {
+  FileState,
+  HouseBookFileProperty,
+} from '../../utils/houseBookFileProperty';
 
 type Props = {
   fileId: string;
+};
+
+const fileName = (path: string, fileState: FileState) => {
+  if (fileState === FileState.NewFile) {
+    return HouseBookFileProperty.newFileName;
+  }
+
+  return FilePath.getFileName(path);
+};
+
+const filePath = (path: string, fileState: FileState) => {
+  if (fileState === FileState.NewFile) {
+    return HouseBookFileProperty.newFilePath;
+  }
+
+  return path;
 };
 
 const HouseBookFileCell = memo<Props>(({ fileId }) => {
@@ -18,7 +37,6 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
     houseBookFilePropertyState({ id: fileId }),
   );
   const { isActive } = useActiveFileIdState();
-  const fileName = FilePath.getFileName(fileProperty.filePath);
   const { setActiveFileId } = useSetActiveFileIdState();
   const handleClick = () => {
     setActiveFileId(fileId);
@@ -37,13 +55,13 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
           <div
             className={`${styles['file-info']} ${styles['file-info-skin']} ${styles['file-name']} ${styles['file-name-skin']}`}
           >
-            {fileName}
+            {fileName(fileProperty.filePath, fileProperty.fileState)}
           </div>
 
           <div
             className={`${styles['file-info']} ${styles['file-info-skin']} ${styles['file-path']}`}
           >
-            {fileProperty.filePath}
+            {filePath(fileProperty.filePath, fileProperty.fileState)}
           </div>
         </div>
 
