@@ -8,7 +8,7 @@ import { useCallback, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
 import { HouseBookData } from '../utils/houseBookData';
-import { FileState } from '../utils/houseBookFileProperty';
+import { HouseBookFileState } from '../utils/houseBookFileProperty';
 
 export const HouseFileSaveStatus = {
   Idle: 'idle',
@@ -23,7 +23,7 @@ type Props = {
 };
 
 const useSaveHouseFile = ({ id }: Props) => {
-  const { filePath, fileState } = useRecoilValue(
+  const { filePath, fileState, isNewFile } = useRecoilValue(
     houseBookFilePropertyState({ id }),
   );
   const items = useRecoilValue(houseBookItemsState({ id }));
@@ -56,7 +56,7 @@ const useSaveHouseFile = ({ id }: Props) => {
       return;
     }
 
-    setFileState(FileState.Saved);
+    setFileState(HouseBookFileState.Saved);
   }, [items, month, setFileState, year]);
 
   const overWriteSaveFile = useCallback(async () => {
@@ -84,18 +84,18 @@ const useSaveHouseFile = ({ id }: Props) => {
       return;
     }
 
-    setFileState(FileState.Saved);
+    setFileState(HouseBookFileState.Saved);
   }, [filePath, items, month, setFileState, year]);
 
   const saveFile = useCallback(() => {
-    if (fileState === FileState.NewFile) {
+    if (isNewFile) {
       void saveNewFile();
 
       return;
     }
 
     void overWriteSaveFile();
-  }, [fileState, overWriteSaveFile, saveNewFile]);
+  }, [isNewFile, overWriteSaveFile, saveNewFile]);
 
   return {
     saveStatus,

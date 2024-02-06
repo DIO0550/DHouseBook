@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 import useSetHouseBookItemsState from '@/stores/atoms/useSetHouseBookItemsState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
 import { useSaveHouseFile } from '@/features/files/hooks/useSaveHouseFile';
-import { FileState } from '@/features/files/utils/houseBookFileProperty';
+import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
 import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
 import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
 
@@ -26,7 +26,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
       isFirstRef.current = false;
     } else {
       setHouseBookItems(editor.purchasedItems);
-      setFileState(FileState.Dirty);
+      setFileState(HouseBookFileState.Dirty);
     }
   }, [editor.purchasedItems, setFileState, setHouseBookItems]);
 

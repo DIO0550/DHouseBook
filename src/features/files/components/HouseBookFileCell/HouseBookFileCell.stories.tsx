@@ -5,7 +5,7 @@ import { RecoilRoot, SetRecoilState } from 'recoil';
 import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
 import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
 import { HouseBookFileCell } from './HouseBookFileCell';
-import { FileState } from '../../utils/houseBookFileProperty';
+import { HouseBookFileState } from '../../utils/houseBookFileProperty';
 
 const HouseBookId = '1234';
 const HouseBookFilePath = 'C//work/sample.json';
@@ -25,17 +25,20 @@ type Story = StoryObj<typeof HouseBookFileCell>;
 const initializeState =
   ({
     filePath,
-    fileState = FileState.Dirty,
+    fileState = HouseBookFileState.Dirty,
+    isNewFile = false,
     isActive = false,
   }: {
     filePath: string;
-    fileState?: FileState;
+    fileState?: HouseBookFileState;
+    isNewFile?: boolean;
     isActive?: boolean;
   }) =>
   ({ set }: { set: SetRecoilState }) => {
-    set(houseBookFilePropertyState({ id: HouseBookId }), {
+    set(houseBookFilePropertyState({ id: '1234' }), {
       filePath,
       fileState,
+      isNewFile,
     });
     if (isActive) {
       set(activeFileIdState, HouseBookId);

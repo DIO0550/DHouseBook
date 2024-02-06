@@ -7,7 +7,7 @@ import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
 import { useActiveFileIdState } from '@/stores/atoms/useActiveFileIdState';
 import styles from './HouseBookFileCell.module.scss';
 import {
-  FileState,
+  HouseBookFileState,
   HouseBookFileProperty,
 } from '../../utils/houseBookFileProperty';
 
@@ -15,16 +15,16 @@ type Props = {
   fileId: string;
 };
 
-const fileName = (path: string, fileState: FileState) => {
-  if (fileState === FileState.NewFile) {
+const fileName = (path: string, isNewFile: boolean) => {
+  if (isNewFile) {
     return HouseBookFileProperty.newFileName;
   }
 
   return FilePath.getFileName(path);
 };
 
-const filePath = (path: string, fileState: FileState) => {
-  if (fileState === FileState.NewFile) {
+const filePath = (path: string, isNewFile: boolean) => {
+  if (isNewFile) {
     return HouseBookFileProperty.newFilePath;
   }
 
@@ -55,23 +55,20 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
           <div
             className={`${styles['file-info']} ${styles['file-info-skin']} ${styles['file-name']} ${styles['file-name-skin']}`}
           >
-            {fileName(fileProperty.filePath, fileProperty.fileState)}
+            {fileName(fileProperty.filePath, fileProperty.isNewFile)}
           </div>
 
           <div
             className={`${styles['file-info']} ${styles['file-info-skin']} ${styles['file-path']}`}
           >
-            {filePath(fileProperty.filePath, fileProperty.fileState)}
+            {filePath(fileProperty.filePath, fileProperty.isNewFile)}
           </div>
         </div>
 
         <div
           className={`${styles['file-info']} ${styles['file-info-skin']} ${styles.dirty}`}
         >
-          {fileProperty.fileState === FileState.Dirty ||
-          fileProperty.fileState === FileState.NewFile
-            ? '●'
-            : ''}
+          {fileProperty.fileState === HouseBookFileState.Dirty ? '●' : ''}
         </div>
       </button>
     </li>

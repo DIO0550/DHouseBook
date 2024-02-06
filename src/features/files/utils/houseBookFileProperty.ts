@@ -1,16 +1,17 @@
 type HouseBookFilePath = string | typeof HouseBookFileProperty.newFilePath;
 
-export const FileState = {
-  NewFile: 'NewFile',
+export const HouseBookFileState = {
   Saved: 'Saved',
   Dirty: 'Dirty',
 } as const;
 
-export type FileState = (typeof FileState)[keyof typeof FileState];
+export type HouseBookFileState =
+  (typeof HouseBookFileState)[keyof typeof HouseBookFileState];
 
 export type HouseBookFileProperty = {
   filePath: HouseBookFilePath;
-  fileState: FileState;
+  fileState: HouseBookFileState;
+  isNewFile: boolean;
 };
 
 export const HouseBookFileProperty = {
@@ -23,7 +24,8 @@ export const HouseBookFileProperty = {
    */
   init: (): HouseBookFileProperty => ({
     filePath: HouseBookFileProperty.newFilePath,
-    fileState: FileState.NewFile,
+    fileState: HouseBookFileState.Dirty,
+    isNewFile: true,
   }),
 
   /**
@@ -31,9 +33,14 @@ export const HouseBookFileProperty = {
    * @param filePath ファイルパス
    * @returns 作成したHouseBookFileProperty
    */
-  initWithFilePath: ({ filePath }: { filePath: string }) => ({
+  initWithFilePath: ({
     filePath,
-    fileState: FileState.Saved,
+  }: {
+    filePath: string;
+  }): HouseBookFileProperty => ({
+    filePath,
+    fileState: HouseBookFileState.Saved,
+    isNewFile: false,
   }),
 
   /**
