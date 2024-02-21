@@ -14,9 +14,13 @@ export interface BookApi {
       contents,
       filePath,
     }: OverwriteSaveFileInfo) => Promise<FileSaveResult>;
+    createNewFile: () => Promise<void>;
   };
 
-  on: { openFile: (listener: (result: FileOpenResult) => void) => () => void };
+  on: {
+    openFile: (listener: (result: FileOpenResult) => void) => () => void;
+    createNewFile: (listener: () => void) => () => void;
+  };
 }
 
 declare global {

@@ -23,7 +23,7 @@ type Props = {
 };
 
 const useSaveHouseFile = ({ id }: Props) => {
-  const { filePath, fileState, isNewFile } = useRecoilValue(
+  const { filePath, isNewFile } = useRecoilValue(
     houseBookFilePropertyState({ id }),
   );
   const items = useRecoilValue(houseBookItemsState({ id }));

@@ -38,6 +38,13 @@ const invokeSaveFile = (contents: string) =>
 const invokeOverwriteSaveFile = (info: OverwriteSaveFileInfo) =>
   ipcRenderer.invoke(DialogIpc.Invoke.OverwriteSave, info);
 
+/**
+ * ファイル新規作成
+ * @returns ファイル新規作成処理
+ */
+const invokeCreateNewFile = () =>
+  ipcRenderer.invoke(DialogIpc.Invoke.CreateNewFile);
+
 contextBridge.exposeInMainWorld('api', {
   on: {
     openFile: onOpenFile,
@@ -46,5 +53,6 @@ contextBridge.exposeInMainWorld('api', {
     openFile: invokeOpenFile,
     saveFile: invokeSaveFile,
     overwriteSaveFile: invokeOverwriteSaveFile,
+    createNewFile: invokeCreateNewFile,
   },
 });

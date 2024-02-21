@@ -8,19 +8,14 @@ import {
   InactiveFileId,
   activeFileIdState,
 } from './stores/atoms/activeFileIdState';
-import { useCreateFile } from './features/files/hooks/useCreateFile';
 
 const App = memo(() => {
   const activeFileId = useRecoilValue(activeFileIdState);
-  const { createNewFile } = useCreateFile();
 
   return (
     <FileProvider>
       <div className={styles['contents-container']}>
         <Sidebar />
-        <button type="button" onClick={createNewFile}>
-          新規作成
-        </button>
         <div className={styles['editor-block']}>
           {activeFileId !== InactiveFileId && (
             <HouseBookEditor key={activeFileId} fileId={activeFileId} />

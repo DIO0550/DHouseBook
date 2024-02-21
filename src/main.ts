@@ -34,7 +34,7 @@ const createWindow = () => {
 
 const fileOpen = () => {
   const filePaths = dialog.showOpenDialogSync(mainWindow, {
-    buttonLabel: '開く', // 確認ボタンのラベル
+    buttonLabel: '開く',
     filters: FileFilters,
     properties: ['openFile', 'createDirectory'],
   });
@@ -73,6 +73,10 @@ const fileOpen = () => {
   }
 };
 
+const createNewFile = () => {
+  mainWindow.webContents.send(DialogIpc.Send.CreateNewFile);
+};
+
 // アプリ初期化時
 void app.whenReady().then(async () => {
   if (isDev) {
@@ -99,6 +103,12 @@ const appMenu = Menu.buildFromTemplate([
         label: '開く',
         click: () => {
           fileOpen();
+        },
+      },
+      {
+        label: '新規作成',
+        click: () => {
+          createNewFile();
         },
       },
     ],

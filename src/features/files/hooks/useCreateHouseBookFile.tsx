@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { HouseBookData } from '../utils/houseBookData';
 import { HouseBookFileProperty } from '../utils/houseBookFileProperty';
 
-const useCreateFile = () => {
+const useCreateHouseBookFile = () => {
   const { setNewHouseBook } = useSetHouseBookState();
   const { setActiveFileId } = useSetActiveFileIdState();
 
@@ -25,4 +25,4 @@ const useCreateFile = () => {
   return { createNewFile };
 };
 
-export { useCreateFile };
+export { useCreateHouseBookFile };

@@ -5,18 +5,21 @@ export const DialogIpc = {
     Open: 'FileOpen',
     Save: 'FileSave',
     OverwriteSave: 'FileOverwriteSave',
+    CreateNewFile: 'CreateNewFile',
   },
 
   On: {
     Open: 'FileOpen',
     Save: 'FileSave',
     OverwriteSave: 'FileOverwriteSave',
+    CreateNewFile: 'CreateNewFile',
   },
 
   Send: {
     Open: 'FileOpen',
     Save: 'FileSave',
     OverwriteSave: 'FileOverwriteSave',
+    CreateNewFile: 'CreateNewFile',
   },
 } as const;
 
