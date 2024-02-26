@@ -14,6 +14,7 @@ export const HouseFileOpenStatus = {
 type FileOpenStatus =
   (typeof HouseFileOpenStatus)[keyof typeof HouseFileOpenStatus];
 
+// TODO: 使われてないので不要
 const useOpenHouseFile = () => {
   const { openHouseBook: openHouseBookFile } = useSetHouseBookState();
   const { setActiveFileId } = useSetActiveFileIdState();
