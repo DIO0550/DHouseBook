@@ -60,6 +60,8 @@
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "react-redux": "^8.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "recoil": "^0.7.7",
     "slate": "^0.91.4",
     "slate-history": "^0.86.0",

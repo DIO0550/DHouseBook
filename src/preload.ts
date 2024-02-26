@@ -45,9 +45,20 @@ const invokeOverwriteSaveFile = (info: OverwriteSaveFileInfo) =>
 const invokeCreateNewFile = () =>
   ipcRenderer.invoke(DialogIpc.Invoke.CreateNewFile);
 
+const onCreateNewFile = (listener: () => void) => {
+  ipcRenderer.on(DialogIpc.On.CreateNewFile, (_: IpcRendererEvent) =>
+    listener(),
+  );
+
+  return () => {
+    ipcRenderer.removeAllListeners(DialogIpc.On.CreateNewFile);
+  };
+};
+
 contextBridge.exposeInMainWorld('api', {
   on: {
     openFile: onOpenFile,
+    createNewFile: onCreateNewFile,
   },
   invoke: {
     openFile: invokeOpenFile,
