@@ -16,7 +16,7 @@ type FileOpenStatus =
   (typeof HouseFileOpenStatus)[keyof typeof HouseFileOpenStatus];
 
 const useFileOpen = () => {
-  const { openHouseBook: openHouseBookFile } = useSetHouseBookState();
+  const { setHouseBookState } = useSetHouseBookState();
   const { setActiveFileId } = useSetActiveFileIdState();
   const [openStatus, setOpenStatus] = useState<FileOpenStatus>(
     HouseFileOpenStatus.Idle,
@@ -36,8 +36,8 @@ const useFileOpen = () => {
 
         return;
       }
-      const bookData = HouseBookData.fromJsonString(result.text || '');
-      if (!bookData) {
+      const data = HouseBookData.fromJsonString(result.text || '');
+      if (!data) {
         setOpenStatus(HouseFileOpenStatus.Error);
 
         return;
@@ -46,7 +46,7 @@ const useFileOpen = () => {
         filePath: result.filePath,
       });
       const id = uuidv4();
-      openHouseBookFile({ id, fileProperty, bookData });
+      setHouseBookState({ id, fileProperty, data });
       setActiveFileId(id);
       setOpenStatus(HouseFileOpenStatus.Idle);
     };

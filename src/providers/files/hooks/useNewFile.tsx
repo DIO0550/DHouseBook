@@ -1,12 +1,17 @@
-import { useCreateHouseBookFile } from '@/features/files/hooks/useCreateHouseBookFile';
+import { HouseBookState } from '@/stores/atoms/houseBookState';
+import { useSetActiveFileIdState } from '@/stores/atoms/useSetActiveFileIdState';
+import { useSetHouseBookState } from '@/stores/atoms/useSetHouseBookState';
 import { useEffect } from 'react';
 
 const useNewFile = () => {
-  const { createNewFile } = useCreateHouseBookFile();
+  const { setNewHouseBookState } = useSetHouseBookState();
+  const { setActiveFileId } = useSetActiveFileIdState();
 
   useEffect(() => {
     const createNewFileCallback = () => {
-      createNewFile();
+      const houseBookState = HouseBookState.init();
+      setNewHouseBookState(houseBookState);
+      setActiveFileId(houseBookState.id);
     };
 
     // イベントを受け取る

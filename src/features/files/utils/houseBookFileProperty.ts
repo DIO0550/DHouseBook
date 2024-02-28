@@ -1,4 +1,4 @@
-type HouseBookFilePath = string | typeof HouseBookFileProperty.newFilePath;
+type HouseBookFilePath = string;
 
 export const HouseBookFileState = {
   Saved: 'Saved',

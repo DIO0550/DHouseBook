@@ -1,7 +1,23 @@
+import { HouseBookData } from '@/features/files/utils/houseBookData';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
 import { HouseBookFileProperty } from '@/features/files/utils/houseBookFileProperty';
 import { HouseBookItems } from '@/utils/editors/houseBookItem';
 import { atom, atomFamily, selector } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
+
+export type HouseBookState = {
+  id: string;
+  fileProperty: HouseBookFileProperty;
+  data: HouseBookData;
+};
+
+export const HouseBookState = {
+  init: (): HouseBookState => ({
+    id: uuidv4(),
+    fileProperty: HouseBookFileProperty.init(),
+    data: HouseBookData.init(),
+  }),
+};
 
 export const houseBookIds = atom<string[]>({
   key: 'houseBookIds',
