@@ -1,33 +1,24 @@
+import { HouseFileSaveStatus } from '@/features/files/hooks/useSaveHouseFile';
+import { HouseBookData } from '@/features/files/utils/houseBookData';
+import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
 import {
-  houseBookDateState,
   houseBookFilePropertyState,
   houseBookItemsState,
+  houseBookDateState,
 } from '@/stores/atoms/houseBookState';
-import { FileOpenStatus } from '@/types/fileOpen';
-import { useCallback, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
-import { HouseBookData } from '../utils/houseBookData';
-import { HouseBookFileState } from '../utils/houseBookFileProperty';
-
-export const HouseFileSaveStatus = {
-  Idle: 'idle',
-  Open: 'open',
-  Error: 'error',
-} as const;
-export type HouseFileSaveStatus =
-  (typeof HouseFileSaveStatus)[keyof typeof HouseFileSaveStatus];
+import { FileOpenStatus } from '@/types/fileOpen';
+import { useState, useCallback, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
 type Props = {
   id: string;
 };
 
-const useSaveHouseFile = ({ id }: Props) => {
-  const { filePath, isNewFile } = useRecoilValue(
-    houseBookFilePropertyState({ id }),
-  );
+const useFileSave = ({ id }: Props) => {
+  const filePropertyState = useRecoilValue(houseBookFilePropertyState({ id }));
   const items = useRecoilValue(houseBookItemsState({ id }));
-  const { year, month } = useRecoilValue(houseBookDateState({ id }));
+  const bookDateState = useRecoilValue(houseBookDateState({ id }));
   const { setFileState } = useSetHouseBookFilePropertyState({ id });
 
   const [saveStatus, setSaveStatus] = useState<HouseFileSaveStatus>(
@@ -35,10 +26,14 @@ const useSaveHouseFile = ({ id }: Props) => {
   );
 
   const saveNewFile = useCallback(async () => {
+    if (!bookDateState) {
+      return;
+    }
+
     const jsonData = HouseBookData.toJson({
       date: {
-        year,
-        month,
+        year: bookDateState.year,
+        month: bookDateState.month,
       },
       items,
     });
@@ -57,19 +52,23 @@ const useSaveHouseFile = ({ id }: Props) => {
     }
 
     setFileState(HouseBookFileState.Saved);
-  }, [items, month, setFileState, year]);
+  }, [bookDateState, items, setFileState]);
 
   const overwriteSaveFile = useCallback(async () => {
+    if (!filePropertyState.filePath || !bookDateState) {
+      return;
+    }
+
     const jsonData = HouseBookData.toJson({
       date: {
-        year,
-        month,
+        year: bookDateState.year,
+        month: bookDateState.month,
       },
       items,
     });
     const result = await window.api.invoke.overwriteSaveFile({
       contents: jsonData,
-      filePath,
+      filePath: filePropertyState.filePath,
     });
 
     if (result.status === FileOpenStatus.Error) {
@@ -85,22 +84,33 @@ const useSaveHouseFile = ({ id }: Props) => {
     }
 
     setFileState(HouseBookFileState.Saved);
-  }, [filePath, items, month, setFileState, year]);
+  }, [bookDateState, filePropertyState, items, setFileState]);
 
   const saveFile = useCallback(() => {
-    if (isNewFile) {
+    if (!filePropertyState || filePropertyState.isNewFile) {
       void saveNewFile();
 
       return;
     }
 
     void overwriteSaveFile();
-  }, [isNewFile, overwriteSaveFile, saveNewFile]);
+  }, [filePropertyState, overwriteSaveFile, saveNewFile]);
+
+  useEffect(() => {
+    const saveCallback = () => {
+      saveFile();
+    };
+    // イベントを受け取る
+    const remove = window.api.on.saveFile(saveCallback);
+
+    return () => {
+      remove();
+    };
+  }, [saveFile]);
 
   return {
     saveStatus,
-    saveFile,
   };
 };
 
-export { useSaveHouseFile };
+export { useFileSave };

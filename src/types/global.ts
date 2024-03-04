@@ -19,6 +19,7 @@ export interface BookApi {
 
   on: {
     openFile: (listener: (result: FileOpenResult) => void) => () => void;
+    saveFile: (listener: (result: FileSaveResult) => void) => () => void;
     createNewFile: (listener: () => void) => () => void;
   };
 }

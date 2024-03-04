@@ -32,7 +32,10 @@ const createWindow = () => {
   void mainWindow.loadFile(path.join(__dirname, 'index.html'));
 };
 
-const fileOpen = () => {
+/**
+ * ファイルを開く
+ */
+const openFile = () => {
   const filePaths = dialog.showOpenDialogSync(mainWindow, {
     buttonLabel: '開く',
     filters: FileFilters,
@@ -73,6 +76,16 @@ const fileOpen = () => {
   }
 };
 
+/**
+ * ファイル保存
+ */
+const saveFile = () => {
+  mainWindow.webContents.send(DialogIpc.Send.Save);
+};
+
+/**
+ * 新規ファイル作成
+ */
 const createNewFile = () => {
   mainWindow.webContents.send(DialogIpc.Send.CreateNewFile);
 };
@@ -102,13 +115,22 @@ const appMenu = Menu.buildFromTemplate([
       {
         label: '開く',
         click: () => {
-          fileOpen();
+          openFile();
         },
       },
       {
         label: '新規作成',
         click: () => {
           createNewFile();
+        },
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: '保存',
+        click: () => {
+          saveFile();
         },
       },
     ],

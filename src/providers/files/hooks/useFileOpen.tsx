@@ -23,7 +23,7 @@ const useFileOpen = () => {
   );
 
   useEffect(() => {
-    const openCallBack = (result: FileOpenResult) => {
+    const openCallback = (result: FileOpenResult) => {
       setOpenStatus(HouseFileOpenStatus.Open);
 
       if (result.status === FileOpenStatus.Error) {
@@ -52,7 +52,7 @@ const useFileOpen = () => {
     };
 
     // イベントを受け取る
-    const remove = window.api.on.openFile(openCallBack);
+    const remove = window.api.on.openFile(openCallback);
 
     return () => {
       remove();
