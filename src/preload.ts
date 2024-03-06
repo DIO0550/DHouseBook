@@ -10,7 +10,7 @@ import { FileOpenResult } from './types/fileOpen';
  */
 const invokeOpenFile = () => ipcRenderer.invoke(DialogIpc.Invoke.Open);
 
-// メインプロセス => レンダラープロセス
+//  レンダラープロセス => メインプロセス
 const onOpenFile = (listener: (result: FileOpenResult) => void) => {
   ipcRenderer.on(
     DialogIpc.On.Open,
@@ -29,6 +29,18 @@ const onOpenFile = (listener: (result: FileOpenResult) => void) => {
  */
 const invokeSaveFile = (contents: string) =>
   ipcRenderer.invoke(DialogIpc.Invoke.Open, contents);
+
+/**
+ * ファイル保存
+ * レンダラープロセス => メインプロセス
+ */
+const onSaveFile = (listener: () => void) => {
+  ipcRenderer.on(DialogIpc.On.Save, (_: IpcRendererEvent) => listener());
+
+  return () => {
+    ipcRenderer.removeAllListeners(DialogIpc.On.Save);
+  };
+};
 
 /**
  * ファイルを上書き保存する
@@ -58,6 +70,7 @@ const onCreateNewFile = (listener: () => void) => {
 contextBridge.exposeInMainWorld('api', {
   on: {
     openFile: onOpenFile,
+    saveFile: onSaveFile,
     createNewFile: onCreateNewFile,
   },
   invoke: {

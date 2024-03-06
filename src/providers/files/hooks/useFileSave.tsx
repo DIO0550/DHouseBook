@@ -1,4 +1,3 @@
-import { HouseFileSaveStatus } from '@/features/files/hooks/useSaveHouseFile';
 import { HouseBookData } from '@/features/files/utils/houseBookData';
 import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
 import {
@@ -10,6 +9,14 @@ import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFile
 import { FileOpenStatus } from '@/types/fileOpen';
 import { useState, useCallback, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
+
+export const HouseFileSaveStatus = {
+  Idle: 'idle',
+  Open: 'open',
+  Error: 'error',
+} as const;
+export type HouseFileSaveStatus =
+  (typeof HouseFileSaveStatus)[keyof typeof HouseFileSaveStatus];
 
 type Props = {
   id: string;
