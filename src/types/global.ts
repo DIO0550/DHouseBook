@@ -1,3 +1,4 @@
+import { BookThemeColor } from '@/components/Providers';
 import { FileOpenResult } from './fileOpen';
 import { FileSaveResult } from './fileSave';
 
@@ -15,12 +16,14 @@ export interface BookApi {
       filePath,
     }: OverwriteSaveFileInfo) => Promise<FileSaveResult>;
     createNewFile: () => Promise<void>;
+    changeThemeColor: () => Promise<void>;
   };
 
   on: {
     openFile: (listener: (result: FileOpenResult) => void) => () => void;
     saveFile: (listener: () => void) => () => void;
     createNewFile: (listener: () => void) => () => void;
+    changeThemeColor: (listener: (value: BookThemeColor) => void) => () => void;
   };
 }
 

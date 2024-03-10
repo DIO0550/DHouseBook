@@ -3,6 +3,8 @@ import { IpcRendererEvent, contextBridge, ipcRenderer } from 'electron';
 import { DialogIpc } from './utils/dialogs/dialog';
 import { OverwriteSaveFileInfo } from './types/global';
 import { FileOpenResult } from './types/fileOpen';
+import { ThemeColorIpc } from './utils/ipcs/themeColors';
+import { BookThemeColor } from './components/Providers';
 
 /**
  * ファイルを開く
@@ -67,11 +69,24 @@ const onCreateNewFile = (listener: () => void) => {
   };
 };
 
+// テーマカラー変更
+const onChangeThemeColor = (listener: (value: BookThemeColor) => void) => {
+  ipcRenderer.on(
+    ThemeColorIpc.On.Change,
+    (_: IpcRendererEvent, value: BookThemeColor) => listener(value),
+  );
+
+  return () => {
+    ipcRenderer.removeAllListeners(ThemeColorIpc.On.Change);
+  };
+};
+
 contextBridge.exposeInMainWorld('api', {
   on: {
     openFile: onOpenFile,
     saveFile: onSaveFile,
     createNewFile: onCreateNewFile,
+    changeThemeColor: onChangeThemeColor,
   },
   invoke: {
     openFile: invokeOpenFile,

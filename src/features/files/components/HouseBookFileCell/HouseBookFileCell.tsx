@@ -10,6 +10,7 @@ import {
   HouseBookFileState,
   HouseBookFileProperty,
 } from '../../utils/houseBookFileProperty';
+import { useHouseBookFileClose } from '../../hooks/useHouseBookFileClose';
 
 type Props = {
   fileId: string;
@@ -33,6 +34,7 @@ const filePath = (path: string, isNewFile: boolean) => {
 
 const HouseBookFileCell = memo<Props>(({ fileId }) => {
   const themeColor = useThemeContext();
+  const { closeHouseBookFile } = useHouseBookFileClose();
   const fileProperty = useRecoilValue(
     houseBookFilePropertyState({ id: fileId }),
   );
@@ -44,6 +46,14 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
 
   return (
     <li>
+      <button
+        type="button"
+        onClick={() => {
+          closeHouseBookFile(fileId);
+        }}
+      >
+        閉じる
+      </button>
       <button
         className={`${styles['file-container']} ${styles[themeColor]} ${
           isActive(fileId) ? styles['is-active'] : ''

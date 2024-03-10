@@ -7,8 +7,9 @@ import { useRecoilValue } from 'recoil';
 import useSetHouseBookItemsState from '@/stores/atoms/useSetHouseBookItemsState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
 import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
-import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
-import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
+import { useHouseBookFileClose } from '@/features/files/hooks/useHouseBookFileClose';
+import { PurchasedItemList } from '@/features/editors/components/lists/PurchasedItemList';
+import { AddPurchasedItemButton } from '@/features/editors/components/editors/AddPurchasedItemButton';
 
 const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const houseBookItems = useRecoilValue(houseBookItemsState({ id: fileId }));
@@ -18,6 +19,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const { setHouseBookItems } = useSetHouseBookItemsState(fileId);
   const editor = useEditor({ initialPurchasedItems: houseBookItems });
   const isFirstRef = useRef(true);
+  const { closeHouseBookFile } = useHouseBookFileClose();
 
   useEffect(() => {
     if (isFirstRef.current) {
@@ -39,6 +41,15 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
           editor.addPurhcasedItem(HouseBookItem.init())
         }
       />
+      {/* TODO:閉じるボタン  */}
+      <button
+        type="button"
+        onClick={() => {
+          closeHouseBookFile(fileId);
+        }}
+      >
+        閉じる
+      </button>
     </div>
   );
 });
