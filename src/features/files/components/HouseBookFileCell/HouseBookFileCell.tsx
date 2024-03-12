@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { FilePath } from '@/features/files/utils/filePath';
-import { useThemeContext } from '@/components/Providers';
+import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import { useSetActiveFileIdState } from '@/stores/atoms/useSetActiveFileIdState';
 import { useRecoilValue } from 'recoil';
 import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
@@ -33,7 +33,7 @@ const filePath = (path: string, isNewFile: boolean) => {
 };
 
 const HouseBookFileCell = memo<Props>(({ fileId }) => {
-  const themeColor = useThemeContext();
+  const { themeColor } = useThemeContext();
   const { closeHouseBookFile } = useHouseBookFileClose();
   const fileProperty = useRecoilValue(
     houseBookFilePropertyState({ id: fileId }),

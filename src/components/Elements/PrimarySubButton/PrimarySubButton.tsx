@@ -1,5 +1,5 @@
 import { memo, MouseEvent } from 'react';
-import { useThemeContext } from '@/components/Providers';
+import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PrimarySubButton.module.scss';
 
 type Props = {
@@ -8,13 +8,13 @@ type Props = {
 };
 
 const PrimarySubButton = memo<Props>(({ title, handleClick }) => {
-  const theme = useThemeContext();
+  const { themeColor } = useThemeContext();
 
   return (
     <button
       type="button"
       onClick={handleClick}
-      className={`${styles['primary-sub']} ${styles[theme]}`}
+      className={`${styles['primary-sub']} ${styles[themeColor]}`}
     >
       <div>{title}</div>
     </button>

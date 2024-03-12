@@ -1,4 +1,4 @@
-import { BookThemeColor } from '@/components/Providers';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import { FileOpenResult } from './fileOpen';
 import { FileSaveResult } from './fileSave';
 
@@ -23,7 +23,7 @@ export interface BookApi {
     openFile: (listener: (result: FileOpenResult) => void) => () => void;
     saveFile: (listener: () => void) => () => void;
     createNewFile: (listener: () => void) => () => void;
-    changeThemeColor: (listener: (value: BookThemeColor) => void) => () => void;
+    changeThemeColor: (listener: (value: ThemeColor) => void) => () => void;
   };
 }
 

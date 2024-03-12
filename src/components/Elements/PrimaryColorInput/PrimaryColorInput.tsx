@@ -1,5 +1,5 @@
-import { useThemeContext } from '@/components/Providers/ThemeProvider/ThemeProvider';
 import { memo } from 'react';
+import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PrimaryColorInput.module.scss';
 
 type Props = {
@@ -13,11 +13,11 @@ type Props = {
 
 const PrimaryColorInput = memo<Props>(
   ({ defaultValue, type = 'text', onChange }) => {
-    const theme = useThemeContext();
+    const { themeColor } = useThemeContext();
 
     return (
       <input
-        className={`${styles.primary} ${styles[theme]}`}
+        className={`${styles.primary} ${styles[themeColor]}`}
         defaultValue={defaultValue}
         type={type}
         onChange={onChange}

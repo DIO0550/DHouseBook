@@ -4,7 +4,7 @@ import { PurchasedItemPrice } from '@/features/editors/components/cells/Purchase
 import { PurchasedItemType } from '@/features/editors/components/cells/PurchasedItemType';
 import { PurchasedItemDate } from '@/features/editors/components/cells/PurchasedItemDate';
 import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
-import { useThemeContext } from '@/components/Providers';
+import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PurchasedItemRow.module.scss';
 
 type Props = {
@@ -18,11 +18,11 @@ type Props = {
 
 const PurchasedItemRow = memo<Props>(
   ({ id, name, price, type, date, handleUpdate }) => {
-    const theme = useThemeContext();
+    const { themeColor } = useThemeContext();
 
     return (
       <div
-        className={`${styles.container} ${styles['container-skin']} ${styles[theme]}`}
+        className={`${styles.container} ${styles['container-skin']} ${styles[themeColor]}`}
       >
         <PurchasedItemName
           id={id}

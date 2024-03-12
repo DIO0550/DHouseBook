@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import { useThemeContext } from '@/components/Providers';
+import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PurchasedItemListHeader.module.scss';
 
 const PurchasedItemListHeader = memo(() => {
-  const theme = useThemeContext();
+  const { themeColor } = useThemeContext();
 
   return (
-    <header className={`${styles['header-container']} ${styles[theme]}`}>
+    <header className={`${styles['header-container']} ${styles[themeColor]}`}>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-name']}`}
       >
