@@ -10,6 +10,8 @@ import {
   FileOverwriteSaveResult,
   FileOverwriteSaveStatus,
 } from './types/fileOverwriteSave';
+import { ThemeColor } from './providers/themes/components/ThemeProvider/ThemeColor';
+import { ThemeColorIpc } from './utils/ipcs/themeColors';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -76,6 +78,10 @@ const openFile = () => {
   }
 };
 
+const changeThemeColor = (color: ThemeColor) => {
+  mainWindow.webContents.send(ThemeColorIpc.Send.Change, color);
+};
+
 /**
  * ファイル保存
  */
@@ -131,6 +137,15 @@ const appMenu = Menu.buildFromTemplate([
         label: '保存',
         click: () => {
           saveFile();
+        },
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: '青色',
+        click: () => {
+          changeThemeColor(ThemeColor.blue);
         },
       },
     ],

@@ -1,14 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import type { Meta, StoryObj } from '@storybook/react';
-import { BookThemeColor, ThemeProvider } from '@/components/Providers';
+import { ThemeProvider } from '@/components/Providers';
 import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
+
 import {
   houseBookIds,
   houseBookFilePropertyState,
 } from '@/stores/atoms/houseBookState';
 import { SetRecoilState, RecoilRoot } from 'recoil';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
+import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
 import { Sidebar } from './Sidebar';
-import { HouseBookFileState } from '../../utils/houseBookFileProperty';
 
 const meta: Meta<typeof Sidebar> = {
   component: Sidebar,
@@ -45,7 +47,7 @@ const initializeState =
 export const NotDirty: StoryType = {
   decorators: [
     (Story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>
+      <ThemeProvider initialValue={ThemeColor.red}>
         <RecoilRoot
           initializeState={initializeState({ filePath: 'C//work/sample.json' })}
         >
@@ -59,7 +61,7 @@ export const NotDirty: StoryType = {
 export const Dirty: StoryType = {
   decorators: [
     (Story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>
+      <ThemeProvider initialValue={ThemeColor.red}>
         <RecoilRoot
           initializeState={initializeState({
             filePath: 'C//work/sample.json',

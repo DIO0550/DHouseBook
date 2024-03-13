@@ -3,13 +3,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
 
-import { ThemeProvider, BookThemeColor } from '@/components/Providers';
+import { ThemeProvider } from '@/components/Providers';
 import { RecoilRoot, SetRecoilState } from 'recoil';
 import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
 import {
   houseBookFilePropertyState,
   houseBookIds,
 } from '@/stores/atoms/houseBookState';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import { HouseBookList } from './HouseBookFileList';
 import { HouseBookFileState } from '../../utils/houseBookFileProperty';
 
@@ -18,7 +19,7 @@ const meta: Meta<typeof HouseBookList> = {
   component: HouseBookList,
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
     ),
   ],
   render: () => <HouseBookList />,

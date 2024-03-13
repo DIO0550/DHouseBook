@@ -1,6 +1,6 @@
 import { memo, MouseEvent } from 'react';
+import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './SecondaryButton.module.scss';
-import { useThemeContext } from '@/components/Providers';
 
 type Props = {
   title: string;
@@ -8,13 +8,13 @@ type Props = {
 };
 
 const SecondaryButton = memo<Props>(({ title, handleClick }) => {
-  const theme = useThemeContext();
+  const { themeColor } = useThemeContext();
 
   return (
     <button
       type="button"
       onClick={handleClick}
-      className={`${styles.secondary} ${styles[theme]}`}
+      className={`${styles.secondary} ${styles[themeColor]}`}
     >
       <div>{title}</div>
     </button>

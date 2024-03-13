@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
-import { BookThemeColor, ThemeProvider } from '@/components/Providers';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
+import { ThemeProvider } from '@/components/Providers';
 import { SecondaryButton } from './SecondaryButton';
 
 const meta: Meta<typeof SecondaryButton> = {
@@ -16,7 +17,7 @@ type Story = StoryObj<typeof SecondaryButton>;
 export const Red: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -27,9 +28,7 @@ export const Red: Story = {
 export const Purple: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.purple}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.purple}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -40,9 +39,7 @@ export const Purple: Story = {
 export const Blue: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.blue}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.blue}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -53,9 +50,7 @@ export const Blue: Story = {
 export const Cyan: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.cyan}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.cyan}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -66,9 +61,7 @@ export const Cyan: Story = {
 export const Green: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.green}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.green}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -79,9 +72,7 @@ export const Green: Story = {
 export const Yellow: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.yellow}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.yellow}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -92,9 +83,7 @@ export const Yellow: Story = {
 export const Orange: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.orange}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.orange}>{story()}</ThemeProvider>
     ),
   ],
   args: {
@@ -105,9 +94,7 @@ export const Orange: Story = {
 export const Gray: Story = {
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.gray}>
-        {story()}
-      </ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.gray}>{story()}</ThemeProvider>
     ),
   ],
   args: {

@@ -8,21 +8,25 @@ import {
   InactiveFileId,
   activeFileIdState,
 } from './stores/atoms/activeFileIdState';
+import { ThemeColor } from './providers/themes/components/ThemeProvider/ThemeColor';
+import { ThemeProvider } from './components/Providers';
 
 const App = memo(() => {
   const activeFileId = useRecoilValue(activeFileIdState);
 
   return (
-    <FileProvider>
-      <div className={styles['contents-container']}>
-        <Sidebar />
-        <div className={styles['editor-block']}>
-          {activeFileId !== InactiveFileId && (
-            <HouseBookEditor key={activeFileId} fileId={activeFileId} />
-          )}
+    <ThemeProvider initialValue={ThemeColor.red}>
+      <FileProvider>
+        <div className={styles['contents-container']}>
+          <Sidebar />
+          <div className={styles['editor-block']}>
+            {activeFileId !== InactiveFileId && (
+              <HouseBookEditor key={activeFileId} fileId={activeFileId} />
+            )}
+          </div>
         </div>
-      </div>
-    </FileProvider>
+      </FileProvider>
+    </ThemeProvider>
   );
 });
 

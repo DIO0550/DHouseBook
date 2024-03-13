@@ -3,8 +3,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
 
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import { TestPurchasedItemData } from '@/tests/testPurchasedItem';
-import { ThemeProvider, BookThemeColor } from '@/components/Providers';
+import { ThemeProvider } from '@/components/Providers';
 import { PurchasedItemListHeader } from './PurchasedItemListHeader';
 
 const meta: Meta<typeof PurchasedItemListHeader> = {
@@ -12,7 +13,7 @@ const meta: Meta<typeof PurchasedItemListHeader> = {
   render: () => <PurchasedItemListHeader />,
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
     ),
   ],
 };

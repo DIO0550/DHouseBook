@@ -2,8 +2,8 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
-
-import { ThemeProvider, BookThemeColor } from '@/components/Providers';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
+import { ThemeProvider } from '@/components/Providers';
 import { PurchasedItemRow } from './PurchasedItemRow';
 
 const meta: Meta<typeof PurchasedItemRow> = {
@@ -11,7 +11,7 @@ const meta: Meta<typeof PurchasedItemRow> = {
   component: PurchasedItemRow,
   decorators: [
     (story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>{story()}</ThemeProvider>
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
     ),
   ],
   render: (args) => <PurchasedItemRow {...args} />,

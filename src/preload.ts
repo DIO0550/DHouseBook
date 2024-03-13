@@ -3,8 +3,8 @@ import { IpcRendererEvent, contextBridge, ipcRenderer } from 'electron';
 import { DialogIpc } from './utils/dialogs/dialog';
 import { OverwriteSaveFileInfo } from './types/global';
 import { FileOpenResult } from './types/fileOpen';
+import { ThemeColor } from './providers/themes/components/ThemeProvider/ThemeColor';
 import { ThemeColorIpc } from './utils/ipcs/themeColors';
-import { BookThemeColor } from './components/Providers';
 
 /**
  * ファイルを開く
@@ -70,10 +70,10 @@ const onCreateNewFile = (listener: () => void) => {
 };
 
 // テーマカラー変更
-const onChangeThemeColor = (listener: (value: BookThemeColor) => void) => {
+const onChangeThemeColor = (listener: (value: ThemeColor) => void) => {
   ipcRenderer.on(
     ThemeColorIpc.On.Change,
-    (_: IpcRendererEvent, value: BookThemeColor) => listener(value),
+    (_: IpcRendererEvent, value: ThemeColor) => listener(value),
   );
 
   return () => {

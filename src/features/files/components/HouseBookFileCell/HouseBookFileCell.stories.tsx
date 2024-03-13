@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Meta, StoryObj } from '@storybook/react';
-import { BookThemeColor, ThemeProvider } from '@/components/Providers';
+import { ThemeProvider } from '@/components/Providers';
 import { RecoilRoot, SetRecoilState } from 'recoil';
 import { houseBookFilePropertyState } from '@/stores/atoms/houseBookState';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
 import { HouseBookFileCell } from './HouseBookFileCell';
 import { HouseBookFileState } from '../../utils/houseBookFileProperty';
@@ -51,9 +52,7 @@ export const Red: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.red}>
-          {story()}
-        </ThemeProvider>
+        <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
       </RecoilRoot>
     ),
   ],
@@ -64,7 +63,7 @@ export const Purple: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.purple}>
+        <ThemeProvider initialValue={ThemeColor.purple}>
           {story()}
         </ThemeProvider>
       </RecoilRoot>
@@ -78,9 +77,7 @@ export const Blue: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.blue}>
-          {story()}
-        </ThemeProvider>
+        <ThemeProvider initialValue={ThemeColor.blue}>{story()}</ThemeProvider>
       </RecoilRoot>
     ),
   ],
@@ -92,9 +89,7 @@ export const Cyan: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.cyan}>
-          {story()}
-        </ThemeProvider>
+        <ThemeProvider initialValue={ThemeColor.cyan}>{story()}</ThemeProvider>
       </RecoilRoot>
     ),
   ],
@@ -106,9 +101,7 @@ export const Green: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.green}>
-          {story()}
-        </ThemeProvider>
+        <ThemeProvider initialValue={ThemeColor.green}>{story()}</ThemeProvider>
       </RecoilRoot>
     ),
   ],
@@ -120,7 +113,7 @@ export const Yellow: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.yellow}>
+        <ThemeProvider initialValue={ThemeColor.yellow}>
           {story()}
         </ThemeProvider>
       </RecoilRoot>
@@ -134,7 +127,7 @@ export const Orange: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.orange}>
+        <ThemeProvider initialValue={ThemeColor.orange}>
           {story()}
         </ThemeProvider>
       </RecoilRoot>
@@ -148,9 +141,7 @@ export const Gray: Story = {
       <RecoilRoot
         initializeState={initializeState({ filePath: HouseBookFilePath })}
       >
-        <ThemeProvider initialValue={BookThemeColor.gray}>
-          {story()}
-        </ThemeProvider>
+        <ThemeProvider initialValue={ThemeColor.gray}>{story()}</ThemeProvider>
       </RecoilRoot>
     ),
   ],

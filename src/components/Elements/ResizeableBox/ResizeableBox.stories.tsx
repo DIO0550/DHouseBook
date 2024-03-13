@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import type { Meta, StoryObj } from '@storybook/react';
-import { BookThemeColor, ThemeProvider } from '@/components/Providers';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
+import { ThemeProvider } from '@/components/Providers';
 import { ResizeableBox } from './ResizeableBox';
 
 const meta: Meta<typeof ResizeableBox> = {
@@ -22,7 +23,7 @@ export const Default: StoryType = {
   },
   decorators: [
     (Story) => (
-      <ThemeProvider initialValue={BookThemeColor.red}>
+      <ThemeProvider initialValue={ThemeColor.red}>
         <Story />
       </ThemeProvider>
     ),
