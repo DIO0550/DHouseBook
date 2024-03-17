@@ -78,6 +78,10 @@ const openFile = () => {
   }
 };
 
+/**
+ * テーマカラー変更
+ * @param color 設定する色
+ */
 const changeThemeColor = (color: ThemeColor) => {
   mainWindow.webContents.send(ThemeColorIpc.Send.Change, color);
 };
@@ -142,11 +146,63 @@ const appMenu = Menu.buildFromTemplate([
       {
         type: 'separator',
       },
+    ],
+  },
+  {
+    label: '設定',
+    submenu: [
       {
-        label: '青色',
-        click: () => {
-          changeThemeColor(ThemeColor.blue);
-        },
+        label: 'カラー設定',
+        submenu: [
+          {
+            label: '赤',
+            click: () => {
+              changeThemeColor(ThemeColor.red);
+            },
+          },
+          {
+            label: '紫',
+            click: () => {
+              changeThemeColor(ThemeColor.purple);
+            },
+          },
+          {
+            label: '青',
+            click: () => {
+              changeThemeColor(ThemeColor.blue);
+            },
+          },
+          {
+            label: 'シアン',
+            click: () => {
+              changeThemeColor(ThemeColor.cyan);
+            },
+          },
+          {
+            label: '緑',
+            click: () => {
+              changeThemeColor(ThemeColor.green);
+            },
+          },
+          {
+            label: '黄',
+            click: () => {
+              changeThemeColor(ThemeColor.yellow);
+            },
+          },
+          {
+            label: 'オレンジ',
+            click: () => {
+              changeThemeColor(ThemeColor.orange);
+            },
+          },
+          {
+            label: 'グレー',
+            click: () => {
+              changeThemeColor(ThemeColor.gray);
+            },
+          },
+        ],
       },
     ],
   },
