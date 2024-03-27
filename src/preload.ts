@@ -81,7 +81,7 @@ const onChangeThemeColor = (listener: (value: ThemeColor) => void) => {
   };
 };
 
-contextBridge.exposeInMainWorld('api', {
+const myApi = {
   on: {
     openFile: onOpenFile,
     saveFile: onSaveFile,
@@ -94,4 +94,6 @@ contextBridge.exposeInMainWorld('api', {
     overwriteSaveFile: invokeOverwriteSaveFile,
     createNewFile: invokeCreateNewFile,
   },
-});
+} as const;
+
+contextBridge.exposeInMainWorld('api', myApi);

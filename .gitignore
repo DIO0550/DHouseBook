@@ -107,3 +107,5 @@ index.js
 */bookdata/*.txt
 */bookdata/*.json
 newapp/src/test.test.ts
+
+*storybook.log

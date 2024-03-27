@@ -1,8 +1,11 @@
+// import type { StorybookConfig } from '@storybook/react-webpack5';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import custom from '../webpack.config';
 const path = require('path');
-const mainConfig = {
+
+const config = {
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   webpackFinal: async (config) => {
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
@@ -25,28 +28,20 @@ const mainConfig = {
 
     return config;
   },
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
+    '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
+    '@chromatic-com/storybook',
     '@storybook/addon-interactions',
-    // '@storybook/addon-postcss',
-    // {
-    //   name: '@storybook/addon-postcss',
-    //   options: {
-    //     postcssLoaderOptions: {
-    //       implementation: require('postcss'),
-    //     },
-    //   },
-    // },
+    '@storybook/addon-webpack5-compiler-babel',
   ],
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
   },
-  core: {
-    builder: '@storybook/builder-webpack5',
+  docs: {
+    autodocs: 'tag',
   },
 };
-
-export default mainConfig;
+export default config;

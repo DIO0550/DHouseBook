@@ -33,6 +33,7 @@
   box-sizing: border-box;
   height: 100%;
   width: 100%;
+  min-width: min-content;
 }
 
 .contents {
@@ -41,6 +42,8 @@
   box-sizing: border-box;
   height: 100%;
   width: 100%;
+
+  min-width: min-content;
 }
 
 .box-knob {
