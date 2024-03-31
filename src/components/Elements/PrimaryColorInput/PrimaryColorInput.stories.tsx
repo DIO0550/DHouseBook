@@ -5,7 +5,6 @@ import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeCol
 import { PrimaryColorInput } from './PrimaryColorInput';
 
 const meta: Meta<typeof PrimaryColorInput> = {
-  title: 'PrimaryColorInput',
   component: PrimaryColorInput,
   args: {
     defaultValue: '入力欄',

@@ -1,16 +1,13 @@
 import '../src/index.scss';
-import { FileOpenResult } from '../src/types/fileOpen';
-import { FileSaveResult } from '../src/types/fileSave';
 import '../src/types/global';
 import { fn } from '@storybook/test';
-import { OverwriteSaveFileInfo } from '../src/types/global';
 
 global.window.api = {
   on: {
-    openFile: fn(),
-    saveFile: fn(),
-    createNewFile: fn(),
-    changeThemeColor: fn(),
+    openFile: fn(() => fn()),
+    saveFile: fn(() => fn()),
+    createNewFile: fn(() => fn()),
+    changeThemeColor: fn(() => fn()),
   },
   invoke: {
     openFile: fn(),
@@ -22,7 +19,7 @@ global.window.api = {
 };
 
 const parameters = {
-  // actions: { argTypesRegex: '^on[A-Z].*' },
+  actions: { argTypesRegex: '^on.*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,

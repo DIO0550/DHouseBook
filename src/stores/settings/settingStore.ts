@@ -1,17 +1,15 @@
 import Store from 'electron-store';
 
-const store = new Store();
+type StoreType = {
+  themeColor: string;
+};
 
-export const SettingStoreKey = {
-  ThemeColor: 'ThemeColor',
-} as const;
-
-export type SettingKey = (typeof SettingStoreKey)[keyof typeof SettingStoreKey];
+const store = new Store<StoreType>();
 
 export const SettingStore = {
-  set: (key: SettingKey, value: string) => {
+  set: (key: keyof StoreType, value: string) => {
     store.set(key, value);
   },
-  get: (key: SettingKey) => store.get(key),
-  delete: (key: SettingKey) => store.delete(key),
+  get: (key: keyof StoreType) => store.get(key),
+  delete: (key: keyof StoreType) => store.delete(key),
 } as const;

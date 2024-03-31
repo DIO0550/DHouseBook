@@ -3,7 +3,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import { LocalSpinner } from './LocalSpinner';
 
 const meta: Meta<typeof LocalSpinner> = {
-  title: 'LocalSpinner',
   component: LocalSpinner,
   render: (args) => (
     <div style={{ width: '100%', height: '500px' }}>

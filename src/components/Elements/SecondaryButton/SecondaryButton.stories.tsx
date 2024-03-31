@@ -5,7 +5,6 @@ import { ThemeProvider } from '@/components/Providers';
 import { SecondaryButton } from './SecondaryButton';
 
 const meta: Meta<typeof SecondaryButton> = {
-  title: 'SecondaryButton',
   component: SecondaryButton,
   render: (args) => <SecondaryButton {...args} />,
 };

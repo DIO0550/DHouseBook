@@ -5,7 +5,6 @@ import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeCol
 import { PrimarySubButton } from './PrimarySubButton';
 
 const meta: Meta<typeof PrimarySubButton> = {
-  title: 'PrimarySubButton',
   component: PrimarySubButton,
   render: (args) => <PrimarySubButton {...args} />,
 };
