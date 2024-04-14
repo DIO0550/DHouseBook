@@ -102,7 +102,7 @@ dist
 
 dist/**/main.js
 preload.js
-index.js
+# index.js
 
 */bookdata/*.txt
 */bookdata/*.json

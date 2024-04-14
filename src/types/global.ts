@@ -17,6 +17,7 @@ export interface BookApi {
     }: OverwriteSaveFileInfo) => Promise<FileSaveResult>;
     createNewFile: () => Promise<void>;
     changeThemeColor: () => Promise<void>;
+    initialThemeColor: () => ThemeColor;
   };
 
   on: {

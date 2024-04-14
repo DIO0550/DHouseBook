@@ -30,4 +30,4 @@ const App = memo(() => {
   );
 });
 
-export default App;
+export { App };

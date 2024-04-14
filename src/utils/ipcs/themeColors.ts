@@ -1,6 +1,7 @@
 export const ThemeColorIpc = {
   Invoke: {
     Change: 'Change',
+    InitialValue: 'InitialValue',
   },
 
   On: {

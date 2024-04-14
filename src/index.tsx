@@ -1,19 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.scss';
-import { Provider } from 'react-redux';
 
 import { RecoilRoot } from 'recoil';
-import App from './App';
-import store from './stores/store';
+import { createRoot } from 'react-dom/client';
+import { App } from './App';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+if (!container) throw new Error('Failed to find the root element');
+const root = createRoot(container);
+root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
-  document.getElementById('root'),
 );

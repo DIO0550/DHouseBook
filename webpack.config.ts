@@ -70,18 +70,6 @@ const base: Configuration = {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
-      inject: 'body',
-      minify: false,
-    }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(envconfig),
-    }),
-  ],
   performance: { hints: false },
   optimization: { minimize: false },
   devtool: 'inline-source-map',
@@ -107,7 +95,7 @@ const renderer: Configuration = {
   ...base,
   target: 'web',
   entry: {
-    index: './src/index.tsx',
+    app: './src/index.tsx',
   },
   plugins: [
     new MiniCssExtractPlugin(),

@@ -1,8 +1,15 @@
-import { BrowserWindow, app, Menu, session, ipcMain, dialog } from 'electron';
-import { searchDevtools } from 'electron-search-devtools';
-import path from 'node:path';
-import { DialogIpc, FileFilters } from '@/utils/dialogs/dialog';
+import { DialogIpc, FileFilters } from './utils/dialogs/dialog';
+
+import Store from 'electron-store';
+import { BrowserWindow, app, Menu, ipcMain, dialog, session } from 'electron';
+
 import fs from 'fs';
+import path from 'node:path';
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import installExtension, {
+//   REACT_DEVELOPER_TOOLS,
+// } from 'electron-devtools-installer';
+import os from 'os';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
 import { FileSaveResult, FileSaveStatus } from './types/fileSave';
 import { OverwriteSaveFileInfo } from './types/global';
@@ -12,8 +19,24 @@ import {
 } from './types/fileOverwriteSave';
 import { ThemeColor } from './providers/themes/components/ThemeProvider/ThemeColor';
 import { ThemeColorIpc } from './utils/ipcs/themeColors';
+// import { SettingStore } from './stores/settings/settingStore';
+
+type StoreType = {
+  themeColor: string;
+};
+
+const store = new Store<StoreType>();
 
 const isDev = process.env.NODE_ENV === 'development';
+const isDarwin = process.platform === 'darwin';
+const reactDevtools =
+  // バージョン番号は適宜読み換えてください
+  '/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/5.0.2_2';
+
+// eslint-disable-next-line no-nested-ternary
+const extDir = isDarwin
+  ? '/Library/Application Support/Google/Chrome'
+  : '/AppData/Local/Google/Chrome/User Data';
 
 let mainWindow: BrowserWindow;
 // Window 生成
@@ -83,6 +106,7 @@ const openFile = () => {
  * @param color 設定する色
  */
 const changeThemeColor = (color: ThemeColor) => {
+  // SettingStore.set('themeColor', color);
   mainWindow.webContents.send(ThemeColorIpc.Send.Change, color);
 };
 
@@ -103,12 +127,11 @@ const createNewFile = () => {
 // アプリ初期化時
 void app.whenReady().then(async () => {
   if (isDev) {
-    const devtools = await searchDevtools('REACT');
-    if (devtools) {
-      await session.defaultSession.loadExtension(devtools, {
-        allowFileAccess: true,
-      });
-    }
+    // installExtension(REACT_DEVELOPER_TOOLS);
+    // await session.defaultSession.loadExtension(
+    //   path.join(os.homedir(), extDir, reactDevtools),
+    //   { allowFileAccess: true },
+    // );
   }
   createWindow();
 });
@@ -283,6 +306,10 @@ ipcMain.handle(DialogIpc.Invoke.Save, (_, contents: string): FileSaveResult => {
     return { status: FileSaveStatus.Error, message: 'Error Save File' };
   }
 });
+
+// ipcMain.handle(ThemeColorIpc.Invoke.InitialValue, () =>
+//   SettingStore.get('themeColor'),
+// );
 
 // 上書き保存
 ipcMain.handle(
