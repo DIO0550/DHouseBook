@@ -1,6 +1,3 @@
-import { DialogIpc, FileFilters } from './utils/dialogs/dialog';
-
-import Store from 'electron-store';
 import { BrowserWindow, app, Menu, ipcMain, dialog, session } from 'electron';
 
 import fs from 'fs';
@@ -10,6 +7,7 @@ import path from 'node:path';
 //   REACT_DEVELOPER_TOOLS,
 // } from 'electron-devtools-installer';
 import os from 'os';
+import { DialogIpc, FileFilters } from './utils/dialogs/dialog';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
 import { FileSaveResult, FileSaveStatus } from './types/fileSave';
 import { OverwriteSaveFileInfo } from './types/global';
@@ -19,13 +17,7 @@ import {
 } from './types/fileOverwriteSave';
 import { ThemeColor } from './providers/themes/components/ThemeProvider/ThemeColor';
 import { ThemeColorIpc } from './utils/ipcs/themeColors';
-// import { SettingStore } from './stores/settings/settingStore';
-
-type StoreType = {
-  themeColor: string;
-};
-
-const store = new Store<StoreType>();
+import { SettingStore } from './stores/settings/settingStore';
 
 const isDev = process.env.NODE_ENV === 'development';
 const isDarwin = process.platform === 'darwin';
@@ -128,10 +120,10 @@ const createNewFile = () => {
 void app.whenReady().then(async () => {
   if (isDev) {
     // installExtension(REACT_DEVELOPER_TOOLS);
-    // await session.defaultSession.loadExtension(
-    //   path.join(os.homedir(), extDir, reactDevtools),
-    //   { allowFileAccess: true },
-    // );
+    await session.defaultSession.loadExtension(
+      path.join(os.homedir(), extDir, reactDevtools),
+      { allowFileAccess: true },
+    );
   }
   createWindow();
 });
@@ -307,18 +299,19 @@ ipcMain.handle(DialogIpc.Invoke.Save, (_, contents: string): FileSaveResult => {
   }
 });
 
-// ipcMain.handle(ThemeColorIpc.Invoke.InitialValue, () =>
-//   SettingStore.get('themeColor'),
-// );
+ipcMain.handle(ThemeColorIpc.Invoke.InitialValue, () =>
+  SettingStore.get('themeColor'),
+);
 
 // 上書き保存
 ipcMain.handle(
   DialogIpc.Invoke.OverwriteSave,
   (
     _,
-    { filePath, contents }: OverwriteSaveFileInfo,
+    overwriteSaveFileInfo: OverwriteSaveFileInfo,
   ): FileOverwriteSaveResult => {
     try {
+      const { filePath, contents } = overwriteSaveFileInfo;
       fs.writeFileSync(filePath, contents);
 
       return {

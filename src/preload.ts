@@ -81,8 +81,8 @@ const onChangeThemeColor = (listener: (value: ThemeColor) => void) => {
   };
 };
 
-// const invokeInitialThemeColor = () =>
-//   ipcRenderer.invoke(DialogIpc.Invoke.OverwriteSave);
+const invokeInitialThemeColor = () =>
+  ipcRenderer.invoke(DialogIpc.Invoke.OverwriteSave);
 
 const myApi = {
   on: {
@@ -96,7 +96,7 @@ const myApi = {
     saveFile: invokeSaveFile,
     overwriteSaveFile: invokeOverwriteSaveFile,
     createNewFile: invokeCreateNewFile,
-    // initialThemeColor: invokeInitialThemeColor,
+    initialThemeColor: invokeInitialThemeColor,
   },
 } as const;
 

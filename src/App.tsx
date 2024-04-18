@@ -8,14 +8,13 @@ import {
   InactiveFileId,
   activeFileIdState,
 } from './stores/atoms/activeFileIdState';
-import { ThemeColor } from './providers/themes/components/ThemeProvider/ThemeColor';
-import { ThemeProvider } from './components/Providers';
+import { LoadThemeProvider } from './providers/themes/components/ThemeProvider/LoadThemeProvider';
 
 const App = memo(() => {
   const activeFileId = useRecoilValue(activeFileIdState);
 
   return (
-    <ThemeProvider initialValue={ThemeColor.red}>
+    <LoadThemeProvider>
       <FileProvider>
         <div className={styles['contents-container']}>
           <Sidebar />
@@ -26,7 +25,7 @@ const App = memo(() => {
           </div>
         </div>
       </FileProvider>
-    </ThemeProvider>
+    </LoadThemeProvider>
   );
 });
 
