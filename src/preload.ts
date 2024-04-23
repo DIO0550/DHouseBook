@@ -82,7 +82,7 @@ const onChangeThemeColor = (listener: (value: ThemeColor) => void) => {
 };
 
 const invokeInitialThemeColor = () =>
-  ipcRenderer.invoke(DialogIpc.Invoke.OverwriteSave);
+  ipcRenderer.invoke(ThemeColorIpc.Invoke.InitialValue);
 
 const myApi = {
   on: {

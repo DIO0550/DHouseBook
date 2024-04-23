@@ -3,9 +3,9 @@ import { BrowserWindow, app, Menu, ipcMain, dialog, session } from 'electron';
 import fs from 'fs';
 import path from 'node:path';
 // eslint-disable-next-line import/no-extraneous-dependencies
-// import installExtension, {
-//   REACT_DEVELOPER_TOOLS,
-// } from 'electron-devtools-installer';
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+} from 'electron-devtools-installer';
 import os from 'os';
 import { DialogIpc, FileFilters } from './utils/dialogs/dialog';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
@@ -23,7 +23,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const isDarwin = process.platform === 'darwin';
 const reactDevtools =
   // バージョン番号は適宜読み換えてください
-  '/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/5.0.2_2';
+  '/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/dhousebook';
 
 // eslint-disable-next-line no-nested-ternary
 const extDir = isDarwin
@@ -98,7 +98,7 @@ const openFile = () => {
  * @param color 設定する色
  */
 const changeThemeColor = (color: ThemeColor) => {
-  // SettingStore.set('themeColor', color);
+  SettingStore.set('themeColor', color);
   mainWindow.webContents.send(ThemeColorIpc.Send.Change, color);
 };
 
@@ -119,7 +119,7 @@ const createNewFile = () => {
 // アプリ初期化時
 void app.whenReady().then(async () => {
   if (isDev) {
-    // installExtension(REACT_DEVELOPER_TOOLS);
+    installExtension(REACT_DEVELOPER_TOOLS);
     await session.defaultSession.loadExtension(
       path.join(os.homedir(), extDir, reactDevtools),
       { allowFileAccess: true },
@@ -130,6 +130,8 @@ void app.whenReady().then(async () => {
 
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
+
+console.log(app.getPath('userData'));
 
 // アプリケーションメニュー
 const appMenu = Menu.buildFromTemplate([

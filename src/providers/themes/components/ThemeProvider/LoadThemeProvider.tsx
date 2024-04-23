@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 };
 
-const WaitLoadTheme = ({
+const LoadThemeColor = ({
   children,
   themeColor,
   setThemeColor,
@@ -16,7 +16,7 @@ const WaitLoadTheme = ({
 }) => {
   if (!themeColor) {
     throw window.api.invoke.initialThemeColor().then((color) => {
-      if (!themeColor) {
+      if (!color) {
         setThemeColor(ThemeColor.red);
 
         return;
@@ -28,16 +28,16 @@ const WaitLoadTheme = ({
   return <ThemeProvider initialValue={themeColor}>{children}</ThemeProvider>;
 };
 
-const LoadThemeProvider = ({ children }: Props) => {
+const ThemeColorProvider = ({ children }: Props) => {
   const [themeColor, setThemeColor] = useState<ThemeColor | undefined>();
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
-      <WaitLoadTheme themeColor={themeColor} setThemeColor={setThemeColor}>
+      <LoadThemeColor themeColor={themeColor} setThemeColor={setThemeColor}>
         {children}
-      </WaitLoadTheme>
+      </LoadThemeColor>
     </Suspense>
   );
 };
 
-export { LoadThemeProvider };
+export { ThemeColorProvider };
