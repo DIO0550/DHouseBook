@@ -84,6 +84,9 @@ const onChangeThemeColor = (listener: (value: ThemeColor) => void) => {
 const invokeInitialThemeColor = () =>
   ipcRenderer.invoke(ThemeColorIpc.Invoke.InitialValue);
 
+const invokeSyncShowMessageBox = (options: Electron.MessageBoxOptions) =>
+  ipcRenderer.invoke(DialogIpc.Invoke.ShowMessageBoxSync, options);
+
 const myApi = {
   on: {
     openFile: onOpenFile,
@@ -97,6 +100,7 @@ const myApi = {
     overwriteSaveFile: invokeOverwriteSaveFile,
     createNewFile: invokeCreateNewFile,
     initialThemeColor: invokeInitialThemeColor,
+    syncShowMessageBox: invokeSyncShowMessageBox,
   },
 } as const;
 

@@ -6,6 +6,7 @@ export const DialogIpc = {
     Save: 'FileSave',
     OverwriteSave: 'FileOverwriteSave',
     CreateNewFile: 'CreateNewFile',
+    ShowMessageBoxSync: 'ShowMessageBoxSync',
   },
 
   On: {
@@ -20,6 +21,7 @@ export const DialogIpc = {
     Save: 'FileSave',
     OverwriteSave: 'FileOverwriteSave',
     CreateNewFile: 'CreateNewFile',
+    ShowMessageBoxSync: 'ShowMessageBoxSync',
   },
 } as const;
 

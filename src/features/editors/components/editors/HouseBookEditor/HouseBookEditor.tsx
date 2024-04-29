@@ -45,7 +45,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
       <button
         type="button"
         onClick={() => {
-          closeHouseBookFile(fileId);
+          void closeHouseBookFile(fileId);
         }}
       >
         閉じる

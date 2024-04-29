@@ -2,10 +2,6 @@ import { BrowserWindow, app, Menu, ipcMain, dialog, session } from 'electron';
 
 import fs from 'fs';
 import path from 'node:path';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import installExtension, {
-  REACT_DEVELOPER_TOOLS,
-} from 'electron-devtools-installer';
 import os from 'os';
 import { DialogIpc, FileFilters } from './utils/dialogs/dialog';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
@@ -119,19 +115,16 @@ const createNewFile = () => {
 // アプリ初期化時
 void app.whenReady().then(async () => {
   if (isDev) {
-    installExtension(REACT_DEVELOPER_TOOLS);
-    await session.defaultSession.loadExtension(
-      path.join(os.homedir(), extDir, reactDevtools),
-      { allowFileAccess: true },
-    );
+    // await session.defaultSession.loadExtension(
+    //   path.join(os.homedir(), extDir, reactDevtools),
+    //   { allowFileAccess: true },
+    // );
   }
   createWindow();
 });
 
 // 全てのWindowsが閉じられたとき
 app.once('window-all-closed', () => app.quit());
-
-console.log(app.getPath('userData'));
 
 // アプリケーションメニュー
 const appMenu = Menu.buildFromTemplate([
@@ -330,5 +323,14 @@ ipcMain.handle(
         message: 'Error Overwrite Save File',
       };
     }
+  },
+);
+
+ipcMain.handle(
+  DialogIpc.Invoke.ShowMessageBoxSync,
+  (_, option: Electron.MessageBoxOptions): number => {
+    const result = dialog.showMessageBoxSync(mainWindow, option);
+
+    return result;
   },
 );

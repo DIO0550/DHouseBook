@@ -18,6 +18,9 @@ export interface BookApi {
     createNewFile: () => Promise<void>;
     changeThemeColor: () => Promise<void>;
     initialThemeColor: () => Promise<ThemeColor>;
+    syncShowMessageBox: (
+      options: Electron.MessageBoxOptions,
+    ) => Promise<number>;
   };
 
   on: {

@@ -49,7 +49,7 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
       <button
         type="button"
         onClick={() => {
-          closeHouseBookFile(fileId);
+          void closeHouseBookFile(fileId);
         }}
       >
         閉じる
