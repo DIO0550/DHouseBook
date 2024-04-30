@@ -34,7 +34,7 @@ const filePath = (path: string, isNewFile: boolean) => {
 
 const HouseBookFileCell = memo<Props>(({ fileId }) => {
   const { themeColor } = useThemeContext();
-  const { closeHouseBookFile } = useHouseBookFileClose();
+  const { closeHouseBookFile } = useHouseBookFileClose({ id: fileId });
   const fileProperty = useRecoilValue(
     houseBookFilePropertyState({ id: fileId }),
   );
@@ -49,7 +49,7 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
       <button
         type="button"
         onClick={() => {
-          void closeHouseBookFile(fileId);
+          void closeHouseBookFile();
         }}
       >
         閉じる
