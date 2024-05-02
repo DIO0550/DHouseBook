@@ -19,7 +19,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const { setHouseBookItems } = useSetHouseBookItemsState(fileId);
   const editor = useEditor({ initialPurchasedItems: houseBookItems });
   const isFirstRef = useRef(true);
-  const { closeHouseBookFile } = useHouseBookFileClose();
+  const { closeHouseBookFile } = useHouseBookFileClose({ id: fileId });
 
   useEffect(() => {
     if (isFirstRef.current) {
@@ -45,7 +45,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
       <button
         type="button"
         onClick={() => {
-          void closeHouseBookFile(fileId);
+          void closeHouseBookFile();
         }}
       >
         閉じる

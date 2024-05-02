@@ -1,28 +1,41 @@
 import { MessageBox } from './messageBox';
 
-const UnsaveMessageBoxButtonLabel = {
+const UnsaveMessageBoxButton = {
   Save: '保存',
   NotSave: '保存しない',
   Cancel: 'キャンセル',
 } as const;
 type UnsaveMessageBoxButtonLabel =
-  (typeof UnsaveMessageBoxButtonLabel)[keyof typeof UnsaveMessageBoxButtonLabel];
+  (typeof UnsaveMessageBoxButton)[keyof typeof UnsaveMessageBoxButton];
 
 const UnsaveMessageBoxButtons: UnsaveMessageBoxButtonLabel[] = Object.values(
-  UnsaveMessageBoxButtonLabel,
+  UnsaveMessageBoxButton,
 );
 const CancelId =
   UnsaveMessageBoxButtons.findIndex(
-    (button) => button === UnsaveMessageBoxButtonLabel.Cancel,
+    (button) => button === UnsaveMessageBoxButton.Cancel,
   ) ?? -1;
+export const UnsaveMessageBoxButtonId = {
+  Save:
+    UnsaveMessageBoxButtons.findIndex(
+      (button) => button === UnsaveMessageBoxButton.Save,
+    ) ?? 0,
+  NotSave:
+    UnsaveMessageBoxButtons.findIndex(
+      (button) => button === UnsaveMessageBoxButton.NotSave,
+    ) ?? 0,
+  Cancel: CancelId,
+};
 
 const UnsaveMessageBox = {
-  sycnShow: () =>
+  sycnShow: (fileName: string) =>
     MessageBox.syncShow({
       buttons: UnsaveMessageBoxButtons,
-      title: 'ファイルを保存しますか？',
-      message: '未保存です。',
+      type: 'warning',
+      title: `${fileName}に加えた変更を保存しますか？`,
+      message: '保存していない場合は、変更が反映されません。',
       cancelId: CancelId,
+      noLink: true,
     }),
 };
 

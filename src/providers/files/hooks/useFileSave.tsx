@@ -18,6 +18,12 @@ export const HouseFileSaveStatus = {
 export type HouseFileSaveStatus =
   (typeof HouseFileSaveStatus)[keyof typeof HouseFileSaveStatus];
 
+export const HouseBookSaveResult = {
+  Success: 'Success',
+  Error: 'Error',
+  Cancel: 'Cancel',
+};
+
 type Props = {
   id: string;
 };
@@ -34,7 +40,7 @@ const useFileSave = ({ id }: Props) => {
 
   const saveNewFile = useCallback(async () => {
     if (!bookDateState) {
-      return;
+      return HouseBookSaveResult.Error;
     }
 
     const jsonData = HouseBookData.toJson({
@@ -49,21 +55,23 @@ const useFileSave = ({ id }: Props) => {
     if (result.status === FileOpenStatus.Error) {
       setSaveStatus(HouseFileSaveStatus.Error);
 
-      return;
+      return HouseBookSaveResult.Error;
     }
 
     if (result.status === FileOpenStatus.Cancel) {
       setSaveStatus(HouseFileSaveStatus.Idle);
 
-      return;
+      return HouseBookSaveResult.Cancel;
     }
 
     setFileState(HouseBookFileState.Saved);
+
+    return HouseBookSaveResult.Success;
   }, [bookDateState, items, setFileState]);
 
   const overwriteSaveFile = useCallback(async () => {
     if (!filePropertyState.filePath || !bookDateState) {
-      return;
+      return HouseBookSaveResult.Error;
     }
 
     const jsonData = HouseBookData.toJson({
@@ -81,31 +89,35 @@ const useFileSave = ({ id }: Props) => {
     if (result.status === FileOpenStatus.Error) {
       setSaveStatus(HouseFileSaveStatus.Error);
 
-      return;
+      return HouseBookSaveResult.Error;
     }
 
     if (result.status === FileOpenStatus.Cancel) {
       setSaveStatus(HouseFileSaveStatus.Idle);
 
-      return;
+      return HouseBookSaveResult.Cancel;
     }
 
     setFileState(HouseBookFileState.Saved);
+
+    return HouseBookSaveResult.Success;
   }, [bookDateState, filePropertyState, items, setFileState]);
 
-  const saveFile = useCallback(() => {
+  const saveFile = useCallback(async () => {
     if (!filePropertyState || filePropertyState.isNewFile) {
-      void saveNewFile();
+      const result = await saveNewFile();
 
-      return;
+      return result;
     }
 
-    void overwriteSaveFile();
+    const result = await overwriteSaveFile();
+
+    return result;
   }, [filePropertyState, overwriteSaveFile, saveNewFile]);
 
   useEffect(() => {
     const saveCallback = () => {
-      saveFile();
+      void saveFile();
     };
     // イベントを受け取る
     const remove = window.api.on.saveFile(saveCallback);
@@ -116,6 +128,7 @@ const useFileSave = ({ id }: Props) => {
   }, [saveFile]);
 
   return {
+    saveFile,
     saveStatus,
   };
 };
