@@ -1,9 +1,8 @@
 import { useEditor } from '@/features/editors/hooks/useEditor';
 import { memo } from 'react';
 import { HouseBookItem } from '@/utils/editors/houseBookItem';
-import { HouseBookData } from '@/features/files/utils/houseBookData';
-import { AddPurchasedItemButton } from '../AddPurchasedItemButton/AddPurchasedItemButton';
 import { PurchasedItemList } from '../../lists/PurchasedItemList/PurchasedItemList';
+import { HouseBookEditorNavigation } from '../HouseBookEditorNavigation';
 
 type Props = {
   initialPurchasedItems?: HouseBookItem[];
@@ -14,30 +13,12 @@ const PurchasedItemEditor = memo<Props>(({ initialPurchasedItems = [] }) => {
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={() => {
-          void window.api.invoke.saveFile(
-            HouseBookData.toJson({
-              date: {
-                year: 2022,
-                month: 12,
-              },
-              items: editor.purchasedItems,
-            }),
-          );
-        }}
-      >
-        保存
-      </button>
+      <HouseBookEditorNavigation
+        onAddItem={() => editor.addPurhcasedItem(HouseBookItem.init())}
+      />
       <PurchasedItemList
         purchasedItems={editor.purchasedItems}
         handleUpdate={editor.updatePurchaedItem}
-      />
-      <AddPurchasedItemButton
-        handleAddButtonClick={() =>
-          editor.addPurhcasedItem(HouseBookItem.init())
-        }
       />
     </div>
   );

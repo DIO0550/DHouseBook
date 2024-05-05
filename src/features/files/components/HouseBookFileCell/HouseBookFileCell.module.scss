@@ -69,3 +69,43 @@
   padding: 8px;
   opacity: 0.5;
 }
+
+.close-btn-wrapper {
+  margin-right: 8px;
+}
+
+.close {
+  $close-size: 25px;
+  $line-width: 2px;
+  display: block;
+  width: $close-size;
+  height: $close-size;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: calc($close-size / 2);
+    width: $close-size;
+    height: $line-width;
+  }
+
+  &-skin {
+    &::before,
+    &::after {
+      background: #6c6c6c;
+    }
+  }
+
+  &::after {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+}

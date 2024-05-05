@@ -47,14 +47,6 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
   return (
     <li>
       <button
-        type="button"
-        onClick={() => {
-          void closeHouseBookFile();
-        }}
-      >
-        閉じる
-      </button>
-      <button
         className={`${styles['file-container']} ${styles[themeColor]} ${
           isActive(fileId) ? styles['is-active'] : ''
         }`}
@@ -79,6 +71,16 @@ const HouseBookFileCell = memo<Props>(({ fileId }) => {
           className={`${styles['file-info']} ${styles['file-info-skin']} ${styles.dirty}`}
         >
           {fileProperty.fileState === HouseBookFileState.Dirty ? '●' : ''}
+        </div>
+        <div className={`${styles['close-btn-wrapper']}`}>
+          <button
+            className={`${styles.close} ${styles['close-skin']} `}
+            aria-label="close"
+            type="button"
+            onClick={() => {
+              void closeHouseBookFile();
+            }}
+          />
         </div>
       </button>
     </li>

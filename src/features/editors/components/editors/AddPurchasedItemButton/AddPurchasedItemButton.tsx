@@ -3,11 +3,11 @@ import { memo } from 'react';
 
 type Props = {
   // 追加ボタンクリック
-  handleAddButtonClick: () => void;
+  onClick: () => void;
 };
 
-const AddPurchasedItemButton = memo<Props>(({ handleAddButtonClick }) => (
-  <PrimaryButton title="追加" handleClick={handleAddButtonClick} />
+const AddPurchasedItemButton = memo<Props>(({ onClick }) => (
+  <PrimaryButton title="アイテム追加" onClick={onClick} />
 ));
 
 export { AddPurchasedItemButton };

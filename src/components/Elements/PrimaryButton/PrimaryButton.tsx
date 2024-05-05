@@ -4,16 +4,16 @@ import styles from './PrimaryButton.module.scss';
 
 type Props = {
   title: string;
-  handleClick: (e?: MouseEvent) => void;
+  onClick: (e?: MouseEvent) => void;
 };
 
-const PrimaryButton = memo<Props>(({ title, handleClick }) => {
+const PrimaryButton = memo<Props>(({ title, onClick }) => {
   const { themeColor } = useThemeContext();
 
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={onClick}
       className={`${styles.primary} ${styles[themeColor]}`}
     >
       <div>{title}</div>

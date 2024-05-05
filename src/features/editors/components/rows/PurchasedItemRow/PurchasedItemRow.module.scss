@@ -6,7 +6,7 @@
 .container {
   display: flex;
 
-  .container-skin {
+  &-skin {
     &:nth-child(odd) {
       &.red {
         background-color: functions.primarySubSubColor(red);
