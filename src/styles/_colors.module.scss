@@ -49,8 +49,11 @@ $color-theme-gray-primary-sub-sub: palettes.$palette-gray-100;
 $color-theme-gray-secondary: palettes.$palette-gray-800;
 
 // input
-$color-input-text: palettes.$palette-black;
+$color-input-text: palettes.$palette-true-black;
 $color-input-outline: palettes.$palette-blue-gray-800;
 
 // sidebar-color
 $color-sidebar-bg: palettes.$palette-gray-200;
+
+// button
+$color-button-color-text: palettes.$palette-true-white;

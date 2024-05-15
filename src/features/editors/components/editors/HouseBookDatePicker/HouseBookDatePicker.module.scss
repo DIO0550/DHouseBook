@@ -1,0 +1,48 @@
+@use '@/styles/icons,.module.scss' as icons;
+.container {
+  display: flex;
+  flex-direction: column;
+
+  height: fit-content;
+  width: fit-content;
+
+  gap: 8px;
+}
+.year-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.year {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+
+  &-skin {
+    font-size: 1.25rem;
+  }
+}
+.decrement-btn,
+.increment-btn {
+  margin: 0 16px;
+}
+
+.decrement-btn {
+  @include icons.icon-arrow-left();
+}
+
+.increment-btn {
+  @include icons.icon-arrow-right();
+}
+
+.month-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.month {
+  height: 50px;
+  width: 100px;
+}

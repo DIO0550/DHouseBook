@@ -1,0 +1,34 @@
+@mixin icon-arrow(
+  $width: 18px,
+  $height: 18px,
+  $color: #000000,
+  $border-width: 2px
+) {
+  display: block;
+  box-sizing: border-box;
+  width: $width;
+  height: $height;
+  border-style: solid;
+  border-width: $border-width $border-width 0 0;
+  border-color: $color;
+}
+
+@mixin icon-arrow-right(
+  $width: 18px,
+  $height: 18px,
+  $color: #000000,
+  $border-width: 2px
+) {
+  @include icon-arrow($width, $height, $color, $border-width);
+  transform: rotate(45deg);
+}
+
+@mixin icon-arrow-left(
+  $width: 18px,
+  $height: 18px,
+  $color: #000000,
+  $border-width: 2px
+) {
+  @include icon-arrow($width, $height, $color, $border-width);
+  transform: rotate(-135deg);
+}

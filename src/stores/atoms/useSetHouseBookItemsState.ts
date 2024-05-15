@@ -4,13 +4,13 @@ import { useCallback } from 'react';
 import { houseBookItemsState } from './houseBookState';
 
 const useSetHouseBookItemsState = (id: string) => {
-  const setHousebookItemsState = useSetRecoilState(houseBookItemsState({ id }));
+  const setHouseBookItemsState = useSetRecoilState(houseBookItemsState({ id }));
 
   const setHouseBookItems = useCallback(
     (items: HouseBookItems) => {
-      setHousebookItemsState(items);
+      setHouseBookItemsState(items);
     },
-    [setHousebookItemsState],
+    [setHouseBookItemsState],
   );
 
   return {

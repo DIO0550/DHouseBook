@@ -1,0 +1,51 @@
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/variables.module.scss' as variables;
+
+.input {
+  display: none;
+}
+
+.label {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.input:checked + .label {
+  &.red {
+    @include mixins.base-primary-button-style(red);
+    padding: 0;
+  }
+  &.purple {
+    @include mixins.base-primary-button-style(purple);
+    padding: 0;
+  }
+  &.blue {
+    @include mixins.base-primary-button-style(blue);
+    padding: 0;
+  }
+  &.cyan {
+    @include mixins.base-primary-button-style(cyan);
+    padding: 0;
+  }
+  &.green {
+    @include mixins.base-primary-button-style(green);
+    padding: 0;
+  }
+  &.yellow {
+    @include mixins.base-primary-button-style(yellow);
+    padding: 0;
+  }
+  &.orange {
+    @include mixins.base-primary-button-style(orange);
+    padding: 0;
+  }
+  &.gray {
+    @include mixins.base-primary-button-style(gray);
+
+    padding: 0;
+  }
+}
