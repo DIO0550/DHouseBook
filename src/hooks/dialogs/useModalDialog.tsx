@@ -7,14 +7,44 @@ import {
   useState,
 } from 'react';
 
+import styles from './ModalDialog.module.scss';
+
 type ComponentProps = {
   isOpen: boolean;
+  onClose: () => void;
   dialogRef: RefObject<HTMLDialogElement>;
   children: ReactNode;
 };
 
-const DialogComponent = ({ isOpen, dialogRef, children }: ComponentProps) => (
-  <dialog ref={dialogRef}>{isOpen && children}</dialog>
+const DialogComponent = ({
+  isOpen,
+  onClose,
+  dialogRef,
+  children,
+}: ComponentProps) => (
+  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+  <dialog
+    className={`${styles['modal-dialog']}`}
+    ref={dialogRef}
+    onClick={onClose}
+    onKeyDown={(e) => {
+      if (e.code !== 'Escape') {
+        return;
+      }
+      e.preventDefault();
+      onClose();
+    }}
+  >
+    <button
+      className={`${styles.content}`}
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
+      {isOpen && children}
+    </button>
+  </dialog>
 );
 
 const useModalDialog = () => {
@@ -48,7 +78,11 @@ const useModalDialog = () => {
   }, [isOpen]);
 
   const ModalDialog = ({ children }: { children: ReactNode }) => (
-    <DialogComponent dialogRef={dialogRef} isOpen={isOpen}>
+    <DialogComponent
+      dialogRef={dialogRef}
+      isOpen={isOpen}
+      onClose={closeDialog}
+    >
       {children}
     </DialogComponent>
   );

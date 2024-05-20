@@ -1,5 +1,5 @@
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
-import { useModalDialog } from '@/hooks/useModalDialog';
+import { useModalDialog } from '@/hooks/dialogs/useModalDialog';
 import { memo } from 'react';
 import { HouseBookDatePicker } from '../HouseBookDatePicker/HouseBookDatePicker';
 import { Month } from '../HouseBookDatePickerMonth/month';
