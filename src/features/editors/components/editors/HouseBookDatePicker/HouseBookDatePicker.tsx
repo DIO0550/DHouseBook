@@ -42,7 +42,10 @@ const HouseBookDatePicker = memo<Props>(
 
           <div className={`${styles['month-block']}`}>
             {Months.map((m) => (
-              <div className={`${styles.month}`} key={m}>
+              <div
+                className={`${styles.month} ${styles['month-skin']}`}
+                key={m}
+              >
                 <HouseBookDatePickerMonth
                   month={m}
                   isSelected={m === month}

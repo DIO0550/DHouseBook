@@ -1,12 +1,25 @@
 .container {
   display: flex;
   padding: 24px 0;
+
+  box-sizing: border-box;
+}
+
+.date-block {
+  padding: 0px 24px;
+  margin: auto;
+
+  &-skin {
+    font-size: 2rem;
+  }
 }
 
 .operation-block {
   display: flex;
   justify-content: end;
   align-items: center;
+  flex: 1;
 
   padding: 24px 0;
+  margin-right: 24px;
 }
