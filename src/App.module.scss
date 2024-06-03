@@ -9,7 +9,11 @@ body {
   height: 100vh;
   width: 100%;
 }
-
+.sidebar-block {
+  height: 100%;
+}
 .editor-block {
   min-width: 300px;
+  width: 100%;
+  overflow-y: scroll;
 }

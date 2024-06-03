@@ -17,7 +17,9 @@ const App = memo(() => {
     <ThemeColorProvider>
       <FileProvider>
         <div className={styles['contents-container']}>
-          <Sidebar />
+          <div className={`${styles['sidebar-block']}`}>
+            <Sidebar />
+          </div>
           <div className={styles['editor-block']}>
             {activeFileId !== InactiveFileId && (
               <HouseBookEditor key={activeFileId} fileId={activeFileId} />
