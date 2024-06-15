@@ -13,11 +13,11 @@ type Props = {
   price: string;
   type: string;
   date: string;
-  handleUpdate: (updateEntity: UpdateEntity) => void;
+  onUpdateData: (updateEntity: UpdateEntity) => void;
 };
 
 const PurchasedItemRow = memo<Props>(
-  ({ id, name, price, type, date, handleUpdate }) => {
+  ({ id, name, price, type, date, onUpdateData }) => {
     const { themeColor } = useThemeContext();
 
     return (
@@ -27,22 +27,22 @@ const PurchasedItemRow = memo<Props>(
         <PurchasedItemName
           id={id}
           defaultValue={name}
-          handleUpdate={handleUpdate}
+          onUpdate={onUpdateData}
         />
         <PurchasedItemPrice
           id={id}
           defaultValue={price}
-          handleUpdate={handleUpdate}
+          onUpdate={onUpdateData}
         />
         <PurchasedItemType
           id={id}
           defaultValue={type}
-          handleUpdate={handleUpdate}
+          onUpdate={onUpdateData}
         />
         <PurchasedItemDate
           id={id}
           defaultValue={date}
-          handleUpdate={handleUpdate}
+          onUpdate={onUpdateData}
         />
       </div>
     );

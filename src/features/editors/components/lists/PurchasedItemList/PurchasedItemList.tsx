@@ -21,7 +21,7 @@ const PurchasedItemList = memo<Props>(({ purchasedItems, handleUpdate }) => (
         price={String(item.price)}
         type={item.type}
         date={item.date}
-        handleUpdate={handleUpdate}
+        onUpdateData={handleUpdate}
       />
     ))}
   </div>

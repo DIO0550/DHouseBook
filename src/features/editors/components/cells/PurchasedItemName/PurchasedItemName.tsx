@@ -6,15 +6,15 @@ import styles from './PurchasedItemName.module.scss';
 type Props = {
   id: string;
   defaultValue: string;
-  handleUpdate: (updateEntity: UpdateEntity) => void;
+  onUpdate: (updateEntity: UpdateEntity) => void;
 };
 
-const PurchasedItemName = memo<Props>(({ id, defaultValue, handleUpdate }) => (
+const PurchasedItemName = memo<Props>(({ id, defaultValue, onUpdate }) => (
   <div className={styles['name-container']}>
     <PrimaryColorInput
       defaultValue={defaultValue}
       onChange={(e) => {
-        handleUpdate({
+        onUpdate({
           id,
           change: {
             name: e.currentTarget.value,
