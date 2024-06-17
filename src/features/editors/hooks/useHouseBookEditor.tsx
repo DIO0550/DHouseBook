@@ -6,8 +6,10 @@ import {
 import { useSetHouseBookDateState } from '@/stores/atoms/useSetHouseBookDateState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
 import useSetHouseBookItemsState from '@/stores/atoms/useSetHouseBookItemsState';
-import { useRef, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
+import { useDidUpdateEffect } from '@/hooks/useDidUpdateEffect';
+import { HouseBookDate } from '@/features/files/utils/houseBookDate';
+import { useCallback } from 'react';
 import { useEditor } from './useEditor';
 
 type Props = {
@@ -25,17 +27,33 @@ const useHouseBookEditor = ({ fileId }: Props) => {
     id: fileId,
   });
 
-  const editor = useEditor({ initialPurchasedItems: houseBookItems });
-  const isFirstRef = useRef(true);
+  const updateHouseBookDate = useCallback(
+    (date: HouseBookDate) => {
+      setHouseBookDate(date);
+    },
+    [setHouseBookDate],
+  );
 
-  useEffect(() => {
-    if (isFirstRef.current) {
-      isFirstRef.current = false;
-    } else {
-      setHouseBookItems(editor.purchasedItems);
-      setFileState(HouseBookFileState.Dirty);
-    }
-  }, [editor.purchasedItems, setFileState, setHouseBookItems]);
+  const {
+    purchasedItems,
+    addPurhcasedItem,
+    updatePurchaedItem,
+    removePurchasedItem,
+  } = useEditor({ initialPurchasedItems: houseBookItems });
+
+  useDidUpdateEffect(() => {
+    setHouseBookItems(purchasedItems);
+    setFileState(HouseBookFileState.Dirty);
+  }, [purchasedItems, setFileState, setHouseBookItems]);
+
+  return {
+    houseBookDate,
+    updateHouseBookDate,
+    purchasedItems,
+    addPurhcasedItem,
+    updatePurchaedItem,
+    removePurchasedItem,
+  };
 };
 
 export { useHouseBookEditor };
