@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
+import { PrimaryBlock } from '@/components/Elements/PrimaryBlock';
 import { useDatePicker } from './useDatePicker';
 import styles from './HouseBookDatePicker.module.scss';
 import { Month, Months } from '../HouseBookDatePickerMonth/month';
@@ -22,23 +23,27 @@ const HouseBookDatePicker = memo<Props>(
     return (
       <div>
         <div className={`${styles.container}`}>
-          <div className={` ${styles['year-block']}`}>
-            <button
-              className={`${styles['decrement-btn']}`}
-              aria-label="decrement"
-              type="button"
-              onClick={decrementYear}
-            />
-            <div className={`${styles.year} ${styles['year-skin']}`}>
-              {year}
+          <PrimaryBlock>
+            <div
+              className={`${styles['year-block']} ${styles['year-block-skin']}`}
+            >
+              <button
+                className={`${styles['decrement-btn']}`}
+                aria-label="decrement"
+                type="button"
+                onClick={decrementYear}
+              />
+              <div className={`${styles.year} ${styles['year-skin']}`}>
+                {year}
+              </div>
+              <button
+                className={`${styles['increment-btn']}`}
+                aria-label="increment"
+                type="button"
+                onClick={incrementYear}
+              />
             </div>
-            <button
-              className={`${styles['increment-btn']}`}
-              aria-label="increment"
-              type="button"
-              onClick={incrementYear}
-            />
-          </div>
+          </PrimaryBlock>
 
           <div className={`${styles['month-block']}`}>
             {Months.map((m) => (

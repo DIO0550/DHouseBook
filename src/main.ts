@@ -1,8 +1,7 @@
-import { BrowserWindow, app, Menu, ipcMain, dialog, session } from 'electron';
+import { BrowserWindow, app, Menu, ipcMain, dialog } from 'electron';
 
 import fs from 'fs';
 import path from 'node:path';
-import os from 'os';
 import { DialogIpc, FileFilters } from './utils/dialogs/dialog';
 import { FileOpenResult, FileOpenStatus } from './types/fileOpen';
 import { FileSaveResult, FileSaveStatus } from './types/fileSave';
@@ -35,6 +34,8 @@ const createWindow = () => {
       contextIsolation: true,
       preload: path.resolve(__dirname, 'preload.js'),
     },
+    width: 1280,
+    height: 900,
   });
 
   if (isDev) {

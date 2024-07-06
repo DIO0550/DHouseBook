@@ -1,0 +1,28 @@
+@use '@/styles/mixins.module.scss' as mixins;
+
+.primary {
+  &.red {
+    @include mixins.theme-primary-background-color-style(red);
+  }
+  &.purple {
+    @include mixins.theme-primary-background-color-style(purple);
+  }
+  &.blue {
+    @include mixins.theme-primary-background-color-style(blue);
+  }
+  &.cyan {
+    @include mixins.theme-primary-background-color-style(cyan);
+  }
+  &.green {
+    @include mixins.theme-primary-background-color-style(green);
+  }
+  &.yellow {
+    @include mixins.theme-primary-background-color-style(yellow);
+  }
+  &.orange {
+    @include mixins.theme-primary-background-color-style(orange);
+  }
+  &.gray {
+    @include mixins.theme-primary-background-color-style(gray);
+  }
+}
