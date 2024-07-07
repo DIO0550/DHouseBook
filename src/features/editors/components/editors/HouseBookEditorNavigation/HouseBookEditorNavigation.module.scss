@@ -1,8 +1,15 @@
+@use '@/styles/colors.module.scss' as colors;
+
 .container {
   display: flex;
   padding: 24px 0;
+  margin-bottom: 16px;
 
   box-sizing: border-box;
+
+  &-skin {
+    border-bottom: 1px solid colors.$color-border-black;
+  }
 }
 
 .date-block {
