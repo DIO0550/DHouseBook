@@ -1,3 +1,5 @@
+import { atom } from 'recoil';
+
 // 名前フィルターの条件
 export const HouseBookFilterNameCondition = {
   NotInclude: 'NotInclude',
@@ -60,7 +62,7 @@ export const HouseBookFilterPucrchaseDateCondition = {
 export type HouseBookFilterPucrchaseDateCondition =
   (typeof HouseBookFilterPucrchaseDateCondition)[keyof typeof HouseBookFilterPucrchaseDateCondition];
 
-export type HouseBookFilterPucrchaseDateValue = number;
+export type HouseBookFilterPucrchaseDateValue = string;
 export type HouseBookFilterPucrchaseDate = {
   value: HouseBookFilterPucrchaseDateValue;
   condition: HouseBookFilterPucrchaseDateCondition;
@@ -72,3 +74,8 @@ export type HouseBookFilter = {
   type: HouseBookFillterType | undefined;
   purchaseDate: HouseBookFilterPucrchaseDate | undefined;
 };
+
+export const houseBookFilterState = atom<HouseBookFilter>({
+  key: 'houseBookFilter',
+  default: undefined,
+});
