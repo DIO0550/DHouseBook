@@ -1,5 +1,19 @@
 import { atom } from 'recoil';
 
+export const HouseBookFilterOperation = {
+  Or: 'or',
+  And: 'And',
+};
+export type HouseBookFilterOperation =
+  (typeof HouseBookFilterOperation)[keyof typeof HouseBookFilterOperation];
+
+export const HouseBookFilterCategory = {
+  Name: 'Name',
+  Price: 'Price',
+  Type: 'Type',
+  PurchaseDate: 'PurchaseDate',
+};
+
 // 名前フィルターの条件
 export const HouseBookFilterNameCondition = {
   NotInclude: 'NotInclude',
@@ -10,8 +24,10 @@ export type HouseBookFilterNameCondition =
 export type HouseBookFilterNameValue = string;
 
 export type HouseBookFillterName = {
+  type: typeof HouseBookFilterCategory.Name;
   value: HouseBookFilterNameValue;
   condition: HouseBookFilterNameCondition;
+  operation: HouseBookFilterOperation | undefined;
 };
 
 // 値段フィルターの条件
@@ -30,8 +46,10 @@ export type HouseBookFilterPriceCondition =
 
 export type HouseBookFilterPriceValue = number;
 export type HouseBookFilterPrice = {
+  type: typeof HouseBookFilterCategory.Price;
   value: HouseBookFilterPriceValue;
   condition: HouseBookFilterPriceCondition;
+  operation: HouseBookFilterOperation | undefined;
 };
 
 // 種類フィルターの条件
@@ -44,8 +62,10 @@ export type HouseBookFilterTypeCondition =
 export type HouseBookFilterTypeValue = string;
 
 export type HouseBookFillterType = {
+  type: typeof HouseBookFilterCategory.Type;
   value: HouseBookFilterTypeValue;
   condition: HouseBookFilterTypeCondition;
+  operation: HouseBookFilterOperation | undefined;
 };
 
 // 購入日フィルターの条件
@@ -64,18 +84,19 @@ export type HouseBookFilterPucrchaseDateCondition =
 
 export type HouseBookFilterPucrchaseDateValue = string;
 export type HouseBookFilterPucrchaseDate = {
+  type: typeof HouseBookFilterCategory.PurchaseDate;
   value: HouseBookFilterPucrchaseDateValue;
   condition: HouseBookFilterPucrchaseDateCondition;
+  operation: HouseBookFilterOperation | undefined;
 };
 
-export type HouseBookFilter = {
-  name: HouseBookFillterName | undefined;
-  price: HouseBookFilterPrice | undefined;
-  type: HouseBookFillterType | undefined;
-  purchaseDate: HouseBookFilterPucrchaseDate | undefined;
-};
+export type HouseBookFilter =
+  | HouseBookFillterName
+  | HouseBookFilterPrice
+  | HouseBookFillterType
+  | HouseBookFilterPucrchaseDate;
 
-export const houseBookFilterState = atom<HouseBookFilter>({
+export const houseBookFilterState = atom<HouseBookFilter[] | undefined>({
   key: 'houseBookFilter',
   default: undefined,
 });

@@ -8,11 +8,9 @@ import { RecoilRoot, SetRecoilState } from 'recoil';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import {
   HouseBookFilter,
+  HouseBookFilterCategory,
   HouseBookFilterNameCondition,
-  HouseBookFilterPriceCondition,
-  HouseBookFilterPucrchaseDateCondition,
   houseBookFilterState,
-  HouseBookFilterTypeCondition,
 } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookEditorFilter } from './HouseBookEditorFilter';
 
@@ -31,7 +29,7 @@ export default meta;
 type Story = StoryObj<typeof HouseBookEditorFilter>;
 
 const initializeState =
-  ({ filter = undefined }: { filter: HouseBookFilter | undefined }) =>
+  ({ filter = undefined }: { filter: HouseBookFilter[] | undefined }) =>
   ({ set }: { set: SetRecoilState }) => {
     if (filter) {
       set(houseBookFilterState, filter);
@@ -42,24 +40,14 @@ export const FilterOff: Story = {
   decorators: [(story) => <RecoilRoot>{story()}</RecoilRoot>],
 };
 
-const Filter: HouseBookFilter = {
-  name: {
-    value: 'Name',
+const Filter: HouseBookFilter[] = [
+  {
+    type: HouseBookFilterCategory.Name,
+    value: 'House',
     condition: HouseBookFilterNameCondition.Include,
+    operation: undefined,
   },
-  price: {
-    value: 1234,
-    condition: HouseBookFilterPriceCondition.GreaterThan,
-  },
-  type: {
-    value: 'お菓子',
-    condition: HouseBookFilterTypeCondition.Include,
-  },
-  purchaseDate: {
-    value: '20140505',
-    condition: HouseBookFilterPucrchaseDateCondition.GreaterThan,
-  },
-};
+];
 export const FilterOn: Story = {
   decorators: [
     (story) => (
