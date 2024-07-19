@@ -12,7 +12,7 @@ export const HouseBookFilterCategory = {
   Price: 'Price',
   Type: 'Type',
   PurchaseDate: 'PurchaseDate',
-};
+} as const;
 
 // 名前フィルターの条件
 export const HouseBookFilterNameCondition = {
