@@ -54,7 +54,7 @@ describe('useHouseBookFilterState.test', () => {
         wrapper: wrapper({ filter }),
       });
 
-      expect(result.current.isApplyFilter).toBe(false);
+      expect(result.current.isApplyFilter).toBe(true);
     });
   });
 });

@@ -1,0 +1,61 @@
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/colors.module.scss' as colors;
+
+.filter-btn {
+  &-skin {
+    &.red {
+      @include mixins.theme-primary-color-style(red);
+    }
+    &.purple {
+      @include mixins.theme-primary-color-style(purple);
+    }
+    &.blue {
+      @include mixins.theme-primary-color-style(blue);
+    }
+    &.cyan {
+      @include mixins.theme-primary-color-style(cyan);
+    }
+    &.green {
+      @include mixins.theme-primary-color-style(green);
+    }
+    &.yellow {
+      @include mixins.theme-primary-color-style(yellow);
+    }
+    &.orange {
+      @include mixins.theme-primary-color-style(orange);
+    }
+    &.gray {
+      @include mixins.theme-primary-color-style(gray);
+    }
+
+    &.on {
+      color: colors.$color-button-color-text-white;
+      background-color: aqua;
+
+      &.red {
+        @include mixins.theme-primary-background-color-style(red);
+      }
+      &.purple {
+        @include mixins.theme-primary-background-color-style(purple);
+      }
+      &.blue {
+        @include mixins.theme-primary-background-color-style(blue);
+      }
+      &.cyan {
+        @include mixins.theme-primary-background-color-style(cyan);
+      }
+      &.green {
+        @include mixins.theme-primary-background-color-style(green);
+      }
+      &.yellow {
+        @include mixins.theme-primary-background-color-style(yellow);
+      }
+      &.orange {
+        @include mixins.theme-primary-background-color-style(orange);
+      }
+      &.gray {
+        @include mixins.theme-primary-background-color-style(gray);
+      }
+    }
+  }
+}
