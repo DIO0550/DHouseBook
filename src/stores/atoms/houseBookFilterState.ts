@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 
 export const HouseBookFilterOperation = {
-  Or: 'or',
+  Or: 'Or',
   And: 'And',
-};
+} as const;
 export type HouseBookFilterOperation =
   (typeof HouseBookFilterOperation)[keyof typeof HouseBookFilterOperation];
 
@@ -23,7 +23,7 @@ export type HouseBookFilterNameCondition =
   (typeof HouseBookFilterNameCondition)[keyof typeof HouseBookFilterNameCondition];
 export type HouseBookFilterNameValue = string;
 
-export type HouseBookFillterName = {
+export type HouseBookFilterName = {
   type: typeof HouseBookFilterCategory.Name;
   value: HouseBookFilterNameValue;
   condition: HouseBookFilterNameCondition;
@@ -91,7 +91,7 @@ export type HouseBookFilterPucrchaseDate = {
 };
 
 export type HouseBookFilter =
-  | HouseBookFillterName
+  | HouseBookFilterName
   | HouseBookFilterPrice
   | HouseBookFillterType
   | HouseBookFilterPucrchaseDate;
