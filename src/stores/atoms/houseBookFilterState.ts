@@ -61,7 +61,7 @@ export type HouseBookFilterTypeCondition =
   (typeof HouseBookFilterTypeCondition)[keyof typeof HouseBookFilterNameCondition];
 export type HouseBookFilterTypeValue = string;
 
-export type HouseBookFillterType = {
+export type HouseBookFilterType = {
   type: typeof HouseBookFilterCategory.Type;
   value: HouseBookFilterTypeValue;
   condition: HouseBookFilterTypeCondition;
@@ -69,7 +69,7 @@ export type HouseBookFillterType = {
 };
 
 // 購入日フィルターの条件
-export const HouseBookFilterPucrchaseDateCondition = {
+export const HouseBookFilterPurchaseDateCondition = {
   // より大きい
   GreaterThan: 'GreaterThan',
   // 以上
@@ -79,22 +79,22 @@ export const HouseBookFilterPucrchaseDateCondition = {
   // 以下
   LessThanOrEqual: 'LessThanOrEqual',
 } as const;
-export type HouseBookFilterPucrchaseDateCondition =
-  (typeof HouseBookFilterPucrchaseDateCondition)[keyof typeof HouseBookFilterPucrchaseDateCondition];
+export type HouseBookFilterPurchaseDateCondition =
+  (typeof HouseBookFilterPurchaseDateCondition)[keyof typeof HouseBookFilterPurchaseDateCondition];
 
-export type HouseBookFilterPucrchaseDateValue = string;
-export type HouseBookFilterPucrchaseDate = {
+export type HouseBookFilterPurchaseDateValue = string;
+export type HouseBookFilterPurchaseDate = {
   type: typeof HouseBookFilterCategory.PurchaseDate;
-  value: HouseBookFilterPucrchaseDateValue;
-  condition: HouseBookFilterPucrchaseDateCondition;
+  value: HouseBookFilterPurchaseDateValue;
+  condition: HouseBookFilterPurchaseDateCondition;
   operation: HouseBookFilterOperation | undefined;
 };
 
 export type HouseBookFilter =
   | HouseBookFilterName
   | HouseBookFilterPrice
-  | HouseBookFillterType
-  | HouseBookFilterPucrchaseDate;
+  | HouseBookFilterType
+  | HouseBookFilterPurchaseDate;
 
 export const houseBookFilterState = atom<HouseBookFilter[] | undefined>({
   key: 'houseBookFilter',
