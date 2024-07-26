@@ -44,7 +44,7 @@ describe('useHouseBookFilterState.test', () => {
     it('フィルタが設定されていればtrue', () => {
       const filter: HouseBookFilter[] = [
         {
-          type: HouseBookFilterCategory.Name,
+          category: HouseBookFilterCategory.Name,
           value: 'Hoge',
           condition: HouseBookFilterNameCondition.Include,
           operation: undefined,

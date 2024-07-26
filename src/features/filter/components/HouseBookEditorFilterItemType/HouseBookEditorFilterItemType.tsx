@@ -3,6 +3,7 @@ import {
   HouseBookFilterTypeCondition,
 } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
+import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 
 const HouseBookFilterTypeConditionLabel: {
   [x in HouseBookFilterTypeCondition]: string;
@@ -16,6 +17,7 @@ type Props = {
 };
 const HouseBookEditorFilterItemType = memo<Props>(({ filter }) => (
   <div>
+    <HouseBookEditorFilterItemOperation operation={filter.operation} />
     <select defaultValue={filter.condition}>
       {Object.values(HouseBookFilterTypeCondition).map((v) => (
         <option value={v}>{HouseBookFilterTypeConditionLabel[v]}</option>

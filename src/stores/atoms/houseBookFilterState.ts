@@ -24,7 +24,7 @@ export type HouseBookFilterNameCondition =
 export type HouseBookFilterNameValue = string;
 
 export type HouseBookFilterName = {
-  type: typeof HouseBookFilterCategory.Name;
+  category: typeof HouseBookFilterCategory.Name;
   value: HouseBookFilterNameValue;
   condition: HouseBookFilterNameCondition;
   operation: HouseBookFilterOperation | undefined;
@@ -46,7 +46,7 @@ export type HouseBookFilterPriceCondition =
 
 export type HouseBookFilterPriceValue = number;
 export type HouseBookFilterPrice = {
-  type: typeof HouseBookFilterCategory.Price;
+  category: typeof HouseBookFilterCategory.Price;
   value: HouseBookFilterPriceValue;
   condition: HouseBookFilterPriceCondition;
   operation: HouseBookFilterOperation | undefined;
@@ -62,7 +62,7 @@ export type HouseBookFilterTypeCondition =
 export type HouseBookFilterTypeValue = string;
 
 export type HouseBookFilterType = {
-  type: typeof HouseBookFilterCategory.Type;
+  category: typeof HouseBookFilterCategory.Type;
   value: HouseBookFilterTypeValue;
   condition: HouseBookFilterTypeCondition;
   operation: HouseBookFilterOperation | undefined;
@@ -84,7 +84,7 @@ export type HouseBookFilterPurchaseDateCondition =
 
 export type HouseBookFilterPurchaseDateValue = string;
 export type HouseBookFilterPurchaseDate = {
-  type: typeof HouseBookFilterCategory.PurchaseDate;
+  category: typeof HouseBookFilterCategory.PurchaseDate;
   value: HouseBookFilterPurchaseDateValue;
   condition: HouseBookFilterPurchaseDateCondition;
   operation: HouseBookFilterOperation | undefined;

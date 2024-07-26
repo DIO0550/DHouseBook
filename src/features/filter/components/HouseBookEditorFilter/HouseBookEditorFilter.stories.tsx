@@ -42,7 +42,7 @@ export const FilterOff: Story = {
 
 const Filter: HouseBookFilter[] = [
   {
-    type: HouseBookFilterCategory.Name,
+    category: HouseBookFilterCategory.Name,
     value: 'House',
     condition: HouseBookFilterNameCondition.Include,
     operation: undefined,

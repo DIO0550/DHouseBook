@@ -3,6 +3,7 @@ import {
   HouseBookFilterPurchaseDateCondition,
 } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
+import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 
 const HouseBookFilterPurchaseDateConditionLabel: {
   [x in HouseBookFilterPurchaseDateCondition]: string;
@@ -18,6 +19,7 @@ type Props = {
 };
 const HouseBookEditorFilterItemPurchaseDate = memo<Props>(({ filter }) => (
   <div>
+    <HouseBookEditorFilterItemOperation operation={filter.operation} />
     <select defaultValue={filter.condition}>
       {Object.values(HouseBookFilterPurchaseDateCondition).map((v) => (
         <option value={v}>

@@ -9,23 +9,45 @@ import {
   HouseBookFilterCategory,
   HouseBookFilterNameCondition,
 } from '@/stores/atoms/houseBookFilterState';
-import { HouseBookEditorFilterItem } from './HouseBookEditorFilterItem';
+import { HouseBookEditorFilterItemName } from './HouseBookEditorFilterItemName';
 
-const meta: Meta<typeof HouseBookEditorFilterItem> = {
-  component: HouseBookEditorFilterItem,
+const meta: Meta<typeof HouseBookEditorFilterItemName> = {
+  component: HouseBookEditorFilterItemName,
   decorators: [
     (story) => (
       <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
     ),
   ],
-  render: (args) => <HouseBookEditorFilterItem {...args} />,
+  render: (args) => <HouseBookEditorFilterItemName {...args} />,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof HouseBookEditorFilterItem>;
+type Story = StoryObj<typeof HouseBookEditorFilterItemName>;
 
-export const Filter: Story = {
+export const OperationNone: Story = {
+  args: {
+    filter: {
+      category: HouseBookFilterCategory.Name,
+      value: 'House',
+      condition: HouseBookFilterNameCondition.Include,
+      operation: undefined,
+    },
+  },
+};
+
+export const OperationAnd: Story = {
+  args: {
+    filter: {
+      category: HouseBookFilterCategory.Name,
+      value: 'House',
+      condition: HouseBookFilterNameCondition.Include,
+      operation: undefined,
+    },
+  },
+};
+
+export const OperationOr: Story = {
   args: {
     filter: {
       category: HouseBookFilterCategory.Name,
