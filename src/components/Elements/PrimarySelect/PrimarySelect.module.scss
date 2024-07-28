@@ -1,0 +1,12 @@
+.select {
+}
+
+.menu-overlay {
+  &-skin {
+    cursor: default;
+  }
+}
+
+.menu-overlay.close {
+  visibility: hidden;
+}

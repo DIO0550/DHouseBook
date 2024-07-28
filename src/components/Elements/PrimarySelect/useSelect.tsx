@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type Option = {
   value: string;
@@ -10,10 +10,24 @@ type Props = {
   options?: Option[];
 };
 
-export const NoSelectValue = '';
+export const NoSelectOption = {
+  Value: '',
+  Label: '',
+};
 
 const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
+  const selectRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const [value, setValue] = useState(defaultValue);
+  const label = useMemo(() => {
+    const selectedOption = options.find((option) => option.value === value);
+    if (selectedOption === undefined) {
+      return NoSelectOption.Label;
+    }
+
+    return selectedOption.label;
+  }, []);
 
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const openMenu = useCallback(() => {
@@ -28,7 +42,7 @@ const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
       if (options.some((option) => option.value === selectedValue)) {
         setValue(selectedValue);
       } else {
-        setValue(NoSelectValue);
+        setValue(NoSelectOption.Value);
       }
     },
     [options],
@@ -36,12 +50,15 @@ const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
 
   useEffect(() => {
     if (!options.some((option) => option.value === value)) {
-      setValue(NoSelectValue);
+      setValue(NoSelectOption.Value);
     }
   }, [options, value]);
 
   return {
+    selectRef,
+    menuRef,
     value,
+    label,
     selectOption,
     isOpenMenu,
     openMenu,
