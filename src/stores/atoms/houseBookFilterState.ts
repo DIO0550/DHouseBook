@@ -1,11 +1,12 @@
 import { atom } from 'recoil';
 
 export const HouseBookFilterOperation = {
-  Or: 'Or',
   And: 'And',
+  Or: 'Or',
 } as const;
 export type HouseBookFilterOperation =
   (typeof HouseBookFilterOperation)[keyof typeof HouseBookFilterOperation];
+export const HouseBookFilterOperationDefault = HouseBookFilterOperation.And;
 
 export const HouseBookFilterCategory = {
   Name: 'Name',
@@ -13,6 +14,8 @@ export const HouseBookFilterCategory = {
   Type: 'Type',
   PurchaseDate: 'PurchaseDate',
 } as const;
+export type HouseBookFilterCategory =
+  (typeof HouseBookFilterCategory)[keyof typeof HouseBookFilterCategory];
 
 // 名前フィルターの条件
 export const HouseBookFilterNameCondition = {
@@ -29,6 +32,19 @@ export type HouseBookFilterName = {
   condition: HouseBookFilterNameCondition;
   operation: HouseBookFilterOperation | undefined;
 };
+export const HouseBookFilterNameDefault = {
+  Value: '',
+  Condition: HouseBookFilterNameCondition.Include,
+} as const;
+
+const HouseBookFilterName = {
+  init: (): HouseBookFilterName => ({
+    category: HouseBookFilterCategory.Name,
+    value: HouseBookFilterNameDefault.Value,
+    condition: HouseBookFilterNameDefault.Condition,
+    operation: undefined,
+  }),
+} as const;
 
 // 値段フィルターの条件
 export const HouseBookFilterPriceCondition = {
@@ -51,6 +67,18 @@ export type HouseBookFilterPrice = {
   condition: HouseBookFilterPriceCondition;
   operation: HouseBookFilterOperation | undefined;
 };
+export const HouseBookFilterPriceDefault = {
+  Value: 0,
+  Condition: HouseBookFilterPriceCondition.GreaterThan,
+} as const;
+const HouseBookFilterPrice = {
+  init: (): HouseBookFilterPrice => ({
+    category: HouseBookFilterCategory.Price,
+    value: HouseBookFilterPriceDefault.Value,
+    condition: HouseBookFilterPriceDefault.Condition,
+    operation: undefined,
+  }),
+} as const;
 
 // 種類フィルターの条件
 export const HouseBookFilterTypeCondition = {
@@ -67,6 +95,19 @@ export type HouseBookFilterType = {
   condition: HouseBookFilterTypeCondition;
   operation: HouseBookFilterOperation | undefined;
 };
+export const HouseBookFilterTypeDefault = {
+  Value: '',
+  Condition: HouseBookFilterTypeCondition.Include,
+} as const;
+
+const HouseBookFilterType = {
+  init: (): HouseBookFilterType => ({
+    category: HouseBookFilterCategory.Type,
+    value: HouseBookFilterTypeDefault.Value,
+    condition: HouseBookFilterTypeDefault.Condition,
+    operation: undefined,
+  }),
+} as const;
 
 // 購入日フィルターの条件
 export const HouseBookFilterPurchaseDateCondition = {
@@ -89,12 +130,41 @@ export type HouseBookFilterPurchaseDate = {
   condition: HouseBookFilterPurchaseDateCondition;
   operation: HouseBookFilterOperation | undefined;
 };
+export const HouseBookFilterPurchaseDateDefault = {
+  Value: '',
+  Condition: HouseBookFilterPurchaseDateCondition.GreaterThan,
+} as const;
+const HouseBookFilterPurchaseDate = {
+  init: (): HouseBookFilterPurchaseDate => ({
+    category: HouseBookFilterCategory.PurchaseDate,
+    value: HouseBookFilterPurchaseDateDefault.Value,
+    condition: HouseBookFilterPurchaseDateDefault.Condition,
+    operation: undefined,
+  }),
+} as const;
 
 export type HouseBookFilter =
   | HouseBookFilterName
   | HouseBookFilterPrice
   | HouseBookFilterType
   | HouseBookFilterPurchaseDate;
+
+export const HouseBookFilter = {
+  initWithCategory: (category: HouseBookFilterCategory): HouseBookFilter => {
+    switch (category) {
+      case HouseBookFilterCategory.Name:
+        return HouseBookFilterName.init();
+      case HouseBookFilterCategory.Price:
+        return HouseBookFilterPrice.init();
+      case HouseBookFilterCategory.Type:
+        return HouseBookFilterType.init();
+      case HouseBookFilterCategory.PurchaseDate:
+        return HouseBookFilterPurchaseDate.init();
+      default:
+        return HouseBookFilterName.init();
+    }
+  },
+} as const;
 
 export const houseBookFilterState = atom<HouseBookFilter[] | undefined>({
   key: 'houseBookFilter',
