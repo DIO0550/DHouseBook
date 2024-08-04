@@ -1,4 +1,5 @@
 import {
+  memo,
   ReactNode,
   RefObject,
   useCallback,
@@ -16,35 +17,32 @@ type ComponentProps = {
   children: ReactNode;
 };
 
-const DialogComponent = ({
-  isOpen,
-  onClose,
-  dialogRef,
-  children,
-}: ComponentProps) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
-  <dialog
-    className={`${styles['modal-dialog']}`}
-    ref={dialogRef}
-    onClick={onClose}
-    onKeyDown={(e) => {
-      if (e.code !== 'Escape') {
-        return;
-      }
-      e.preventDefault();
-      onClose();
-    }}
-  >
-    <button
-      className={`${styles.content}`}
-      type="button"
-      onClick={(e) => {
-        e.stopPropagation();
+const DialogComponent = memo<ComponentProps>(
+  ({ isOpen, onClose, dialogRef, children }) => (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <dialog
+      className={`${styles['modal-dialog']}`}
+      ref={dialogRef}
+      onClick={onClose}
+      onKeyDown={(e) => {
+        if (e.code !== 'Escape') {
+          return;
+        }
+        e.preventDefault();
+        onClose();
       }}
     >
-      {isOpen && children}
-    </button>
-  </dialog>
+      <button
+        className={`${styles.content}`}
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        {isOpen && children}
+      </button>
+    </dialog>
+  ),
 );
 
 const useModalDialog = () => {
@@ -77,14 +75,17 @@ const useModalDialog = () => {
     }
   }, [isOpen]);
 
-  const ModalDialog = ({ children }: { children: ReactNode }) => (
-    <DialogComponent
-      dialogRef={dialogRef}
-      isOpen={isOpen}
-      onClose={closeDialog}
-    >
-      {children}
-    </DialogComponent>
+  const ModalDialog = useCallback(
+    ({ children }: { children: ReactNode }) => (
+      <DialogComponent
+        dialogRef={dialogRef}
+        isOpen={isOpen}
+        onClose={closeDialog}
+      >
+        {children}
+      </DialogComponent>
+    ),
+    [closeDialog, isOpen],
   );
 
   return {

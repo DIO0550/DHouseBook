@@ -3,15 +3,21 @@ import { memo } from 'react';
 import { HouseBookEditorFilterItem } from '../HouseBookEditorFilterItem/HouseBookEditorFilterItem';
 
 type Props = {
-  filters: HouseBookFilter[];
+  filters: HouseBookFilter[] | undefined;
 };
 
-const HouseBookEditorFilterList = memo<Props>(({ filters }) => (
-  <div>
-    {filters.map((v) => (
-      <HouseBookEditorFilterItem filter={v} />
-    ))}
-  </div>
-));
+const HouseBookEditorFilterList = memo<Props>(
+  ({ filters = [] as HouseBookFilter[] }) => {
+    console.log(filters);
+
+    return (
+      <div>
+        {filters.map((v) => (
+          <HouseBookEditorFilterItem filter={v} />
+        ))}
+      </div>
+    );
+  },
+);
 
 export { HouseBookEditorFilterList };

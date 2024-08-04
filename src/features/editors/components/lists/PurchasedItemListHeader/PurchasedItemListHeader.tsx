@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import styles from './PurchasedItemListHeader.module.scss';
 
 const PurchasedItemListHeader = memo(() => {
@@ -10,22 +11,22 @@ const PurchasedItemListHeader = memo(() => {
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-name']}`}
       >
-        商品名
+        {HouseBookItemCategory.displayName[HouseBookItemCategory.Name]}
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-price']}`}
       >
-        値段
+        {HouseBookItemCategory.displayName[HouseBookItemCategory.Price]}
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-type']}`}
       >
-        種類
+        {HouseBookItemCategory.displayName[HouseBookItemCategory.Type]}
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-date']}`}
       >
-        購入日
+        {HouseBookItemCategory.displayName[HouseBookItemCategory.Date]}
       </div>
     </header>
   );

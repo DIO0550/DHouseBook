@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
 
 export const HouseBookFilterOperation = {
   And: 'And',
@@ -143,25 +144,44 @@ const HouseBookFilterPurchaseDate = {
   }),
 } as const;
 
-export type HouseBookFilter =
+export type HouseBookFilter = {
+  id: string;
+} & (
   | HouseBookFilterName
   | HouseBookFilterPrice
   | HouseBookFilterType
-  | HouseBookFilterPurchaseDate;
+  | HouseBookFilterPurchaseDate
+);
 
 export const HouseBookFilter = {
   initWithCategory: (category: HouseBookFilterCategory): HouseBookFilter => {
+    const id = uuidv4();
     switch (category) {
       case HouseBookFilterCategory.Name:
-        return HouseBookFilterName.init();
+        return {
+          id,
+          ...HouseBookFilterName.init(),
+        };
       case HouseBookFilterCategory.Price:
-        return HouseBookFilterPrice.init();
+        return {
+          id,
+          ...HouseBookFilterPrice.init(),
+        };
       case HouseBookFilterCategory.Type:
-        return HouseBookFilterType.init();
+        return {
+          id,
+          ...HouseBookFilterType.init(),
+        };
       case HouseBookFilterCategory.PurchaseDate:
-        return HouseBookFilterPurchaseDate.init();
+        return {
+          id,
+          ...HouseBookFilterPurchaseDate.init(),
+        };
       default:
-        return HouseBookFilterName.init();
+        return {
+          id,
+          ...HouseBookFilterName.init(),
+        };
     }
   },
 } as const;

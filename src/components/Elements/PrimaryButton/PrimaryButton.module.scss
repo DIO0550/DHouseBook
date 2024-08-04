@@ -1,6 +1,7 @@
 @use '@/styles/mixins.module.scss' as mixins;
 
 .primary {
+  display: block;
   &.red {
     @include mixins.base-primary-button-style(red);
   }
