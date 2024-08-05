@@ -1,3 +1,4 @@
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { atom } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,15 +10,6 @@ export type HouseBookFilterOperation =
   (typeof HouseBookFilterOperation)[keyof typeof HouseBookFilterOperation];
 export const HouseBookFilterOperationDefault = HouseBookFilterOperation.And;
 
-export const HouseBookFilterCategory = {
-  Name: 'Name',
-  Price: 'Price',
-  Type: 'Type',
-  PurchaseDate: 'PurchaseDate',
-} as const;
-export type HouseBookFilterCategory =
-  (typeof HouseBookFilterCategory)[keyof typeof HouseBookFilterCategory];
-
 // 名前フィルターの条件
 export const HouseBookFilterNameCondition = {
   NotInclude: 'NotInclude',
@@ -28,7 +20,7 @@ export type HouseBookFilterNameCondition =
 export type HouseBookFilterNameValue = string;
 
 export type HouseBookFilterName = {
-  category: typeof HouseBookFilterCategory.Name;
+  category: typeof HouseBookItemCategory.Name;
   value: HouseBookFilterNameValue;
   condition: HouseBookFilterNameCondition;
   operation: HouseBookFilterOperation | undefined;
@@ -40,7 +32,7 @@ export const HouseBookFilterNameDefault = {
 
 const HouseBookFilterName = {
   init: (): HouseBookFilterName => ({
-    category: HouseBookFilterCategory.Name,
+    category: HouseBookItemCategory.Name,
     value: HouseBookFilterNameDefault.Value,
     condition: HouseBookFilterNameDefault.Condition,
     operation: undefined,
@@ -63,7 +55,7 @@ export type HouseBookFilterPriceCondition =
 
 export type HouseBookFilterPriceValue = number;
 export type HouseBookFilterPrice = {
-  category: typeof HouseBookFilterCategory.Price;
+  category: typeof HouseBookItemCategory.Price;
   value: HouseBookFilterPriceValue;
   condition: HouseBookFilterPriceCondition;
   operation: HouseBookFilterOperation | undefined;
@@ -74,7 +66,7 @@ export const HouseBookFilterPriceDefault = {
 } as const;
 const HouseBookFilterPrice = {
   init: (): HouseBookFilterPrice => ({
-    category: HouseBookFilterCategory.Price,
+    category: HouseBookItemCategory.Price,
     value: HouseBookFilterPriceDefault.Value,
     condition: HouseBookFilterPriceDefault.Condition,
     operation: undefined,
@@ -91,7 +83,7 @@ export type HouseBookFilterTypeCondition =
 export type HouseBookFilterTypeValue = string;
 
 export type HouseBookFilterType = {
-  category: typeof HouseBookFilterCategory.Type;
+  category: typeof HouseBookItemCategory.Type;
   value: HouseBookFilterTypeValue;
   condition: HouseBookFilterTypeCondition;
   operation: HouseBookFilterOperation | undefined;
@@ -103,7 +95,7 @@ export const HouseBookFilterTypeDefault = {
 
 const HouseBookFilterType = {
   init: (): HouseBookFilterType => ({
-    category: HouseBookFilterCategory.Type,
+    category: HouseBookItemCategory.Type,
     value: HouseBookFilterTypeDefault.Value,
     condition: HouseBookFilterTypeDefault.Condition,
     operation: undefined,
@@ -111,7 +103,7 @@ const HouseBookFilterType = {
 } as const;
 
 // 購入日フィルターの条件
-export const HouseBookFilterPurchaseDateCondition = {
+export const HouseBookFilterDateCondition = {
   // より大きい
   GreaterThan: 'GreaterThan',
   // 以上
@@ -121,25 +113,25 @@ export const HouseBookFilterPurchaseDateCondition = {
   // 以下
   LessThanOrEqual: 'LessThanOrEqual',
 } as const;
-export type HouseBookFilterPurchaseDateCondition =
-  (typeof HouseBookFilterPurchaseDateCondition)[keyof typeof HouseBookFilterPurchaseDateCondition];
+export type HouseBookFilterDateCondition =
+  (typeof HouseBookFilterDateCondition)[keyof typeof HouseBookFilterDateCondition];
 
-export type HouseBookFilterPurchaseDateValue = string;
-export type HouseBookFilterPurchaseDate = {
-  category: typeof HouseBookFilterCategory.PurchaseDate;
-  value: HouseBookFilterPurchaseDateValue;
-  condition: HouseBookFilterPurchaseDateCondition;
+export type HouseBookFilterDateValue = string;
+export type HouseBookFilterDate = {
+  category: typeof HouseBookItemCategory.Date;
+  value: HouseBookFilterDateValue;
+  condition: HouseBookFilterDateCondition;
   operation: HouseBookFilterOperation | undefined;
 };
-export const HouseBookFilterPurchaseDateDefault = {
+export const HouseBookFilterDateDefault = {
   Value: '',
-  Condition: HouseBookFilterPurchaseDateCondition.GreaterThan,
+  Condition: HouseBookFilterDateCondition.GreaterThan,
 } as const;
-const HouseBookFilterPurchaseDate = {
-  init: (): HouseBookFilterPurchaseDate => ({
-    category: HouseBookFilterCategory.PurchaseDate,
-    value: HouseBookFilterPurchaseDateDefault.Value,
-    condition: HouseBookFilterPurchaseDateDefault.Condition,
+const HouseBookFilterDate = {
+  init: (): HouseBookFilterDate => ({
+    category: HouseBookItemCategory.Date,
+    value: HouseBookFilterDateDefault.Value,
+    condition: HouseBookFilterDateDefault.Condition,
     operation: undefined,
   }),
 } as const;
@@ -150,32 +142,32 @@ export type HouseBookFilter = {
   | HouseBookFilterName
   | HouseBookFilterPrice
   | HouseBookFilterType
-  | HouseBookFilterPurchaseDate
+  | HouseBookFilterDate
 );
 
 export const HouseBookFilter = {
-  initWithCategory: (category: HouseBookFilterCategory): HouseBookFilter => {
+  initWithCategory: (category: HouseBookItemCategory): HouseBookFilter => {
     const id = uuidv4();
     switch (category) {
-      case HouseBookFilterCategory.Name:
+      case HouseBookItemCategory.Name:
         return {
           id,
           ...HouseBookFilterName.init(),
         };
-      case HouseBookFilterCategory.Price:
+      case HouseBookItemCategory.Price:
         return {
           id,
           ...HouseBookFilterPrice.init(),
         };
-      case HouseBookFilterCategory.Type:
+      case HouseBookItemCategory.Type:
         return {
           id,
           ...HouseBookFilterType.init(),
         };
-      case HouseBookFilterCategory.PurchaseDate:
+      case HouseBookItemCategory.Date:
         return {
           id,
-          ...HouseBookFilterPurchaseDate.init(),
+          ...HouseBookFilterDate.init(),
         };
       default:
         return {

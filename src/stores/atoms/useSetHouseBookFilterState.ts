@@ -32,8 +32,25 @@ const useSetHouseBookFilterState = () => {
     [],
   );
 
+  const removeHouseBookFilterById = useRecoilCallback(
+    ({ set }) =>
+      (id: string) => {
+        set(houseBookFilterState, (current) => {
+          if (!current) {
+            return undefined;
+          }
+
+          const result = current.filter((v) => v.id !== id);
+
+          return result;
+        });
+      },
+    [],
+  );
+
   return {
     setHouseBookFilterWithCategory,
+    removeHouseBookFilterById,
   };
 };
 

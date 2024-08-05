@@ -5,10 +5,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeProvider } from '@/components/Providers';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
-import {
-  HouseBookFilterCategory,
-  HouseBookFilterNameCondition,
-} from '@/stores/atoms/houseBookFilterState';
+import { HouseBookFilterNameCondition } from '@/stores/atoms/houseBookFilterState';
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookEditorFilterItemName } from './HouseBookEditorFilterItemName';
 
 const meta: Meta<typeof HouseBookEditorFilterItemName> = {
@@ -28,7 +26,7 @@ type Story = StoryObj<typeof HouseBookEditorFilterItemName>;
 export const OperationNone: Story = {
   args: {
     filter: {
-      category: HouseBookFilterCategory.Name,
+      category: HouseBookItemCategory.Name,
       value: 'House',
       condition: HouseBookFilterNameCondition.Include,
       operation: undefined,
@@ -39,7 +37,7 @@ export const OperationNone: Story = {
 export const OperationAnd: Story = {
   args: {
     filter: {
-      category: HouseBookFilterCategory.Name,
+      category: HouseBookItemCategory.Name,
       value: 'House',
       condition: HouseBookFilterNameCondition.Include,
       operation: undefined,
@@ -50,7 +48,7 @@ export const OperationAnd: Story = {
 export const OperationOr: Story = {
   args: {
     filter: {
-      category: HouseBookFilterCategory.Name,
+      category: HouseBookItemCategory.Name,
       value: 'House',
       condition: HouseBookFilterNameCondition.Include,
       operation: undefined,

@@ -1,10 +1,8 @@
-import {
-  HouseBookFilter,
-  HouseBookFilterCategory,
-} from '@/stores/atoms/houseBookFilterState';
+import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookEditorFilterItemName } from '../HouseBookEditorFilterItemName/HouseBookEditorFilterItemName';
-import { HouseBookEditorFilterItemPurchaseDate } from '../HouseBookEditorFilterItemPurchaseDate/HouseBookEditorFilterItemPurchaseDate';
+import { HouseBookEditorFilterItemDate } from '../HouseBookEditorFilterItemPurchaseDate/HouseBookEditorFilterItemPurchaseDate';
 import { HouseBookEditorFilterItemPrice } from '../HouseBookEditorFilterItemPrice/HouseBookEditorFilterItemPrice';
 import { HouseBookEditorFilterItemType } from '../HouseBookEditorFilterItemType/HouseBookEditorFilterItemType';
 
@@ -13,17 +11,25 @@ type Props = {
 };
 const HouseBookEditorFilterItem = memo<Props>(({ filter }) => {
   switch (filter.category) {
-    case HouseBookFilterCategory.Name:
-      return <HouseBookEditorFilterItemName filter={filter} />;
+    case HouseBookItemCategory.Name:
+      return (
+        <HouseBookEditorFilterItemName filterId={filter.id} filter={filter} />
+      );
 
-    case HouseBookFilterCategory.Price:
-      return <HouseBookEditorFilterItemPrice filter={filter} />;
+    case HouseBookItemCategory.Price:
+      return (
+        <HouseBookEditorFilterItemPrice filterId={filter.id} filter={filter} />
+      );
 
-    case HouseBookFilterCategory.Type:
-      return <HouseBookEditorFilterItemType filter={filter} />;
+    case HouseBookItemCategory.Type:
+      return (
+        <HouseBookEditorFilterItemType filterId={filter.id} filter={filter} />
+      );
 
-    case HouseBookFilterCategory.PurchaseDate:
-      return <HouseBookEditorFilterItemPurchaseDate filter={filter} />;
+    case HouseBookItemCategory.Date:
+      return (
+        <HouseBookEditorFilterItemDate filterId={filter.id} filter={filter} />
+      );
 
     default:
       return null;

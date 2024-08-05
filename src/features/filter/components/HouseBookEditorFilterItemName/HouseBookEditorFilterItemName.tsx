@@ -5,6 +5,7 @@ import {
 import { memo } from 'react';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
+import { HouuseBookEditorFilterRemoveButtonFilter } from '../HouseBookEditorFilterRemoveButton';
 
 const HouseBookFilterNameConditionLabel: {
   [x in HouseBookFilterNameCondition]: string;
@@ -14,9 +15,10 @@ const HouseBookFilterNameConditionLabel: {
 };
 
 type Props = {
+  filterId: string;
   filter: HouseBookFilterName;
 };
-const HouseBookEditorFilterItemName = memo<Props>(({ filter }) => (
+const HouseBookEditorFilterItemName = memo<Props>(({ filterId, filter }) => (
   <div>
     <HouseBookEditorFiterItemCategory category={filter.category} />
     <HouseBookEditorFilterItemOperation operation={filter.operation} />
@@ -26,6 +28,7 @@ const HouseBookEditorFilterItemName = memo<Props>(({ filter }) => (
       ))}
     </select>
     <input type="text" defaultValue={filter.value} />
+    <HouuseBookEditorFilterRemoveButtonFilter filterId={filterId} />
   </div>
 ));
 

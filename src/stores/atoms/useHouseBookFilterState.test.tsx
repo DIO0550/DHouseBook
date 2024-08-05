@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
 import { RecoilRoot, SetRecoilState } from 'recoil';
 import { ReactNode } from 'react';
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { useHouseBookFilterState } from './useHouseBookFilterState';
 import {
   HouseBookFilter,
-  HouseBookFilterCategory,
   HouseBookFilterNameCondition,
   houseBookFilterState,
 } from './houseBookFilterState';
@@ -44,7 +44,8 @@ describe('useHouseBookFilterState.test', () => {
     it('フィルタが設定されていればtrue', () => {
       const filter: HouseBookFilter[] = [
         {
-          category: HouseBookFilterCategory.Name,
+          id: '1234',
+          category: HouseBookItemCategory.Name,
           value: 'Hoge',
           condition: HouseBookFilterNameCondition.Include,
           operation: undefined,

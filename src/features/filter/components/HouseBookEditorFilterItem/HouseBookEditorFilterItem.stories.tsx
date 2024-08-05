@@ -5,10 +5,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeProvider } from '@/components/Providers';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
-import {
-  HouseBookFilterCategory,
-  HouseBookFilterNameCondition,
-} from '@/stores/atoms/houseBookFilterState';
+import { HouseBookFilterNameCondition } from '@/stores/atoms/houseBookFilterState';
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookEditorFilterItem } from './HouseBookEditorFilterItem';
 
 const meta: Meta<typeof HouseBookEditorFilterItem> = {
@@ -28,7 +26,8 @@ type Story = StoryObj<typeof HouseBookEditorFilterItem>;
 export const Filter: Story = {
   args: {
     filter: {
-      category: HouseBookFilterCategory.Name,
+      id: '1234',
+      category: HouseBookItemCategory.Name,
       value: 'House',
       condition: HouseBookFilterNameCondition.Include,
       operation: undefined,

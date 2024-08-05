@@ -8,10 +8,10 @@ import { RecoilRoot, SetRecoilState } from 'recoil';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import {
   HouseBookFilter,
-  HouseBookFilterCategory,
   HouseBookFilterNameCondition,
   houseBookFilterState,
 } from '@/stores/atoms/houseBookFilterState';
+import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookEditorFilter } from './HouseBookEditorFilter';
 
 const meta: Meta<typeof HouseBookEditorFilter> = {
@@ -42,7 +42,8 @@ export const FilterOff: Story = {
 
 const Filter: HouseBookFilter[] = [
   {
-    category: HouseBookFilterCategory.Name,
+    id: '1234',
+    category: HouseBookItemCategory.Name,
     value: 'House',
     condition: HouseBookFilterNameCondition.Include,
     operation: undefined,
