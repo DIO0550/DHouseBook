@@ -4,7 +4,7 @@ import {
 } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
-import { HouuseBookEditorFilterRemoveButtonFilter } from '../HouseBookEditorFilterRemoveButton';
+import { HouuseBookEditorFilterRemoveButton } from '../HouseBookEditorFilterRemoveButton';
 
 const HouseBookFilterTypeConditionLabel: {
   [x in HouseBookFilterTypeCondition]: string;
@@ -16,18 +16,24 @@ const HouseBookFilterTypeConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterType;
+  removeFilter: (id: string) => void;
 };
-const HouseBookEditorFilterItemType = memo<Props>(({ filterId, filter }) => (
-  <div>
-    <HouseBookEditorFilterItemOperation operation={filter.operation} />
-    <select defaultValue={filter.condition}>
-      {Object.values(HouseBookFilterTypeCondition).map((v) => (
-        <option value={v}>{HouseBookFilterTypeConditionLabel[v]}</option>
-      ))}
-    </select>
-    <input type="text" defaultValue={filter.value} />
-    <HouuseBookEditorFilterRemoveButtonFilter filterId={filterId} />
-  </div>
-));
+const HouseBookEditorFilterItemType = memo<Props>(
+  ({ filterId, filter, removeFilter }) => (
+    <div>
+      <HouseBookEditorFilterItemOperation operation={filter.operation} />
+      <select defaultValue={filter.condition}>
+        {Object.values(HouseBookFilterTypeCondition).map((v) => (
+          <option value={v}>{HouseBookFilterTypeConditionLabel[v]}</option>
+        ))}
+      </select>
+      <input type="text" defaultValue={filter.value} />
+      <HouuseBookEditorFilterRemoveButton
+        filterId={filterId}
+        onClick={removeFilter}
+      />
+    </div>
+  ),
+);
 
 export { HouseBookEditorFilterItemType };

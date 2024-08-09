@@ -1,25 +1,25 @@
-import {
-  HouseBookFilter,
-  houseBookFilterState,
-} from '@/stores/atoms/houseBookFilterState';
-import { useSetHouseBookFilterState } from '@/stores/atoms/useSetHouseBookFilterState';
+import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
-import { useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useCallback, useState } from 'react';
 
-const useHouseBookEditorFilter = () => {
-  const filters = useRecoilValue(houseBookFilterState);
-  const { setHouseBookFilterWithCategory, removeHouseBookFilterById } =
-    useSetHouseBookFilterState();
+type Props = {
+  initFilters?: HouseBookFilter[];
+};
+const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
+  const [filters, setFilters] = useState(initFilters);
 
   const addNewFilter = useCallback(() => {
     const newFilter = HouseBookFilter.initWithCategory(
       HouseBookItemCategory.Name,
     );
-    setHouseBookFilterWithCategory(newFilter);
-  }, [setHouseBookFilterWithCategory]);
 
-  return { filters, addNewFilter, removeHouseBookFilterById };
+    setFilters((cur) => [...cur, newFilter]);
+  }, []);
+
+  return {
+    addNewFilter,
+    filters,
+  };
 };
 
 export { useHouseBookEditorFilter };

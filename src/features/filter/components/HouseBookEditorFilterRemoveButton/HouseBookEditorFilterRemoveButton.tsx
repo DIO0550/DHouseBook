@@ -1,23 +1,21 @@
 import { memo } from 'react';
-import { useHouseBookEditorFilter } from '../../hooks/useHouseBookEditorFilter';
 
 type Props = {
   filterId: string;
+  onClick: (id: string) => void;
 };
 
-const HouuseBookEditorFilterRemoveButtonFilter = memo<Props>(({ filterId }) => {
-  const { removeHouseBookFilterById } = useHouseBookEditorFilter();
-
-  return (
+const HouuseBookEditorFilterRemoveButton = memo<Props>(
+  ({ filterId, onClick }) => (
     <button
       type="button"
       onClick={() => {
-        removeHouseBookFilterById(filterId);
+        onClick(filterId);
       }}
     >
       削除
     </button>
-  );
-});
+  ),
+);
 
-export { HouuseBookEditorFilterRemoveButtonFilter };
+export { HouuseBookEditorFilterRemoveButton };

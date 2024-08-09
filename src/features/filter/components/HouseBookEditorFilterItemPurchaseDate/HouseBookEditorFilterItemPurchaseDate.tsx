@@ -5,7 +5,7 @@ import {
 import { memo } from 'react';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
-import { HouuseBookEditorFilterRemoveButtonFilter } from '../HouseBookEditorFilterRemoveButton';
+import { HouuseBookEditorFilterRemoveButton } from '../HouseBookEditorFilterRemoveButton';
 
 const HouseBookFilterDateConditionLabel: {
   [x in HouseBookFilterDateCondition]: string;
@@ -19,19 +19,25 @@ const HouseBookFilterDateConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterDate;
+  removeFilter: (id: string) => void;
 };
-const HouseBookEditorFilterItemDate = memo<Props>(({ filterId, filter }) => (
-  <div>
-    <HouseBookEditorFiterItemCategory category={filter.category} />
-    <HouseBookEditorFilterItemOperation operation={filter.operation} />
-    <select defaultValue={filter.condition}>
-      {Object.values(HouseBookFilterDateCondition).map((v) => (
-        <option value={v}>{HouseBookFilterDateConditionLabel[v]}</option>
-      ))}
-    </select>
-    <input type="text" defaultValue={filter.value} />
-    <HouuseBookEditorFilterRemoveButtonFilter filterId={filterId} />
-  </div>
-));
+const HouseBookEditorFilterItemDate = memo<Props>(
+  ({ filterId, filter, removeFilter }) => (
+    <div>
+      <HouseBookEditorFiterItemCategory category={filter.category} />
+      <HouseBookEditorFilterItemOperation operation={filter.operation} />
+      <select defaultValue={filter.condition}>
+        {Object.values(HouseBookFilterDateCondition).map((v) => (
+          <option value={v}>{HouseBookFilterDateConditionLabel[v]}</option>
+        ))}
+      </select>
+      <input type="text" defaultValue={filter.value} />
+      <HouuseBookEditorFilterRemoveButton
+        filterId={filterId}
+        onClick={removeFilter}
+      />
+    </div>
+  ),
+);
 
 export { HouseBookEditorFilterItemDate };
