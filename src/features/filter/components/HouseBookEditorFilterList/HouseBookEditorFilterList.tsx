@@ -4,20 +4,17 @@ import { HouseBookEditorFilterItem } from '../HouseBookEditorFilterItem/HouseBoo
 
 type Props = {
   filters: HouseBookFilter[] | undefined;
+  removeFilter: (id: string) => void;
 };
 
 const HouseBookEditorFilterList = memo<Props>(
-  ({ filters = [] as HouseBookFilter[] }) => {
-    console.log(filters);
-
-    return (
-      <div>
-        {filters.map((v) => (
-          <HouseBookEditorFilterItem filter={v} />
-        ))}
-      </div>
-    );
-  },
+  ({ filters = [] as HouseBookFilter[], removeFilter }) => (
+    <div>
+      {filters.map((v) => (
+        <HouseBookEditorFilterItem filter={v} removeFilter={removeFilter} />
+      ))}
+    </div>
+  ),
 );
 
 export { HouseBookEditorFilterList };

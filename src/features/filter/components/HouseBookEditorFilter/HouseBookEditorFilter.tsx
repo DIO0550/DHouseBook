@@ -10,10 +10,12 @@ import { useHouseBookEditorFilter } from '../../hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterList } from '../HouseBookEditorFilterList/HouseBookEditorFilterList';
 
 const HouseBookEditorFilter = memo(() => {
-  const { isApplyFilter } = useHouseBookFilterState();
+  const { filters: filtersState, isApplyFilter } = useHouseBookFilterState();
   const { showDialog, closeDialog, ModalDialog } = useModalDialog();
   const { themeColor } = useThemeContext();
-  const { filters, addNewFilter } = useHouseBookEditorFilter();
+  const { filters, addNewFilter } = useHouseBookEditorFilter({
+    initFilters: filtersState,
+  });
 
   return (
     <>

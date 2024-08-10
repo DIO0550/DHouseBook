@@ -4,7 +4,7 @@ import {
 } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
-import { HouuseBookEditorFilterRemoveButton } from '../HouseBookEditorFilterRemoveButton';
+import { HouseBookEditorFilterRemoveButton } from '../HouseBookEditorFilterRemoveButton';
 
 const HouseBookFilterTypeConditionLabel: {
   [x in HouseBookFilterTypeCondition]: string;
@@ -28,7 +28,7 @@ const HouseBookEditorFilterItemType = memo<Props>(
         ))}
       </select>
       <input type="text" defaultValue={filter.value} />
-      <HouuseBookEditorFilterRemoveButton
+      <HouseBookEditorFilterRemoveButton
         filterId={filterId}
         onClick={removeFilter}
       />

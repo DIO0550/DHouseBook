@@ -3,9 +3,9 @@ import {
   HouseBookFilterPriceCondition,
 } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
+import { PrimarySubButton } from '@/components/Elements';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
-import { HouuseBookEditorFilterRemoveButton } from '../HouseBookEditorFilterRemoveButton';
 
 const HouseBookFilterPriceConditionLabel: {
   [x in HouseBookFilterPriceCondition]: string;
@@ -24,17 +24,19 @@ type Props = {
 const HouseBookEditorFilterItemPrice = memo<Props>(
   ({ filterId, filter, removeFilter }) => (
     <div>
-      <HouseBookEditorFiterItemCategory category={filter.category} />
       <HouseBookEditorFilterItemOperation operation={filter.operation} />
+      <HouseBookEditorFiterItemCategory category={filter.category} />
       <select defaultValue={filter.condition}>
         {Object.values(HouseBookFilterPriceCondition).map((v) => (
           <option value={v}>{HouseBookFilterPriceConditionLabel[v]}</option>
         ))}
       </select>
       <input type="text" defaultValue={filter.value} />
-      <HouuseBookEditorFilterRemoveButton
-        filterId={filterId}
-        onClick={removeFilter}
+      <PrimarySubButton
+        title="削除"
+        onClick={() => {
+          removeFilter(filterId);
+        }}
       />
     </div>
   ),

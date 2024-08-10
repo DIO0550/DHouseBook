@@ -3,17 +3,18 @@ import { useMemo } from 'react';
 import { houseBookFilterState } from './houseBookFilterState';
 
 const useHouseBookFilterState = () => {
-  const filter = useRecoilValue(houseBookFilterState);
+  const filters = useRecoilValue(houseBookFilterState);
 
   const isApplyFilter = useMemo(() => {
-    if (!filter) {
+    if (!filters) {
       return false;
     }
 
-    return filter.length !== 0;
-  }, [filter]);
+    return filters.length !== 0;
+  }, [filters]);
 
   return {
+    filters,
     isApplyFilter,
   };
 };

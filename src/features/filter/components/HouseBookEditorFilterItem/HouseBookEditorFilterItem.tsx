@@ -8,27 +8,44 @@ import { HouseBookEditorFilterItemType } from '../HouseBookEditorFilterItemType/
 
 type Props = {
   filter: HouseBookFilter;
+  removeFilter: (id: string) => void;
 };
-const HouseBookEditorFilterItem = memo<Props>(({ filter }) => {
+const HouseBookEditorFilterItem = memo<Props>(({ filter, removeFilter }) => {
   switch (filter.category) {
     case HouseBookItemCategory.Name:
       return (
-        <HouseBookEditorFilterItemName filterId={filter.id} filter={filter} />
+        <HouseBookEditorFilterItemName
+          filterId={filter.id}
+          filter={filter}
+          removeFilter={removeFilter}
+        />
       );
 
     case HouseBookItemCategory.Price:
       return (
-        <HouseBookEditorFilterItemPrice filterId={filter.id} filter={filter} />
+        <HouseBookEditorFilterItemPrice
+          filterId={filter.id}
+          filter={filter}
+          removeFilter={removeFilter}
+        />
       );
 
     case HouseBookItemCategory.Type:
       return (
-        <HouseBookEditorFilterItemType filterId={filter.id} filter={filter} />
+        <HouseBookEditorFilterItemType
+          filterId={filter.id}
+          filter={filter}
+          removeFilter={removeFilter}
+        />
       );
 
     case HouseBookItemCategory.Date:
       return (
-        <HouseBookEditorFilterItemDate filterId={filter.id} filter={filter} />
+        <HouseBookEditorFilterItemDate
+          filterId={filter.id}
+          filter={filter}
+          removeFilter={removeFilter}
+        />
       );
 
     default:

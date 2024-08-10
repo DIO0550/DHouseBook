@@ -4,16 +4,16 @@ import styles from './PrimarySubButton.module.scss';
 
 type Props = {
   title: string;
-  handleClick: (e?: MouseEvent) => void;
+  onClick: (e?: MouseEvent) => void;
 };
 
-const PrimarySubButton = memo<Props>(({ title, handleClick }) => {
+const PrimarySubButton = memo<Props>(({ title, onClick }) => {
   const { themeColor } = useThemeContext();
 
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={onClick}
       className={`${styles['primary-sub']} ${styles[themeColor]}`}
     >
       <div>{title}</div>

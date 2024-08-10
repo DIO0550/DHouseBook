@@ -5,7 +5,8 @@ type Props = {
   onClick: (id: string) => void;
 };
 
-const HouuseBookEditorFilterRemoveButton = memo<Props>(
+// このコンポーネントいらないかも
+const HouseBookEditorFilterRemoveButton = memo<Props>(
   ({ filterId, onClick }) => (
     <button
       type="button"
@@ -18,4 +19,4 @@ const HouuseBookEditorFilterRemoveButton = memo<Props>(
   ),
 );
 
-export { HouuseBookEditorFilterRemoveButton };
+export { HouseBookEditorFilterRemoveButton };
