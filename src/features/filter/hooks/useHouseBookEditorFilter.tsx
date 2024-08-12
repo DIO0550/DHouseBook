@@ -21,13 +21,21 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
       operation,
     } as HouseBookFilter;
 
-    console.log(newFilter);
-
     setFilters((cur) => [...cur, newFilter]);
   }, [filters]);
 
+  const removeFilterById = useCallback(
+    (id: string) => {
+      const result = filters.filter((filter) => filter.id !== id);
+
+      setFilters(result);
+    },
+    [filters],
+  );
+
   return {
     addNewFilter,
+    removeFilterById,
     filters,
   };
 };

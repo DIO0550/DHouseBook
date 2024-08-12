@@ -1,51 +1,34 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { memo } from 'react';
-import { useModalDialog } from '@/hooks/dialogs/useModalDialog';
+import { memo, useState } from 'react';
 import { useHouseBookFilterState } from '@/stores/atoms/useHouseBookFilterState';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
-import { PrimaryButton } from '@/components/Elements';
 import styles from './HouseBookEditorFilter.module.scss';
-import { useHouseBookEditorFilter } from '../../hooks/useHouseBookEditorFilter';
-import { HouseBookEditorFilterList } from '../HouseBookEditorFilterList/HouseBookEditorFilterList';
+import { HouseBookEditorFilterModalDialog } from '../HouseBookEditorFilterModalDialog/HouseBookEditorFilterModalDialog';
 
 const HouseBookEditorFilter = memo(() => {
-  const { filters: filtersState, isApplyFilter } = useHouseBookFilterState();
-  const { showDialog, closeDialog, ModalDialog } = useModalDialog();
+  const { filters, isApplyFilter } = useHouseBookFilterState();
+  const [isOpen, setIsOpen] = useState(false);
   const { themeColor } = useThemeContext();
-  const { filters, addNewFilter } = useHouseBookEditorFilter({
-    initFilters: filtersState,
-  });
 
   return (
     <>
-      <ModalDialog>
-        <div>
-          <div>
-            <div>フィルター設定</div>
-          </div>
-          <HouseBookEditorFilterList filters={filters} />
-          <div>
-            <PrimaryButton
-              title="追加"
-              onClick={(e) => {
-                e?.stopPropagation();
-                addNewFilter();
-              }}
-            />
-            <button type="button" onClick={closeDialog}>
-              キャンセル
-            </button>
-          </div>
-        </div>
-      </ModalDialog>
+      <HouseBookEditorFilterModalDialog
+        initFilters={filters}
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      />
       <div>
         <button
           className={`${styles['filter-btn']} ${styles['filter-btn-skin']} ${
             isApplyFilter ? styles.on : ''
           } ${styles[themeColor]}`}
           type="button"
-          onClick={showDialog}
+          onClick={() => {
+            setIsOpen(true);
+          }}
         >
           フィルター
         </button>
