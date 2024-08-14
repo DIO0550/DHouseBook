@@ -1,3 +1,5 @@
+import { DateEx } from '@/utils/DateEx';
+import { HouseBookItem } from '@/utils/editors/houseBookItem';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { atom } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
@@ -134,6 +136,32 @@ const HouseBookFilterDate = {
     condition: HouseBookFilterDateDefault.Condition,
     operation: undefined,
   }),
+
+  match: (filter: HouseBookFilterDate, item: HouseBookItem) => {
+    const filterDate = new Date(filter.value);
+    const itemDate = new Date(item.date);
+    if (DateEx.isInvalidDate(filterDate) || DateEx.isInvalidDate(itemDate)) {
+      return false;
+    }
+
+    if (filter.condition === HouseBookFilterDateCondition.GreaterThan) {
+      return itemDate.getTime() > filterDate.getTime();
+    }
+
+    if (filter.condition === HouseBookFilterDateCondition.GreaterThanOrEqual) {
+      return itemDate.getTime() >= filterDate.getTime();
+    }
+
+    if (filter.condition === HouseBookFilterDateCondition.LessThan) {
+      return itemDate.getTime() < filterDate.getTime();
+    }
+
+    if (filter.condition === HouseBookFilterDateCondition.LessThanOrEqual) {
+      return itemDate.getTime() <= filterDate.getTime();
+    }
+
+    return false;
+  },
 } as const;
 
 export type HouseBookFilter = {
@@ -176,7 +204,33 @@ export const HouseBookFilter = {
         };
     }
   },
+
+  spllitFilter: (filters: HouseBookFilter[]): HouseBookFilter[][] => {
+    const result: HouseBookFilter[][] = filters.reduce<HouseBookFilter[][]>(
+      (prev, cur) => {
+        if (!prev.length) {
+          prev.push([cur]);
+
+          return prev;
+        }
+        if (cur.operation !== HouseBookFilterOperation.And) {
+          prev.push([cur]);
+        }
+        const lastFilter = prev.at(-1);
+        lastFilter?.push(cur);
+
+        return prev;
+      },
+      [] as HouseBookFilter[][],
+    );
+
+    return result;
+  },
 } as const;
+
+const filterItems = (items: HouseBookItem[], filters: HouseBookFilter[]) => {
+  const;
+};
 
 export const houseBookFilterState = atom<HouseBookFilter[] | undefined>({
   key: 'houseBookFilter',

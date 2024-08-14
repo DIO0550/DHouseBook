@@ -2,7 +2,7 @@ import { HouseBookData } from '@/features/files/utils/houseBookData';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
 import { HouseBookFileProperty } from '@/features/files/utils/houseBookFileProperty';
 import { HouseBookItems } from '@/utils/editors/houseBookItem';
-import { atom, atomFamily, selector } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 
 export type HouseBookState = {
@@ -42,28 +42,16 @@ export const houseBookDateState = atomFamily<HouseBookDate, { id: string }>({
   default: undefined,
 });
 
-export const houseBookFilesSelector = selector<HouseBookFileProperty[]>({
-  key: 'houseBookFileSelector',
-  get: ({ get }) => {
-    const ids = get(houseBookIds);
+export const filteredHouseBookItems = selectorFamily<
+  HouseBookItems,
+  { id: string }
+>({
+  key: 'filteredHouseBookItems',
+  get:
+    ({ id }) =>
+    ({ get }) => {
+      const items = get(houseBookItemsState({ id }));
 
-    return ids.map((id) => {
-      const files = get(houseBookFilePropertyState({ id }));
-
-      return files;
-    });
-  },
-});
-
-export const houseBookItemsStatesSelector = selector<HouseBookItems[]>({
-  key: 'houseBookItemsStatesSelector',
-  get: ({ get }) => {
-    const ids = get(houseBookIds);
-
-    return ids.map((id) => {
-      const states = get(houseBookItemsState({ id }));
-
-      return states;
-    });
-  },
+      return items;
+    },
 });
