@@ -22,7 +22,7 @@ export const HouseBookFilterNameDefault = {
   Condition: HouseBookFilterNameCondition.Include,
 } as const;
 
-const HouseBookFilterName = {
+export const HouseBookFilterName = {
   init: (): HouseBookFilterName => ({
     category: HouseBookItemCategory.Name,
     value: HouseBookFilterNameDefault.Value,

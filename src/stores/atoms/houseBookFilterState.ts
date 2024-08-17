@@ -70,11 +70,32 @@ export const HouseBookFilter = {
 
     return result;
   },
-} as const;
 
-const filterItems = (items: HouseBookItem[], filters: HouseBookFilter[]) => {
-  const;
-};
+  match: (filter: HouseBookFilter, item: HouseBookItem) => {
+    switch (filter.category) {
+      case HouseBookItemCategory.Name:
+        return HouseBookFilterName.match(filter, item);
+      case HouseBookItemCategory.Price:
+        return HouseBookFilterPrice.match(filter, item);
+      case HouseBookItemCategory.Type:
+        return HouseBookFilterType.match(filter, item);
+      case HouseBookItemCategory.Date:
+        return HouseBookFilterDate.match(filter, item);
+      default:
+        return false;
+    }
+  },
+
+  filterItems: (items: HouseBookItem[], filters: HouseBookFilter[]) => {
+    let result = [...items] as HouseBookItem[];
+    for (let i = 0; i < filters.length; i += 1) {
+      const filter = filters[i];
+      result = result.filter((item) => HouseBookFilter.match(filter, item));
+    }
+
+    return result;
+  },
+} as const;
 
 export const houseBookFilterState = atom<HouseBookFilter[] | undefined>({
   key: 'houseBookFilter',

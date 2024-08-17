@@ -27,7 +27,7 @@ export const HouseBookFilterPriceDefault = {
   Value: 0,
   Condition: HouseBookFilterPriceCondition.GreaterThan,
 } as const;
-const HouseBookFilterPrice = {
+export const HouseBookFilterPrice = {
   init: (): HouseBookFilterPrice => ({
     category: HouseBookItemCategory.Price,
     value: HouseBookFilterPriceDefault.Value,

@@ -28,7 +28,7 @@ export const HouseBookFilterDateDefault = {
   Value: '',
   Condition: HouseBookFilterDateCondition.GreaterThan,
 } as const;
-const HouseBookFilterDate = {
+export const HouseBookFilterDate = {
   init: (): HouseBookFilterDate => ({
     category: HouseBookItemCategory.Date,
     value: HouseBookFilterDateDefault.Value,

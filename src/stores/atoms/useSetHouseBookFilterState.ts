@@ -1,12 +1,11 @@
 import { useRecoilCallback } from 'recoil';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { HouseBookFilterOperationDefault } from '@/utils/filters/houseBookFilterOperation';
 import {
-  HouseBookFilter,
   HouseBookFilterName,
   HouseBookFilterNameCondition,
-  HouseBookFilterOperationDefault,
-  houseBookFilterState,
-} from './houseBookFilterState';
+} from '@/utils/filters/houseBookFilterName';
+import { HouseBookFilter, houseBookFilterState } from './houseBookFilterState';
 
 const UpdateType = {
   Category: 'Category',
@@ -30,6 +29,7 @@ type UpdateFilterNameCondition = {
   value: HouseBookFilterNameCondition;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type UpdateFilterName =
   | { category: typeof HouseBookItemCategory.Name }
   | UpdateFilterNameCategory
@@ -63,24 +63,26 @@ const useSetHouseBookFilterState = () => {
     [],
   );
 
-  const updateHouseBookFilter = useRecoilCallback(
-    ({ set }) =>
-      (id: string, type: UpdateType, value: string) => {
-        set(houseBookFilterState, (current) => {
-          if (!current) {
-            return undefined;
-          }
+  // const updateHouseBookFilter = useRecoilCallback(
+  //   ({ set }) =>
+  //     (id: string, type: UpdateType, value: string) => {
+  //       set(houseBookFilterState, (current) => {
+  //         if (!current) {
+  //           return undefined;
+  //         }
 
-          const filter: HouseBookFilter = current.find((f) => f.id === id);
-          if (!filter) {
-            return current;
-          }
+  //         const filter: HouseBookFilter = current.find((f) => f.id === id);
+  //         if (!filter) {
+  //           return current;
+  //         }
 
-          return [...current, newValue];
-        });
-      },
-    [],
-  );
+  //         const newValue =
+
+  //         return [...current, newValue];
+  //       });
+  //     },
+  //   [],
+  // );
 
   const removeHouseBookFilterById = useRecoilCallback(
     ({ set }) =>

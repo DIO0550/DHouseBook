@@ -2,8 +2,9 @@ import { HouseBookData } from '@/features/files/utils/houseBookData';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
 import { HouseBookFileProperty } from '@/features/files/utils/houseBookFileProperty';
 import { HouseBookItems } from '@/utils/editors/houseBookItem';
-import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+import { atom, atomFamily, selectorFamily } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
+import { HouseBookFilter, houseBookFilterState } from './houseBookFilterState';
 
 export type HouseBookState = {
   id: string;
@@ -51,7 +52,20 @@ export const filteredHouseBookItems = selectorFamily<
     ({ id }) =>
     ({ get }) => {
       const items = get(houseBookItemsState({ id }));
+      const filters = get(houseBookFilterState);
+      if (!filters) {
+        return items;
+      }
+      const splitedFilters = HouseBookFilter.spllitFilter(filters);
+      const result = [] as HouseBookItems;
+      splitedFilters.forEach((f) => {
+        const filterdItems = HouseBookFilter.filterItems(items, f);
+        result.concat(filterdItems);
+      });
 
-      return items;
+      return result.filter(
+        (element, index, self) =>
+          self.findIndex((e) => e.id === element.id) === index,
+      );
     },
 });

@@ -22,7 +22,7 @@ export const HouseBookFilterTypeDefault = {
   Condition: HouseBookFilterTypeCondition.Include,
 } as const;
 
-const HouseBookFilterType = {
+export const HouseBookFilterType = {
   init: (): HouseBookFilterType => ({
     category: HouseBookItemCategory.Type,
     value: HouseBookFilterTypeDefault.Value,
