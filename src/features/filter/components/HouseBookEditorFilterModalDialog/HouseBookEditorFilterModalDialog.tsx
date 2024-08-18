@@ -56,6 +56,8 @@ const HouseBookEditorFilterModalDialog = memo<Props>(
       return null;
     }
 
+    console.log('Modal');
+
     return <DialogComponent initFilters={initFilters} onClose={onClose} />;
   },
 );

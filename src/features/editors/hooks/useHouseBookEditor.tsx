@@ -1,7 +1,7 @@
 import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
 import {
-  houseBookItemsState,
   houseBookDateState,
+  filteredHouseBookItems,
 } from '@/stores/atoms/houseBookState';
 import { useSetHouseBookDateState } from '@/stores/atoms/useSetHouseBookDateState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const useHouseBookEditor = ({ fileId }: Props) => {
-  const houseBookItems = useRecoilValue(houseBookItemsState({ id: fileId }));
+  const houseBookItems = useRecoilValue(filteredHouseBookItems({ id: fileId }));
   const houseBookDate = useRecoilValue(houseBookDateState({ id: fileId }));
   const { setFileState } = useSetHouseBookFilePropertyState({
     id: fileId,

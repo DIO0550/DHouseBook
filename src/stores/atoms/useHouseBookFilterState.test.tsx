@@ -2,12 +2,9 @@ import { renderHook } from '@testing-library/react';
 import { RecoilRoot, SetRecoilState } from 'recoil';
 import { ReactNode } from 'react';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { HouseBookFilterNameCondition } from '@/utils/filters/houseBookFilterName';
 import { useHouseBookFilterState } from './useHouseBookFilterState';
-import {
-  HouseBookFilter,
-  HouseBookFilterNameCondition,
-  houseBookFilterState,
-} from './houseBookFilterState';
+import { HouseBookFilter, houseBookFilterState } from './houseBookFilterState';
 
 const wrapper =
   ({ filter }: { filter?: HouseBookFilter[] | undefined } = {}) =>

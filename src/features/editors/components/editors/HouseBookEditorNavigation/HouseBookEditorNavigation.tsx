@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
+import { HouseBookEditorFilter } from '@/features/filter/components/HouseBookEditorFilter';
 import { AddPurchasedItemButton } from '../AddPurchasedItemButton';
 import styles from './HouseBookEditorNavigation.module.scss';
 import { HouseBookEditorDate } from '../HouseBookEditorDate/HouseBookEditorDate';
@@ -13,6 +14,7 @@ type Props = {
 const HouseBookEditorNavigation = memo<Props>(
   ({ date, onAddItem, onChangeDate }) => (
     <nav className={`${styles.container} ${styles['container-skin']}`}>
+      <HouseBookEditorFilter />
       <div className={`${styles['date-block']} ${styles['date-block-skin']}`}>
         <HouseBookEditorDate date={date} onChangeDate={onChangeDate} />
       </div>

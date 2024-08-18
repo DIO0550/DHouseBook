@@ -8,10 +8,10 @@ import { RecoilRoot, SetRecoilState } from 'recoil';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import {
   HouseBookFilter,
-  HouseBookFilterNameCondition,
   houseBookFilterState,
 } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { HouseBookFilterNameCondition } from '@/utils/filters/houseBookFilterName';
 import { HouseBookEditorFilter } from './HouseBookEditorFilter';
 
 const meta: Meta<typeof HouseBookEditorFilter> = {

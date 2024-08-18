@@ -5,12 +5,11 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeProvider } from '@/components/Providers';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
-import {
-  HouseBookFilterNameCondition,
-  HouseBookFilterOperation,
-  HouseBookFilterPriceCondition,
-} from '@/stores/atoms/houseBookFilterState';
+
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { HouseBookFilterNameCondition } from '@/utils/filters/houseBookFilterName';
+import { HouseBookFilterOperation } from '@/utils/filters/houseBookFilterOperation';
+import { HouseBookFilterPriceCondition } from '@/utils/filters/houseBookFilterPrice';
 import { HouseBookEditorFilterList } from './HouseBookEditorFilterList';
 
 const meta: Meta<typeof HouseBookEditorFilterList> = {

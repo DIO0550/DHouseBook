@@ -1,9 +1,9 @@
-import {
-  HouseBookFilterType,
-  HouseBookFilterTypeCondition,
-} from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
+import {
+  HouseBookFilterTypeCondition,
+  HouseBookFilterType,
+} from '@/utils/filters/houseBookFilterType';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 
 const HouseBookFilterTypeConditionLabel: {

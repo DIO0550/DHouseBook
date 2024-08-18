@@ -1,8 +1,6 @@
-import {
-  HouseBookFilter,
-  HouseBookFilterOperationDefault,
-} from '@/stores/atoms/houseBookFilterState';
+import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { HouseBookFilterOperationDefault } from '@/utils/filters/houseBookFilterOperation';
 import { useCallback, useState } from 'react';
 
 type Props = {

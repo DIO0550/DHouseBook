@@ -56,16 +56,9 @@ export const filteredHouseBookItems = selectorFamily<
       if (!filters) {
         return items;
       }
-      const splitedFilters = HouseBookFilter.spllitFilter(filters);
-      const result = [] as HouseBookItems;
-      splitedFilters.forEach((f) => {
-        const filterdItems = HouseBookFilter.filterItems(items, f);
-        result.concat(filterdItems);
-      });
 
-      return result.filter(
-        (element, index, self) =>
-          self.findIndex((e) => e.id === element.id) === index,
-      );
+      const reuslt = HouseBookFilter.filterItems(filters, items);
+
+      return reuslt;
     },
 });

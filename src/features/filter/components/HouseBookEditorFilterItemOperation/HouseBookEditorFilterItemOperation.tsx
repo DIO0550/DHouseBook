@@ -1,4 +1,4 @@
-import { HouseBookFilterOperation } from '@/stores/atoms/houseBookFilterState';
+import { HouseBookFilterOperation } from '@/utils/filters/houseBookFilterOperation';
 
 const HouseBookFilterOperationLabel: {
   [key in HouseBookFilterOperation]: string;

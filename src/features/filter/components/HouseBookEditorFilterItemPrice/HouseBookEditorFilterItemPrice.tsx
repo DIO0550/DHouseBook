@@ -1,9 +1,9 @@
-import {
-  HouseBookFilterPrice,
-  HouseBookFilterPriceCondition,
-} from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
+import {
+  HouseBookFilterPriceCondition,
+  HouseBookFilterPrice,
+} from '@/utils/filters/houseBookFilterPrice';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 

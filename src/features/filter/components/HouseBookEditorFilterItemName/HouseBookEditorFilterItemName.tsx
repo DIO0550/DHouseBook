@@ -1,11 +1,11 @@
-import {
-  HouseBookFilterName,
-  HouseBookFilterNameCondition,
-} from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
 import { HouseBookEditorFiterItemCategory } from '@/features/filter/components/HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import { HouseBookEditorFilterItemOperation } from '@/features/filter/components/HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
+import {
+  HouseBookFilterNameCondition,
+  HouseBookFilterName,
+} from '@/utils/filters/houseBookFilterName';
 import styles from './HouseBookEditorFilterItemName.module.scss';
 
 const HouseBookFilterNameConditionLabel: {

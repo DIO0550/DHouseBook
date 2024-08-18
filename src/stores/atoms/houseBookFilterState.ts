@@ -1,4 +1,4 @@
-import { HouseBookItem } from '@/utils/editors/houseBookItem';
+import { HouseBookItem, HouseBookItems } from '@/utils/editors/houseBookItem';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookFilterDate } from '@/utils/filters/houseBookFilterDate';
 import { HouseBookFilterName } from '@/utils/filters/houseBookFilterName';
@@ -49,7 +49,13 @@ export const HouseBookFilter = {
     }
   },
 
-  spllitFilter: (filters: HouseBookFilter[]): HouseBookFilter[][] => {
+  /**
+   * Orオペレーションで、フィルターを分割する
+   * @param filters 分割対象のフィルター
+   */
+  splitFilterByOrOperation: (
+    filters: HouseBookFilter[],
+  ): HouseBookFilter[][] => {
     const result: HouseBookFilter[][] = filters.reduce<HouseBookFilter[][]>(
       (prev, cur) => {
         if (!prev.length) {
@@ -86,14 +92,31 @@ export const HouseBookFilter = {
     }
   },
 
-  filterItems: (items: HouseBookItem[], filters: HouseBookFilter[]) => {
-    let result = [...items] as HouseBookItem[];
-    for (let i = 0; i < filters.length; i += 1) {
-      const filter = filters[i];
-      result = result.filter((item) => HouseBookFilter.match(filter, item));
-    }
+  filterItems: (filters: HouseBookFilter[], items: HouseBookItems) => {
+    const splitedFiltersByOrOperation =
+      HouseBookFilter.splitFilterByOrOperation(filters);
 
-    return result;
+    const filterdItems = splitedFiltersByOrOperation.reduce<HouseBookItem[]>(
+      (acc, currentFilters) => {
+        let returnValue = [...items] as HouseBookItem[];
+        for (let i = 0; i < currentFilters.length; i += 1) {
+          const filter = currentFilters[i];
+          returnValue = returnValue.filter((item) =>
+            HouseBookFilter.match(filter, item),
+          );
+        }
+
+        return acc.concat(returnValue);
+      },
+      [] as HouseBookItem[],
+    );
+
+    const reuslt = filterdItems.filter(
+      (element, index, self) =>
+        self.findIndex((e) => e.id === element.id) === index,
+    );
+
+    return reuslt;
   },
 } as const;
 

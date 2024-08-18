@@ -5,8 +5,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeProvider } from '@/components/Providers';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
-import { HouseBookFilterNameCondition } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { HouseBookFilterNameCondition } from '@/utils/filters/houseBookFilterName';
 import { HouseBookEditorFilterItem } from './HouseBookEditorFilterItem';
 
 const meta: Meta<typeof HouseBookEditorFilterItem> = {
