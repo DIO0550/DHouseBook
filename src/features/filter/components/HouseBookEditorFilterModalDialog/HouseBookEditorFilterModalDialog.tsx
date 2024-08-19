@@ -4,6 +4,7 @@ import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo, ComponentProps } from 'react';
 import { useHouseBookEditorFilter } from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterList } from '../HouseBookEditorFilterList/HouseBookEditorFilterList';
+import { useSetHouseBookFilterState } from '@/stores/atoms/useSetHouseBookFilterState';
 
 type DialogProps = {
   initFilters: HouseBookFilter[] | undefined;
@@ -11,6 +12,7 @@ type DialogProps = {
 };
 
 const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
+  const { setHouseBookFilters } = useSetHouseBookFilterState();
   const { filters, addNewFilter, removeFilterById } = useHouseBookEditorFilter({
     initFilters,
   });
@@ -33,7 +35,14 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
               addNewFilter();
             }}
           />
-          <button type="button">設定</button>
+          <button
+            type="button"
+            onClick={() => {
+              setHouseBookFilters(filters);
+            }}
+          >
+            設定
+          </button>
           <button type="button" onClick={onClose}>
             キャンセル
           </button>
@@ -55,8 +64,6 @@ const HouseBookEditorFilterModalDialog = memo<Props>(
     if (!isOpen) {
       return null;
     }
-
-    console.log('Modal');
 
     return <DialogComponent initFilters={initFilters} onClose={onClose} />;
   },

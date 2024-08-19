@@ -27,7 +27,6 @@ const HouseBookEditorFilter = memo(() => {
           } ${styles[themeColor]}`}
           type="button"
           onClick={() => {
-            console.log('filter');
             setIsOpen(true);
           }}
         >
