@@ -1,9 +1,5 @@
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
-import {
-  HouseBookFilterName,
-  HouseBookFilterNameCondition,
-} from '@/utils/filters/houseBookFilterName';
 import { HouseBookFilterOperationDefault } from '@/utils/filters/houseBookFilterOperation';
 import { useCallback, useState } from 'react';
 
@@ -11,31 +7,35 @@ const UpdateType = {
   Category: 'Category',
   Value: 'Value',
   Condition: 'Condition',
+  Operation: 'Operation',
 } as const;
 type UpdateType = (typeof UpdateType)[keyof typeof UpdateType];
 
-type UpdateFilterNameCategory = {
+type UpdateCategory = {
   type: typeof UpdateType.Category;
-  value: HouseBookItemCategory;
+  value: HouseBookFilter['category'];
 };
 
-type UpdateFilterNameValue = {
+type UpdateValue = {
   type: typeof UpdateType.Value;
-  value: HouseBookFilterName['value'];
+  value: HouseBookFilter['value'];
 };
 
-type UpdateFilterNameCondition = {
-  type: typeof UpdateType.Value;
-  value: HouseBookFilterNameCondition;
+type UpdateCondition = {
+  type: typeof UpdateType.Condition;
+  value: HouseBookFilter['condition'];
 };
 
-type UpdateFilterName =
-  | { category: typeof HouseBookItemCategory.Name }
-  | UpdateFilterNameCategory
-  | UpdateFilterNameValue
-  | UpdateFilterNameCondition;
+type UpdateOperation = {
+  type: typeof UpdateType.Operation;
+  value: HouseBookFilter['operation'];
+};
 
-type UpdateFilter = UpdateFilterName;
+export type UpdateTarget =
+  | UpdateCategory
+  | UpdateValue
+  | UpdateCondition
+  | UpdateOperation;
 
 type Props = {
   initFilters?: HouseBookFilter[];
@@ -56,9 +56,56 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
     setFilters((cur) => [...cur, newFilter]);
   }, [filters]);
 
-  const updateFilter = useCallback((id: string, value: UpdateFilter) => {
-    const targetFilter = filters.find((filter) => filter.id === id);
-  }, []);
+  const updateFilter = useCallback(
+    (id: string, target: UpdateTarget) => {
+      const targetFilter = filters.find((filter) => filter.id === id);
+      if (!targetFilter) {
+        return;
+      }
+      let newValue: HouseBookFilter;
+
+      switch (target.type) {
+        case UpdateType.Category:
+          newValue = HouseBookFilter.initWithCategory(target.value);
+          break;
+
+        case UpdateType.Condition:
+          newValue = {
+            ...targetFilter,
+            condition: target.value,
+          } as HouseBookFilter;
+          break;
+
+        case UpdateType.Operation:
+          newValue = {
+            ...targetFilter,
+            operation: target.value,
+          };
+          break;
+
+        case UpdateType.Value:
+          newValue = {
+            ...targetFilter,
+            value: target.value,
+          } as HouseBookFilter;
+          break;
+
+        default:
+          return;
+      }
+
+      const result = filters.map((f) => {
+        if (f.id === id) {
+          return newValue;
+        }
+
+        return f;
+      });
+
+      setFilters(result);
+    },
+    [filters],
+  );
 
   const removeFilterById = useCallback(
     (id: string) => {
@@ -72,6 +119,7 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
   return {
     addNewFilter,
     removeFilterById,
+    updateFilter,
     filters,
   };
 };

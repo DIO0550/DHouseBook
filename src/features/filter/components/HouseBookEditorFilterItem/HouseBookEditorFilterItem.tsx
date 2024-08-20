@@ -1,6 +1,7 @@
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { UpdateTarget } from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterItemName } from '../HouseBookEditorFilterItemName/HouseBookEditorFilterItemName';
 import { HouseBookEditorFilterItemDate } from '../HouseBookEditorFilterItemPurchaseDate/HouseBookEditorFilterItemPurchaseDate';
 import { HouseBookEditorFilterItemPrice } from '../HouseBookEditorFilterItemPrice/HouseBookEditorFilterItemPrice';
@@ -8,6 +9,7 @@ import { HouseBookEditorFilterItemType } from '../HouseBookEditorFilterItemType/
 
 type Props = {
   filter: HouseBookFilter;
+  updateFilter: (id: string, target: UpdateTarget) => void;
   removeFilter: (id: string) => void;
 };
 const HouseBookEditorFilterItem = memo<Props>(({ filter, removeFilter }) => {
