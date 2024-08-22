@@ -1,12 +1,15 @@
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { HouseBookEditorFilterItem } from '../HouseBookEditorFilterItem/HouseBookEditorFilterItem';
-import { UpdateTarget } from '../../hooks/useHouseBookEditorFilter';
+import {
+  RemoveFilter,
+  UpdateFilter,
+} from '../../hooks/useHouseBookEditorFilter';
 
 type Props = {
   filters: HouseBookFilter[] | undefined;
-  updateFilter: (id: string, target: UpdateTarget) => void;
-  removeFilter: (id: string) => void;
+  updateFilter: UpdateFilter;
+  removeFilter: RemoveFilter;
 };
 
 const HouseBookEditorFilterList = memo<Props>(

@@ -1,33 +1,33 @@
 import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
 import {
-  HouseBookFilterPriceCondition,
-  HouseBookFilterPrice,
-} from '@/utils/filters/houseBookFilterPrice';
+  HouseBookFilterDateCondition,
+  HouseBookFilterDate,
+} from '@/utils/filters/houseBookFilterDate';
 import {
   RemoveFilter,
   UpdateFilter,
 } from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
-import styles from './HouseBookEditorFilterItemPrice.module.scss';
+import styles from './HouseBookEditorFilterItemDate.module.scss';
 
-const HouseBookFilterPriceConditionLabel: {
-  [x in HouseBookFilterPriceCondition]: string;
+const HouseBookFilterDateConditionLabel: {
+  [x in HouseBookFilterDateCondition]: string;
 } = {
-  [HouseBookFilterPriceCondition.GreaterThan]: 'より大きい',
-  [HouseBookFilterPriceCondition.GreaterThanOrEqual]: '以上',
-  [HouseBookFilterPriceCondition.LessThan]: 'より小さい',
-  [HouseBookFilterPriceCondition.LessThanOrEqual]: '以下',
+  [HouseBookFilterDateCondition.GreaterThan]: 'より後',
+  [HouseBookFilterDateCondition.GreaterThanOrEqual]: '以降',
+  [HouseBookFilterDateCondition.LessThan]: 'より前',
+  [HouseBookFilterDateCondition.LessThanOrEqual]: '以前',
 };
 
 type Props = {
   filterId: string;
-  filter: HouseBookFilterPrice;
+  filter: HouseBookFilterDate;
   updateFilter: UpdateFilter;
   removeFilter: RemoveFilter;
 };
-const HouseBookEditorFilterItemPrice = memo<Props>(
+const HouseBookEditorFilterItemDate = memo<Props>(
   ({ filterId, filter, updateFilter, removeFilter }) => (
     <div>
       {/* オペレーション */}
@@ -38,7 +38,6 @@ const HouseBookEditorFilterItemPrice = memo<Props>(
           updateFilter={updateFilter}
         />
       </div>
-
       {/* カテゴリー */}
       <div className={`${styles['category-block']}`}>
         <HouseBookEditorFiterItemCategory
@@ -55,12 +54,12 @@ const HouseBookEditorFilterItemPrice = memo<Props>(
           onChange={(e) => {
             updateFilter(filterId, {
               type: 'Condition',
-              value: e.currentTarget.value as HouseBookFilterPriceCondition,
+              value: e.currentTarget.value as HouseBookFilterDateCondition,
             });
           }}
         >
-          {Object.values(HouseBookFilterPriceCondition).map((v) => (
-            <option value={v}>{HouseBookFilterPriceConditionLabel[v]}</option>
+          {Object.values(HouseBookFilterDateCondition).map((v) => (
+            <option value={v}>{HouseBookFilterDateConditionLabel[v]}</option>
           ))}
         </select>
       </div>
@@ -78,6 +77,7 @@ const HouseBookEditorFilterItemPrice = memo<Props>(
           }}
         />
       </div>
+
       <PrimarySubButton
         title="削除"
         onClick={() => {
@@ -88,4 +88,4 @@ const HouseBookEditorFilterItemPrice = memo<Props>(
   ),
 );
 
-export { HouseBookEditorFilterItemPrice };
+export { HouseBookEditorFilterItemDate };

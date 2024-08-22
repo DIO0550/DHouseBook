@@ -4,7 +4,13 @@ import {
   HouseBookFilterTypeCondition,
   HouseBookFilterType,
 } from '@/utils/filters/houseBookFilterType';
+import {
+  RemoveFilter,
+  UpdateFilter,
+} from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
+import styles from './HouseBookEditorFilterItemType.module.scss';
+import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 
 const HouseBookFilterTypeConditionLabel: {
   [x in HouseBookFilterTypeCondition]: string;
@@ -16,18 +22,61 @@ const HouseBookFilterTypeConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterType;
-  removeFilter: (id: string) => void;
+  updateFilter: UpdateFilter;
+  removeFilter: RemoveFilter;
 };
 const HouseBookEditorFilterItemType = memo<Props>(
-  ({ filterId, filter, removeFilter }) => (
+  ({ filterId, filter, updateFilter, removeFilter }) => (
     <div>
-      <HouseBookEditorFilterItemOperation operation={filter.operation} />
-      <select defaultValue={filter.condition}>
-        {Object.values(HouseBookFilterTypeCondition).map((v) => (
-          <option value={v}>{HouseBookFilterTypeConditionLabel[v]}</option>
-        ))}
-      </select>
-      <input type="text" defaultValue={filter.value} />
+      {/* オペレーション */}
+      <div className={`${styles['operation-block']}`}>
+        <HouseBookEditorFilterItemOperation
+          filterId={filterId}
+          operation={filter.operation}
+          updateFilter={updateFilter}
+        />
+      </div>
+
+      {/* カテゴリー */}
+      <div className={`${styles['category-block']}`}>
+        <HouseBookEditorFiterItemCategory
+          filterId={filterId}
+          category={filter.category}
+          updateFilter={updateFilter}
+        />
+      </div>
+
+      {/* コンディション */}
+      <div className={`${styles['condition-block']}`}>
+        <select
+          value={filter.condition}
+          onChange={(e) => {
+            updateFilter(filterId, {
+              type: 'Condition',
+              value: e.currentTarget.value as HouseBookFilterTypeCondition,
+            });
+          }}
+        >
+          {Object.values(HouseBookFilterTypeCondition).map((v) => (
+            <option value={v}>{HouseBookFilterTypeConditionLabel[v]}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* 値 */}
+      <div className={`${styles['value-block']}`}>
+        <input
+          type="text"
+          value={filter.value}
+          onChange={(e) => {
+            updateFilter(filterId, {
+              type: 'Value',
+              value: e.currentTarget.value,
+            });
+          }}
+        />
+      </div>
+
       <PrimarySubButton
         title="削除"
         onClick={() => {

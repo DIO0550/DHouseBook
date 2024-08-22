@@ -7,6 +7,10 @@ import {
   HouseBookFilterName,
 } from '@/utils/filters/houseBookFilterName';
 import styles from './HouseBookEditorFilterItemName.module.scss';
+import {
+  RemoveFilter,
+  UpdateFilter,
+} from '../../hooks/useHouseBookEditorFilter';
 
 const HouseBookFilterNameConditionLabel: {
   [x in HouseBookFilterNameCondition]: string;
@@ -18,22 +22,39 @@ const HouseBookFilterNameConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterName;
-  removeFilter: (id: string) => void;
+  updateFilter: UpdateFilter;
+  removeFilter: RemoveFilter;
 };
 const HouseBookEditorFilterItemName = memo<Props>(
-  ({ filterId, filter, removeFilter }) => (
+  ({ filterId, filter, updateFilter, removeFilter }) => (
     <div className={`${styles['item-container']}`}>
       {/* オペレーション */}
       <div className={`${styles['operation-block']}`}>
-        <HouseBookEditorFilterItemOperation operation={filter.operation} />
+        <HouseBookEditorFilterItemOperation
+          filterId={filterId}
+          operation={filter.operation}
+          updateFilter={updateFilter}
+        />
       </div>
       {/* カテゴリー */}
       <div className={`${styles['category-block']}`}>
-        <HouseBookEditorFiterItemCategory category={filter.category} />
+        <HouseBookEditorFiterItemCategory
+          filterId={filterId}
+          category={filter.category}
+          updateFilter={updateFilter}
+        />
       </div>
       {/* コンディション */}
       <div className={`${styles['condition-block']}`}>
-        <select defaultValue={filter.condition}>
+        <select
+          value={filter.condition}
+          onChange={(e) => {
+            updateFilter(filterId, {
+              type: 'Condition',
+              value: e.currentTarget.value as HouseBookFilterNameCondition,
+            });
+          }}
+        >
           {Object.values(HouseBookFilterNameCondition).map((v) => (
             <option value={v}>{HouseBookFilterNameConditionLabel[v]}</option>
           ))}
@@ -41,8 +62,18 @@ const HouseBookEditorFilterItemName = memo<Props>(
       </div>
       {/* 値 */}
       <div className={`${styles['value-block']}`}>
-        <input type="text" defaultValue={filter.value} />
+        <input
+          onChange={(e) => {
+            updateFilter(filterId, {
+              type: 'Value',
+              value: e.currentTarget.value,
+            });
+          }}
+          type="text"
+          value={filter.value}
+        />
       </div>
+
       {/* 削除 */}
       <PrimarySubButton
         title="削除"

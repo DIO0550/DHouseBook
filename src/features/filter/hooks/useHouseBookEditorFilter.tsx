@@ -40,6 +40,7 @@ export type UpdateTarget =
 type Props = {
   initFilters?: HouseBookFilter[];
 };
+
 const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
   const [filters, setFilters] = useState(initFilters);
 
@@ -125,3 +126,11 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
 };
 
 export { useHouseBookEditorFilter };
+
+export type UpdateFilter = ReturnType<
+  typeof useHouseBookEditorFilter
+>['updateFilter'];
+
+export type RemoveFilter = ReturnType<
+  typeof useHouseBookEditorFilter
+>['removeFilterById'];
