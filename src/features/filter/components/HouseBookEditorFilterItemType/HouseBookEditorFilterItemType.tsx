@@ -27,7 +27,7 @@ type Props = {
 };
 const HouseBookEditorFilterItemType = memo<Props>(
   ({ filterId, filter, updateFilter, removeFilter }) => (
-    <div>
+    <div className={`${styles['item-container']}`}>
       {/* オペレーション */}
       <div className={`${styles['operation-block']}`}>
         <HouseBookEditorFilterItemOperation

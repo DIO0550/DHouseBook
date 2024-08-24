@@ -1,0 +1,9 @@
+@use '@/styles/colors.module.scss' as colors;
+
+.cancel-action-btn {
+  padding: 8px 16px;
+  color: colors.$color-btn-text-gray;
+  background-color: colors.$color-btn-white;
+  border: 1px solid colors.$color-border-gray;
+  border-radius: 8px;
+}

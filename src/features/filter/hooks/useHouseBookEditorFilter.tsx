@@ -95,6 +95,8 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
           return;
       }
 
+      console.log(newValue);
+
       const result = filters.map((f) => {
         if (f.id === id) {
           return newValue;

@@ -29,7 +29,7 @@ type Props = {
 };
 const HouseBookEditorFilterItemPrice = memo<Props>(
   ({ filterId, filter, updateFilter, removeFilter }) => (
-    <div>
+    <div className={`${styles['item-container']}`}>
       {/* オペレーション */}
       <div className={`${styles['operation-block']}`}>
         <HouseBookEditorFilterItemOperation

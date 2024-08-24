@@ -4,16 +4,16 @@ import styles from './SecondaryButton.module.scss';
 
 type Props = {
   title: string;
-  handleClick: (e?: MouseEvent) => void;
+  onClick: (e?: MouseEvent) => void;
 };
 
-const SecondaryButton = memo<Props>(({ title, handleClick }) => {
+const SecondaryButton = memo<Props>(({ title, onClick }) => {
   const { themeColor } = useThemeContext();
 
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={onClick}
       className={`${styles.secondary} ${styles[themeColor]}`}
     >
       <div>{title}</div>

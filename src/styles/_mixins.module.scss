@@ -3,7 +3,10 @@
 @use '@/styles/colors.module.scss' as colors;
 
 @mixin base-primary-button-style($theme) {
-  color: colors.$color-button-color-text-white;
+  width: 100%;
+  box-sizing: border-box;
+
+  color: colors.$color-btn-text-white;
   background-color: functions.primaryColor($theme);
   padding-top: variable.$base-button-padding-v;
   padding-bottom: variable.$base-button-padding-v;
@@ -13,7 +16,10 @@
 }
 
 @mixin base-primary-sub-button-style($theme) {
-  color: colors.$color-button-color-text-white;
+  width: 100%;
+  box-sizing: border-box;
+
+  color: colors.$color-btn-text-white;
   background-color: functions.primarySubColor($theme);
   padding-top: variable.$base-button-padding-v;
   padding-bottom: variable.$base-button-padding-v;
@@ -23,7 +29,10 @@
 }
 
 @mixin base-secondary-button-style($theme) {
-  color: colors.$color-button-color-text-white;
+  width: 100%;
+  box-sizing: border-box;
+
+  color: colors.$color-btn-text-white;
   background-color: functions.secondaryColor($theme);
   padding-top: variable.$base-button-padding-v;
   padding-bottom: variable.$base-button-padding-v;

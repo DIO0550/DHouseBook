@@ -1,10 +1,11 @@
-import { PrimaryButton } from '@/components/Elements';
+import { PrimaryButton, SecondaryButton } from '@/components/Elements';
 import { ModalDialog } from '@/components/Elements/ModalDialog/ModalDialog';
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo, ComponentProps } from 'react';
 import { useHouseBookEditorFilter } from '@/features/filter/hooks/useHouseBookEditorFilter';
-import { HouseBookEditorFilterList } from '../HouseBookEditorFilterList/HouseBookEditorFilterList';
 import { useSetHouseBookFilterState } from '@/stores/atoms/useSetHouseBookFilterState';
+import { HouseBookEditorFilterList } from '../HouseBookEditorFilterList/HouseBookEditorFilterList';
+import styles from './HouseBookEditorFilterModalDialog.module.scss';
 
 type DialogProps = {
   initFilters: HouseBookFilter[] | undefined;
@@ -13,9 +14,10 @@ type DialogProps = {
 
 const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
   const { setHouseBookFilters } = useSetHouseBookFilterState();
-  const { filters, addNewFilter, removeFilterById } = useHouseBookEditorFilter({
-    initFilters,
-  });
+  const { filters, addNewFilter, updateFilter, removeFilterById } =
+    useHouseBookEditorFilter({
+      initFilters,
+    });
 
   return (
     <ModalDialog isOpen onClose={onClose}>
@@ -25,27 +27,29 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
         </div>
         <HouseBookEditorFilterList
           filters={filters}
+          updateFilter={updateFilter}
           removeFilter={removeFilterById}
         />
         <div>
-          <PrimaryButton
-            title="追加"
-            onClick={(e) => {
-              e?.stopPropagation();
-              addNewFilter();
-            }}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              setHouseBookFilters(filters);
-            }}
-          >
-            設定
-          </button>
-          <button type="button" onClick={onClose}>
-            キャンセル
-          </button>
+          <div className={styles['add-button']}>
+            <PrimaryButton
+              title="追加"
+              onClick={(e) => {
+                e?.stopPropagation();
+                addNewFilter();
+              }}
+            />
+          </div>
+
+          <div className={styles['operation-btn']}>
+            <PrimaryButton
+              onClick={() => {
+                setHouseBookFilters(filters);
+              }}
+              title="設定"
+            />
+            <SecondaryButton title="キャンセル" onClick={onClose} />
+          </div>
         </div>
       </div>
     </ModalDialog>
