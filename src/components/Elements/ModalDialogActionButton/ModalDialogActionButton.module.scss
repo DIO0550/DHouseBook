@@ -1,0 +1,42 @@
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/colors.module.scss' as colors;
+
+@mixin color-style($theme) {
+  border-color: functions.primaryColor($theme);
+  color: functions.primaryColor($theme);
+}
+
+.action-btn {
+  display: block;
+  padding: 8px 16px;
+  background-color: colors.$color-btn-white;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+
+  &.red {
+    @include color-style(red);
+  }
+  &.purple {
+    @include color-style(purple);
+  }
+  &.blue {
+    @include color-style(blue);
+  }
+  &.cyan {
+    @include color-style(cyan);
+  }
+  &.green {
+    @include color-style(green);
+  }
+  &.yellow {
+    @include color-style(yellow);
+  }
+  &.orange {
+    @include color-style(orange);
+  }
+  &.gray {
+    @include color-style(gray);
+  }
+}
