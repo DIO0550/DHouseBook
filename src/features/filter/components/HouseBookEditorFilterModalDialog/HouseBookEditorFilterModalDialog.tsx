@@ -1,9 +1,11 @@
-import { PrimaryButton, SecondaryButton } from '@/components/Elements';
+import { PrimaryButton } from '@/components/Elements';
 import { ModalDialog } from '@/components/Elements/ModalDialog/ModalDialog';
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo, ComponentProps } from 'react';
 import { useHouseBookEditorFilter } from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { useSetHouseBookFilterState } from '@/stores/atoms/useSetHouseBookFilterState';
+import { OutlineCancelActionButton } from '@/components/Elements/OutlineCancelActionButton/OutlineCancelActionButton';
+import { PrimaryOutlineButton } from '@/components/Elements/PrimaryOutlineButton/PrimaryOutlineButton';
 import { HouseBookEditorFilterList } from '../HouseBookEditorFilterList/HouseBookEditorFilterList';
 import styles from './HouseBookEditorFilterModalDialog.module.scss';
 
@@ -41,14 +43,14 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
             />
           </div>
 
-          <div className={styles['operation-btn']}>
-            <PrimaryButton
+          <div className={styles['operation-btn-block']}>
+            <OutlineCancelActionButton title="キャンセル" onClick={onClose} />
+            <PrimaryOutlineButton
+              title="設定"
               onClick={() => {
                 setHouseBookFilters(filters);
               }}
-              title="設定"
             />
-            <SecondaryButton title="キャンセル" onClick={onClose} />
           </div>
         </div>
       </div>

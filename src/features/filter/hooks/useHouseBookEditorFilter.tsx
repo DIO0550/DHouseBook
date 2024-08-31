@@ -67,7 +67,10 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
 
       switch (target.type) {
         case UpdateType.Category:
-          newValue = HouseBookFilter.initWithCategory(target.value);
+          newValue = {
+            ...HouseBookFilter.initWithCategory(target.value),
+            operation: targetFilter.operation,
+          };
           break;
 
         case UpdateType.Condition:

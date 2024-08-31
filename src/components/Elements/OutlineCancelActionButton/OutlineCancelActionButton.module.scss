@@ -1,0 +1,19 @@
+@use '@/styles/colors.module.scss' as colors;
+@use '@/styles/variables.module.scss' as variables;
+
+.cancel-action-btn {
+  display: block;
+  padding: variables.$base-button-padding-v variables.$base-button-padding-h;
+
+  &-skin {
+    border: 1px solid colors.$color-border-gray;
+    border-radius: 8px;
+    background-color: colors.$color-btn-white;
+    color: colors.$color-btn-text-gray;
+
+    &:hover {
+      background-color: colors.$color-btn-gray;
+      color: colors.$color-btn-text-white;
+    }
+  }
+}

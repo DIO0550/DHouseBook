@@ -4,4 +4,10 @@
 
 .operation-btn-block {
   margin-top: 8px;
+  display: flex;
+  width: 100%;
+  column-gap: 12px;
+
+  justify-content: end;
+  align-items: center;
 }

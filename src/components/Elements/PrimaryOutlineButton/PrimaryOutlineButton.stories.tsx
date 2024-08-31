@@ -2,16 +2,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
 import { ThemeProvider } from '@/components/Providers';
-import { ModalDialogActionButton } from './ModalDialogActionButton';
+import { PrimaryOutlineButton } from './PrimaryOutlineButton';
 
-const meta: Meta<typeof ModalDialogActionButton> = {
-  component: ModalDialogActionButton,
-  render: (args) => <ModalDialogActionButton {...args} />,
+const meta: Meta<typeof PrimaryOutlineButton> = {
+  component: PrimaryOutlineButton,
+  render: (args) => <PrimaryOutlineButton {...args} />,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof ModalDialogActionButton>;
+type Story = StoryObj<typeof PrimaryOutlineButton>;
 
 export const Red: Story = {
   decorators: [
