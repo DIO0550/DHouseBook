@@ -78,12 +78,15 @@ const HouseBookEditorFilterItemPrice = memo<Props>(
           }}
         />
       </div>
-      <PrimarySubButton
-        title="削除"
-        onClick={() => {
-          removeFilter(filterId);
-        }}
-      />
+
+      <div>
+        <PrimarySubButton
+          title="削除"
+          onClick={() => {
+            removeFilter(filterId);
+          }}
+        />
+      </div>
     </div>
   ),
 );

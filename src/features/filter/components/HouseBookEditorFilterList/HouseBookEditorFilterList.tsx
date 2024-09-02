@@ -5,6 +5,7 @@ import {
   RemoveFilter,
   UpdateFilter,
 } from '../../hooks/useHouseBookEditorFilter';
+import styles from './HouseBookEditorFilterList.module.scss';
 
 type Props = {
   filters: HouseBookFilter[] | undefined;
@@ -14,7 +15,7 @@ type Props = {
 
 const HouseBookEditorFilterList = memo<Props>(
   ({ filters = [] as HouseBookFilter[], updateFilter, removeFilter }) => (
-    <div>
+    <div className={`${styles.list}`}>
       {filters.map((v) => (
         <HouseBookEditorFilterItem
           key={v.id}

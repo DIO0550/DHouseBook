@@ -23,15 +23,17 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
 
   return (
     <ModalDialog isOpen onClose={onClose}>
-      <div>
-        <div>
+      <div className={styles['dialog-container']}>
+        <div className={`${styles['dialog-header']}`}>
           <div>フィルター設定</div>
         </div>
-        <HouseBookEditorFilterList
-          filters={filters}
-          updateFilter={updateFilter}
-          removeFilter={removeFilterById}
-        />
+        <div className={`${styles['list-block']}`}>
+          <HouseBookEditorFilterList
+            filters={filters}
+            updateFilter={updateFilter}
+            removeFilter={removeFilterById}
+          />
+        </div>
         <div>
           <div className={styles['add-button']}>
             <PrimaryButton
