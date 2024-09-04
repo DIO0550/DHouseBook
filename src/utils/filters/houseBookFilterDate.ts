@@ -61,4 +61,6 @@ export const HouseBookFilterDate = {
 
     return false;
   },
+
+  validate: (target: string) => DateEx.isInvalidDate(new Date(target)),
 } as const;

@@ -2,6 +2,7 @@ import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookFilterOperationDefault } from '@/utils/filters/houseBookFilterOperation';
 import { useCallback, useState } from 'react';
+import { useFilterInputValidator } from './useFilterInpuValidator';
 
 const UpdateType = {
   Category: 'Category',
@@ -42,6 +43,8 @@ type Props = {
 };
 
 const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
+  const { validate, validates, addValidate, updateValidate, removeValidate } =
+    useFilterInputValidator({ filters: initFilters });
   const [filters, setFilters] = useState(initFilters);
 
   const addNewFilter = useCallback(() => {
@@ -53,9 +56,10 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
       ...HouseBookFilter.initWithCategory(HouseBookItemCategory.Name),
       operation,
     } as HouseBookFilter;
+    addValidate(newFilter.id);
 
     setFilters((cur) => [...cur, newFilter]);
-  }, [filters]);
+  }, [filters, addValidate]);
 
   const updateFilter = useCallback(
     (id: string, target: UpdateTarget) => {
@@ -71,6 +75,7 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
             ...HouseBookFilter.initWithCategory(target.value),
             operation: targetFilter.operation,
           };
+          updateValidate(newValue.id, true);
           break;
 
         case UpdateType.Condition:
@@ -92,6 +97,11 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
             ...targetFilter,
             value: target.value,
           } as HouseBookFilter;
+
+          updateValidate(
+            newValue.id,
+            HouseBookFilter.validate(newValue.category, String(target.value)),
+          );
           break;
 
         default:
@@ -115,12 +125,15 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
     (id: string) => {
       const result = filters.filter((filter) => filter.id !== id);
 
+      removeValidate(id);
       setFilters(result);
     },
-    [filters],
+    [filters, removeValidate],
   );
 
   return {
+    validate,
+    validates,
     addNewFilter,
     removeFilterById,
     updateFilter,

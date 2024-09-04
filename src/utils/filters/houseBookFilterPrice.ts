@@ -1,6 +1,7 @@
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookItem } from '@/utils/editors/houseBookItem';
 import { HouseBookFilterOperation } from './houseBookFilterOperation';
+import { NumberEx } from '../NumberEx';
 
 // 値段フィルターの条件
 export const HouseBookFilterPriceCondition = {
@@ -54,4 +55,6 @@ export const HouseBookFilterPrice = {
 
     return false;
   },
+
+  validate: (target: string) => NumberEx.isNumericString(target),
 } as const;

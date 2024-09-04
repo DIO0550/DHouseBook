@@ -37,4 +37,6 @@ export const HouseBookFilterName = {
 
     return !item.type.includes(filter.value);
   },
+
+  validate: (target: string) => typeof target === 'string',
 } as const;

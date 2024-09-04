@@ -6,7 +6,7 @@ import { HouseBookFilterOperation } from '@/utils/filters/houseBookFilterOperati
 import { HouseBookFilterPrice } from '@/utils/filters/houseBookFilterPrice';
 import { HouseBookFilterType } from '@/utils/filters/houseBookFilterType';
 import { atom } from 'recoil';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4, validate } from 'uuid';
 
 export type HouseBookFilter = {
   id: string;
@@ -117,6 +117,25 @@ export const HouseBookFilter = {
     );
 
     return reuslt;
+  },
+
+  validate: (category: HouseBookItemCategory, target: string) => {
+    switch (category) {
+      case HouseBookItemCategory.Name:
+        return HouseBookFilterName.validate(target);
+
+      case HouseBookItemCategory.Price:
+        return HouseBookFilterPrice.validate(target);
+
+      case HouseBookItemCategory.Type:
+        return HouseBookFilterType.validate(target);
+
+      case HouseBookItemCategory.Date:
+        return HouseBookFilterDate.validate(target);
+
+      default:
+        return false;
+    }
   },
 } as const;
 

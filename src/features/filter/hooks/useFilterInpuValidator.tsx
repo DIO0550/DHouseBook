@@ -59,13 +59,14 @@ const useFilterInputValidator = ({ filters }: Props) => {
     [validates],
   );
 
-  const inputValidate = useMemo(
+  const validate = useMemo(
     () => validates.every((v) => v.validate),
     [validates],
   );
 
   return {
-    inputValidate,
+    validates,
+    validate,
     addValidate,
     updateValidate,
     removeValidate,
