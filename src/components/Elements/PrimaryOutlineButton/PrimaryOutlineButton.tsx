@@ -1,19 +1,20 @@
-import { memo, MouseEventHandler } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PrimaryOutlineButton.module.scss';
 
 type Props = {
   title: string;
-  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const PrimaryOutlineButton = memo<Props>(({ title, onClick }) => {
+const PrimaryOutlineButton = memo<Props>((props) => {
+  const { title, ...buttonProps } = props;
   const { themeColor } = useThemeContext();
 
   return (
     <button
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...buttonProps}
       type="button"
-      onClick={onClick}
       className={`${styles['outline-btn']} ${styles['outline-btn-skin']} ${styles[themeColor]}`}
     >
       <div>{title}</div>

@@ -8,7 +8,7 @@ type Props = {
   updateFilter: UpdateFilter;
 };
 
-const HouseBookEditorFiterItemCategory = memo<Props>(
+const HouseBookEditorFilterItemCategory = memo<Props>(
   ({ filterId, category, updateFilter }) => (
     <select
       value={category}
@@ -32,4 +32,4 @@ const HouseBookEditorFiterItemCategory = memo<Props>(
   ),
 );
 
-export { HouseBookEditorFiterItemCategory };
+export { HouseBookEditorFilterItemCategory };

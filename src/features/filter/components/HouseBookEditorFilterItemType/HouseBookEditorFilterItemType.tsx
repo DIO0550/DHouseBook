@@ -10,7 +10,7 @@ import {
 } from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import styles from './HouseBookEditorFilterItemType.module.scss';
-import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
+import { HouseBookEditorFilterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 
 const HouseBookFilterTypeConditionLabel: {
   [x in HouseBookFilterTypeCondition]: string;
@@ -22,11 +22,12 @@ const HouseBookFilterTypeConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterType;
+  validate: boolean;
   updateFilter: UpdateFilter;
   removeFilter: RemoveFilter;
 };
 const HouseBookEditorFilterItemType = memo<Props>(
-  ({ filterId, filter, updateFilter, removeFilter }) => (
+  ({ filterId, filter, validate, updateFilter, removeFilter }) => (
     <div className={`${styles['item-container']}`}>
       {/* オペレーション */}
       <div className={`${styles['operation-block']}`}>
@@ -39,7 +40,7 @@ const HouseBookEditorFilterItemType = memo<Props>(
 
       {/* カテゴリー */}
       <div className={`${styles['category-block']}`}>
-        <HouseBookEditorFiterItemCategory
+        <HouseBookEditorFilterItemCategory
           filterId={filterId}
           category={filter.category}
           updateFilter={updateFilter}
@@ -68,6 +69,7 @@ const HouseBookEditorFilterItemType = memo<Props>(
         <input
           type="text"
           value={filter.value}
+          className={`${validate ? '' : styles['invalid-input']}`}
           onChange={(e) => {
             updateFilter(filterId, {
               type: 'Value',

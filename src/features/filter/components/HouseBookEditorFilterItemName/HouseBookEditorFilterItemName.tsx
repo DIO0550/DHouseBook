@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
-import { HouseBookEditorFiterItemCategory } from '@/features/filter/components/HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
+import { HouseBookEditorFilterItemCategory } from '@/features/filter/components/HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import { HouseBookEditorFilterItemOperation } from '@/features/filter/components/HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import {
   HouseBookFilterNameCondition,
@@ -22,11 +22,12 @@ const HouseBookFilterNameConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterName;
+  validate: boolean;
   updateFilter: UpdateFilter;
   removeFilter: RemoveFilter;
 };
 const HouseBookEditorFilterItemName = memo<Props>(
-  ({ filterId, filter, updateFilter, removeFilter }) => (
+  ({ filterId, filter, validate, updateFilter, removeFilter }) => (
     <div className={`${styles['item-container']}`}>
       {/* オペレーション */}
       <div className={`${styles['operation-block']}`}>
@@ -38,7 +39,7 @@ const HouseBookEditorFilterItemName = memo<Props>(
       </div>
       {/* カテゴリー */}
       <div className={`${styles['category-block']}`}>
-        <HouseBookEditorFiterItemCategory
+        <HouseBookEditorFilterItemCategory
           filterId={filterId}
           category={filter.category}
           updateFilter={updateFilter}
@@ -63,6 +64,7 @@ const HouseBookEditorFilterItemName = memo<Props>(
       {/* 値 */}
       <div className={`${styles['value-block']}`}>
         <input
+          className={`${validate ? '' : styles['invalid-input']}`}
           onChange={(e) => {
             updateFilter(filterId, {
               type: 'Value',

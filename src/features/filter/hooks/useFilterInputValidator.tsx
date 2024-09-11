@@ -1,7 +1,7 @@
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { useCallback, useMemo, useState } from 'react';
 
-type FilterInputValidate = {
+export type FilterInputValidate = {
   filterId: string;
   validate: boolean;
 };
@@ -34,6 +34,9 @@ const useFilterInputValidator = ({ filters }: Props) => {
 
   const updateValidate = useCallback(
     (filterId: string, validate: boolean) => {
+      console.log(`filterId: ${filterId}`);
+
+      console.log(`validate: ${validate}`);
       const result = validates.map((v) => {
         if (v.filterId !== filterId) {
           return v;
@@ -44,6 +47,8 @@ const useFilterInputValidator = ({ filters }: Props) => {
           validate,
         };
       });
+
+      console.log(result);
 
       setValidates(result);
     },

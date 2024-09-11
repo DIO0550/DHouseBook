@@ -125,6 +125,8 @@ export const HouseBookFilter = {
         return HouseBookFilterName.validate(target);
 
       case HouseBookItemCategory.Price:
+        console.log(HouseBookFilterPrice.validate(target));
+
         return HouseBookFilterPrice.validate(target);
 
       case HouseBookItemCategory.Type:

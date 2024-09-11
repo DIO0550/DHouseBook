@@ -193,8 +193,6 @@ describe('dateFormatter', () => {
       }) => {
         const mockDate = new Date(2021, 2, date, 1, 10, 1);
 
-        console.log(mockDate.getDate());
-
         const sut = dfmt.toString(mockDate, formatValue);
         expect(sut).toBe(expectValue);
       },

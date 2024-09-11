@@ -16,10 +16,16 @@ type DialogProps = {
 
 const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
   const { setHouseBookFilters } = useSetHouseBookFilterState();
-  const { filters, addNewFilter, updateFilter, removeFilterById } =
-    useHouseBookEditorFilter({
-      initFilters,
-    });
+  const {
+    validate,
+    validates,
+    filters,
+    addNewFilter,
+    updateFilter,
+    removeFilterById,
+  } = useHouseBookEditorFilter({
+    initFilters,
+  });
 
   return (
     <ModalDialog isOpen onClose={onClose}>
@@ -30,6 +36,7 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
         <div className={`${styles['list-block']}`}>
           <HouseBookEditorFilterList
             filters={filters}
+            validates={validates}
             updateFilter={updateFilter}
             removeFilter={removeFilterById}
           />
@@ -48,6 +55,7 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
           <div className={styles['operation-btn-block']}>
             <OutlineCancelActionButton title="キャンセル" onClick={onClose} />
             <PrimaryOutlineButton
+              disabled={!validate}
               title="設定"
               onClick={() => {
                 setHouseBookFilters(filters);

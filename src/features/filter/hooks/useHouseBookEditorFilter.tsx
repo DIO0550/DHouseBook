@@ -2,7 +2,7 @@ import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookFilterOperationDefault } from '@/utils/filters/houseBookFilterOperation';
 import { useCallback, useState } from 'react';
-import { useFilterInputValidator } from './useFilterInpuValidator';
+import { useFilterInputValidator } from './useFilterInputValidator';
 
 const UpdateType = {
   Category: 'Category',
@@ -73,6 +73,7 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
         case UpdateType.Category:
           newValue = {
             ...HouseBookFilter.initWithCategory(target.value),
+            id,
             operation: targetFilter.operation,
           };
           updateValidate(newValue.id, true);
@@ -118,7 +119,7 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
 
       setFilters(result);
     },
-    [filters],
+    [filters, updateValidate],
   );
 
   const removeFilterById = useCallback(

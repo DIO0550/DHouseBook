@@ -9,7 +9,7 @@ import {
   UpdateFilter,
 } from '@/features/filter/hooks/useHouseBookEditorFilter';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
-import { HouseBookEditorFiterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
+import { HouseBookEditorFilterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import styles from './HouseBookEditorFilterItemPrice.module.scss';
 
 const HouseBookFilterPriceConditionLabel: {
@@ -24,71 +24,77 @@ const HouseBookFilterPriceConditionLabel: {
 type Props = {
   filterId: string;
   filter: HouseBookFilterPrice;
+  validate: boolean;
   updateFilter: UpdateFilter;
   removeFilter: RemoveFilter;
 };
 const HouseBookEditorFilterItemPrice = memo<Props>(
-  ({ filterId, filter, updateFilter, removeFilter }) => (
-    <div className={`${styles['item-container']}`}>
-      {/* オペレーション */}
-      <div className={`${styles['operation-block']}`}>
-        <HouseBookEditorFilterItemOperation
-          filterId={filterId}
-          operation={filter.operation}
-          updateFilter={updateFilter}
-        />
-      </div>
+  ({ filterId, filter, validate, updateFilter, removeFilter }) => {
+    console.log(validate);
 
-      {/* カテゴリー */}
-      <div className={`${styles['category-block']}`}>
-        <HouseBookEditorFiterItemCategory
-          filterId={filterId}
-          category={filter.category}
-          updateFilter={updateFilter}
-        />
-      </div>
+    return (
+      <div className={`${styles['item-container']}`}>
+        {/* オペレーション */}
+        <div className={`${styles['operation-block']}`}>
+          <HouseBookEditorFilterItemOperation
+            filterId={filterId}
+            operation={filter.operation}
+            updateFilter={updateFilter}
+          />
+        </div>
 
-      {/* コンディション */}
-      <div className={`${styles['condition-block']}`}>
-        <select
-          value={filter.condition}
-          onChange={(e) => {
-            updateFilter(filterId, {
-              type: 'Condition',
-              value: e.currentTarget.value as HouseBookFilterPriceCondition,
-            });
-          }}
-        >
-          {Object.values(HouseBookFilterPriceCondition).map((v) => (
-            <option value={v}>{HouseBookFilterPriceConditionLabel[v]}</option>
-          ))}
-        </select>
-      </div>
+        {/* カテゴリー */}
+        <div className={`${styles['category-block']}`}>
+          <HouseBookEditorFilterItemCategory
+            filterId={filterId}
+            category={filter.category}
+            updateFilter={updateFilter}
+          />
+        </div>
 
-      {/* 値 */}
-      <div className={`${styles['value-block']}`}>
-        <input
-          type="text"
-          value={filter.value}
-          onChange={(e) => {
-            updateFilter(filterId, {
-              type: 'Value',
-              value: e.currentTarget.value,
-            });
-          }}
-        />
-      </div>
+        {/* コンディション */}
+        <div className={`${styles['condition-block']}`}>
+          <select
+            value={filter.condition}
+            onChange={(e) => {
+              updateFilter(filterId, {
+                type: 'Condition',
+                value: e.currentTarget.value as HouseBookFilterPriceCondition,
+              });
+            }}
+          >
+            {Object.values(HouseBookFilterPriceCondition).map((v) => (
+              <option value={v}>{HouseBookFilterPriceConditionLabel[v]}</option>
+            ))}
+          </select>
+        </div>
 
-      <div>
-        <PrimarySubButton
-          title="削除"
-          onClick={() => {
-            removeFilter(filterId);
-          }}
-        />
+        {/* 値 */}
+        <div className={`${styles['value-block']}`}>
+          <input
+            className={`${validate ? '' : styles['invalid-input']}`}
+            type="text"
+            value={filter.value}
+            onChange={(e) => {
+              updateFilter(filterId, {
+                type: 'Value',
+                value: e.currentTarget.value,
+              });
+            }}
+          />
+        </div>
+
+        <div>
+          <PrimarySubButton
+            title="削除"
+            onClick={() => {
+              removeFilter(filterId);
+            }}
+          />
+        </div>
       </div>
-    </div>
-  ),
+    );
+  },
 );
 
 export { HouseBookEditorFilterItemPrice };

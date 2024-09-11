@@ -12,17 +12,19 @@ import { HouseBookEditorFilterItemType } from '../HouseBookEditorFilterItemType/
 
 type Props = {
   filter: HouseBookFilter;
+  validate: boolean;
   updateFilter: UpdateFilter;
   removeFilter: RemoveFilter;
 };
 const HouseBookEditorFilterItem = memo<Props>(
-  ({ filter, updateFilter, removeFilter }) => {
+  ({ filter, validate, updateFilter, removeFilter }) => {
     switch (filter.category) {
       case HouseBookItemCategory.Name:
         return (
           <HouseBookEditorFilterItemName
             filterId={filter.id}
             filter={filter}
+            validate={validate}
             updateFilter={updateFilter}
             removeFilter={removeFilter}
           />
@@ -33,6 +35,7 @@ const HouseBookEditorFilterItem = memo<Props>(
           <HouseBookEditorFilterItemPrice
             filterId={filter.id}
             filter={filter}
+            validate={validate}
             updateFilter={updateFilter}
             removeFilter={removeFilter}
           />
@@ -43,6 +46,7 @@ const HouseBookEditorFilterItem = memo<Props>(
           <HouseBookEditorFilterItemType
             filterId={filter.id}
             filter={filter}
+            validate={validate}
             updateFilter={updateFilter}
             removeFilter={removeFilter}
           />
@@ -53,6 +57,7 @@ const HouseBookEditorFilterItem = memo<Props>(
           <HouseBookEditorFilterItemDate
             filterId={filter.id}
             filter={filter}
+            validate={validate}
             updateFilter={updateFilter}
             removeFilter={removeFilter}
           />
