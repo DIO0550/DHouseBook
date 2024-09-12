@@ -79,12 +79,15 @@ const HouseBookEditorFilterItemType = memo<Props>(
         />
       </div>
 
-      <PrimarySubButton
-        title="削除"
-        onClick={() => {
-          removeFilter(filterId);
-        }}
-      />
+      {/* 削除 */}
+      <div className={`${styles['remove-btn-block']}`}>
+        <PrimarySubButton
+          title="削除"
+          onClick={() => {
+            removeFilter(filterId);
+          }}
+        />
+      </div>
     </div>
   ),
 );

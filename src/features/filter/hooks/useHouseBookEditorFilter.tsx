@@ -56,7 +56,8 @@ const useHouseBookEditorFilter = ({ initFilters = [] }: Props) => {
       ...HouseBookFilter.initWithCategory(HouseBookItemCategory.Name),
       operation,
     } as HouseBookFilter;
-    addValidate(newFilter.id);
+
+    addValidate(newFilter.id, true);
 
     setFilters((cur) => [...cur, newFilter]);
   }, [filters, addValidate]);

@@ -24,19 +24,16 @@ const useFilterInputValidator = ({ filters }: Props) => {
     initValidates(filters),
   );
 
-  const addValidate = useCallback((filterId: string) => {
+  const addValidate = useCallback((filterId: string, validate: boolean) => {
     const newValidate: FilterInputValidate = {
       filterId,
-      validate: false,
+      validate,
     };
     setValidates((current) => [...current, newValidate]);
   }, []);
 
   const updateValidate = useCallback(
     (filterId: string, validate: boolean) => {
-      console.log(`filterId: ${filterId}`);
-
-      console.log(`validate: ${validate}`);
       const result = validates.map((v) => {
         if (v.filterId !== filterId) {
           return v;
@@ -47,8 +44,6 @@ const useFilterInputValidator = ({ filters }: Props) => {
           validate,
         };
       });
-
-      console.log(result);
 
       setValidates(result);
     },
