@@ -14,6 +14,19 @@
   }
 }
 
+@mixin color-disable-style {
+  border-color: colors.$color-btn-disable;
+  background-color: colors.$color-btn-white;
+  color: colors.$color-btn-disable;
+  cursor: default;
+
+  &:hover {
+    border-color: colors.$color-btn-disable;
+    background-color: colors.$color-btn-white;
+    color: colors.$color-btn-disable;
+  }
+}
+
 .outline-btn {
   display: block;
   padding: variables.$base-button-padding-v variables.$base-button-padding-h;
@@ -45,6 +58,10 @@
     }
     &.gray {
       @include color-style(gray);
+    }
+
+    &:disabled {
+      @include color-disable-style();
     }
   }
 }

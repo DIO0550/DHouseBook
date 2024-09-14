@@ -100,3 +100,15 @@ export const Gray: Story = {
     title: 'ボタン',
   },
 };
+
+export const Disabled: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
+  args: {
+    title: 'ボタン',
+    disabled: true,
+  },
+};

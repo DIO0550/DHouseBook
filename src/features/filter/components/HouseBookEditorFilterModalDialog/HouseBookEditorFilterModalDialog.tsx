@@ -59,6 +59,7 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
               title="設定"
               onClick={() => {
                 setHouseBookFilters(filters);
+                onClose();
               }}
             />
           </div>
