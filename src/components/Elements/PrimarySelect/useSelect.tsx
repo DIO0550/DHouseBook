@@ -15,6 +15,31 @@ export const NoSelectOption = {
   Label: '',
 };
 
+const updateMenuClientRect = (
+  select: HTMLButtonElement,
+  menu: HTMLDivElement,
+) => {
+  // const parent = select.parentElement;
+  const selectRect = select.getBoundingClientRect();
+  const menuRect = menu.getBoundingClientRect();
+  // const parentRect = parent?.getBoundingClientRect();
+
+  const isTop =
+    document.body.getBoundingClientRect().height <
+    selectRect.bottom + menuRect.height;
+
+  menu.style.width = `${selectRect.width}px`;
+  menu.style.left = `${selectRect.left}px`;
+
+  if (!isTop) {
+    menu.style.top = ``;
+    menu.style.bottom = `${selectRect.top}px`;
+  } else {
+    menu.style.top = `${selectRect.bottom}px`;
+    menu.style.bottom = ``;
+  }
+};
+
 const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
   const selectRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -27,11 +52,15 @@ const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
     }
 
     return selectedOption.label;
-  }, []);
+  }, [options, value]);
 
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const openMenu = useCallback(() => {
     setIsOpenMenu(true);
+    if (!selectRef.current || !menuRef.current) {
+      return;
+    }
+    updateMenuClientRect(selectRef.current, menuRef.current);
   }, []);
   const closeMenu = useCallback(() => {
     setIsOpenMenu(false);

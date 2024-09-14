@@ -1,5 +1,8 @@
+$select-width: 100%;
+
 .select {
   position: relative;
+  width: $select-width;
 }
 
 .menu-overlay {
@@ -13,10 +16,19 @@
   }
 }
 
+.menu-item {
+  display: block;
+  width: $select-width;
+}
+
 .menu-block {
   position: absolute;
+  width: $select-width;
   top: 0;
   left: 0;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-overlay.close {

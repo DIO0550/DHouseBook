@@ -15,6 +15,8 @@ global.window.api = {
     overwriteSaveFile: fn(),
     createNewFile: fn(),
     changeThemeColor: fn(),
+    initialThemeColor: fn(),
+    syncShowMessageBox: fn(),
   },
 };
 

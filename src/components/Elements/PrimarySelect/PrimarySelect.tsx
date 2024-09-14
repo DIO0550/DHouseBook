@@ -9,7 +9,16 @@ type Props = {
 
 const PrimarySelect = memo<Props>(
   ({ defaultValue = NoSelectOption.Value, options }) => {
-    const { value, label, isOpenMenu, openMenu, closeMenu } = useSelect({
+    const {
+      selectRef,
+      menuRef,
+      value,
+      label,
+      selectOption,
+      isOpenMenu,
+      openMenu,
+      closeMenu,
+    } = useSelect({
       defaultValue,
       options,
     });
@@ -20,6 +29,7 @@ const PrimarySelect = memo<Props>(
     return (
       <div data-value={value}>
         <button
+          ref={selectRef}
           type="button"
           className={`${styles.select}, ${styles['select-block']}`}
           onClick={() => {
@@ -40,9 +50,17 @@ const PrimarySelect = memo<Props>(
         >
           <div
             className={`${styles['menu-block']} ${styles['menu-block-skin']}`}
+            ref={menuRef}
           >
             {options.map((option) => (
-              <button type="button" data-value={option.value}>
+              <button
+                className={`${styles['menu-item']} ${styles['menu-item-skin']}`}
+                type="button"
+                data-value={option.value}
+                onClick={(_) => {
+                  selectOption(option.value);
+                }}
+              >
                 {option.label}
               </button>
             ))}

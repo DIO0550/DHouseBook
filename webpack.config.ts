@@ -59,7 +59,7 @@ const base: Configuration = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              additionalData: `@use '@/styles/reset.scss';`,
+              additionalData: `@use '@/styles/reset.scss'; @use '@/styles/global.scss';`,
             },
           },
         ],
