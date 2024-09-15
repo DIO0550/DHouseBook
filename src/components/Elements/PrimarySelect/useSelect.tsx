@@ -6,6 +6,7 @@ export type Option = {
 };
 
 type Props = {
+  value?: string;
   defaultValue: string;
   options?: Option[];
 };
@@ -19,10 +20,9 @@ const updateMenuClientRect = (
   select: HTMLButtonElement,
   menu: HTMLDivElement,
 ) => {
-  // const parent = select.parentElement;
   const selectRect = select.getBoundingClientRect();
   const menuRect = menu.getBoundingClientRect();
-  // const parentRect = parent?.getBoundingClientRect();
+  const MARGIN = 4;
 
   const isTop =
     document.body.getBoundingClientRect().height <
@@ -33,26 +33,44 @@ const updateMenuClientRect = (
 
   if (!isTop) {
     menu.style.top = ``;
-    menu.style.bottom = `${selectRect.top}px`;
+    menu.style.bottom = `${selectRect.top + MARGIN}px`;
   } else {
-    menu.style.top = `${selectRect.bottom}px`;
+    menu.style.top = `${selectRect.bottom + MARGIN}px`;
     menu.style.bottom = ``;
   }
 };
 
-const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
+const useSelect = ({
+  value,
+  defaultValue,
+  options = [] as Option[],
+}: Props) => {
+  // Ref
   const selectRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const [value, setValue] = useState(defaultValue);
+  // 選択中の値
+  const [selectValue, setSelectValue] = useState(defaultValue);
+
+  const currentValue = useMemo(() => {
+    if (value) {
+      return value;
+    }
+
+    return selectValue;
+  }, [value, selectValue]);
+
+  // 選択中の値のラベル
   const label = useMemo(() => {
-    const selectedOption = options.find((option) => option.value === value);
+    const selectedOption = options.find(
+      (option) => option.value === currentValue,
+    );
     if (selectedOption === undefined) {
       return NoSelectOption.Label;
     }
 
     return selectedOption.label;
-  }, [options, value]);
+  }, [currentValue, options]);
 
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const openMenu = useCallback(() => {
@@ -69,24 +87,24 @@ const useSelect = ({ defaultValue, options = [] as Option[] }: Props) => {
   const selectOption = useCallback(
     (selectedValue: string) => {
       if (options.some((option) => option.value === selectedValue)) {
-        setValue(selectedValue);
+        setSelectValue(selectedValue);
       } else {
-        setValue(NoSelectOption.Value);
+        setSelectValue(NoSelectOption.Value);
       }
     },
     [options],
   );
 
   useEffect(() => {
-    if (!options.some((option) => option.value === value)) {
-      setValue(NoSelectOption.Value);
+    if (!options.some((option) => option.value === selectValue)) {
+      setSelectValue(NoSelectOption.Value);
     }
-  }, [options, value]);
+  }, [options, selectValue]);
 
   return {
     selectRef,
     menuRef,
-    value,
+    currentValue,
     label,
     selectOption,
     isOpenMenu,

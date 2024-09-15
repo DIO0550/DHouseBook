@@ -1,8 +1,47 @@
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/colors.module.scss' as colors;
+@use '@/styles/variables.module.scss' as variables;
+@use '@/styles/selects.module.scss' as selects;
+
 $select-width: 100%;
 
+.select-container {
+  width: 100%;
+  height: 100%;
+}
+
 .select {
-  position: relative;
-  width: $select-width;
+  display: flex;
+
+  &.red {
+    @include selects.base-primary-select-style(red);
+  }
+  &.purple {
+    @include selects.base-primary-select-style(purple);
+  }
+  &.blue {
+    @include selects.base-primary-select-style(blue);
+  }
+  &.cyan {
+    @include selects.base-primary-select-style(cyan);
+  }
+  &.green {
+    @include selects.base-primary-select-style(green);
+  }
+  &.yellow {
+    @include selects.base-primary-select-style(yellow);
+  }
+  &.orange {
+    @include selects.base-primary-select-style(orange);
+  }
+  &.gray {
+    @include selects.base-primary-select-style(gray);
+  }
+}
+
+.select-label {
+  @include selects.base-primary-select-label-style();
 }
 
 .menu-overlay {
@@ -11,26 +50,76 @@ $select-width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+
   &-skin {
     cursor: default;
   }
 }
 
 .menu-item {
-  display: block;
-  width: $select-width;
+  &.red {
+    @include selects.base-primary-select-menu-item-style(red);
+  }
+  &.purple {
+    @include selects.base-primary-select-menu-item-style(purple);
+  }
+  &.blue {
+    @include selects.base-primary-select-menu-item-style(blue);
+  }
+  &.cyan {
+    @include selects.base-primary-select-menu-item-style(cyan);
+  }
+  &.green {
+    @include selects.base-primary-select-menu-item-style(green);
+  }
+  &.yellow {
+    @include selects.base-primary-select-menu-item-style(yellow);
+  }
+  &.orange {
+    @include selects.base-primary-select-menu-item-style(orange);
+  }
+  &.gray {
+    @include selects.base-primary-select-menu-item-style(gray);
+  }
+
+  &-skin {
+    cursor: pointer;
+  }
 }
 
 .menu-block {
-  position: absolute;
-  width: $select-width;
-  top: 0;
-  left: 0;
-
-  display: flex;
-  flex-direction: column;
+  &.red {
+    @include selects.base-primary-select-menu-style(red);
+  }
+  &.purple {
+    @include selects.base-primary-select-menu-style(purple);
+  }
+  &.blue {
+    @include selects.base-primary-select-menu-style(blue);
+  }
+  &.cyan {
+    @include selects.base-primary-select-menu-style(cyan);
+  }
+  &.green {
+    @include selects.base-primary-select-menu-style(green);
+  }
+  &.yellow {
+    @include selects.base-primary-select-menu-style(yellow);
+  }
+  &.orange {
+    @include selects.base-primary-select-menu-style(orange);
+  }
+  &.gray {
+    @include selects.base-primary-select-menu-style(gray);
+  }
 }
 
 .menu-overlay.close {
   visibility: hidden;
+}
+
+.triangle {
+  margin: auto 0;
+  margin-right: 8px;
+  @include mixins.triangle-down(colors.$color-select-text-black, 15px);
 }

@@ -1,0 +1,62 @@
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/variables.module.scss' as variable;
+@use '@/styles/colors.module.scss' as colors;
+
+@mixin outline($color) {
+  outline: solid 1px $color;
+}
+
+@mixin border($color) {
+  border: solid 1px $color;
+}
+
+// セレクトのスタイル
+@mixin base-primary-select-style($theme) {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  @include border($theme);
+
+  color: colors.$color-select-text-black;
+  border-radius: 8px;
+  padding: variable.$base-button-padding-v variable.$base-button-padding-h;
+
+  &.open {
+    @include outline(functions.primaryColor($theme));
+  }
+
+  &:hover {
+    @include outline(functions.primaryColor($theme));
+  }
+}
+
+@mixin base-primary-select-label-style() {
+  flex: 1;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin base-primary-select-menu-style($theme) {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  @include border($theme);
+}
+
+@mixin base-primary-select-menu-item-style($theme) {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: variable.$base-button-padding-v variable.$base-button-padding-h;
+  &:hover {
+    background-color: functions.primarySubSubColor($theme);
+  }
+}

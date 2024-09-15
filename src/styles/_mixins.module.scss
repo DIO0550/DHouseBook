@@ -2,6 +2,7 @@
 @use '@/styles/variables.module.scss' as variable;
 @use '@/styles/colors.module.scss' as colors;
 
+// ボタンのスタイル
 @mixin base-primary-button-style($theme) {
   width: 100%;
   box-sizing: border-box;
@@ -39,6 +40,13 @@
   padding-left: variable.$base-button-padding-h;
   padding-right: variable.$base-button-padding-h;
   border-radius: 8px;
+}
+
+@mixin triangle-down($color, $width) {
+  background: $color;
+  height: calc(tan(60deg) * $width / 2);
+  width: $width;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 @mixin theme-primary-background-color-style($theme) {
