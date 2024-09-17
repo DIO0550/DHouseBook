@@ -1,6 +1,8 @@
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { memo } from 'react';
-import { UpdateFilter } from '../../hooks/useHouseBookEditorFilter';
+import { Option } from '@/components/Elements/PrimarySelect/useSelect';
+import { PrimarySelect } from '@/components/Elements/PrimarySelect/PrimarySelect';
+import { UpdateFilter } from '@/features/filter/hooks/useHouseBookEditorFilter';
 
 type Props = {
   filterId: string;
@@ -9,27 +11,33 @@ type Props = {
 };
 
 const HouseBookEditorFilterItemCategory = memo<Props>(
-  ({ filterId, category, updateFilter }) => (
-    <select
-      value={category}
-      onChange={(e) => {
-        updateFilter(filterId, {
-          type: 'Category',
-          value: e.currentTarget.value as HouseBookItemCategory,
-        });
-      }}
-    >
-      {Object.values(HouseBookItemCategory).map((v) => {
-        if (typeof v !== 'string') {
-          return null;
-        }
+  ({ filterId, category, updateFilter }) => {
+    const options = Object.values(HouseBookItemCategory).reduce((acc, cur) => {
+      if (typeof cur !== 'string') {
+        return acc;
+      }
 
-        return (
-          <option value={v}>{HouseBookItemCategory.displayName(v)}</option>
-        );
-      })}
-    </select>
-  ),
+      const option: Option = {
+        label: HouseBookItemCategory.displayName(cur),
+        value: cur,
+      };
+
+      return [...acc, option];
+    }, [] as Option[]);
+
+    return (
+      <PrimarySelect
+        value={category}
+        options={options}
+        onChange={(v: string) => {
+          updateFilter(filterId, {
+            type: 'Category',
+            value: v as HouseBookItemCategory,
+          });
+        }}
+      />
+    );
+  },
 );
 
 export { HouseBookEditorFilterItemCategory };

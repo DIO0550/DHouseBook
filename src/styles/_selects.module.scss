@@ -21,6 +21,7 @@
   color: colors.$color-select-text-black;
   border-radius: 8px;
   padding: variable.$base-button-padding-v variable.$base-button-padding-h;
+  z-index: 99;
 
   &.open {
     @include outline(functions.primaryColor($theme));
@@ -39,7 +40,7 @@
 }
 
 @mixin base-primary-select-menu-style($theme) {
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   width: 100%;
   top: 0;
@@ -49,14 +50,31 @@
   flex-direction: column;
   border-radius: 8px;
   @include border($theme);
+  background-color: colors.$color-select-menu-bg-white;
+  z-index: 1000;
 }
 
 @mixin base-primary-select-menu-item-style($theme) {
+  position: relative;
+  z-index: 1000;
   display: block;
   width: 100%;
   text-align: left;
   padding: variable.$base-button-padding-v variable.$base-button-padding-h;
   &:hover {
     background-color: functions.primarySubSubColor($theme);
+  }
+}
+
+@mixin base-primary-select-menu-overlay() {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  &-skin {
+    cursor: default;
   }
 }

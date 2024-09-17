@@ -45,15 +45,7 @@ $select-width: 100%;
 }
 
 .menu-overlay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  &-skin {
-    cursor: default;
-  }
+  @include selects.base-primary-select-menu-overlay();
 }
 
 .menu-item {
@@ -120,6 +112,6 @@ $select-width: 100%;
 
 .triangle {
   margin: auto 0;
-  margin-right: 8px;
-  @include mixins.triangle-down(colors.$color-select-text-black, 15px);
+  margin-right: -4px;
+  @include mixins.triangle-down(colors.$color-select-text-black, 12px);
 }
