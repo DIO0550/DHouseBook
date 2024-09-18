@@ -101,6 +101,30 @@ const useSelect = ({
     }
   }, [options, selectValue]);
 
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      entries.forEach((e) => {
+        if (!selectRef.current || !menuRef.current) {
+          return;
+        }
+
+        if (e.target !== selectRef.current) {
+          return;
+        }
+
+        updateMenuClientRect(selectRef.current, menuRef.current);
+      });
+    });
+
+    if (selectRef.current) {
+      observer.observe(selectRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return {
     selectRef,
     menuRef,

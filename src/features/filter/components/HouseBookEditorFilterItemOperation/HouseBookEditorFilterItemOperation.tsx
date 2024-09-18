@@ -1,5 +1,7 @@
 import { HouseBookFilterOperation } from '@/utils/filters/houseBookFilterOperation';
-import { UpdateFilter } from '../../hooks/useHouseBookEditorFilter';
+import { Option } from '@/components/Elements/PrimarySelect/useSelect';
+import { UpdateFilter } from '@/features/filter/hooks/useHouseBookEditorFilter';
+import { PrimarySelect } from '@/components/Elements/PrimarySelect/PrimarySelect';
 
 const HouseBookFilterOperationLabel: {
   [key in HouseBookFilterOperation]: string;
@@ -22,21 +24,32 @@ const HouseBookEditorFilterItemOperation = ({
     return null;
   }
 
+  const options = Object.values(HouseBookFilterOperation).reduce((acc, cur) => {
+    if (typeof cur !== 'string') {
+      return acc;
+    }
+
+    console.log(cur);
+
+    const option: Option = {
+      label: HouseBookFilterOperationLabel[cur as HouseBookFilterOperation],
+      value: cur,
+    };
+
+    return [...acc, option];
+  }, [] as Option[]);
+
   return (
-    <select
+    <PrimarySelect
       value={operation}
-      onChange={(e) => {
-        const newValue = e.currentTarget.value as HouseBookFilterOperation;
+      options={options}
+      onChange={(v) => {
         updateFilter(filterId, {
           type: 'Operation',
-          value: newValue,
+          value: v as HouseBookFilterOperation,
         });
       }}
-    >
-      {Object.values(HouseBookFilterOperation).map((v) => (
-        <option value={v}>{HouseBookFilterOperationLabel[v]}</option>
-      ))}
-    </select>
+    />
   );
 };
 
