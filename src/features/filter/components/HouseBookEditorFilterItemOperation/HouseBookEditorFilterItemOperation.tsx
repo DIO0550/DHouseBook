@@ -29,8 +29,6 @@ const HouseBookEditorFilterItemOperation = ({
       return acc;
     }
 
-    console.log(cur);
-
     const option: Option = {
       label: HouseBookFilterOperationLabel[cur as HouseBookFilterOperation],
       value: cur,

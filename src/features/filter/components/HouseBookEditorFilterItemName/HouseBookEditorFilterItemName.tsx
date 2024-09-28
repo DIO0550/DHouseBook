@@ -2,22 +2,13 @@ import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
 import { HouseBookEditorFilterItemCategory } from '@/features/filter/components/HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import { HouseBookEditorFilterItemOperation } from '@/features/filter/components/HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
-import {
-  HouseBookFilterNameCondition,
-  HouseBookFilterName,
-} from '@/utils/filters/houseBookFilterName';
+import { HouseBookFilterName } from '@/utils/filters/houseBookFilterName';
 import styles from './HouseBookEditorFilterItemName.module.scss';
 import {
   RemoveFilter,
   UpdateFilter,
 } from '../../hooks/useHouseBookEditorFilter';
-
-const HouseBookFilterNameConditionLabel: {
-  [x in HouseBookFilterNameCondition]: string;
-} = {
-  [HouseBookFilterNameCondition.Include]: '含む',
-  [HouseBookFilterNameCondition.NotInclude]: '含まない',
-};
+import HouseBookEditorFilterItemCondition from '../HouseBookEditorFilterItemCondition/HouseBookEditorFilterItemCondition';
 
 type Props = {
   filterId: string;
@@ -47,19 +38,12 @@ const HouseBookEditorFilterItemName = memo<Props>(
       </div>
       {/* コンディション */}
       <div className={`${styles['condition-block']}`}>
-        <select
-          value={filter.condition}
-          onChange={(e) => {
-            updateFilter(filterId, {
-              type: 'Condition',
-              value: e.currentTarget.value as HouseBookFilterNameCondition,
-            });
-          }}
-        >
-          {Object.values(HouseBookFilterNameCondition).map((v) => (
-            <option value={v}>{HouseBookFilterNameConditionLabel[v]}</option>
-          ))}
-        </select>
+        <HouseBookEditorFilterItemCondition
+          filterId={filterId}
+          category={filter.category}
+          condition={filter.condition}
+          updateFilter={updateFilter}
+        />
       </div>
       {/* 値 */}
       <div className={`${styles['value-block']}`}>

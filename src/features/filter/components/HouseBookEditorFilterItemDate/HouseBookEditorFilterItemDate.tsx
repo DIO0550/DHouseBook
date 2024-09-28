@@ -1,9 +1,6 @@
 import { memo } from 'react';
 import { PrimarySubButton } from '@/components/Elements';
-import {
-  HouseBookFilterDateCondition,
-  HouseBookFilterDate,
-} from '@/utils/filters/houseBookFilterDate';
+import { HouseBookFilterDate } from '@/utils/filters/houseBookFilterDate';
 import {
   RemoveFilter,
   UpdateFilter,
@@ -11,15 +8,7 @@ import {
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookEditorFilterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import styles from './HouseBookEditorFilterItemDate.module.scss';
-
-const HouseBookFilterDateConditionLabel: {
-  [x in HouseBookFilterDateCondition]: string;
-} = {
-  [HouseBookFilterDateCondition.GreaterThan]: 'より後',
-  [HouseBookFilterDateCondition.GreaterThanOrEqual]: '以降',
-  [HouseBookFilterDateCondition.LessThan]: 'より前',
-  [HouseBookFilterDateCondition.LessThanOrEqual]: '以前',
-};
+import HouseBookEditorFilterItemCondition from '../HouseBookEditorFilterItemCondition/HouseBookEditorFilterItemCondition';
 
 type Props = {
   filterId: string;
@@ -50,19 +39,12 @@ const HouseBookEditorFilterItemDate = memo<Props>(
 
       {/* コンディション */}
       <div className={`${styles['condition-block']}`}>
-        <select
-          value={filter.condition}
-          onChange={(e) => {
-            updateFilter(filterId, {
-              type: 'Condition',
-              value: e.currentTarget.value as HouseBookFilterDateCondition,
-            });
-          }}
-        >
-          {Object.values(HouseBookFilterDateCondition).map((v) => (
-            <option value={v}>{HouseBookFilterDateConditionLabel[v]}</option>
-          ))}
-        </select>
+        <HouseBookEditorFilterItemCondition
+          filterId={filterId}
+          category={filter.category}
+          condition={filter.condition}
+          updateFilter={updateFilter}
+        />
       </div>
 
       {/* 値 */}
