@@ -1,0 +1,84 @@
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/colors.module.scss' as colors;
+@use '@/styles/variables.module.scss' as variables;
+
+@mixin color-style($theme) {
+  border-color: functions.primaryColor($theme);
+  background-color: colors.$color-btn-white;
+  color: functions.primaryColor($theme);
+
+  //   &:hover {
+  //     background-color: functions.primaryColor($theme);
+  //     color: colors.$color-btn-text-white;
+  //   }
+}
+
+@mixin color-checked-style($theme) {
+  background-color: functions.primaryColor($theme);
+  color: colors.$color-btn-text-white;
+}
+
+.switch-btn {
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: variables.$base-button-padding-v variables.$base-button-padding-h;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+
+  &-skin {
+    &.red {
+      @include color-style(red);
+    }
+    &.purple {
+      @include color-style(purple);
+    }
+    &.blue {
+      @include color-style(blue);
+    }
+    &.cyan {
+      @include color-style(cyan);
+    }
+    &.green {
+      @include color-style(green);
+    }
+    &.yellow {
+      @include color-style(yellow);
+    }
+    &.orange {
+      @include color-style(orange);
+    }
+    &.gray {
+      @include color-style(gray);
+    }
+  }
+}
+
+.checked {
+  &.red {
+    @include color-checked-style(red);
+  }
+  &.purple {
+    @include color-checked-style(purple);
+  }
+  &.blue {
+    @include color-checked-style(blue);
+  }
+  &.cyan {
+    @include color-checked-style(cyan);
+  }
+  &.green {
+    @include color-checked-style(green);
+  }
+  &.yellow {
+    @include color-checked-style(yellow);
+  }
+  &.orange {
+    @include color-checked-style(orange);
+  }
+  &.gray {
+    @include color-checked-style(gray);
+  }
+}
