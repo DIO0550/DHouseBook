@@ -24,6 +24,7 @@ const config = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, 'src'),
+      '@image': path.resolve(__dirname, '../src/resources/images'),
     };
 
     return config;

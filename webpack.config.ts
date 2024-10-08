@@ -26,6 +26,7 @@ const base: Configuration = {
     ],
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@image': path.resolve(__dirname, 'src/resources/images'),
     },
   },
   entry: {

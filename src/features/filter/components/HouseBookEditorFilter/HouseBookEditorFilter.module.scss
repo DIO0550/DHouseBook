@@ -1,7 +1,58 @@
 @use '@/styles/mixins.module.scss' as mixins;
 @use '@/styles/colors.module.scss' as colors;
+@use '@/styles/functions.module.scss' as functions;
 
 .filter-btn {
-  height: 56px;
-  width: 200px;
+  $icon-size: 32px;
+  height: $icon-size;
+  width: $icon-size;
+
+  button {
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  &-icon {
+    height: 100%;
+    width: 100%;
+    margin-top: 2px;
+
+    &-skin {
+      mask-repeat: no-repeat;
+      mask-image: url('@image/icons/icon_filter.svg');
+      mask-size: contain;
+    }
+
+    &.on {
+      background-color: colors.$color-btn-white;
+    }
+
+    &.off {
+      &.red {
+        background-color: functions.primaryColor(red);
+      }
+      &.purple {
+        background-color: functions.primaryColor(purple);
+      }
+      &.blue {
+        background-color: functions.primaryColor(blue);
+      }
+      &.cyan {
+        background-color: functions.primaryColor(cyan);
+      }
+      &.green {
+        background-color: functions.primaryColor(green);
+      }
+      &.yellow {
+        background-color: functions.primaryColor(yellow);
+      }
+      &.orange {
+        background-color: functions.primaryColor(orange);
+      }
+      &.gray {
+        background-color: functions.primaryColor(gray);
+      }
+    }
+  }
 }
