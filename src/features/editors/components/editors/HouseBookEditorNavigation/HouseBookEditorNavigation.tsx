@@ -14,12 +14,12 @@ type Props = {
 const HouseBookEditorNavigation = memo<Props>(
   ({ date, onAddItem, onChangeDate }) => (
     <nav className={`${styles.container} ${styles['container-skin']}`}>
-      <HouseBookEditorFilter />
       <div className={`${styles['date-block']} ${styles['date-block-skin']}`}>
         <HouseBookEditorDate date={date} onChangeDate={onChangeDate} />
       </div>
       <div className={`${styles['operation-block']}`}>
         <AddPurchasedItemButton onClick={onAddItem} />
+        <HouseBookEditorFilter />
       </div>
     </nav>
   ),

@@ -8,7 +8,7 @@ type Props = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const PrimarySwitchButton = memo<Props>((props) => {
-  const { children, checked, ...buttonProps } = props;
+  const { children, checked, className, ...buttonProps } = props;
   const { themeColor } = useThemeContext();
 
   return (
@@ -18,7 +18,7 @@ const PrimarySwitchButton = memo<Props>((props) => {
       type="button"
       className={`${styles['switch-btn']} ${styles['switch-btn-skin']} ${
         styles[themeColor]
-      } ${checked ? styles.checked : ''}`}
+      } ${checked ? styles.checked : ''} ${className}`}
     >
       {children}
     </button>

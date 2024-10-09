@@ -1,5 +1,6 @@
-import { PrimaryButton } from '@/components/Elements';
+import { PrimaryOutlineButton } from '@/components/Elements/PrimaryOutlineButton/PrimaryOutlineButton';
 import { memo } from 'react';
+import styles from './AddPurchasedItemButton.module.scss';
 
 type Props = {
   // 追加ボタンクリック
@@ -7,7 +8,13 @@ type Props = {
 };
 
 const AddPurchasedItemButton = memo<Props>(({ onClick }) => (
-  <PrimaryButton title="アイテム追加" onClick={onClick} />
+  <div className={`${styles['add-btn-block']} ${styles['add-btn-block-skin']}`}>
+    <PrimaryOutlineButton
+      className={`${styles['add-btn']} ${styles['add-btn-skin']}`}
+      title="+"
+      onClick={onClick}
+    />
+  </div>
 ));
 
 export { AddPurchasedItemButton };

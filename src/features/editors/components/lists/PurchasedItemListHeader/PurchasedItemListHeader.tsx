@@ -11,22 +11,22 @@ const PurchasedItemListHeader = memo(() => {
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-name']}`}
       >
-        {HouseBookItemCategory.displayName[HouseBookItemCategory.Name]}
+        {HouseBookItemCategory.displayName(HouseBookItemCategory.Name)}
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-price']}`}
       >
-        {HouseBookItemCategory.displayName[HouseBookItemCategory.Price]}
+        {HouseBookItemCategory.displayName(HouseBookItemCategory.Price)}
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-type']}`}
       >
-        {HouseBookItemCategory.displayName[HouseBookItemCategory.Type]}
+        {HouseBookItemCategory.displayName(HouseBookItemCategory.Type)}
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-date']}`}
       >
-        {HouseBookItemCategory.displayName[HouseBookItemCategory.Date]}
+        {HouseBookItemCategory.displayName(HouseBookItemCategory.Date)}
       </div>
     </header>
   );

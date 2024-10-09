@@ -1,0 +1,12 @@
+.add-btn-block {
+  $btn-size: 32px;
+  width: $btn-size;
+  height: $btn-size;
+  box-sizing: border-box;
+}
+
+.add-btn {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}

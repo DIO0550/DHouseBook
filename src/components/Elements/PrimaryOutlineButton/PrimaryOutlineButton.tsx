@@ -7,7 +7,7 @@ type Props = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const PrimaryOutlineButton = memo<Props>((props) => {
-  const { title, ...buttonProps } = props;
+  const { title, className, ...buttonProps } = props;
   const { themeColor } = useThemeContext();
 
   return (
@@ -15,7 +15,7 @@ const PrimaryOutlineButton = memo<Props>((props) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...buttonProps}
       type="button"
-      className={`${styles['outline-btn']} ${styles['outline-btn-skin']} ${styles[themeColor]}`}
+      className={`${styles['outline-btn']} ${styles['outline-btn-skin']} ${styles[themeColor]} ${className}`}
     >
       <div>{title}</div>
     </button>
