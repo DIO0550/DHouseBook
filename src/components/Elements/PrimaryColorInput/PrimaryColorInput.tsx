@@ -1,29 +1,20 @@
-import { memo } from 'react';
+import { InputHTMLAttributes, memo } from 'react';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PrimaryColorInput.module.scss';
 
-type Props = {
-  // デフォルトの値
-  defaultValue: string;
-  // type
-  type?: string;
-  // 変更イベント
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-};
+type Props = InputHTMLAttributes<HTMLInputElement>;
 
-const PrimaryColorInput = memo<Props>(
-  ({ defaultValue, type = 'text', onChange }) => {
-    const { themeColor } = useThemeContext();
+const PrimaryColorInput = memo<Props>((props) => {
+  const { themeColor } = useThemeContext();
+  const { className, ...inputProps } = props;
 
-    return (
-      <input
-        className={`${styles.primary} ${styles[themeColor]}`}
-        defaultValue={defaultValue}
-        type={type}
-        onChange={onChange}
-      />
-    );
-  },
-);
+  return (
+    <input
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...inputProps}
+      className={`${styles[themeColor]} ${styles.primary}  ${className}`}
+    />
+  );
+});
 
 export { PrimaryColorInput };

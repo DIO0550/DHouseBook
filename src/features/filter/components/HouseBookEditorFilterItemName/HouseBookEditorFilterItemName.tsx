@@ -3,12 +3,13 @@ import { PrimarySubButton } from '@/components/Elements';
 import { HouseBookEditorFilterItemCategory } from '@/features/filter/components/HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import { HouseBookEditorFilterItemOperation } from '@/features/filter/components/HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookFilterName } from '@/utils/filters/houseBookFilterName';
-import styles from './HouseBookEditorFilterItemName.module.scss';
+import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
 import {
   RemoveFilter,
   UpdateFilter,
 } from '../../hooks/useHouseBookEditorFilter';
 import HouseBookEditorFilterItemCondition from '../HouseBookEditorFilterItemCondition/HouseBookEditorFilterItemCondition';
+import styles from './HouseBookEditorFilterItemName.module.scss';
 
 type Props = {
   filterId: string;
@@ -47,16 +48,17 @@ const HouseBookEditorFilterItemName = memo<Props>(
       </div>
       {/* 値 */}
       <div className={`${styles['value-block']}`}>
-        <input
-          className={`${validate ? '' : styles['invalid-input']}`}
+        <PrimaryColorInput
+          type="text"
+          value={filter.value}
+          className={`${validate ? '' : `${styles['invalid-input-skin']}`}
+          `}
           onChange={(e) => {
             updateFilter(filterId, {
               type: 'Value',
               value: e.currentTarget.value,
             });
           }}
-          type="text"
-          value={filter.value}
         />
       </div>
 

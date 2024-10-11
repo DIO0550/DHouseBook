@@ -6,19 +6,19 @@
 .category-block {
   min-width: 80px;
   width: 300px;
-  margin-left: 50px;
+  margin-left: 32px;
 }
 
 .condition-block {
   min-width: 80px;
   width: 300px;
-  margin-left: 50px;
+  margin-left: 32px;
 }
 
 .value-block {
   min-width: 80px;
   width: 300px;
-  margin-left: 50px;
+  margin-left: 32px;
 }
 
 .item-container {
@@ -26,9 +26,10 @@
 }
 
 .remove-btn-block {
-  width: 240px;
+  width: 200px;
+  margin-left: 32px;
 }
 
-.invalid-input {
-  outline: 1px solid red;
+.invalid-input-skin {
+  outline: solid 1px red;
 }

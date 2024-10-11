@@ -5,6 +5,7 @@ import {
   RemoveFilter,
   UpdateFilter,
 } from '@/features/filter/hooks/useHouseBookEditorFilter';
+import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import styles from './HouseBookEditorFilterItemType.module.scss';
 import { HouseBookEditorFilterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
@@ -50,10 +51,15 @@ const HouseBookEditorFilterItemType = memo<Props>(
 
       {/* 値 */}
       <div className={`${styles['value-block']}`}>
-        <input
+        <PrimaryColorInput
           type="text"
           value={filter.value}
-          className={`${validate ? '' : styles['invalid-input']}`}
+          className={`${
+            validate
+              ? ''
+              : styles['invalid-input'] + styles['invalid-input-skin']
+          }
+          `}
           onChange={(e) => {
             updateFilter(filterId, {
               type: 'Value',

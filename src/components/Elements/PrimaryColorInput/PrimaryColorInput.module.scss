@@ -1,30 +1,31 @@
 @use '@/styles/inputs.module.scss' as inputs;
 
+.red {
+  @include inputs.base-primary-input-style(red);
+}
+.purple {
+  @include inputs.base-primary-input-style(purple);
+}
+.blue {
+  @include inputs.base-primary-input-style(blue);
+}
+.cyan {
+  @include inputs.base-primary-input-style(cyan);
+}
+.green {
+  @include inputs.base-primary-input-style(green);
+}
+.yellow {
+  @include inputs.base-primary-input-style(yellow);
+}
+.orange {
+  @include inputs.base-primary-input-style(orange);
+}
+.gray {
+  @include inputs.base-primary-input-style(gray);
+}
+
 .primary {
   height: 100%;
   width: 100%;
-  &.red {
-    @include inputs.base-primary-input-style(red);
-  }
-  &.purple {
-    @include inputs.base-primary-input-style(purple);
-  }
-  &.blue {
-    @include inputs.base-primary-input-style(blue);
-  }
-  &.cyan {
-    @include inputs.base-primary-input-style(cyan);
-  }
-  &.green {
-    @include inputs.base-primary-input-style(green);
-  }
-  &.yellow {
-    @include inputs.base-primary-input-style(yellow);
-  }
-  &.orange {
-    @include inputs.base-primary-input-style(orange);
-  }
-  &.gray {
-    @include inputs.base-primary-input-style(gray);
-  }
 }
