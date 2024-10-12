@@ -5,7 +5,7 @@ import {
   RemoveFilter,
   UpdateFilter,
 } from '@/features/filter/hooks/useHouseBookEditorFilter';
-import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
+import { PrimaryRoundInput } from '@/components/Elements/Primary/PrimaryRoundInput/PrimaryRoundInput';
 import { HouseBookEditorFilterItemOperation } from '../HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import styles from './HouseBookEditorFilterItemType.module.scss';
 import { HouseBookEditorFilterItemCategory } from '../HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
@@ -51,7 +51,7 @@ const HouseBookEditorFilterItemType = memo<Props>(
 
       {/* 値 */}
       <div className={`${styles['value-block']}`}>
-        <PrimaryColorInput
+        <PrimaryRoundInput
           type="text"
           value={filter.value}
           className={`${

@@ -41,10 +41,12 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
             removeFilter={removeFilterById}
           />
         </div>
-        <div>
+        <div
+          className={`${styles['dialog-footer']} ${styles['dialog-footer-skin']}`}
+        >
           <div className={styles['add-button']}>
             <PrimaryButton
-              title="追加"
+              title="+"
               onClick={(e) => {
                 e?.stopPropagation();
                 addNewFilter();

@@ -3,11 +3,11 @@ import { PrimarySubButton } from '@/components/Elements';
 import { HouseBookEditorFilterItemCategory } from '@/features/filter/components/HouseBookEditorFilterItemCategory/HouseBookEditorFilterItemCategory';
 import { HouseBookEditorFilterItemOperation } from '@/features/filter/components/HouseBookEditorFilterItemOperation/HouseBookEditorFilterItemOperation';
 import { HouseBookFilterName } from '@/utils/filters/houseBookFilterName';
-import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
+import { PrimaryRoundInput } from '@/components/Elements/Primary/PrimaryRoundInput/PrimaryRoundInput';
 import {
   RemoveFilter,
   UpdateFilter,
-} from '../../hooks/useHouseBookEditorFilter';
+} from '@/features/filter/hooks/useHouseBookEditorFilter';
 import HouseBookEditorFilterItemCondition from '../HouseBookEditorFilterItemCondition/HouseBookEditorFilterItemCondition';
 import styles from './HouseBookEditorFilterItemName.module.scss';
 
@@ -48,7 +48,7 @@ const HouseBookEditorFilterItemName = memo<Props>(
       </div>
       {/* 値 */}
       <div className={`${styles['value-block']}`}>
-        <PrimaryColorInput
+        <PrimaryRoundInput
           type="text"
           value={filter.value}
           className={`${validate ? '' : `${styles['invalid-input-skin']}`}

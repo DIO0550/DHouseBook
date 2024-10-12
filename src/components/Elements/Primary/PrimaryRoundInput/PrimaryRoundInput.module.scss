@@ -1,0 +1,45 @@
+@use '@/styles/inputs.module.scss' as inputs;
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/colors.module.scss' as colors;
+@use '@/styles/variables.module.scss' as variables;
+
+@mixin outline($color) {
+  outline: solid 1px functions.primaryColor($color);
+}
+
+.red {
+  @include outline(red);
+}
+.purple {
+  @include outline(purple);
+}
+.blue {
+  @include outline(blue);
+}
+.cyan {
+  @include outline(cyan);
+}
+.green {
+  @include outline(green);
+}
+.yellow {
+  @include outline(yellow);
+}
+.orange {
+  @include outline(orange);
+}
+.gray {
+  @include outline(gray);
+}
+
+.primary {
+  height: 100%;
+  width: 100%;
+
+  padding: 8px;
+
+  &-skin {
+    border-radius: 8px;
+  }
+}
