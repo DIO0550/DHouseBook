@@ -11,12 +11,12 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
     <div>
       <HouseBookEditorNavigation
         date={editor.houseBookDate}
-        onAddItem={() => editor.addPurhcasedItem(HouseBookItem.init())}
+        onAddItem={() => editor.addPurchasedItem(HouseBookItem.init())}
         onChangeDate={editor.updateHouseBookDate}
       />
       <PurchasedItemList
         purchasedItems={editor.purchasedItems}
-        handleUpdate={editor.updatePurchaedItem}
+        handleUpdate={editor.updatePurchasedItem}
       />
     </div>
   );

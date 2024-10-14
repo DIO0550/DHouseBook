@@ -100,7 +100,7 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
    * 購入したアイテムの追加
    * @param item 追加するアイテム
    */
-  const addPurhcasedItem = useCallback((item: HouseBookItem) => {
+  const addPurchasedItem = useCallback((item: HouseBookItem) => {
     dispatch({
       payload: item,
       type: ActionType.Add,
@@ -122,7 +122,7 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
    * 購入したアイテムの更新
    * @param update 更新内容
    */
-  const updatePurchaedItem = useCallback((update: UpdateEntity) => {
+  const updatePurchasedItem = useCallback((update: UpdateEntity) => {
     dispatch({
       payload: update,
       type: ActionType.Update,
@@ -139,9 +139,9 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
 
   return {
     purchasedItems,
-    addPurhcasedItem,
+    addPurchasedItem,
     removePurchasedItem,
-    updatePurchaedItem,
+    updatePurchasedItem,
   };
 };
 

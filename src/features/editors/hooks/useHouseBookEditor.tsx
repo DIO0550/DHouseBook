@@ -36,8 +36,8 @@ const useHouseBookEditor = ({ fileId }: Props) => {
 
   const {
     purchasedItems,
-    addPurhcasedItem,
-    updatePurchaedItem,
+    addPurchasedItem,
+    updatePurchasedItem,
     removePurchasedItem,
   } = useEditor({ initialPurchasedItems: houseBookItems });
 
@@ -50,8 +50,8 @@ const useHouseBookEditor = ({ fileId }: Props) => {
     houseBookDate,
     updateHouseBookDate,
     purchasedItems,
-    addPurhcasedItem,
-    updatePurchaedItem,
+    addPurchasedItem,
+    updatePurchasedItem,
     removePurchasedItem,
   };
 };

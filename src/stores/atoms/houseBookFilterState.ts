@@ -6,7 +6,7 @@ import { HouseBookFilterOperation } from '@/utils/filters/houseBookFilterOperati
 import { HouseBookFilterPrice } from '@/utils/filters/houseBookFilterPrice';
 import { HouseBookFilterType } from '@/utils/filters/houseBookFilterType';
 import { atom } from 'recoil';
-import { v4 as uuidv4, validate } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export type HouseBookFilter = {
   id: string;
@@ -96,7 +96,7 @@ export const HouseBookFilter = {
     const splitedFiltersByOrOperation =
       HouseBookFilter.splitFilterByOrOperation(filters);
 
-    const filterdItems = splitedFiltersByOrOperation.reduce<HouseBookItem[]>(
+    const filteredItems = splitedFiltersByOrOperation.reduce<HouseBookItem[]>(
       (acc, currentFilters) => {
         let returnValue = [...items] as HouseBookItem[];
         for (let i = 0; i < currentFilters.length; i += 1) {
@@ -111,12 +111,12 @@ export const HouseBookFilter = {
       [] as HouseBookItem[],
     );
 
-    const reuslt = filterdItems.filter(
+    const result = filteredItems.filter(
       (element, index, self) =>
         self.findIndex((e) => e.id === element.id) === index,
     );
 
-    return reuslt;
+    return result;
   },
 
   validate: (category: HouseBookItemCategory, target: string) => {
@@ -125,8 +125,6 @@ export const HouseBookFilter = {
         return HouseBookFilterName.validate(target);
 
       case HouseBookItemCategory.Price:
-        console.log(HouseBookFilterPrice.validate(target));
-
         return HouseBookFilterPrice.validate(target);
 
       case HouseBookItemCategory.Type:

@@ -24,13 +24,20 @@ const HouseBookEditorFilterList = memo<Props>(
   }) => (
     <div className={`${styles.list}`}>
       {filters.map((v, i) => (
-        <HouseBookEditorFilterItem
-          key={v.id}
-          filter={v}
-          validate={validates[i].validate ?? true}
-          updateFilter={updateFilter}
-          removeFilter={removeFilter}
-        />
+        <>
+          <HouseBookEditorFilterItem
+            key={v.id}
+            filter={v}
+            validate={validates[i].validate ?? true}
+            updateFilter={updateFilter}
+            removeFilter={removeFilter}
+          />
+          {i !== filters.length - 1 && (
+            <div
+              className={`${styles.separator} ${styles['separator-skin']}`}
+            />
+          )}
+        </>
       ))}
     </div>
   ),

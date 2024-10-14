@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { HouseBookFilter } from '@/stores/atoms/houseBookFilterState';
 import { memo } from 'react';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
@@ -9,6 +10,7 @@ import { HouseBookEditorFilterItemName } from '../HouseBookEditorFilterItemName/
 import { HouseBookEditorFilterItemDate } from '../HouseBookEditorFilterItemDate/HouseBookEditorFilterItemDate';
 import { HouseBookEditorFilterItemPrice } from '../HouseBookEditorFilterItemPrice/HouseBookEditorFilterItemPrice';
 import { HouseBookEditorFilterItemType } from '../HouseBookEditorFilterItemType/HouseBookEditorFilterItemType';
+import styles from './HouseBookEditorFilterItem.module.scss';
 
 type Props = {
   filter: HouseBookFilter;
@@ -16,7 +18,7 @@ type Props = {
   updateFilter: UpdateFilter;
   removeFilter: RemoveFilter;
 };
-const HouseBookEditorFilterItem = memo<Props>(
+const ItemComponent = memo<Props>(
   ({ filter, validate, updateFilter, removeFilter }) => {
     switch (filter.category) {
       case HouseBookItemCategory.Name:
@@ -68,5 +70,11 @@ const HouseBookEditorFilterItem = memo<Props>(
     }
   },
 );
+
+const HouseBookEditorFilterItem = memo<Props>((props) => (
+  <div className={`${styles.container} ${styles['container-skin']}`}>
+    <ItemComponent {...props} />
+  </div>
+));
 
 export { HouseBookEditorFilterItem };

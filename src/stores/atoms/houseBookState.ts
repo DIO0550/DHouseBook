@@ -57,8 +57,8 @@ export const filteredHouseBookItems = selectorFamily<
         return items;
       }
 
-      const reuslt = HouseBookFilter.filterItems(filters, items);
+      const result = HouseBookFilter.filterItems(filters, items);
 
-      return reuslt;
+      return result;
     },
 });
