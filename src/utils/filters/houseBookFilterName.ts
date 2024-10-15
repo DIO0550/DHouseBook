@@ -32,10 +32,10 @@ export const HouseBookFilterName = {
 
   match: (filter: HouseBookFilterName, item: HouseBookItem) => {
     if (filter.condition === HouseBookFilterNameCondition.Include) {
-      return item.type.includes(filter.value);
+      return item.name.includes(filter.value);
     }
 
-    return !item.type.includes(filter.value);
+    return !item.name.includes(filter.value);
   },
 
   validate: (target: string) => typeof target === 'string',

@@ -1,7 +1,7 @@
 import { HouseBookFileState } from '@/features/files/utils/houseBookFileProperty';
 import {
   houseBookDateState,
-  filteredHouseBookItems,
+  houseBookItemsState,
 } from '@/stores/atoms/houseBookState';
 import { useSetHouseBookDateState } from '@/stores/atoms/useSetHouseBookDateState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
@@ -9,7 +9,11 @@ import useSetHouseBookItemsState from '@/stores/atoms/useSetHouseBookItemsState'
 import { useRecoilValue } from 'recoil';
 import { useDidUpdateEffect } from '@/hooks/useDidUpdateEffect';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import {
+  HouseBookFilter,
+  houseBookFilterState,
+} from '@/stores/atoms/houseBookFilterState';
 import { useEditor } from './useEditor';
 
 type Props = {
@@ -17,7 +21,8 @@ type Props = {
 };
 
 const useHouseBookEditor = ({ fileId }: Props) => {
-  const houseBookItems = useRecoilValue(filteredHouseBookItems({ id: fileId }));
+  const houseBookItems = useRecoilValue(houseBookItemsState({ id: fileId }));
+  const filters = useRecoilValue(houseBookFilterState);
   const houseBookDate = useRecoilValue(houseBookDateState({ id: fileId }));
   const { setFileState } = useSetHouseBookFilePropertyState({
     id: fileId,
@@ -41,12 +46,27 @@ const useHouseBookEditor = ({ fileId }: Props) => {
     removePurchasedItem,
   } = useEditor({ initialPurchasedItems: houseBookItems });
 
+  const filteredHouseBookItems = useMemo(() => {
+    if (!filters) {
+      return purchasedItems;
+    }
+
+    if (!filters.length) {
+      return purchasedItems;
+    }
+
+    const result = HouseBookFilter.filterItems(filters, purchasedItems);
+
+    return result;
+  }, [filters, purchasedItems]);
+
   useDidUpdateEffect(() => {
     setHouseBookItems(purchasedItems);
     setFileState(HouseBookFileState.Dirty);
   }, [purchasedItems, setFileState, setHouseBookItems]);
 
   return {
+    filteredHouseBookItems,
     houseBookDate,
     updateHouseBookDate,
     purchasedItems,

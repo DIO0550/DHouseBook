@@ -15,7 +15,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
         onChangeDate={editor.updateHouseBookDate}
       />
       <PurchasedItemList
-        purchasedItems={editor.purchasedItems}
+        purchasedItems={editor.filteredHouseBookItems}
         handleUpdate={editor.updatePurchasedItem}
       />
     </div>
