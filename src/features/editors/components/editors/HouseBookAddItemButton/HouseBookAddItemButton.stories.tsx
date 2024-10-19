@@ -1,17 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
-import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
+import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from '@/components/Providers';
-import { PrimaryOutlineButton } from './PrimaryOutlineButton';
+import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
+import { fn } from '@storybook/test';
+import { HouseBookAddItemButton } from './HouseBookAddItemButton';
 
-const meta: Meta<typeof PrimaryOutlineButton> = {
-  component: PrimaryOutlineButton,
-  render: (args) => <PrimaryOutlineButton {...args} />,
+const meta: Meta<typeof HouseBookAddItemButton> = {
+  component: HouseBookAddItemButton,
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
+  render: (args) => <HouseBookAddItemButton {...args} />,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PrimaryOutlineButton>;
+type Story = StoryObj<typeof HouseBookAddItemButton>;
 
 export const Red: Story = {
   decorators: [
@@ -20,7 +28,7 @@ export const Red: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -31,7 +39,7 @@ export const Purple: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -42,7 +50,7 @@ export const Blue: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -53,7 +61,7 @@ export const Cyan: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -64,7 +72,7 @@ export const Green: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -75,7 +83,7 @@ export const Yellow: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -86,7 +94,7 @@ export const Orange: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -97,7 +105,7 @@ export const Gray: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
+    onClick: fn(),
   },
 };
 
@@ -108,7 +116,6 @@ export const Disabled: Story = {
     ),
   ],
   args: {
-    children: <div>ボタン</div>,
-    disabled: true,
+    onClick: fn(),
   },
 };

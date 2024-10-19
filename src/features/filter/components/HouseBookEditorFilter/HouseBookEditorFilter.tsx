@@ -21,8 +21,9 @@ const HouseBookEditorFilter = memo(() => {
           setIsOpen(false);
         }}
       />
-      <div className={`${styles['filter-btn']}`}>
+      <div className={`${styles['filter-btn-block']}`}>
         <PrimarySwitchButton
+          className={`${styles['filter-btn']}`}
           checked={isApplyFilter}
           type="button"
           onClick={() => {

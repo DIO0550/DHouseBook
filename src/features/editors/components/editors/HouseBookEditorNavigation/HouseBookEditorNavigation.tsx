@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { HouseBookDate } from '@/features/files/utils/houseBookDate';
 import { HouseBookEditorFilter } from '@/features/filter/components/HouseBookEditorFilter';
-import { AddPurchasedItemButton } from '../AddPurchasedItemButton';
+import { HouseBookAddItemButton } from '../HouseBookAddItemButton';
 import styles from './HouseBookEditorNavigation.module.scss';
 import { HouseBookEditorDate } from '../HouseBookEditorDate/HouseBookEditorDate';
 
@@ -18,7 +18,7 @@ const HouseBookEditorNavigation = memo<Props>(
         <HouseBookEditorDate date={date} onChangeDate={onChangeDate} />
       </div>
       <div className={`${styles['operation-block']}`}>
-        <AddPurchasedItemButton onClick={onAddItem} />
+        <HouseBookAddItemButton onClick={onAddItem} />
         <HouseBookEditorFilter />
       </div>
     </nav>

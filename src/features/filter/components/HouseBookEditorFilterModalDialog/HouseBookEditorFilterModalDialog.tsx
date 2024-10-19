@@ -58,12 +58,13 @@ const DialogComponent = memo<DialogProps>(({ initFilters, onClose }) => {
             <OutlineCancelActionButton title="キャンセル" onClick={onClose} />
             <PrimaryOutlineButton
               disabled={!validate}
-              title="設定"
               onClick={() => {
                 setHouseBookFilters(filters);
                 onClose();
               }}
-            />
+            >
+              <div>設定</div>
+            </PrimaryOutlineButton>
           </div>
         </div>
       </div>

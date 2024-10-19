@@ -2,16 +2,16 @@
 @use '@/styles/colors.module.scss' as colors;
 @use '@/styles/functions.module.scss' as functions;
 
-.filter-btn {
+.filter-btn-block {
   $icon-size: 32px;
   height: $icon-size;
   width: $icon-size;
+}
 
-  button {
-    padding: 0;
-    display: block;
-    box-sizing: border-box;
-  }
+.filter-btn {
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
 
   &-icon {
     height: 100%;
