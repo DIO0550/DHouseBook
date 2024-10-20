@@ -12,6 +12,7 @@ type Props = {
 const PurchasedItemPrice = memo<Props>(({ id, defaultValue, onUpdate }) => (
   <div className={styles['price-container']}>
     <PrimaryColorInput
+      className={`${styles.input}`}
       defaultValue={defaultValue}
       onChange={(e) =>
         onUpdate({

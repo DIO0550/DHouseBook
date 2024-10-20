@@ -4,6 +4,7 @@ import { HouseBookEditorFilter } from '@/features/filter/components/HouseBookEdi
 import { HouseBookAddItemButton } from '../HouseBookAddItemButton';
 import styles from './HouseBookEditorNavigation.module.scss';
 import { HouseBookEditorDate } from '../HouseBookEditorDate/HouseBookEditorDate';
+import { HouseBookEditButton } from '../HouseBookEditButton';
 
 type Props = {
   date: HouseBookDate | undefined;
@@ -19,6 +20,7 @@ const HouseBookEditorNavigation = memo<Props>(
       </div>
       <div className={`${styles['operation-block']}`}>
         <HouseBookAddItemButton onClick={onAddItem} />
+        <HouseBookEditButton />
         <HouseBookEditorFilter />
       </div>
     </nav>

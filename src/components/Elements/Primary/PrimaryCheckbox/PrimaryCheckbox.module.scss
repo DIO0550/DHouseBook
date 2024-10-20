@@ -1,0 +1,98 @@
+@use '@/styles/mixins.module.scss' as mixins;
+@use '@/styles/functions.module.scss' as functions;
+@use '@/styles/colors.module.scss' as colors;
+@use '@/styles/variables.module.scss' as variables;
+
+@mixin checked-color-style($theme) {
+  border-color: functions.primaryColor($theme);
+  background-color: functions.primaryColor($theme);
+  color: functions.primaryColor($theme);
+}
+
+@mixin not-checked-color-style($theme) {
+  border-color: functions.primaryColor($theme);
+  background-color: colors.$color-btn-white;
+  color: functions.primaryColor($theme);
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  appearance: none;
+  height: 24px;
+  width: 24px;
+  box-sizing: border-box;
+
+  &-skin {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  &-skin:checked {
+    &::before {
+      display: display;
+      height: 100%;
+      width: 100%;
+      background-color: colors.$color-checkbox-mark;
+      mask-repeat: no-repeat;
+      mask-image: url('@image/icons/icon_check.svg');
+      mask-size: contain;
+      content: '';
+    }
+    &.red {
+      @include checked-color-style(red);
+    }
+    &.purple {
+      @include checked-color-style(purple);
+    }
+    &.blue {
+      @include checked-color-style(blue);
+    }
+    &.cyan {
+      @include checked-color-style(cyan);
+    }
+    &.green {
+      @include checked-color-style(green);
+    }
+    &.yellow {
+      @include checked-color-style(yellow);
+    }
+    &.orange {
+      @include checked-color-style(orange);
+    }
+    &.gray {
+      @include checked-color-style(gray);
+    }
+  }
+
+  &-skin:not(:checked) {
+    &.red {
+      @include not-checked-color-style(red);
+    }
+    &.purple {
+      @include not-checked-color-style(purple);
+    }
+    &.blue {
+      @include not-checked-color-style(blue);
+    }
+    &.cyan {
+      @include not-checked-color-style(cyan);
+    }
+    &.green {
+      @include not-checked-color-style(green);
+    }
+    &.yellow {
+      @include not-checked-color-style(yellow);
+    }
+    &.orange {
+      @include not-checked-color-style(orange);
+    }
+    &.gray {
+      @include not-checked-color-style(gray);
+    }
+  }
+}

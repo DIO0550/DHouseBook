@@ -5,3 +5,7 @@
   width: list-mixins.$width-purchased-item-date;
   height: list-mixins.$height-purchased-item-cell;
 }
+
+.input {
+  @include list-mixins.purchased-item-style();
+}

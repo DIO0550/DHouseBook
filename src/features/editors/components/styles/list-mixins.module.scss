@@ -15,3 +15,9 @@ $min-width-purchased-item-list: $min-width-purchased-item-name +
 $height-purchased-item-cell: 60px;
 
 $border-width-item-cell: 1px;
+
+$purchased-item-input-padding: 8px;
+
+@mixin purchased-item-style() {
+  padding: 0 8px;
+}
