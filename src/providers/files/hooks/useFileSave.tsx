@@ -7,7 +7,7 @@ import {
 } from '@/stores/atoms/houseBookState';
 import useSetHouseBookFilePropertyState from '@/stores/atoms/useSetHouseBookFilePropertyState';
 import { FileOpenStatus } from '@/types/fileOpen';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 
 export const HouseFileSaveStatus = {
@@ -114,18 +114,6 @@ const useFileSave = ({ id }: Props) => {
 
     return result;
   }, [filePropertyState, overwriteSaveFile, saveNewFile]);
-
-  useEffect(() => {
-    const saveCallback = () => {
-      void saveFile();
-    };
-    // イベントを受け取る
-    const remove = window.api.on.saveFile(saveCallback);
-
-    return () => {
-      remove();
-    };
-  }, [saveFile]);
 
   return {
     saveFile,

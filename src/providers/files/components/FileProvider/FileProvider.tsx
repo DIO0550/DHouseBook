@@ -3,15 +3,15 @@ import { useFileOpen } from '@/providers/files/hooks/useFileOpen';
 import { useNewFile } from '@/providers/files/hooks/useNewFile';
 import { activeFileIdState } from '@/stores/atoms/activeFileIdState';
 import { useRecoilValue } from 'recoil';
-import { useFileSave } from '@/providers/files/hooks/useFileSave';
+import { useFileSaveProvider } from '@/providers/files/hooks/useFileSaveProvider';
 
 const FileProvider = ({ children }: { children: ReactNode }) => {
   const activeFileId = useRecoilValue(activeFileIdState);
   useFileOpen();
   useNewFile();
-  useFileSave({ id: activeFileId });
+  useFileSaveProvider({ id: activeFileId });
 
-  return <>{children}</>;
+  return <> {children}</>;
 };
 
 export { FileProvider };

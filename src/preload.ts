@@ -30,7 +30,7 @@ const onOpenFile = (listener: (result: FileOpenResult) => void) => {
  * @returns ファイル保存処理
  */
 const invokeSaveFile = (contents: string) =>
-  ipcRenderer.invoke(DialogIpc.Invoke.Open, contents);
+  ipcRenderer.invoke(DialogIpc.Invoke.Save, contents);
 
 /**
  * ファイル保存
