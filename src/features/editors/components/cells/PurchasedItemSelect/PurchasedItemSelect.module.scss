@@ -1,2 +1,17 @@
-.container {
+@use '@/features/editors/components/styles/list-mixins.module.scss' as
+  list-mixins;
+@use '@/styles/colors.module.scss' as colors;
+
+.select-container {
+  width: list-mixins.$width-purchased-item-select;
+  height: list-mixins.$height-purchased-item-cell;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-skin {
+    outline: list-mixins.$border-width-item-cell solid
+      colors.$color-border-black;
+  }
 }

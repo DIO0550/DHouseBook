@@ -9,7 +9,9 @@ type Props = {
 };
 
 const PurchasedItemSelect = memo<Props>(({ id, checked, onChange }) => (
-  <div className={`${styles.container}`}>
+  <div
+    className={`${styles['select-container']} ${styles['select-container-skin']}`}
+  >
     <PrimaryCheckbox
       onChange={() => {
         onChange(id);

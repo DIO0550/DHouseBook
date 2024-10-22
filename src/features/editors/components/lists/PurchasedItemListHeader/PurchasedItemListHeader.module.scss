@@ -1,6 +1,7 @@
 @use '@/features/editors/components/styles/list-mixins.module.scss' as
   list-mixins;
 @use '@/styles/functions.module.scss' as functions;
+@use '@/styles/colors.module.scss' as colors;
 
 .name-container {
   width: list-mixins.$width-purchased-item-name;
@@ -44,7 +45,12 @@
   height: list-mixins.$height-purchased-item-cell;
 
   &-skin {
-    outline: list-mixins.$border-width-item-cell solid black;
+    outline: list-mixins.$border-width-item-cell solid
+      colors.$color-border-black;
+  }
+
+  &-select {
+    width: list-mixins.$width-purchased-item-select;
   }
 
   &-name {

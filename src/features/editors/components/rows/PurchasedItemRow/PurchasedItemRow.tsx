@@ -6,6 +6,7 @@ import { PurchasedItemDate } from '@/features/editors/components/cells/Purchased
 import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PurchasedItemRow.module.scss';
+import { PurchasedItemSelect } from '../../cells/PurchasedItemSelect/PurchasedItemSelect';
 
 type Props = {
   id: string;
@@ -24,6 +25,7 @@ const PurchasedItemRow = memo<Props>(
       <div
         className={`${styles.container} ${styles['container-skin']} ${styles[themeColor]}`}
       >
+        <PurchasedItemSelect id={id} checked={false} onChange={() => {}} />
         <PurchasedItemName
           id={id}
           defaultValue={name}

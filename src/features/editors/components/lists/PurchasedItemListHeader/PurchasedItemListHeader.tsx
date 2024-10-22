@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
+import { PrimaryCheckbox } from '@/components/Elements/Primary/PrimaryCheckbox';
 import styles from './PurchasedItemListHeader.module.scss';
 
 const PurchasedItemListHeader = memo(() => {
@@ -8,6 +9,11 @@ const PurchasedItemListHeader = memo(() => {
 
   return (
     <header className={`${styles['header-container']} ${styles[themeColor]}`}>
+      <div
+        className={`${styles.header} ${styles['header-skin']} ${styles['header-select']}`}
+      >
+        <PrimaryCheckbox />
+      </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-name']}`}
       >
