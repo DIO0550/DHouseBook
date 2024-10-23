@@ -14,18 +14,33 @@ type Props = {
   price: string;
   type: string;
   date: string;
+  isSelected: boolean;
   onUpdateData: (updateEntity: UpdateEntity) => void;
+  onChangeSelect: (id: string) => void;
 };
 
 const PurchasedItemRow = memo<Props>(
-  ({ id, name, price, type, date, onUpdateData }) => {
+  ({
+    id,
+    name,
+    price,
+    type,
+    date,
+    isSelected,
+    onUpdateData,
+    onChangeSelect,
+  }) => {
     const { themeColor } = useThemeContext();
 
     return (
       <div
         className={`${styles.container} ${styles['container-skin']} ${styles[themeColor]}`}
       >
-        <PurchasedItemSelect id={id} checked={false} onChange={() => {}} />
+        <PurchasedItemSelect
+          id={id}
+          checked={isSelected}
+          onChange={onChangeSelect}
+        />
         <PurchasedItemName
           id={id}
           defaultValue={name}

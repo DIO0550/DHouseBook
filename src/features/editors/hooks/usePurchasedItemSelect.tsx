@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-type SelectPurchasedItems = { [key in string]?: 1 };
+export type SelectPurchasedItems = { [key in string]?: 1 };
 const SelectPurchasedItems = {
   addKey: (items: SelectPurchasedItems, id: string): SelectPurchasedItems => ({
     ...items,
