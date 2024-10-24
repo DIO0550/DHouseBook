@@ -1,3 +1,4 @@
+import { ObjectEx } from '@/utils/extensions/ObjectEx';
 import { useCallback, useState } from 'react';
 
 export type SelectPurchasedItems = { [key in string]?: 1 };
@@ -29,6 +30,15 @@ const usePurchasedItemSelect = () => {
     setSelectItemIds((cur) => SelectPurchasedItems.addKeys(cur, ids));
   }, []);
 
+  const deselectedItems = useCallback((ids: string[]) => {
+    setSelectItemIds((cur) =>
+      ids.reduce(
+        (acc, currentValue) => ObjectEx.omitKey(acc, currentValue),
+        cur,
+      ),
+    );
+  }, []);
+
   const selectedItem = useCallback((id: string) => {
     setSelectItemIds((cur) => ({
       ...cur,
@@ -36,10 +46,16 @@ const usePurchasedItemSelect = () => {
     }));
   }, []);
 
+  const deselectedItem = useCallback((id: string) => {
+    setSelectItemIds((cur) => ObjectEx.omitKey(cur, id));
+  }, []);
+
   return {
     selectItemIds,
     selectedItems,
     selectedItem,
+    deselectedItem,
+    deselectedItems,
   };
 };
 
