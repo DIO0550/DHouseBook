@@ -1,7 +1,7 @@
 import { HouseBookItemCategory } from '@/utils/editors/houseBookItemCategory';
 import { HouseBookItem } from '@/utils/editors/houseBookItem';
 import { HouseBookFilterOperation } from './houseBookFilterOperation';
-import { NumberEx } from '../NumberEx';
+import { NumberEx } from '../extensions/NumberEx';
 
 // 値段フィルターの条件
 export const HouseBookFilterPriceCondition = {

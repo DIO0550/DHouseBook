@@ -26,11 +26,11 @@ const SelectPurchasedItems = {
 const usePurchasedItemSelect = () => {
   const [selectItemIds, setSelectItemIds] = useState<SelectPurchasedItems>({});
 
-  const selectedItems = useCallback((ids: string[]) => {
+  const selectItems = useCallback((ids: string[]) => {
     setSelectItemIds((cur) => SelectPurchasedItems.addKeys(cur, ids));
   }, []);
 
-  const deselectedItems = useCallback((ids: string[]) => {
+  const deselectItems = useCallback((ids: string[]) => {
     setSelectItemIds((cur) =>
       ids.reduce(
         (acc, currentValue) => ObjectEx.omitKey(acc, currentValue),
@@ -39,23 +39,35 @@ const usePurchasedItemSelect = () => {
     );
   }, []);
 
-  const selectedItem = useCallback((id: string) => {
+  const selectItem = useCallback((id: string) => {
     setSelectItemIds((cur) => ({
       ...cur,
       [id]: 1,
     }));
   }, []);
 
-  const deselectedItem = useCallback((id: string) => {
+  const deselectItem = useCallback((id: string) => {
     setSelectItemIds((cur) => ObjectEx.omitKey(cur, id));
   }, []);
 
+  const changeSelectItem = useCallback(
+    (id: string) => {
+      if (id in selectItemIds) {
+        deselectItem(id);
+
+        return;
+      }
+
+      selectItem(id);
+    },
+    [deselectItem, selectItem, selectItemIds],
+  );
+
   return {
     selectItemIds,
-    selectedItems,
-    selectedItem,
-    deselectedItem,
-    deselectedItems,
+    selectItems,
+    deselectItems,
+    changeSelectItem,
   };
 };
 

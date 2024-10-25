@@ -7,7 +7,7 @@ import { HouseBookEditorNavigation } from '../HouseBookEditorNavigation';
 
 const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const editor = useHouseBookEditor({ fileId });
-  const { selectItemIds, selectedItem } = usePurchasedItemSelect();
+  const { selectItemIds, changeSelectItem } = usePurchasedItemSelect();
 
   return (
     <div>
@@ -20,7 +20,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
         purchasedItems={editor.filteredHouseBookItems}
         onUpdateData={editor.updatePurchasedItem}
         selectedItems={selectItemIds}
-        onChangeSelect={selectedItem}
+        onChangeSelect={changeSelectItem}
       />
     </div>
   );
