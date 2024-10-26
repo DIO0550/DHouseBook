@@ -181,5 +181,9 @@
   },
   "resolutions": {
     "webpack": "5"
+  },
+  "overrides": {
+    "minimatch": "5.1.2",
+    "glob": "8.1.0"
   }
 }

@@ -4,13 +4,13 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
-import { TestPurchasedItemData } from '@/tests/testPurchasedItem';
 import { ThemeProvider } from '@/components/Providers';
+import { HouseBookEditorMode } from '@/features/editors/hooks/useHouseBookEditorMode';
 import { PurchasedItemListHeader } from './PurchasedItemListHeader';
 
 const meta: Meta<typeof PurchasedItemListHeader> = {
   component: PurchasedItemListHeader,
-  render: () => <PurchasedItemListHeader />,
+  render: (args) => <PurchasedItemListHeader {...args} />,
   decorators: [
     (story) => (
       <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
@@ -22,8 +22,14 @@ export default meta;
 
 type Story = StoryObj<typeof PurchasedItemListHeader>;
 
-export const Default: Story = {
+export const Normal: Story = {
   args: {
-    purchasedItems: TestPurchasedItemData,
+    mode: HouseBookEditorMode.Normal,
+  },
+};
+
+export const Select: Story = {
+  args: {
+    mode: HouseBookEditorMode.Select,
   },
 };

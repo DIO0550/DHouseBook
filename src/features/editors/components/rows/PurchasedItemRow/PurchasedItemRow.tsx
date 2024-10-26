@@ -5,10 +5,12 @@ import { PurchasedItemType } from '@/features/editors/components/cells/Purchased
 import { PurchasedItemDate } from '@/features/editors/components/cells/PurchasedItemDate';
 import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
+import { HouseBookEditorMode } from '@/features/editors/hooks/useHouseBookEditorMode';
 import styles from './PurchasedItemRow.module.scss';
 import { PurchasedItemSelect } from '../../cells/PurchasedItemSelect/PurchasedItemSelect';
 
 type Props = {
+  mode: HouseBookEditorMode;
   id: string;
   name: string;
   price: string;
@@ -21,6 +23,7 @@ type Props = {
 
 const PurchasedItemRow = memo<Props>(
   ({
+    mode,
     id,
     name,
     price,
@@ -37,6 +40,7 @@ const PurchasedItemRow = memo<Props>(
         className={`${styles.container} ${styles['container-skin']} ${styles[themeColor]}`}
       >
         <PurchasedItemSelect
+          mode={mode}
           id={id}
           checked={isSelected}
           onChange={onChangeSelect}
