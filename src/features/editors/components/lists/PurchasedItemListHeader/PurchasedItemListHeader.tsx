@@ -24,22 +24,30 @@ const PurchasedItemListHeader = memo<Props>(({ mode }) => {
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-name']}`}
       >
-        {HouseBookItemCategory.displayName(HouseBookItemCategory.Name)}
+        <div className={`${styles['header-category-wrapper']}`}>
+          {HouseBookItemCategory.displayName(HouseBookItemCategory.Name)}
+        </div>
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-price']}`}
       >
-        {HouseBookItemCategory.displayName(HouseBookItemCategory.Price)}
+        <div className={`${styles['header-category-wrapper']}`}>
+          {HouseBookItemCategory.displayName(HouseBookItemCategory.Price)}
+        </div>
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-type']}`}
       >
-        {HouseBookItemCategory.displayName(HouseBookItemCategory.Type)}
+        <div className={`${styles['header-category-wrapper']}`}>
+          {HouseBookItemCategory.displayName(HouseBookItemCategory.Type)}
+        </div>
       </div>
       <div
         className={`${styles.header} ${styles['header-skin']} ${styles['header-date']}`}
       >
-        {HouseBookItemCategory.displayName(HouseBookItemCategory.Date)}
+        <div className={`${styles['header-category-wrapper']}`}>
+          {HouseBookItemCategory.displayName(HouseBookItemCategory.Date)}
+        </div>
       </div>
     </header>
   );

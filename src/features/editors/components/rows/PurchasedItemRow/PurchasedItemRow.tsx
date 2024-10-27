@@ -39,32 +39,44 @@ const PurchasedItemRow = memo<Props>(
       <div
         className={`${styles.container} ${styles['container-skin']} ${styles[themeColor]}`}
       >
-        <PurchasedItemSelect
-          mode={mode}
-          id={id}
-          checked={isSelected}
-          onChange={onChangeSelect}
-        />
-        <PurchasedItemName
-          id={id}
-          defaultValue={name}
-          onUpdate={onUpdateData}
-        />
-        <PurchasedItemPrice
-          id={id}
-          defaultValue={price}
-          onUpdate={onUpdateData}
-        />
-        <PurchasedItemType
-          id={id}
-          defaultValue={type}
-          onUpdate={onUpdateData}
-        />
-        <PurchasedItemDate
-          id={id}
-          defaultValue={date}
-          onUpdate={onUpdateData}
-        />
+        {mode === HouseBookEditorMode.Select && (
+          <div className={`${styles['select-block']}`}>
+            <PurchasedItemSelect
+              id={id}
+              checked={isSelected}
+              onChange={onChangeSelect}
+            />
+          </div>
+        )}
+
+        <div className={`${styles['name-block']}`}>
+          <PurchasedItemName
+            id={id}
+            defaultValue={name}
+            onUpdate={onUpdateData}
+          />
+        </div>
+        <div className={`${styles['price-block']}`}>
+          <PurchasedItemPrice
+            id={id}
+            defaultValue={price}
+            onUpdate={onUpdateData}
+          />
+        </div>
+        <div className={`${styles['type-block']}`}>
+          <PurchasedItemType
+            id={id}
+            defaultValue={type}
+            onUpdate={onUpdateData}
+          />
+        </div>
+        <div className={`${styles['date-block']}`}>
+          <PurchasedItemDate
+            id={id}
+            defaultValue={date}
+            onUpdate={onUpdateData}
+          />
+        </div>
       </div>
     );
   },

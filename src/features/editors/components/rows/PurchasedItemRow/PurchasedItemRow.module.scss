@@ -5,6 +5,7 @@
 
 .container {
   display: flex;
+  box-sizing: border-box;
 
   &-skin {
     &:nth-child(odd) {
@@ -38,4 +39,29 @@
   input {
     outline-width: list-mixins.$border-width-item-cell;
   }
+}
+
+.select-block {
+  width: list-mixins.$width-purchased-item-select;
+  height: list-mixins.$height-purchased-item-cell;
+}
+
+.name-block {
+  flex: list-mixins.$flex-purchased-item-name;
+  height: list-mixins.$height-purchased-item-cell;
+}
+
+.price-block {
+  flex: list-mixins.$flex-purchased-item-price;
+  height: list-mixins.$height-purchased-item-cell;
+}
+
+.type-block {
+  flex: list-mixins.$flex-purchased-item-type;
+  height: list-mixins.$height-purchased-item-cell;
+}
+
+.date-block {
+  flex: list-mixins.$flex-purchased-item-date;
+  height: list-mixins.$height-purchased-item-cell;
 }

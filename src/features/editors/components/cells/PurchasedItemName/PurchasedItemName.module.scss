@@ -2,8 +2,8 @@
   list-mixins;
 
 .name-container {
-  width: list-mixins.$width-purchased-item-name;
-  height: list-mixins.$height-purchased-item-cell;
+  width: 100%;
+  height: 100%;
 }
 
 .input {

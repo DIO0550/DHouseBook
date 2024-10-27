@@ -2,8 +2,8 @@
   list-mixins;
 
 .date-container {
-  width: list-mixins.$width-purchased-item-date;
-  height: list-mixins.$height-purchased-item-cell;
+  width: 100%;
+  height: 100%;
 }
 
 .input {

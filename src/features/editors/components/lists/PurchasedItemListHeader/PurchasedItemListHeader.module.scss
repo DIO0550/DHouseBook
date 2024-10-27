@@ -3,14 +3,9 @@
 @use '@/styles/functions.module.scss' as functions;
 @use '@/styles/colors.module.scss' as colors;
 
-.name-container {
-  width: list-mixins.$width-purchased-item-name;
-  height: list-mixins.$height-purchased-item-cell;
-}
-
 .header-container {
   display: flex;
-
+  width: 100%;
   &.red {
     background-color: functions.primarySubColor(red);
   }
@@ -40,32 +35,39 @@
 .header {
   display: flex;
   align-items: center;
-  padding-left: 10px;
+
+  box-sizing: border-box;
 
   height: list-mixins.$height-purchased-item-cell;
-
   &-skin {
     outline: list-mixins.$border-width-item-cell solid
       colors.$color-border-black;
   }
 
   &-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: list-mixins.$width-purchased-item-select;
   }
 
   &-name {
-    width: list-mixins.$width-purchased-item-name;
+    flex: list-mixins.$flex-purchased-item-name;
   }
 
   &-price {
-    width: list-mixins.$width-purchased-item-price;
+    flex: list-mixins.$flex-purchased-item-price;
   }
 
   &-type {
-    width: list-mixins.$width-purchased-item-type;
+    flex: list-mixins.$flex-purchased-item-type;
   }
 
   &-date {
-    width: list-mixins.$width-purchased-item-date;
+    flex: list-mixins.$flex-purchased-item-date;
   }
+}
+
+.header-category-wrapper {
+  padding-left: 10px;
 }
