@@ -4,6 +4,8 @@
 @use '@/styles/colors.module.scss' as colors;
 
 .header-container {
+  position: sticky;
+  top: 0;
   display: flex;
   width: 100%;
   &.red {

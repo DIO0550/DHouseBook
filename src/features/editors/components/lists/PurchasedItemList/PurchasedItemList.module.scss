@@ -4,6 +4,9 @@
 .purchased-item-list {
   min-width: list-mixins.$min-width-purchased-item-list;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
+  height: 100%;
+  margin: 0px auto;
+  padding: 1px 16px;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
