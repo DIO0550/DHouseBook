@@ -13,12 +13,28 @@ type Props = {
   onUpdateData: (updateEntity: UpdateEntity) => void;
   selectedItems: SelectPurchasedItems;
   onChangeSelect: (id: string) => void;
+  onChangeAllSelect: () => void;
 };
 
 const PurchasedItemList = memo<Props>(
-  ({ mode, purchasedItems, onUpdateData, selectedItems, onChangeSelect }) => (
+  ({
+    mode,
+    purchasedItems,
+    onUpdateData,
+    selectedItems,
+    onChangeSelect,
+    onChangeAllSelect,
+  }) => (
     <div className={`${styles['purchased-item-list']}`}>
-      <PurchasedItemListHeader mode={mode} />
+      <PurchasedItemListHeader
+        mode={mode}
+        checked={Object.keys(selectedItems).length === purchasedItems.length}
+        indeterminate={
+          Object.keys(selectedItems).length > 0 &&
+          Object.keys(selectedItems).length !== purchasedItems.length
+        }
+        onChangeAllSelect={onChangeAllSelect}
+      />
       {purchasedItems.map((item) => (
         <PurchasedItemRow
           key={item.id}

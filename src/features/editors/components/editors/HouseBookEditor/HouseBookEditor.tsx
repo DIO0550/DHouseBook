@@ -9,7 +9,9 @@ import styles from './HouseBookEditor.module.scss';
 
 const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const editor = useHouseBookEditor({ fileId });
-  const { selectItemIds, changeSelectItem } = usePurchasedItemSelect();
+  const purchasedItemIds = editor.filteredHouseBookItems.map((item) => item.id);
+  const { selectItemIds, handleChangeSelectItem, handleChangeSelectAllItems } =
+    usePurchasedItemSelect({ allItemIds: purchasedItemIds });
   const { mode, changeMode } = useHouseBookEditorMode();
 
   return (
@@ -29,7 +31,8 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
           purchasedItems={editor.filteredHouseBookItems}
           onUpdateData={editor.updatePurchasedItem}
           selectedItems={selectItemIds}
-          onChangeSelect={changeSelectItem}
+          onChangeSelect={handleChangeSelectItem}
+          onChangeAllSelect={handleChangeSelectAllItems}
         />
       </div>
     </div>

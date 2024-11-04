@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@/components/Providers';
 import { ThemeColor } from '@/providers/themes/components/ThemeProvider/ThemeColor';
-import { PrimaryRoundInput } from './PrimaryRoundInput';
+import { ThemeProvider } from '@/components/Providers';
+import { PrimaryThreeStateCheckbox } from './PrimaryThreeStateCheckbox';
 
-const meta: Meta<typeof PrimaryRoundInput> = {
-  component: PrimaryRoundInput,
-  render: (args) => <PrimaryRoundInput {...args} />,
+const meta: Meta<typeof PrimaryThreeStateCheckbox> = {
+  component: PrimaryThreeStateCheckbox,
+  render: (args) => <PrimaryThreeStateCheckbox {...args} />,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PrimaryRoundInput>;
+type Story = StoryObj<typeof PrimaryThreeStateCheckbox>;
 
 export const Red: Story = {
   decorators: [
@@ -75,4 +75,39 @@ export const Gray: Story = {
       <ThemeProvider initialValue={ThemeColor.gray}>{story()}</ThemeProvider>
     ),
   ],
+};
+
+export const Checked: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
+  args: {
+    checked: true,
+  },
+};
+
+export const IndeterminateChecked: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
+  args: {
+    checked: true,
+    indeterminate: true,
+  },
+};
+
+export const IndeterminateNotChecked: Story = {
+  decorators: [
+    (story) => (
+      <ThemeProvider initialValue={ThemeColor.red}>{story()}</ThemeProvider>
+    ),
+  ],
+  args: {
+    checked: false,
+    indeterminate: true,
+  },
 };
