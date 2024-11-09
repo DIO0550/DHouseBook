@@ -1,22 +1,21 @@
-import { memo, MouseEvent } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 import { useThemeContext } from '@/providers/themes/hooks/useThemeContext';
 import styles from './PrimaryButton.module.scss';
 
-type Props = {
-  title: string;
-  onClick: (e?: MouseEvent) => void;
-};
+type Props = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const PrimaryButton = memo<Props>(({ title, onClick }) => {
+const PrimaryButton = memo<Props>((props) => {
   const { themeColor } = useThemeContext();
+  const { children, className, ...buttonProps } = props;
 
   return (
     <button
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...buttonProps}
       type="button"
-      onClick={onClick}
-      className={`${styles.primary} ${styles[themeColor]}`}
+      className={`${styles.primary} ${styles[themeColor]} ${className}`}
     >
-      <div>{title}</div>
+      {children}
     </button>
   );
 });

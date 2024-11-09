@@ -23,6 +23,7 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
           onChangeMode={changeMode}
           onAddItem={() => editor.addPurchasedItem(HouseBookItem.init())}
           onChangeDate={editor.updateHouseBookDate}
+          onDeleteItem={() => {}}
         />
       </div>
       <div className={`${styles['editor-list']}`}>
