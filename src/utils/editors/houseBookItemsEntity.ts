@@ -1,3 +1,4 @@
+import { ObjectEx } from '../extensions/ObjectEx';
 import { HouseBookItem } from './houseBookItem';
 
 type EntityDictionary = { [id in string]: HouseBookItem };
@@ -51,6 +52,27 @@ const removeOne = (itemsEntity: HouseBookItemsEntity, itemId: string) => {
 };
 
 /**
+ * アイテムを複数削除する
+ * @param itemsEntity エンティティ
+ * @param itemIds 削除するアイテムのIDの配列
+ * @returns 削除後のエンティティ
+ */
+const removeMultiple = (
+  itemsEntity: HouseBookItemsEntity,
+  itemIds: string[],
+) => {
+  const copyItemsEntity = { ...itemsEntity.entities };
+  const resultItemEntity = ObjectEx.omitKeys(copyItemsEntity, itemIds);
+
+  const newEntities: HouseBookItemsEntity = {
+    ids: [...itemsEntity.ids.filter((id) => !itemIds.includes(id))],
+    entities: resultItemEntity,
+  };
+
+  return newEntities;
+};
+
+/**
  * アイテムを更新する
  * @param itemsEntity エンティティ
  * @param item 更新対象のアイテム
@@ -94,6 +116,7 @@ const HouseBookItemsEntity = {
   addOne,
   updateOne,
   removeOne,
+  removeMultiple,
   selectAll,
 };
 

@@ -14,17 +14,17 @@ type Props = {
   onChangeMode: (mode: HouseBookEditorMode) => void;
   onAddItem: () => void;
   onChangeDate: (date: HouseBookDate) => void;
-  onDeleteItem: () => void;
+  onDeleteItems: () => void;
 };
 
 const HouseBookEditorNavigation = memo<Props>(
-  ({ date, onAddItem, onChangeDate, onDeleteItem, mode, onChangeMode }) => (
+  ({ date, onAddItem, onChangeDate, onDeleteItems, mode, onChangeMode }) => (
     <nav className={`${styles.container} ${styles['container-skin']}`}>
       <div className={`${styles['date-block']} ${styles['date-block-skin']}`}>
         <HouseBookEditorDate date={date} onChangeDate={onChangeDate} />
       </div>
       <div className={`${styles['operation-block']}`}>
-        <HouseBookDeleteItemButton onClick={onDeleteItem} />
+        <HouseBookDeleteItemButton onClick={onDeleteItems} />
         <HouseBookAddItemButton onClick={onAddItem} />
         <HouseBookEditButton
           onClick={() => {

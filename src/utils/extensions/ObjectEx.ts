@@ -10,10 +10,11 @@ export const ObjectEx = {
     keys: K[],
   ): Omit<T, K> => {
     const copyObj = { ...obj };
+    let result = copyObj;
     keys.forEach((key) => {
-      ObjectEx.omitKey(copyObj, key);
+      result = ObjectEx.omitKey(result, key) as T;
     });
 
-    return copyObj;
+    return result;
   },
 } as const;

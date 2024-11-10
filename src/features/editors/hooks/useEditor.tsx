@@ -13,6 +13,7 @@ type Props = {
 const ActionType = {
   Add: 'Add',
   Remove: 'Remove',
+  MultipleRemove: 'MultipleRemove',
   Update: 'Update',
 } as const;
 type ActionType = (typeof ActionType)[keyof typeof ActionType];
@@ -45,7 +46,12 @@ type RemoveItem = ActionBase & {
   type: typeof ActionType.Remove;
 };
 
-type Action = AddItem | RemoveItem | UpdateItem;
+type RemoveItems = ActionBase & {
+  payload: string[];
+  type: typeof ActionType.MultipleRemove;
+};
+
+type Action = AddItem | RemoveItem | UpdateItem | RemoveItems;
 
 export { AddItem, RemoveItem, UpdateItem };
 
@@ -80,6 +86,10 @@ const reducer = (state: HouseBookItemsEntity, action: Action) => {
     // アイテム削除
     case ActionType.Remove:
       return HouseBookItemsEntity.removeOne(state, action.payload);
+
+    // アイテムの複数削除
+    case ActionType.MultipleRemove:
+      return HouseBookItemsEntity.removeMultiple(state, action.payload);
 
     // アイテム更新
     case ActionType.Update:
@@ -119,6 +129,17 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
   }, []);
 
   /**
+   * 購入したアイテムの複数削除
+   * @param ids 削除するアイテムのidの配列
+   */
+  const removePurchasedItems = useCallback((ids: string[]) => {
+    dispatch({
+      payload: ids,
+      type: ActionType.MultipleRemove,
+    });
+  }, []);
+
+  /**
    * 購入したアイテムの更新
    * @param update 更新内容
    */
@@ -141,6 +162,7 @@ const useEditor = ({ initialPurchasedItems = [] }: Props) => {
     purchasedItems,
     addPurchasedItem,
     removePurchasedItem,
+    removePurchasedItems,
     updatePurchasedItem,
   };
 };

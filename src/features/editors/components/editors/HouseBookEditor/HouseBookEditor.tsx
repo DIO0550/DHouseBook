@@ -10,9 +10,15 @@ import styles from './HouseBookEditor.module.scss';
 const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
   const editor = useHouseBookEditor({ fileId });
   const purchasedItemIds = editor.filteredHouseBookItems.map((item) => item.id);
-  const { selectItemIds, handleChangeSelectItem, handleChangeSelectAllItems } =
-    usePurchasedItemSelect({ allItemIds: purchasedItemIds });
+  const {
+    selectItemIds,
+    deselectItems,
+    handleChangeSelectItem,
+    handleChangeSelectAllItems,
+  } = usePurchasedItemSelect({ allItemIds: purchasedItemIds });
   const { mode, changeMode } = useHouseBookEditorMode();
+
+  console.log(selectItemIds);
 
   return (
     <div className={`${styles['editor-container']}`}>
@@ -23,7 +29,11 @@ const HouseBookEditor = memo(({ fileId }: { fileId: string }) => {
           onChangeMode={changeMode}
           onAddItem={() => editor.addPurchasedItem(HouseBookItem.init())}
           onChangeDate={editor.updateHouseBookDate}
-          onDeleteItem={() => {}}
+          onDeleteItems={() => {
+            const ids = Object.keys(selectItemIds);
+            editor.removePurchasedItems(ids);
+            deselectItems(ids);
+          }}
         />
       </div>
       <div className={`${styles['editor-list']}`}>

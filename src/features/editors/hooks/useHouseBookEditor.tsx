@@ -44,6 +44,7 @@ const useHouseBookEditor = ({ fileId }: Props) => {
     addPurchasedItem,
     updatePurchasedItem,
     removePurchasedItem,
+    removePurchasedItems,
   } = useEditor({ initialPurchasedItems: houseBookItems });
 
   const filteredHouseBookItems = useMemo(() => {
@@ -73,6 +74,7 @@ const useHouseBookEditor = ({ fileId }: Props) => {
     addPurchasedItem,
     updatePurchasedItem,
     removePurchasedItem,
+    removePurchasedItems,
   };
 };
 

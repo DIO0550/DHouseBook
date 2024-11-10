@@ -65,6 +65,16 @@ const usePurchasedItemSelect = ({ allItemIds }: Props) => {
     setSelectItemIds((cur) => ObjectEx.omitKey(cur, id));
   }, []);
 
+  const deselectItems = useCallback((ids: string[]) => {
+    setSelectItemIds((cur) => {
+      console.log('ids:', ids);
+      const result = ObjectEx.omitKeys(cur, ids);
+      console.log(result);
+
+      return result;
+    });
+  }, []);
+
   const handleChangeSelectItem = useCallback(
     (id: string) => {
       if (id in selectItemIds) {
@@ -80,6 +90,7 @@ const usePurchasedItemSelect = ({ allItemIds }: Props) => {
 
   return {
     selectItemIds,
+    deselectItems,
     handleChangeSelectAllItems,
     handleChangeSelectItem,
   };
