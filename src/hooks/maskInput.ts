@@ -1,5 +1,6 @@
-type MaskRegExp = {
-  value: Array<string | RegExp>;
+export type MaskRegExp = {
+  values: Array<string | RegExp>;
+  placeholder: string;
 };
 
 const RegExpMap: { [key in string]: RegExp } = {
@@ -9,8 +10,8 @@ const RegExpMap: { [key in string]: RegExp } = {
   '*': /[.]/,
 };
 
-const MaskRegExp = {
-  from: (value: string) => {
+export const MaskRegExp = {
+  from: (value: string, placeholder: string = '_') => {
     const characters = Array.from(value);
     const result = characters.map((char) => {
       if (Object.hasOwn(RegExpMap, char)) {
@@ -21,14 +22,29 @@ const MaskRegExp = {
     });
 
     const maskRegExp: MaskRegExp = {
-      value: result,
+      values: result,
+      placeholder,
     };
 
     return maskRegExp;
   },
-} as const;
 
-const maskInput = (
-  current: string,
-  mask: string | Array<RegExp | string>,
-) => {};
+  exec: (mask: MaskRegExp, value: string) => {
+    const characters = [...value];
+
+    const result = mask.values.map((v, index) => {
+      const char = characters[index];
+      if (typeof v === 'string') {
+        return v;
+      }
+
+      if (v.test(char)) {
+        return char;
+      }
+
+      return mask.placeholder;
+    });
+
+    return result.join('');
+  },
+} as const;
