@@ -1,4 +1,4 @@
-import { MaskRegExp } from './maskInput';
+import { MaskInputRegExp } from './maskInput';
 
 describe('MaskRegExp', () => {
   describe('from', () => {
