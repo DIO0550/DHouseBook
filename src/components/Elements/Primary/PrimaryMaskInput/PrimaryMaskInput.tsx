@@ -8,14 +8,27 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const PrimaryMaskInput = memo<Props>((props) => {
-  const { mask, maskPlaceholder, ...inputProps } = props;
-  const { onChange } = useInputMask({
+  const {
+    mask,
+    maskPlaceholder,
+    defaultValue: initialValue,
+    ...inputProps
+  } = props;
+
+  const { onChange, defaultValue } = useInputMask({
+    defaultValue: initialValue,
     mask,
     maskPlaceholder,
   });
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <PrimaryRoundInput {...inputProps} onChange={onChange} />;
+  return (
+    <PrimaryRoundInput
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...inputProps}
+      onChange={onChange}
+      defaultValue={defaultValue}
+    />
+  );
 });
 
-export default PrimaryMaskInput;
+export { PrimaryMaskInput };

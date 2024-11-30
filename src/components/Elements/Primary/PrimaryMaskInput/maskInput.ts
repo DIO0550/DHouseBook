@@ -1,3 +1,5 @@
+import { InputHTMLAttributes } from 'react';
+
 export type MaskInputRegExp = (
   | {
       type: 'RegExpArray';
@@ -14,6 +16,22 @@ const RegExpMap: { [key in string]: RegExp } = {
   a: /[a-zA-Z]/,
   A: /[a-zA-Z]/,
   '*': /[.]/,
+};
+
+const correctDefaultValueLength = (
+  maskLength: number,
+  maskType: MaskInputRegExp['type'],
+  defaultValue: InputHTMLAttributes<HTMLInputElement>['defaultValue'] = '',
+) => {
+  const stringValue = String(defaultValue);
+
+  if (maskType === 'RegExp') {
+    return stringValue;
+  }
+
+  const result = stringValue + ''.repeat(maskLength - stringValue.length || 0);
+
+  return result;
 };
 
 export const MaskInputRegExp = {
@@ -82,5 +100,17 @@ export const MaskInputRegExp = {
     });
 
     return result.join('');
+  },
+
+  defaultValue: (
+    mask: MaskInputRegExp,
+    defaultValue: InputHTMLAttributes<HTMLInputElement>['defaultValue'] = '',
+  ) => {
+    const maskLength = Array.isArray(mask.value) ? mask.value.length : 0;
+
+    return MaskInputRegExp.exec(
+      mask,
+      correctDefaultValueLength(maskLength, mask.type, defaultValue),
+    );
   },
 } as const;
