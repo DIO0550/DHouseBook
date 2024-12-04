@@ -83,6 +83,8 @@ export const MaskInputRegExp = {
     if (mask.type === 'RegExp') {
       const result = characters.filter((char) => mask.value.test(char));
 
+      console.log(result);
+
       return result.join('');
     }
 

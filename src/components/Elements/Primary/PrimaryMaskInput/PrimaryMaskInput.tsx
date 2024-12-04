@@ -3,7 +3,7 @@ import { useInputMask } from './useInputMask';
 import { PrimaryRoundInput } from '../PrimaryRoundInput/PrimaryRoundInput';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-  mask: string | Array<string | RegExp>;
+  mask: string | RegExp | Array<string | RegExp>;
   maskPlaceholder?: string;
 };
 
@@ -15,7 +15,7 @@ const PrimaryMaskInput = memo<Props>((props) => {
     ...inputProps
   } = props;
 
-  const { onChange, defaultValue } = useInputMask({
+  const { onChange, onKeyDown, defaultValue } = useInputMask({
     defaultValue: initialValue,
     mask,
     maskPlaceholder,
@@ -25,6 +25,8 @@ const PrimaryMaskInput = memo<Props>((props) => {
     <PrimaryRoundInput
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...inputProps}
+      // value={value}
+      onKeyDown={onKeyDown}
       onChange={onChange}
       defaultValue={defaultValue}
     />

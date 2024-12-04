@@ -16,3 +16,9 @@ export const MaskTelNumber: Story = {
     mask: '(999)-999-9999',
   },
 };
+
+export const OnlyNumber: Story = {
+  args: {
+    mask: /[0-9]/,
+  },
+};
