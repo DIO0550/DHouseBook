@@ -15,11 +15,12 @@ const PrimaryMaskInput = memo<Props>((props) => {
     ...inputProps
   } = props;
 
-  const { onChange, onKeyDown, onBeforeInput, defaultValue } = useInputMask({
-    defaultValue: initialValue,
-    mask,
-    maskPlaceholder,
-  });
+  const { onChange, onKeyDown, onBeforeInput, onSelect, defaultValue } =
+    useInputMask({
+      defaultValue: initialValue,
+      mask,
+      maskPlaceholder,
+    });
 
   return (
     <PrimaryRoundInput
@@ -29,6 +30,7 @@ const PrimaryMaskInput = memo<Props>((props) => {
       onBeforeInput={onBeforeInput}
       onKeyDown={onKeyDown}
       onChange={onChange}
+      onSelect={onSelect}
       defaultValue={defaultValue}
     />
   );

@@ -142,10 +142,8 @@ export const MaskInputRegExp = {
       return { value: result.join(''), index: selection?.start };
     }
 
-    const requiredChangeLength = InputSelection.diff(selection) || 1;
     const prevCharacters = [...prevValue];
     const inputDataCharacters = [...inputData];
-    let remainingRequiredChanges = requiredChangeLength;
 
     let needSelectedIndex = selection.start;
     const result = mask.value.map((v, index) => {
@@ -154,7 +152,7 @@ export const MaskInputRegExp = {
         return char;
       }
 
-      if (remainingRequiredChanges <= 0) {
+      if (inputDataCharacters.length <= 0) {
         return char;
       }
 
@@ -162,29 +160,125 @@ export const MaskInputRegExp = {
         return v;
       }
 
-      remainingRequiredChanges -= 1;
-      const inputCharacter = inputDataCharacters.shift();
+      while (inputDataCharacters.length > 0) {
+        const inputCharacter = inputDataCharacters.shift();
 
-      if (remainingRequiredChanges === 0) {
-        needSelectedIndex = index + 1;
-      }
-
-      if (!inputCharacter) {
-        if (remainingRequiredChanges > 0) {
-          return mask.placeholder;
+        if (!inputCharacter) {
+          break;
         }
 
-        return char;
+        if (v.test(inputCharacter)) {
+          needSelectedIndex = index + 1;
+
+          return inputCharacter;
+        }
       }
 
-      if (v.test(inputCharacter)) {
-        return inputCharacter;
-      }
-
-      return mask.placeholder;
+      return char;
     });
 
     return { value: result.join(''), index: needSelectedIndex };
+  },
+
+  execByBackSpace: ({
+    mask,
+    inputValue,
+    selection,
+  }: {
+    mask: MaskInputRegExp;
+    inputValue: string;
+    selection: InputSelection;
+  }) => {
+    const characters = [...inputValue];
+
+    if (mask.type === 'RegExp') {
+      const result = characters.filter((char) => mask.value.test(char));
+
+      return { value: result.join(''), index: selection.start };
+    }
+
+    if (InputSelection.isRangeSelection(selection)) {
+      return MaskInputRegExp.execRangeDelete({
+        mask,
+        inputValue,
+        selection,
+      });
+    }
+
+    const deleteIndex = Array.from({ length: selection.start })
+      .map((_, i) => selection.start - i - 1)
+      .find((index) => typeof mask.value[index] !== 'string');
+
+    if (!deleteIndex) {
+      return { value: inputValue, index: selection.start };
+    }
+
+    const result =
+      inputValue.substring(0, deleteIndex) +
+      mask.placeholder +
+      inputValue.substring(deleteIndex + 1);
+
+    return { value: result, index: deleteIndex };
+  },
+
+  execRangeDelete: ({
+    mask,
+    inputValue,
+    selection,
+  }: {
+    mask: MaskInputRegExp;
+    inputValue: string;
+    selection: InputSelection;
+  }): {
+    value: string;
+    index: number;
+  } => {
+    if (InputSelection.isRangeSelection(selection)) {
+      return {
+        value: inputValue,
+        index: selection.start,
+      };
+    }
+
+    if (mask.type === 'RegExp') {
+      const result =
+        inputValue.substring(0, selection.start) +
+        inputValue.substring(selection.end, inputValue.length);
+
+      return {
+        value: result,
+        index: selection.start,
+      };
+    }
+
+    const deleteIndex = Array.from(
+      { length: selection.end - selection.start },
+      (_, i) => i + selection.start,
+    );
+    const deletePositionValue = deleteIndex
+      .map((i) => {
+        const maskValue = mask.value[i];
+        if (!maskValue) {
+          return '';
+        }
+
+        if (typeof maskValue === 'string') {
+          return maskValue;
+        }
+
+        return mask.placeholder;
+      })
+      .join('');
+
+    const result =
+      inputValue.substring(0, selection.start) +
+      deletePositionValue +
+      inputValue.substring(selection.end, inputValue.length);
+
+    return {
+      value: result,
+      index: selection.start,
+    };
   },
 
   // exec: (
@@ -277,9 +371,9 @@ export const MaskInputRegExp = {
     }
 
     const result =
-      currentValue.substring(0, selection.start) +
+      currentValue.substring(0, deletePosition - 1) +
       mask.placeholder +
-      currentValue.substring(selection.end, currentValue.length);
+      currentValue.substring(deletePosition, currentValue.length);
 
     return result;
   },
