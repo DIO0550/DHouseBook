@@ -15,7 +15,7 @@ const PrimaryMaskInput = memo<Props>((props) => {
     ...inputProps
   } = props;
 
-  const { onChange, onKeyDown, onBeforeInput, onSelect, defaultValue } =
+  const { onChange, onKeyDown, onBeforeInput, onSelect, onCut, defaultValue } =
     useInputMask({
       defaultValue: initialValue,
       mask,
@@ -26,11 +26,11 @@ const PrimaryMaskInput = memo<Props>((props) => {
     <PrimaryRoundInput
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...inputProps}
-      // value={value}
       onBeforeInput={onBeforeInput}
       onKeyDown={onKeyDown}
       onChange={onChange}
       onSelect={onSelect}
+      onCut={onCut}
       defaultValue={defaultValue}
     />
   );

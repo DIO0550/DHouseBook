@@ -5,7 +5,6 @@ import {
   useCallback,
   useMemo,
   useRef,
-  useState,
 } from 'react';
 import { InputEventEx } from '@/utils/extensions/InputEventEx';
 import { BeforeInputEvent } from '@/types/inputType';
@@ -74,13 +73,28 @@ const useInputMask = ({
           });
           break;
         case ChangeEventType.Input:
-          result = MaskInputRegExp.exec(
-            maskInputRegExp,
-            currentTarget.value,
-            prev,
-            beforeInputData.current,
-            inputSelection,
-          );
+          result = MaskInputRegExp.exec({
+            mask: maskInputRegExp,
+            currentValue: currentTarget.value,
+            prevValue: prev,
+            inputData: beforeInputData.current,
+            selection: inputSelection,
+          });
+          break;
+        case ChangeEventType.Cut:
+          result = MaskInputRegExp.execByCut({
+            mask: maskInputRegExp,
+            inputValue: prev,
+            selection: inputSelection,
+          });
+          break;
+
+        case ChangeEventType.Delete:
+          result = MaskInputRegExp.execByDelete({
+            mask: maskInputRegExp,
+            inputValue: prev,
+            selection: inputSelection,
+          });
           break;
 
         default:
@@ -115,69 +129,33 @@ const useInputMask = ({
     beforeInputData.current = e.data;
   }, []);
 
-  const onKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLInputElement>) => {
-      const { currentTarget } = e;
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && !e.nativeEvent.isComposing) {
+      changeType.current = ChangeEventType.BackSpace;
 
-      if (e.key === 'Backspace' && !e.nativeEvent.isComposing) {
-        // setValue((_) => {
-        //   const result = MaskInputRegExp.delete(
-        //     maskInputRegExp,
-        //     currentTarget.value,
-        //     InputSelection.from(
-        //       currentTarget.selectionStart,
-        //       currentTarget.selectionEnd,
-        //     ),
-        //   );
+      return;
+    }
 
-        //   currentTarget.value = result;
-        //   currentTarget.setSelectionRange(
-        //     currentTarget.selectionStart,
-        //     currentTarget.selectionStart,
-        //   );
+    if (e.key === 'Delete' && !e.nativeEvent.isComposing) {
+      changeType.current = ChangeEventType.Delete;
 
-        //   return result;
-        // });
-        changeType.current = ChangeEventType.BackSpace;
+      return;
+    }
 
-        return;
-      }
+    if (!e.nativeEvent.isComposing) {
+      return;
+    }
 
-      if (!e.nativeEvent.isComposing) {
-        return;
-      }
+    if ((e.key !== 'Process' && e.key !== 'Backspace') || e.code !== 'Enter') {
+      // TODO: 入力確定前
+    }
 
-      if (
-        (e.key !== 'Process' && e.key !== 'Backspace') ||
-        e.code !== 'Enter'
-      ) {
-        return;
-      }
+    // TODO:: IME確定時の処理
+  }, []);
 
-      // setValue((cur) => {
-      //   const result = MaskInputRegExp.exec(
-      //     maskInputRegExp,
-      //     currentTarget.value,
-      //     cur,
-      //     beforeInputData.current,
-      //     InputSelection.from(
-      //       selectedInputStart.current,
-      //       selectedInputEnd.current,
-      //     ),
-      //   );
-
-      //   currentTarget.value = result.value;
-      //   currentTarget.setSelectionRange(result.index, result.index);
-
-      //   beforeInputData.current = '';
-      //   selectedInputStart.current = 0;
-      //   selectedInputEnd.current = 0;
-
-      //   return result.value;
-      // });
-    },
-    [maskInputRegExp],
-  );
+  const onCut = useCallback(() => {
+    changeType.current = ChangeEventType.Cut;
+  }, []);
 
   const onSelect = useCallback((e: React.SyntheticEvent<HTMLInputElement>) => {
     const { selectionStart, selectionEnd } = e.currentTarget;
@@ -195,9 +173,9 @@ const useInputMask = ({
     onChange,
     onKeyDown,
     onBeforeInput,
+    onCut,
     onSelect,
     defaultValue,
-    value: prevValue,
   };
 };
 
