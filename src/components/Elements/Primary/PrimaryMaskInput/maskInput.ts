@@ -126,9 +126,15 @@ export const MaskInputRegExp = {
     const characters = [...currentValue];
 
     if (mask.type === 'RegExp') {
-      const result = characters.filter((char) => mask.value.test(char));
+      const maskInputData = [...inputData].filter((char) =>
+        mask.value.test(char),
+      );
+      const result =
+        prevValue.substring(0, selection.start) +
+        maskInputData.join('') +
+        prevValue.substring(selection.end);
 
-      return { value: result.join(''), index: selection.start };
+      return { value: result, index: selection.start + maskInputData.length };
     }
 
     if (!prevValue || !inputData) {
@@ -195,14 +201,7 @@ export const MaskInputRegExp = {
     inputValue: string;
     selection: InputSelection;
   }): MaskResult => {
-    if (mask.type === 'RegExp') {
-      const result =
-        inputValue.substring(0, selection.start) +
-        inputValue.substring(selection.end);
-
-      return { value: result, index: selection.start };
-    }
-
+    console.log('execByBackSpace');
     if (InputSelection.isRangeSelection(selection)) {
       return MaskInputRegExp.execRangeDelete({
         mask,
@@ -211,11 +210,20 @@ export const MaskInputRegExp = {
       });
     }
 
+    if (mask.type === 'RegExp') {
+      const deleteIndex = selection.start - 1 < 0 ? 0 : selection.start - 1;
+      const result =
+        inputValue.substring(0, deleteIndex) +
+        inputValue.substring(selection.end);
+
+      return { value: result, index: selection.start - 1 };
+    }
+
     const deleteIndex = Array.from({ length: selection.start })
       .map((_, i) => selection.start - i - 1)
       .find((index) => typeof mask.value[index] !== 'string');
 
-    if (!deleteIndex) {
+    if (deleteIndex == null) {
       return { value: inputValue, index: selection.start };
     }
 
@@ -236,14 +244,6 @@ export const MaskInputRegExp = {
     inputValue: string;
     selection: InputSelection;
   }): MaskResult => {
-    if (mask.type === 'RegExp') {
-      const result =
-        inputValue.substring(0, selection.start + 1) +
-        inputValue.substring(selection.end + 1);
-
-      return { value: result, index: selection.start };
-    }
-
     if (InputSelection.isRangeSelection(selection)) {
       return MaskInputRegExp.execRangeDelete({
         mask,
@@ -252,13 +252,21 @@ export const MaskInputRegExp = {
       });
     }
 
+    if (mask.type === 'RegExp') {
+      const result =
+        inputValue.substring(0, selection.start) +
+        inputValue.substring(selection.end + 1);
+
+      return { value: result, index: selection.start };
+    }
+
     const deleteIndex = Array.from({
       length: inputValue.length - selection.end,
     })
       .map((_, i) => selection.end + i)
       .find((index) => typeof mask.value[index] !== 'string');
 
-    if (!deleteIndex) {
+    if (deleteIndex == null) {
       return { value: inputValue, index: selection.end };
     }
 

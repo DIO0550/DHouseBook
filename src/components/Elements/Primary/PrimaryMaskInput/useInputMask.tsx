@@ -48,7 +48,7 @@ const useInputMask = ({
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.currentTarget.value) {
+      if (e.currentTarget.value == null) {
         return;
       }
 
@@ -110,14 +110,12 @@ const useInputMask = ({
       currentTarget.setSelectionRange(result.index, result.index);
       changeType.current = ChangeEventType.None;
       beforeInputData.current = '';
-      selectedInputStart.current = 0;
-      selectedInputEnd.current = 0;
     },
     [maskInputRegExp],
   );
 
   const onBeforeInput = useCallback((e: BeforeInputEvent) => {
-    if (!e.data) {
+    if (e.data == null) {
       return;
     }
 

@@ -17,6 +17,12 @@ export const MaskTelNumber: Story = {
   },
 };
 
+export const MaskDate: Story = {
+  args: {
+    mask: '9999/99/99',
+  },
+};
+
 export const OnlyNumber: Story = {
   args: {
     mask: /[0-9]/,

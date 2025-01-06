@@ -1,6 +1,6 @@
-import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
 import { UpdateEntity } from '@/utils/editors/houseBookItemsEntity';
 import { memo } from 'react';
+import { PrimaryMaskInput } from '@/components/Elements/Primary/PrimaryMaskInput/PrimaryMaskInput';
 import styles from './PurchasedItemPrice.module.scss';
 
 type Props = {
@@ -11,7 +11,8 @@ type Props = {
 
 const PurchasedItemPrice = memo<Props>(({ id, defaultValue, onUpdate }) => (
   <div className={styles['price-container']}>
-    <PrimaryColorInput
+    <PrimaryMaskInput
+      mask={/[0-9]/}
       className={`${styles.input}`}
       defaultValue={defaultValue}
       onChange={(e) =>
