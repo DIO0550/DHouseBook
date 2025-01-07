@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, memo } from 'react';
+import { PrimaryColorInput } from '@/components/Elements/PrimaryColorInput';
 import { useInputMask } from './useInputMask';
-import { PrimaryRoundInput } from '../PrimaryRoundInput/PrimaryRoundInput';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   mask: string | RegExp | Array<string | RegExp>;
@@ -23,7 +23,7 @@ const PrimaryMaskInput = memo<Props>((props) => {
     });
 
   return (
-    <PrimaryRoundInput
+    <PrimaryColorInput
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...inputProps}
       onBeforeInput={onBeforeInput}
