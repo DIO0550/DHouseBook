@@ -43,8 +43,7 @@
   position: fixed;
   overflow: hidden;
   width: 100%;
-  top: 0;
-  left: 0;
+  height: fit-content;
 
   display: flex;
   flex-direction: column;

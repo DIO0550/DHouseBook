@@ -16,6 +16,17 @@ export const NoSelectOption = {
   Label: '',
 };
 
+const isTop = (selectRect: DOMRect, menuRect: DOMRect) => {
+  if (
+    document.body.getBoundingClientRect().height >
+    selectRect.bottom + menuRect.height
+  ) {
+    return false;
+  }
+
+  return selectRect.top - menuRect.height > 0;
+};
+
 const updateMenuClientRect = (
   select: HTMLButtonElement,
   menu: HTMLDivElement,
@@ -24,16 +35,12 @@ const updateMenuClientRect = (
   const menuRect = menu.getBoundingClientRect();
   const MARGIN = 4;
 
-  const isTop =
-    document.body.getBoundingClientRect().height <
-    selectRect.bottom + menuRect.height;
-
   menu.style.width = `${selectRect.width}px`;
   menu.style.left = `${selectRect.left}px`;
 
-  if (!isTop) {
-    menu.style.top = ``;
-    menu.style.bottom = `${selectRect.top + MARGIN}px`;
+  if (isTop(selectRect, menuRect)) {
+    menu.style.top = `${selectRect.top - menuRect.height - MARGIN}px`;
+    menu.style.bottom = ``;
   } else {
     menu.style.top = `${selectRect.bottom + MARGIN}px`;
     menu.style.bottom = ``;
